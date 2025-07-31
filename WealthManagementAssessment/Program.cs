@@ -7,18 +7,13 @@ class Program
     private static void Main(string[] args)
     {
 
-        string BaseDirectory = AppContext.BaseDirectory;
-        //string filePath = "\\Csv\\Investments.csv";
-        string path = Path.GetFullPath(Path.Combine(BaseDirectory, @"..\..\..\"));
-
+        string baseDirectory = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\..\"));
         string folderCsv = "Csv\\Investments.csv";
 
-        path = Path.Combine(path, folderCsv);
-        //string path = "C:\\MyFolders\\Visual_Studio_Projects\\WealthManagementAssessment\\WealthManagementAssessment\\Csv\\Investments.csv";
-
+        string fileInvestments = Path.Combine(baseDirectory, folderCsv);
         string investmentId = "Investor30";
 
-        using (var reader = new StreamReader(path))
+        using (var reader = new StreamReader(fileInvestments))
         {
             string? line;
             int count = 0;
