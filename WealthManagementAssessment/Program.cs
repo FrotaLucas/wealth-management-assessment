@@ -64,6 +64,12 @@ class Program
         {
             Console.WriteLine(investments.InvestmentType.ToString() );
         }
+
+        using (var reader = new StreamReader(fileTransactions)) 
+        {
+           
+        
+        }
     }
 
 }
