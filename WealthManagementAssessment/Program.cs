@@ -90,38 +90,21 @@ class Program
                         selectedEstate.Add(transaction);
                         count++;
                     }
-                }
 
-
-            }
-
-            firstLine = true;
-            while( (line = reader.ReadLine()) != null)
-            {
-
-                var fields = line.Split(";");
-
-                if (firstLine)
-                {
-                    firstLine = false;
-                    continue;
-                }
-
-                foreach(var investment in selectedInvestments)
-                {
-                    if(investment.InvestmentId == fields[0] && fields[1] == "Building")
+                    if (investment.InvestmentId == fields[0] && fields[1] == "Building")
                     {
                         var transaction = new Transaction();
                         transaction.InvestmentId = investment.InvestmentId; //or fields[0]
                         transaction.Type = fields[1];
-                        transaction.Value= Double.Parse(fields[3]);
+                        transaction.Value = Double.Parse(fields[3]);
 
                         selectedBuilding.Add(transaction);
                     }
                 }
+
+
             }
 
-         
 
 
         }
