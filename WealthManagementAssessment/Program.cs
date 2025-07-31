@@ -67,7 +67,14 @@ class Program
 
         using (var reader = new StreamReader(fileTransactions)) 
         {
-           
+           string? line;
+
+        
+
+            while ((line = reader.ReadLine()) != null)
+            {
+                Console.WriteLine( "li");
+            }
         
         }
     }
