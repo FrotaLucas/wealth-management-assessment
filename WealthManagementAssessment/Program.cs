@@ -47,7 +47,7 @@ class Program
 
                     selectedInvestments
                         .Add(investment);
-                    Console.WriteLine($"id: {investment.InvestorId}");
+                    //Console.WriteLine($"id: {investment.InvestorId}");
                 }
 
 
