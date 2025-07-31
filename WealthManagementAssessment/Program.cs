@@ -18,16 +18,17 @@ class Program
 
 
         var selectedInvestments = new List<Investment>();
-        var selectedTransactions =  new List<Transaction>();
+        var selectedTransactions = new List<Transaction>();
 
         using (var reader = new StreamReader(fileInvestments))
         {
             string? line;
             int count = 0;
 
-            while( (line = reader.ReadLine()) != null )
+            while ((line = reader.ReadLine()) != null)
             {
-                if (firstLine) {
+                if (firstLine)
+                {
                     firstLine = false;
                     continue;
                 }
@@ -35,7 +36,7 @@ class Program
                 var fields = line.Split(';');
                 var investor = fields[0];
 
-                if( fields[0] == investorId)
+                if (fields[0] == investorId)
                 {
                     var investment = new Investment();
 
@@ -45,7 +46,7 @@ class Program
                     investment.Isin = fields[3];
 
                     selectedInvestments
-                        .Add(  investment);
+                        .Add(investment);
                     Console.WriteLine($"id: {investment.InvestorId}");
                 }
 
@@ -53,29 +54,32 @@ class Program
                 count++;
             }
 
-          
+
 
             Console.WriteLine($"total: {selectedInvestments.Count}");
         }
 
-        
 
-        foreach ( var investments in selectedInvestments)
+
+        foreach (var investments in selectedInvestments)
         {
-            Console.WriteLine(investments.InvestmentType.ToString() );
+            Console.WriteLine(investments.InvestmentType.ToString());
         }
 
-        using (var reader = new StreamReader(fileTransactions)) 
+        using (var reader = new StreamReader(fileTransactions))
         {
-           string? line;
+            string? line;
 
-        
+            int count = 0;
+
+
 
             while ((line = reader.ReadLine()) != null)
             {
-                Console.WriteLine( "li");
+
+                Console.WriteLine("li");
             }
-        
+
         }
     }
 
