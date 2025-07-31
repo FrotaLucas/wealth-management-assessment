@@ -12,6 +12,7 @@ class Program
 
         string fileInvestments = Path.Combine(baseDirectory, folderCsv);
         string investmentId = "Investor30";
+        bool firstLine = true;
 
         using (var reader = new StreamReader(fileInvestments))
         {
@@ -20,6 +21,11 @@ class Program
 
             while( (line = reader.ReadLine()) != null )
             {
+                if (firstLine) {
+                    firstLine = false;
+                    continue;
+                }
+
                 var fields = line.Split(';');
                 var investor = fields[0];
                 Console.WriteLine($"id: {investor}");
