@@ -41,6 +41,7 @@ class Program
                     investment.InvestorId = fields[0];
                     investment.InvestmentId = fields[1];
                     investment.InvestmentType = fields[2]; //new code
+                    investment.Isin = fields[3];
 
                     selectedInvestments
                         .Add(  investment);
