@@ -45,16 +45,21 @@ class Program
 
                     selectedInvestments
                         .Add(  investment);
+                    Console.WriteLine($"id: {investment.InvestorId}");
                 }
 
 
                 count++;
-                Console.WriteLine($"id: {investor}");
             }
 
           
 
             Console.WriteLine($"total: {selectedInvestments.Count}");
+        }
+
+        foreach ( var investments in selectedInvestments)
+        {
+            Console.WriteLine(investments.InvestmentType.ToString() );
         }
     }
 
