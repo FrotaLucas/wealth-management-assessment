@@ -19,6 +19,7 @@ class Program
 
         var selectedInvestments = new List<Investment>();
         var selectedEstate = new List<Transaction>();
+        var selectedBuilding = new List<Transaction>();
 
         using (var reader = new StreamReader(fileInvestments))
         {
