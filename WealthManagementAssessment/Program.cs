@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.IO;
+using WealthManagementAssessment.Domain;
 
 class Program
 {
@@ -13,6 +14,10 @@ class Program
         string fileInvestments = Path.Combine(baseDirectory, folderCsv);
         string investmentId = "Investor30";
         bool firstLine = true;
+
+
+        var selectedInvestments = new List<Investment>();
+        var selectedTransactions =  new List<Transaction>();
 
         using (var reader = new StreamReader(fileInvestments))
         {
