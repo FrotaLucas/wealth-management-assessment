@@ -6,7 +6,16 @@ using System.Threading.Tasks;
 
 namespace WealthManagementAssessment.Domain
 {
-    internal class Transaction
+    public class Transaction
     {
+        public int InvestmentId { get; set; }
+
+        public string Type { get; set; }
+
+        public double Value { get; set; }   
+
+        public DateTime DateTime { get; set; }
+
     }
+
 }
