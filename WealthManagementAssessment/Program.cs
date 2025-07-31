@@ -111,7 +111,12 @@ class Program
                 {
                     if(investment.InvestmentId == fields[0] && investment.InvestmentType == "Building")
                     {
-                        
+                        var transaction = new Transaction();
+                        transaction.InvestmentId = fields[0];
+                        transaction.Type = fields[1];
+                        transaction.Value= Double.Parse(fields[3]);
+
+
                     }
                 }
             }
