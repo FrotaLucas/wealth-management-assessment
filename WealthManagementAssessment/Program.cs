@@ -9,9 +9,10 @@ class Program
     {
 
         string baseDirectory = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\..\"));
-        string folderCsv = "Csv\\Investments.csv";
 
-        string fileInvestments = Path.Combine(baseDirectory, folderCsv);
+        string fileInvestments = Path.Combine(baseDirectory, "Csv\\Investments.csv");
+        string fileTransactions = Path.Combine(baseDirectory, "Csv\\Transactions.csv");
+
         string investorId = "Investor30";
         bool firstLine = true;
 
@@ -56,6 +57,8 @@ class Program
 
             Console.WriteLine($"total: {selectedInvestments.Count}");
         }
+
+        
 
         foreach ( var investments in selectedInvestments)
         {
