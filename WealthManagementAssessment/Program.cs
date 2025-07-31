@@ -18,7 +18,7 @@ class Program
 
 
         var selectedInvestments = new List<Investment>();
-        var selectedTransactions = new List<Transaction>();
+        var selectedEstate = new List<Transaction>();
 
         using (var reader = new StreamReader(fileInvestments))
         {
@@ -86,7 +86,7 @@ class Program
                         transaction.Value = Double.Parse(fields[3]);
                         //missing Date
                         
-                        selectedTransactions.Add(transaction);
+                        selectedEstate.Add(transaction);
                         count++;
                     }
                 }
@@ -120,9 +120,9 @@ class Program
 
         }
 
-        Console.WriteLine($"total Estate for Investor30: {selectedTransactions.Count}");
+        Console.WriteLine($"total Estate for Investor30: {selectedEstate.Count}");
 
-        foreach (var transactions in selectedTransactions)
+        foreach (var transactions in selectedEstate)
         {
             Console.WriteLine(transactions.Type.ToString());
         }
