@@ -71,7 +71,7 @@ class Program
             string? line;
             int count = 0;
             firstLine = false;
-
+            
 
             while ((line = reader.ReadLine()) != null)
             {
@@ -88,6 +88,10 @@ class Program
                 {
                     if(investment.InvestmentId == fields[0] && fields[1] == "Estate")
                     {
+                        var transaction = new Transaction();
+                        transaction.InvestmentId = investment.InvestmentId;
+
+
                         count++;
                     }
                 
