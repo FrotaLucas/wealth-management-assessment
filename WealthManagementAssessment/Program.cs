@@ -92,10 +92,15 @@ class Program
                         transaction.InvestmentId = investment.InvestmentId; //or fields[0]
                         transaction.Value = Double.Parse(fields[1]);
 
+                        
+                        selectedTransactions.Add(transaction);
                         count++;
                     }
                 
                 }
+
+
+
             }
             Console.WriteLine($"total Estate for Investor30: {count}");
 
