@@ -89,8 +89,8 @@ class Program
                     if(investment.InvestmentId == fields[0] && fields[1] == "Estate")
                     {
                         var transaction = new Transaction();
-                        transaction.InvestmentId = investment.InvestmentId;
-
+                        transaction.InvestmentId = investment.InvestmentId; //or fields[0]
+                        transaction.Value = Double.Parse(fields[1]);
 
                         count++;
                     }
