@@ -60,12 +60,6 @@ class Program
         }
 
 
-
-        foreach (var investments in selectedInvestments)
-        {
-            Console.WriteLine(investments.InvestmentType.ToString());
-        }
-
         using (var reader = new StreamReader(fileTransactions))
         {
             string? line;
@@ -90,19 +84,24 @@ class Program
                     {
                         var transaction = new Transaction();
                         transaction.InvestmentId = investment.InvestmentId; //or fields[0]
-                        transaction.Value = Double.Parse(fields[1]);
-
+                        transaction.Value = Double.Parse(fields[3]);
+                        //missing Date
                         
                         selectedTransactions.Add(transaction);
                         count++;
                     }
-                
                 }
 
 
-
             }
-            Console.WriteLine($"total Estate for Investor30: {count}");
+
+            Console.WriteLine($"total Estate for Investor30: {selectedTransactions.Count}");
+
+            foreach (var transactions in selectedTransactions)
+            {
+                Console.WriteLine(transactions.Type.ToString());
+            }
+
 
         }
     }
