@@ -55,8 +55,6 @@ class Program
             }
 
 
-
-            Console.WriteLine($"total: {selectedInvestments.Count}");
         }
 
 
@@ -96,14 +94,37 @@ class Program
 
             }
 
-            Console.WriteLine($"total Estate for Investor30: {selectedTransactions.Count}");
-
-            foreach (var transactions in selectedTransactions)
+            firstLine = true;
+            while( (line = reader.ReadLine()) != null)
             {
-                Console.WriteLine(transactions.Type.ToString());
+
+                var fields = line.Split(";");
+
+                if (firstLine)
+                {
+                    firstLine = false;
+                    continue;
+                }
+
+                foreach(var  investment in selectedInvestments)
+                {
+                    if(investment.InvestmentId == fields[0] && investment.InvestmentType == "Building")
+                    {
+                        
+                    }
+                }
             }
 
+         
 
+
+        }
+
+        Console.WriteLine($"total Estate for Investor30: {selectedTransactions.Count}");
+
+        foreach (var transactions in selectedTransactions)
+        {
+            Console.WriteLine(transactions.Type.ToString());
         }
     }
 
