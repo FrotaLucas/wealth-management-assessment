@@ -12,9 +12,10 @@ namespace WealthManagementAssessment.Domain
 
         public string Type { get; set; }
 
+        public DateTime DateTime { get; set; }
+
         public double Value { get; set; }   
 
-        public DateTime DateTime { get; set; }
 
     }
 
