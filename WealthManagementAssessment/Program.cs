@@ -81,8 +81,19 @@ class Program
                     continue;
                 }
 
-                Console.WriteLine("li");
+                var fields = line.Split(';');
+
+                //check Estate Value
+                foreach (var investment in selectedInvestments)
+                {
+                    if(investment.InvestmentId == fields[0] && fields[1] == "Estate")
+                    {
+                        count++;
+                    }
+                
+                }
             }
+            Console.WriteLine($"total Estate for Investor30: {count}");
 
         }
     }
