@@ -69,13 +69,17 @@ class Program
         using (var reader = new StreamReader(fileTransactions))
         {
             string? line;
-
             int count = 0;
-
+            firstLine = false;
 
 
             while ((line = reader.ReadLine()) != null)
             {
+                if (firstLine)
+                {
+                    firstLine = false;
+                    continue;
+                }
 
                 Console.WriteLine("li");
             }
