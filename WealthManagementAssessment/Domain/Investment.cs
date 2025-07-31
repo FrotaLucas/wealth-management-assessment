@@ -10,7 +10,7 @@ namespace WealthManagementAssessment.Domain
     {
         public string InvestorId { get; set; }
 
-        public int InvestmentId { get; set; }
+        public string InvestmentId { get; set; }
 
         public string InvestmentType { get; set; }
 
