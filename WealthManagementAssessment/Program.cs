@@ -107,16 +107,16 @@ class Program
                     continue;
                 }
 
-                foreach(var  investment in selectedInvestments)
+                foreach(var investment in selectedInvestments)
                 {
-                    if(investment.InvestmentId == fields[0] && investment.InvestmentType == "Building")
+                    if(investment.InvestmentId == fields[0] && fields[1] == "Building")
                     {
                         var transaction = new Transaction();
-                        transaction.InvestmentId = fields[0];
+                        transaction.InvestmentId = investment.InvestmentId; //or fields[0]
                         transaction.Type = fields[1];
                         transaction.Value= Double.Parse(fields[3]);
 
-
+                        selectedBuilding.Add(transaction);
                     }
                 }
             }
@@ -127,6 +127,7 @@ class Program
         }
 
         Console.WriteLine($"total Estate for Investor30: {selectedEstate.Count}");
+        Console.WriteLine($"total Building for Investor30: {selectedBuilding.Count}");
 
         foreach (var transactions in selectedEstate)
         {
