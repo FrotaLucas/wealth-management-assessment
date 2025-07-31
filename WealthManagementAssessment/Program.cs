@@ -84,6 +84,7 @@ class Program
                     {
                         var transaction = new Transaction();
                         transaction.InvestmentId = investment.InvestmentId; //or fields[0]
+                        transaction.Type = fields[1];
                         transaction.Value = Double.Parse(fields[3]);
                         //missing Date
                         
