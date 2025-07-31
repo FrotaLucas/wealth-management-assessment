@@ -112,10 +112,10 @@ class Program
         Console.WriteLine($"total Estate for Investor30: {selectedEstate.Count}");
         Console.WriteLine($"total Building for Investor30: {selectedBuilding.Count}");
 
-        foreach (var transactions in selectedEstate)
-        {
-            Console.WriteLine(transactions.Type.ToString());
-        }
+        //foreach (var transactions in selectedEstate)
+        //{
+        //    Console.WriteLine(transactions.Type.ToString());
+        //}
     }
 
 }

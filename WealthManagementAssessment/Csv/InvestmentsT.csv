@@ -1,0 +1,11 @@
+InvestorId;InvestmentId;InvestmentType;ISIN;City;FondsInvestor
+Investor30;Investment26693;RealEstate;;City1693;
+Investor30;Investment26204;RealEstate;;City1204;
+Investor30;Investment28895;RealEstate;;City3895;
+Investor30;Investment27293;RealEstate;;City2293;
+Investor30;Investment28656;RealEstate;;City3656;
+Investor30;Investment5605;Stock;ISIN115;;
+Investor30;Investment5657;Stock;ISIN34;;
+Investor30;Investment8965;Stock;ISIN140;;
+Investor30;Investment3767;Stock;ISIN126;;
+Investor30;Investment24160;Stock;ISIN158;;
