@@ -1,15 +1,20 @@
-﻿
+﻿using System.Diagnostics;
+using System.IO;
 
 class Program
 {
 
-    static void Main(string[] args)
+    private static void Main(string[] args)
     {
 
-        Console.WriteLine("start project");
+        string BaseDirectory = AppContext.BaseDirectory;
+        //string filePath = "\\Csv\\Investments.csv";
+        string path = Path.GetFullPath(Path.Combine(BaseDirectory, @"..\..\..\"));
 
+        string folderCsv = "Csv\\Investments.csv";
 
-        string path = "C:\\MyFolders\\Visual_Studio_Projects\\WealthManagementAssessment\\WealthManagementAssessment\\Csv\\Investments.csv";
+        path = Path.Combine(path, folderCsv);
+        //string path = "C:\\MyFolders\\Visual_Studio_Projects\\WealthManagementAssessment\\WealthManagementAssessment\\Csv\\Investments.csv";
 
         string investmentId = "Investor30";
 
