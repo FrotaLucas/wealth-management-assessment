@@ -12,7 +12,7 @@ class Program
         string folderCsv = "Csv\\Investments.csv";
 
         string fileInvestments = Path.Combine(baseDirectory, folderCsv);
-        string investmentId = "Investor30";
+        string investorId = "Investor30";
         bool firstLine = true;
 
 
@@ -33,12 +33,22 @@ class Program
 
                 var fields = line.Split(';');
                 var investor = fields[0];
-                Console.WriteLine($"id: {investor}");
+
+                if( fields[0] == investorId)
+                {
+                    var investment = new Investment();
+                    investment.InvestmentId = int.Parse(fields[1]);
+
+                    selectedInvestments
+                        .Add(  investment);
+                }
+
 
                 count++;
+                Console.WriteLine($"id: {investor}");
             }
 
-            Console.WriteLine($"total: {count}");
+            Console.WriteLine($"total: {selectedInvestments.Count}");
         }
     }
 
