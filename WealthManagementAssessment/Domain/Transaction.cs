@@ -8,7 +8,7 @@ namespace WealthManagementAssessment.Domain
 {
     public class Transaction
     {
-        public int InvestmentId { get; set; }
+        public string InvestmentId { get; set; }
 
         public string Type { get; set; }
 
