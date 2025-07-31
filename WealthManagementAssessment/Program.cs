@@ -37,7 +37,10 @@ class Program
                 if( fields[0] == investorId)
                 {
                     var investment = new Investment();
-                    investment.InvestmentId = int.Parse(fields[1]);
+
+                    investment.InvestorId = fields[0];
+                    investment.InvestmentId = fields[1];
+                    investment.InvestmentType = fields[2]; //new code
 
                     selectedInvestments
                         .Add(  investment);
@@ -47,6 +50,8 @@ class Program
                 count++;
                 Console.WriteLine($"id: {investor}");
             }
+
+          
 
             Console.WriteLine($"total: {selectedInvestments.Count}");
         }
