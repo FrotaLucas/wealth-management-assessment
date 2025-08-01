@@ -10,6 +10,7 @@ class Program
 
         string baseDirectory = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\..\"));
 
+        //1 snapshot aqui
         string fileInvestments = Path.Combine(baseDirectory, "Csv\\Investments.csv");
         string fileTransactions = Path.Combine(baseDirectory, "Csv\\Transactions.csv");
 
@@ -19,6 +20,7 @@ class Program
 
         var selectedInvestments = new List<Investment>();
         var selectedEstate = new List<Transaction>();
+        //2 snapshot aqui
         var selectedBuilding = new List<Transaction>();
 
         using (var reader = new StreamReader(fileInvestments))
@@ -55,10 +57,11 @@ class Program
                 count++;
             }
 
-
+            //3 snapshot aqui
+            Console.WriteLine("finish 1. While");
         }
 
-
+        //4 snapshot aqui
         using (var reader = new StreamReader(fileTransactions))
         {
             string? line;
@@ -105,10 +108,13 @@ class Program
 
             }
 
+            //5 snapshot aqui
+            Console.WriteLine("finish 2. While");
 
 
         }
 
+        //6 snapshot aqui
         Console.WriteLine($"total Estate for Investor30: {selectedEstate.Count}");
         Console.WriteLine($"total Building for Investor30: {selectedBuilding.Count}");
 
