@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using System.IO;
 using WealthManagementAssessment.Domain;
+using WealthManagementAssessment.WealthManagementService;
 
 class Program
 {
@@ -23,98 +24,51 @@ class Program
         //2 snapshot aqui
         var selectedBuilding = new List<Transaction>();
 
-        using (var reader = new StreamReader(fileInvestments))
-        {
-            string? line;
-            int count = 0;
 
-            while ((line = reader.ReadLine()) != null)
-            {
-                if (firstLine)
-                {
-                    firstLine = false;
-                    continue;
-                }
+        var obj = new AssetValuationService(investorId);
 
-                var fields = line.Split(';');
-                var investor = fields[0];
+        Console.WriteLine("total investments: " + obj.TotalInvestments());
 
-                if (fields[0] == investorId)
-                {
-                    var investment = new Investment();
+        //using (var reader = new StreamReader(fileInvestments))
+        //{
+        //    string? line;
+        //    int count = 0;
 
-                    investment.InvestorId = fields[0];
-                    investment.InvestmentId = fields[1];
-                    investment.InvestmentType = fields[2]; //new code
-                    investment.Isin = fields[3];
+        //    while ((line = reader.ReadLine()) != null)
+        //    {
+        //        if (firstLine)
+        //        {
+        //            firstLine = false;
+        //            continue;
+        //        }
 
-                    selectedInvestments
-                        .Add(investment);
-                    //Console.WriteLine($"id: {investment.InvestorId}");
-                }
+        //        var fields = line.Split(';');
+        //        var investor = fields[0];
+
+        //        if (fields[0] == investorId)
+        //        {
+        //            var investment = new Investment();
+
+        //            investment.InvestorId = fields[0];
+        //            investment.InvestmentId = fields[1];
+        //            investment.InvestmentType = fields[2]; //new code
+        //            investment.Isin = fields[3];
+
+        //            selectedInvestments
+        //                .Add(investment);
+        //            //Console.WriteLine($"id: {investment.InvestorId}");
+        //        }
 
 
-                count++;
-            }
+        //        count++;
+        //    }
 
-            //3 snapshot aqui
-            Console.WriteLine($"Total investments: {selectedInvestments.Count}");
-        }
+        //    //3 snapshot aqui
+        //    Console.WriteLine($"Total investments: {selectedInvestments.Count}");
+        //}
 
         //4 snapshot aqui
-        using (var reader = new StreamReader(fileTransactions))
-        {
-            string? line;
-            int count = 0;
-            firstLine = false;
-            
-
-            while ((line = reader.ReadLine()) != null)
-            {
-                if (firstLine)
-                {
-                    firstLine = false;
-                    continue;
-                }
-
-                var fields = line.Split(';');
-
-                foreach (var investment in selectedInvestments)
-                {
-                    //check Estate Value
-                    if (investment.InvestmentId == fields[0] && fields[1] == "Estate")
-                    {
-                        var transaction = new Transaction();
-                        transaction.InvestmentId = investment.InvestmentId; //or fields[0]
-                        transaction.Type = fields[1];
-                        transaction.Value = Double.Parse(fields[3]);
-                        //missing Date
-                        
-                        selectedEstate.Add(transaction);
-                        count++;
-                    }
-
-                    //check Building Value
-                    if (investment.InvestmentId == fields[0] && fields[1] == "Building")
-                    {
-                        var transaction = new Transaction();
-                        transaction.InvestmentId = investment.InvestmentId; //or fields[0]
-                        transaction.Type = fields[1];
-                        transaction.Value = Double.Parse(fields[3]);
-
-                        selectedBuilding.Add(transaction);
-                    }
-                }
-
-
-            }
-
-            //5 snapshot aqui
-            Console.WriteLine("finish 2. While");
-
-
-        }
-
+      
         //6 snapshot aqui
         Console.WriteLine($"total Estate for Investor30: {selectedEstate.Count}");
         Console.WriteLine($"total Building for Investor30: {selectedBuilding.Count}");
