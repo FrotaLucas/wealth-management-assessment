@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace WealthManagementAssessment.WealthManagementService
 {
-    internal class AssetValuationService
+    public class AssetValuationService
     {
+
     }
 }
