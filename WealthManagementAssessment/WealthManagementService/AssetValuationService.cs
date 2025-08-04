@@ -74,13 +74,14 @@ namespace WealthManagementAssessment.WealthManagementService
     
         
         //RealStateEngine
-        public double Engine()
+        public double RealStateEngine()
         {
+            bool firstLine = false;
+
             using (var reader = new StreamReader(fileTransactions))
             {
                 string? line;
                 int count = 0;
-                firstLine = false;
 
 
                 while ((line = reader.ReadLine()) != null)
