@@ -59,7 +59,6 @@ namespace WealthManagementAssessment.WealthManagementService
 
                         selectedInvestments
                             .Add(investment);
-                        //Console.WriteLine($"id: {investment.InvestorId}");
                     }
 
 
@@ -123,10 +122,6 @@ namespace WealthManagementAssessment.WealthManagementService
 
 
                 }
-
-                //5 snapshot aqui
-                Console.WriteLine("finish 2. While");
-
 
             }
 
