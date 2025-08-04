@@ -21,6 +21,8 @@ namespace WealthManagementAssessment.WealthManagementService
 
         public string OwnerId { get; set; }
 
+        public DateTime DateTime { get; set; }
+
         public AssetValuationService(string ownerId)
         {
             OwnerId = ownerId;
@@ -72,7 +74,6 @@ namespace WealthManagementAssessment.WealthManagementService
         }
     
         
-        //RealStateEngine
         public double RealStateEngine()
         {
             bool firstLine = false;
@@ -102,7 +103,7 @@ namespace WealthManagementAssessment.WealthManagementService
                             transaction.InvestmentId = investment.InvestmentId; //or fields[0]
                             transaction.Type = fields[1];
                             transaction.Value = Double.Parse(fields[3]);
-                            //missing Date
+                            transaction.DateTime = DateTime.Parse(fields[2]);
 
                             selectedEstate.Add(transaction);
                             count++;
@@ -115,6 +116,7 @@ namespace WealthManagementAssessment.WealthManagementService
                             transaction.InvestmentId = investment.InvestmentId; //or fields[0]
                             transaction.Type = fields[1];
                             transaction.Value = Double.Parse(fields[3]);
+                            transaction.DateTime = DateTime.Parse(fields[2]);
 
                             selectedBuilding.Add(transaction);
                         }
@@ -125,6 +127,10 @@ namespace WealthManagementAssessment.WealthManagementService
 
             }
 
+            foreach(var realState in selectedEstate)
+            {
+                Console.WriteLine(realState.DateTime);
+            }
 
             return selectedBuilding.Count;
         }
