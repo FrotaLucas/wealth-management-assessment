@@ -1,0 +1,11 @@
+1 formatar codigo para que os caminhos para encontrar arquivo transactions.csv e investments.csv
+estejam dentro de um appsettings.config
+
+
+2 Sugestao
+
+RealState, Stock, Fond nao poderiam ser classes cada uma com seu metodo ENGINE para calcular 
+o tamanho do patrimonio? 
+
+
+3 como modelar a aplicacao de forma que o arquivo csv seja lido apenas uma unica vez !!!
