@@ -11,5 +11,8 @@ namespace WealthManagementAssessment.WealthManagementService
 
         public double RealState { get; set; }
 
+        public double Stocks { get; set; }
+
+
     }
 }
