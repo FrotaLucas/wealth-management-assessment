@@ -13,6 +13,7 @@ namespace WealthManagementAssessment.WealthManagementService
 
         public double Stocks { get; set; }
 
+        public double Fonds { get; set; }
 
     }
 }
