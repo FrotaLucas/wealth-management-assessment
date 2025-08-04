@@ -9,12 +9,6 @@ namespace WealthManagementAssessment.WealthManagementService
     public class AssetValuationService
     {
 
-        public double RealState { get; set; }
-
-        public double Stocks { get; set; }
-
-        public double Fonds { get; set; }
-
         public string OwnerId { get; set; }
 
         public AssetValuationService(string ownerId)
