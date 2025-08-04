@@ -9,5 +9,7 @@ namespace WealthManagementAssessment.WealthManagementService
     public class AssetValuationService
     {
 
+        public double RealState { get; set; }
+
     }
 }
