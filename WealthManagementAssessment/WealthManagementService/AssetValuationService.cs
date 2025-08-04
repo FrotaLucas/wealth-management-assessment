@@ -15,10 +15,11 @@ namespace WealthManagementAssessment.WealthManagementService
 
         public double Fonds { get; set; }
 
-      
+        public string OwnerId { get; set; }
+
         public AssetValuationService(string ownerId)
         {
-           
+            OwnerId = ownerId;
         }
 
     }
