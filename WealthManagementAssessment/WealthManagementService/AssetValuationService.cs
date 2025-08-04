@@ -27,7 +27,7 @@ namespace WealthManagementAssessment.WealthManagementService
         }
 
 
-        public void RealStateEngine()
+        public double RealStateEngine()
         {
             bool firstLine = true;
 
@@ -65,12 +65,9 @@ namespace WealthManagementAssessment.WealthManagementService
                     count++;
                 }
 
-                //3 snapshot aqui
-                Console.WriteLine($"Total investments: {selectedInvestments.Count}");
             }
 
-            Console.WriteLine(fileInvestments);
-            Console.WriteLine(fileTransactions);
+            return selectedInvestments.Count;
 
         }
     }
