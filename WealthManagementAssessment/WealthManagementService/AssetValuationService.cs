@@ -28,7 +28,7 @@ namespace WealthManagementAssessment.WealthManagementService
 
 
         //calculate totalInvestments
-        public double RealStateEngine()
+        public double TotalInvestments()
         {
             bool firstLine = true;
 
@@ -76,9 +76,63 @@ namespace WealthManagementAssessment.WealthManagementService
         //RealStateEngine
         public double Engine()
         {
-            return RealStateEngine();
+            using (var reader = new StreamReader(fileTransactions))
+            {
+                string? line;
+                int count = 0;
+                firstLine = false;
+
+
+                while ((line = reader.ReadLine()) != null)
+                {
+                    if (firstLine)
+                    {
+                        firstLine = false;
+                        continue;
+                    }
+
+                    var fields = line.Split(';');
+
+                    foreach (var investment in selectedInvestments)
+                    {
+                        //check Estate Value
+                        if (investment.InvestmentId == fields[0] && fields[1] == "Estate")
+                        {
+                            var transaction = new Transaction();
+                            transaction.InvestmentId = investment.InvestmentId; //or fields[0]
+                            transaction.Type = fields[1];
+                            transaction.Value = Double.Parse(fields[3]);
+                            //missing Date
+
+                            selectedEstate.Add(transaction);
+                            count++;
+                        }
+
+                        //check Building Value
+                        if (investment.InvestmentId == fields[0] && fields[1] == "Building")
+                        {
+                            var transaction = new Transaction();
+                            transaction.InvestmentId = investment.InvestmentId; //or fields[0]
+                            transaction.Type = fields[1];
+                            transaction.Value = Double.Parse(fields[3]);
+
+                            selectedBuilding.Add(transaction);
+                        }
+                    }
+
+
+                }
+
+                //5 snapshot aqui
+                Console.WriteLine("finish 2. While");
+
+
+            }
+
+
+            return selectedBuilding.Count;
         }
-    
+
     }
 
 
