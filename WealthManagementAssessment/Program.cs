@@ -6,13 +6,14 @@ class Program
     private static void Main(string[] args)
     {
         string investorId = "Investor90";
+        string dateString = "08-04-2025";
 
         //var line = Console.ReadLine();
         //var steps = line.Split(";");
-        //DateTime date = DateTime.Parse(steps[1]);
+        DateTime date = DateTime.Parse(dateString);
 
-        //Console.WriteLine("date format"+ date);
-        //12/28/2015 12:00:00 AM
+        Console.WriteLine("date format" + date);
+        //8/4/2025 12:00:00 AM
 
         var obj = new AssetValuationService(investorId);
 
