@@ -16,5 +16,11 @@ namespace WealthManagementAssessment.WealthManagementService
             OwnerId = ownerId;
         }
 
+
+
+        public void RealStateEngine()
+        {
+            
+        }
     }
 }
