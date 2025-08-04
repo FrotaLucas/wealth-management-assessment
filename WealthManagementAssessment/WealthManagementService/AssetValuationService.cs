@@ -23,9 +23,10 @@ namespace WealthManagementAssessment.WealthManagementService
 
         public DateTime DateTime { get; set; }
 
-        public AssetValuationService(string ownerId)
+        public AssetValuationService(string ownerId, DateTime dateTime)
         {
             OwnerId = ownerId;
+            DateTime = dateTime;
         }
 
 
