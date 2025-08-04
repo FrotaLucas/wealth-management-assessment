@@ -14,7 +14,7 @@ class Program
         string fileInvestments = Path.Combine(baseDirectory, "Csv\\Investments.csv");
         string fileTransactions = Path.Combine(baseDirectory, "Csv\\Transactions.csv");
 
-        string investorId = "Investor30";
+        string investorId = "Investor90";
         bool firstLine = true;
 
 
@@ -58,7 +58,7 @@ class Program
             }
 
             //3 snapshot aqui
-            Console.WriteLine("finish 1. While");
+            Console.WriteLine($"Total investments: {selectedInvestments.Count}");
         }
 
         //4 snapshot aqui
@@ -79,10 +79,10 @@ class Program
 
                 var fields = line.Split(';');
 
-                //check Estate Value
                 foreach (var investment in selectedInvestments)
                 {
-                    if(investment.InvestmentId == fields[0] && fields[1] == "Estate")
+                    //check Estate Value
+                    if (investment.InvestmentId == fields[0] && fields[1] == "Estate")
                     {
                         var transaction = new Transaction();
                         transaction.InvestmentId = investment.InvestmentId; //or fields[0]
@@ -94,6 +94,7 @@ class Program
                         count++;
                     }
 
+                    //check Building Value
                     if (investment.InvestmentId == fields[0] && fields[1] == "Building")
                     {
                         var transaction = new Transaction();
