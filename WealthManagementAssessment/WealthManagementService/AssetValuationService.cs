@@ -73,8 +73,8 @@ namespace WealthManagementAssessment.WealthManagementService
             return selectedInvestments.Count;
 
         }
-    
-        
+
+
         public double RealStateEngine()
         {
             bool firstLine = false;
@@ -128,9 +128,13 @@ namespace WealthManagementAssessment.WealthManagementService
 
             }
 
-            foreach(var realState in selectedEstate)
+            for (int i = 0; i < selectedBuilding.Count; i++)
             {
-                Console.WriteLine(realState.DateTime);
+                if (selectedBuilding[i].DateTime == DateTime)
+                {
+                    Console.WriteLine("investmentId"+ selectedBuilding[i].InvestmentId);
+                    Console.WriteLine("investmentId"+ selectedEstate[i].InvestmentId);
+                }
             }
 
             return selectedBuilding.Count;
