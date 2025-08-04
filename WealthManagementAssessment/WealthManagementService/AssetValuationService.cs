@@ -27,6 +27,7 @@ namespace WealthManagementAssessment.WealthManagementService
         }
 
 
+        //calculate totalInvestments
         public double RealStateEngine()
         {
             bool firstLine = true;
@@ -70,5 +71,15 @@ namespace WealthManagementAssessment.WealthManagementService
             return selectedInvestments.Count;
 
         }
+    
+        
+        //RealStateEngine
+        public double Engine()
+        {
+            return RealStateEngine();
+        }
+    
     }
+
+
 }
