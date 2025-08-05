@@ -88,7 +88,7 @@ namespace WealthManagementAssessment.WealthManagementService
 
         public double RealStateEngine()
         {
-            bool firstLine = false;
+            bool firstLine = true;
             RealStateSumup = 0;
 
             using (var reader = new StreamReader(fileTransactions))
@@ -104,11 +104,12 @@ namespace WealthManagementAssessment.WealthManagementService
                     }
 
                     var fields = line.Split(';');
+                    var transationDate = DateTime.Parse(fields[2]);
 
                     foreach (var investment in selectedInvestments)
                     {
                         //check Estate Value
-                        if (investment.InvestmentId == fields[0] && fields[1] == "Estate" && fields[2] == ConvertValuationDateToString())
+                        if (investment.InvestmentId == fields[0] && fields[1] == "Estate" && ValuationDate > transationDate)
                         {
                             var transaction = new Transaction();
                             transaction.InvestmentId = investment.InvestmentId; //or fields[0]
@@ -121,7 +122,7 @@ namespace WealthManagementAssessment.WealthManagementService
                         }
 
                         //check Building Value
-                        if (investment.InvestmentId == fields[0] && fields[1] == "Building" && fields[2] == ConvertValuationDateToString())
+                        if (investment.InvestmentId == fields[0] && fields[1] == "Building" && ValuationDate > transationDate)
                         {
                             var transaction = new Transaction();
                             transaction.InvestmentId = investment.InvestmentId; //or fields[0]
