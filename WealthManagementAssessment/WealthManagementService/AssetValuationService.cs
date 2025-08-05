@@ -118,6 +118,7 @@ namespace WealthManagementAssessment.WealthManagementService
                             transaction.DateTime = DateTime.Parse(fields[2]);
 
                             selectedEstate.Add(transaction);
+                            RealStateSumup += transaction.Value;
                             count++;
                         }
 
@@ -131,6 +132,8 @@ namespace WealthManagementAssessment.WealthManagementService
                             transaction.DateTime = DateTime.Parse(fields[2]);
 
                             selectedBuilding.Add(transaction);
+                            RealStateSumup += transaction.Value;
+
                         }
                     }
 
