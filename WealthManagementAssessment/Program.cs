@@ -12,13 +12,14 @@ class Program
         //var steps = line.Split(";");
         DateTime date = DateTime.Parse(dateString);
 
-        Console.WriteLine("date format" + date);
+        Console.WriteLine("DateTime format: " + date);
         //4/26/2020 12:00:00 AM
 
         var obj = new AssetValuationService(investorId, date);
 
         Console.WriteLine("total investments: " + obj.TotalInvestments());
-        Console.WriteLine("total Bulding Investor90: " + obj.RealStateEngine());
+        Console.WriteLine("total Bulding Type Investor90: " + obj.RealStateEngine());
+        Console.WriteLine("Valuarion Bulding + ESTATE: " + obj.RealStateSumup);
 
     }
 
