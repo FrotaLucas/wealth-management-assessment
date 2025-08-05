@@ -34,7 +34,7 @@ namespace WealthManagementAssessment.WealthManagementService
         }
 
 
-        public string ConvertDateToString()
+        public string ConvertValuationDateToString()
         {
             string date = this.ValuationDate.ToString("yyyy-MM-dd");
 
@@ -109,7 +109,7 @@ namespace WealthManagementAssessment.WealthManagementService
                     foreach (var investment in selectedInvestments)
                     {
                         //check Estate Value
-                        if (investment.InvestmentId == fields[0] && fields[1] == "Estate" && fields[2] == ConvertDateToString())
+                        if (investment.InvestmentId == fields[0] && fields[1] == "Estate" && fields[2] == ConvertValuationDateToString())
                         {
                             var transaction = new Transaction();
                             transaction.InvestmentId = investment.InvestmentId; //or fields[0]
