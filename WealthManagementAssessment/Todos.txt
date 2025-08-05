@@ -4,8 +4,18 @@ estejam dentro de um appsettings.config
 
 2 Sugestao
 
-RealState, Stock, Fond nao poderiam ser classes cada uma com seu metodo ENGINE para calcular 
+RealState, Stock, Fond nao poderiam ser classes ? cada uma com seu metodo ENGINE para calcular 
 o tamanho do patrimonio? 
 
+3 na verdade o preenchimento dessas listas abaixo talvez não seja necessário pq o objetivo eh calcular
+o somatório de RealState, Stock e Fonds
 
-3 como modelar a aplicacao de forma que o arquivo csv seja lido apenas uma unica vez !!!
+//preenchimento desnecessario
+List<Investment> selectedInvestments = new List<Investment>();
+List<Transaction> selectedEstate = new List<Transaction>();
+List<Transaction> selectedBuilding = new List<Transaction>();
+
+
+4 como modelar a aplicacao de forma que o arquivo csv seja lido apenas uma unica vez !!!
+
+
