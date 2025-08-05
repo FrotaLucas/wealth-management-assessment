@@ -94,7 +94,6 @@ namespace WealthManagementAssessment.WealthManagementService
             {
                 string? line;
                 int count = 0;
-                string t = ConvertDateTime();
 
                 while ((line = reader.ReadLine()) != null)
                 {
@@ -109,7 +108,7 @@ namespace WealthManagementAssessment.WealthManagementService
                     foreach (var investment in selectedInvestments)
                     {
                         //check Estate Value
-                        if (investment.InvestmentId == fields[0] && fields[1] == "Estate")
+                        if (investment.InvestmentId == fields[0] && fields[1] == "Estate" && fields[2] == ConvertDateToString())
                         {
                             var transaction = new Transaction();
                             transaction.InvestmentId = investment.InvestmentId; //or fields[0]
