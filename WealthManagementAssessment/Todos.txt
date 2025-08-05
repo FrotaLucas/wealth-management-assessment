@@ -19,3 +19,7 @@ List<Transaction> selectedBuilding = new List<Transaction>();
 4 como modelar a aplicacao de forma que o arquivo csv seja lido apenas uma unica vez !!!
 
 
+5 o que eh melhor para performance do código. 
+5.1 transformar toda a string do csv em data antes de comparar 
+5.2 transformar o parâmetro data do usuário em string 
+
