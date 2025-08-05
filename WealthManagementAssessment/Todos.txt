@@ -23,3 +23,7 @@ List<Transaction> selectedBuilding = new List<Transaction>();
 5.1 transformar toda a string do csv em data antes de comparar 
 5.2 transformar o parâmetro data do usuário em string 
 
+6 conversão não esta tendo retrabalho?
+atualmente string data do  usuário eh transformada em data e depois transformada em string novamente
+string -> data -> string
+
