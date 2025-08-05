@@ -19,9 +19,12 @@ namespace WealthManagementAssessment.WealthManagementService
         List<Transaction> selectedEstate = new List<Transaction>();
         List<Transaction> selectedBuilding = new List<Transaction>();
 
+
         public string OwnerId { get; set; }
 
         public DateTime DateTime { get; set; }
+
+        public double RealStateSumup { get; set; }
 
         public AssetValuationService(string ownerId, DateTime dateTime)
         {
@@ -29,6 +32,12 @@ namespace WealthManagementAssessment.WealthManagementService
             DateTime = dateTime;
         }
 
+
+        public string ConvertDateTime(DateTime dateTime)
+        {
+
+            return string.Empty;
+        }
 
         //calculate totalInvestments
         public double TotalInvestments()
@@ -78,6 +87,7 @@ namespace WealthManagementAssessment.WealthManagementService
         public double RealStateEngine()
         {
             bool firstLine = false;
+            RealStateSumup = 0;
 
             using (var reader = new StreamReader(fileTransactions))
             {
