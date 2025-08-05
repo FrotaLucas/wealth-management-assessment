@@ -121,7 +121,7 @@ namespace WealthManagementAssessment.WealthManagementService
                         }
 
                         //check Building Value
-                        if (investment.InvestmentId == fields[0] && fields[1] == "Building")
+                        if (investment.InvestmentId == fields[0] && fields[1] == "Building" && fields[2] == ConvertValuationDateToString())
                         {
                             var transaction = new Transaction();
                             transaction.InvestmentId = investment.InvestmentId; //or fields[0]
