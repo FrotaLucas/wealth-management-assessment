@@ -94,7 +94,6 @@ namespace WealthManagementAssessment.WealthManagementService
             using (var reader = new StreamReader(fileTransactions))
             {
                 string? line;
-                int count = 0;
 
                 while ((line = reader.ReadLine()) != null)
                 {
@@ -119,7 +118,6 @@ namespace WealthManagementAssessment.WealthManagementService
 
                             selectedEstate.Add(transaction);
                             RealStateSumup += transaction.Value;
-                            count++;
                         }
 
                         //check Building Value
@@ -142,14 +140,14 @@ namespace WealthManagementAssessment.WealthManagementService
 
             }
 
-            for (int i = 0; i < selectedBuilding.Count; i++)
-            {
-                if (selectedBuilding[i].DateTime == ValuationDate)
-                {
-                    Console.WriteLine("investmentId"+ selectedBuilding[i].InvestmentId);
-                    Console.WriteLine("investmentId"+ selectedEstate[i].InvestmentId);
-                }
-            }
+            //for (int i = 0; i < selectedBuilding.Count; i++)
+            //{
+            //    if (selectedBuilding[i].DateTime == ValuationDate)
+            //    {
+            //        Console.WriteLine("investmentId"+ selectedBuilding[i].InvestmentId);
+            //        Console.WriteLine("investmentId"+ selectedEstate[i].InvestmentId);
+            //    }
+            //}
 
             return selectedBuilding.Count;
         }
