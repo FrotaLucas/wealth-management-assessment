@@ -22,20 +22,21 @@ namespace WealthManagementAssessment.WealthManagementService
 
         public string OwnerId { get; set; }
 
-        public DateTime DateTime { get; set; }
+        //EndDate or ReferenceDate
+        public DateTime ValuationDate { get; set; }
 
         public double RealStateSumup { get; set; }
 
         public AssetValuationService(string ownerId, DateTime dateTime)
         {
             OwnerId = ownerId;
-            DateTime = dateTime;
+            ValuationDate = dateTime;
         }
 
 
         public string ConvertDateToString()
         {
-            string date = this.DateTime.ToString("yyyy-MM-dd");
+            string date = this.ValuationDate.ToString("yyyy-MM-dd");
 
             return date;
         }
@@ -140,7 +141,7 @@ namespace WealthManagementAssessment.WealthManagementService
 
             for (int i = 0; i < selectedBuilding.Count; i++)
             {
-                if (selectedBuilding[i].DateTime == DateTime)
+                if (selectedBuilding[i].DateTime == ValuationDate)
                 {
                     Console.WriteLine("investmentId"+ selectedBuilding[i].InvestmentId);
                     Console.WriteLine("investmentId"+ selectedEstate[i].InvestmentId);
