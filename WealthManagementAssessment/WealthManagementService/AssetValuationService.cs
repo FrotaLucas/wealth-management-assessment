@@ -33,7 +33,7 @@ namespace WealthManagementAssessment.WealthManagementService
         }
 
 
-        public string ConvertDateTime()
+        public string ConvertDateToString()
         {
             string date = this.DateTime.ToString("yyyy-MM-dd");
 
