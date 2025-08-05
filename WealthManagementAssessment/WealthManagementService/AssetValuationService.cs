@@ -33,10 +33,11 @@ namespace WealthManagementAssessment.WealthManagementService
         }
 
 
-        public string ConvertDateTime(DateTime dateTime)
+        public string ConvertDateTime()
         {
+            string date = this.DateTime.ToString("yyyy-MM-dd");
 
-            return string.Empty;
+            return date;
         }
 
         //calculate totalInvestments
@@ -93,7 +94,7 @@ namespace WealthManagementAssessment.WealthManagementService
             {
                 string? line;
                 int count = 0;
-
+                string t = ConvertDateTime();
 
                 while ((line = reader.ReadLine()) != null)
                 {
