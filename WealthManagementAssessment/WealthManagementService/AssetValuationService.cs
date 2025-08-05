@@ -34,6 +34,7 @@ namespace WealthManagementAssessment.WealthManagementService
         }
 
 
+        //delete Function!!
         public string ConvertValuationDateToString()
         {
             string date = this.ValuationDate.ToString("yyyy-MM-dd");
