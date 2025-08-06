@@ -22,7 +22,7 @@ namespace WealthManagementAssessment.WealthManagementService
 
         public string OwnerId { get; set; }
 
-        //EndDate or ReferenceDate
+        //EndDate or ReferenceDate?
         public DateTime ValuationDate { get; set; }
 
         public double RealStateSumup { get; set; }
@@ -42,7 +42,6 @@ namespace WealthManagementAssessment.WealthManagementService
             return date;
         }
 
-        //calculate totalInvestments
         public double TotalInvestments()
         {
             bool firstLine = true;
@@ -69,9 +68,10 @@ namespace WealthManagementAssessment.WealthManagementService
 
                         investment.InvestorId = fields[0];
                         investment.InvestmentId = fields[1];
-                        investment.InvestmentType = fields[2]; //new code
+                        investment.InvestmentType = fields[2]; 
                         investment.Isin = fields[3];
 
+                        //not used
                         //RealState
                         //investment.City = fields[4];
                         //Fonds
