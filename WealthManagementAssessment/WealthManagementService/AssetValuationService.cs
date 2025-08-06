@@ -105,6 +105,7 @@ namespace WealthManagementAssessment.WealthManagementService
             using (var reader = new StreamReader(fileTransactions))
             {
                 string? line;
+                int count = 0;
 
                 while ((line = reader.ReadLine()) != null)
                 {
@@ -146,7 +147,7 @@ namespace WealthManagementAssessment.WealthManagementService
 
                         }
 
-                        if(investment.InvestmentId == "Investment5392" && investment.InvestmentType == "Stock" && ValuationDate > transationDate)
+                        if ("Investment1464" == fields[0] && investment.InvestmentId == "Investment1464" && investment.InvestmentType == "Stock" && ValuationDate > transationDate)
                         {
                             var transaction = new Transaction();
                             transaction.InvestmentId = investment.InvestmentId;
@@ -159,7 +160,7 @@ namespace WealthManagementAssessment.WealthManagementService
 
                         }
 
-
+                        count++;
 
                     }
 
