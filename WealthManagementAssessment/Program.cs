@@ -18,8 +18,9 @@ class Program
         var obj = new AssetValuationService(investorId, date);
 
         Console.WriteLine("total investments: " + obj.TotalInvestments());
-        Console.WriteLine("total Bulding Type Investor90: " + obj.RealStateEngine());
-        Console.WriteLine("Valuarion Bulding + ESTATE: " + obj.RealStateSumup);
+        obj.RealStateEngine();
+
+        Console.WriteLine("Valuation RealState Bulding + ESTATE: " + obj.RealStateSumup);
 
     }
 
