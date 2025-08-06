@@ -99,6 +99,7 @@ namespace WealthManagementAssessment.WealthManagementService
         {
             bool firstLine = true;
             RealStateSumup = 0;
+            StockSumup = 0;
 
             using (var reader = new StreamReader(fileTransactions))
             {
@@ -144,6 +145,17 @@ namespace WealthManagementAssessment.WealthManagementService
 
                         }
 
+                        if(investment.InvestmentId == "Investment5392" && investment.InvestmentType == "Stock" && ValuationDate > transationDate)
+                        {
+                            var transaction = new Transaction();
+                            transaction.InvestmentId = investment.InvestmentId;
+                            transaction.Type = fields[1];
+                            transaction.Value = Double.Parse(fields[3]);
+                            transaction.DateTime = DateTime.Parse(fields[2]);
+
+                            StockSumup += transaction.Value;
+
+                        }
 
 
 
