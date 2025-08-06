@@ -74,7 +74,8 @@ namespace WealthManagementAssessment.WealthManagementService
 
                         //RealState
                         //investment.City = fields[4];
-                        
+                        //Fonds
+                        //investment.FondsInvestor = fields[5];
 
                         selectedInvestments
                             .Add(investment);
