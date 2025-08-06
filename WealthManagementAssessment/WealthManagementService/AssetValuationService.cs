@@ -154,6 +154,7 @@ namespace WealthManagementAssessment.WealthManagementService
                             transaction.Value = Double.Parse(fields[3]);
                             transaction.DateTime = DateTime.Parse(fields[2]);
 
+                            selectedStocks.Add(transaction);
                             StockSumup += transaction.Value;
 
                         }
