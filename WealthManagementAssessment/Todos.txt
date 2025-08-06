@@ -8,7 +8,7 @@ RealState, Stock, Fond nao poderiam ser classes ? cada uma com seu metodo ENGINE
 o tamanho do patrimonio? 
 
 3 na verdade o preenchimento dessas listas abaixo talvez não seja necessário pq o objetivo eh calcular
-o somatório de RealState, Stock e Fonds
+o somatório de RealState, Stock e Fonds e não os dados do csv
 
 //preenchimento desnecessario
 List<Investment> selectedInvestments = new List<Investment>();
