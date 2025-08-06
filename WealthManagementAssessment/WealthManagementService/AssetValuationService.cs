@@ -27,6 +27,8 @@ namespace WealthManagementAssessment.WealthManagementService
 
         public double RealStateSumup { get; set; }
 
+        public double StockSumup { get; set; }
+
         public AssetValuationService(string ownerId, DateTime dateTime)
         {
             OwnerId = ownerId;
