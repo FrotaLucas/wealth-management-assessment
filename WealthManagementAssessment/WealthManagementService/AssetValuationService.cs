@@ -92,7 +92,7 @@ namespace WealthManagementAssessment.WealthManagementService
         }
 
 
-        public double RealStateEngine()
+        public void RealStateEngine()
         {
             bool firstLine = true;
             RealStateSumup = 0;
@@ -160,7 +160,6 @@ namespace WealthManagementAssessment.WealthManagementService
             //    }
             //}
 
-            return selectedBuilding.Count;
         }
 
     }
