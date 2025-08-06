@@ -19,6 +19,7 @@ namespace WealthManagementAssessment.WealthManagementService
         List<Transaction> selectedEstate = new List<Transaction>();
         List<Transaction> selectedBuilding = new List<Transaction>();
 
+        List<Transaction> selectedStocks = new List<Transaction>();
 
         public string OwnerId { get; set; }
 
