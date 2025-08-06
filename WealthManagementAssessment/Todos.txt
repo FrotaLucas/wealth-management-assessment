@@ -23,5 +23,7 @@ List<Transaction> selectedBuilding = new List<Transaction>();
 5.1 transformar toda a string do csv em data antes de comparar OU
 5.2 transformar o parâmetro data do usuário em string 
 
-
+6 verifiquei que as datas que estão faltando no arquivo quotes.csv são finais de semana e feriado. 
+Talvez outras datas tbm não importa. 
+Logo, para saber o patrimônio em acoes vou usar sempre a ultima data com cotação valida da acao.
 
