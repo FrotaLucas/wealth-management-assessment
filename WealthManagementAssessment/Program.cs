@@ -21,6 +21,8 @@ class Program
         obj.RealStateEngine();
 
         Console.WriteLine("Valuation RealState Bulding + ESTATE: " + obj.RealStateSumup);
+        Console.WriteLine("Valuation Stocks: " + obj.StockSumup);
+        
 
     }
 
