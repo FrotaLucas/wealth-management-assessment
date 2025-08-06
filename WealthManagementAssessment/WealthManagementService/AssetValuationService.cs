@@ -72,6 +72,10 @@ namespace WealthManagementAssessment.WealthManagementService
                         investment.InvestmentType = fields[2]; //new code
                         investment.Isin = fields[3];
 
+                        //RealState
+                        //investment.City = fields[4];
+                        
+
                         selectedInvestments
                             .Add(investment);
                     }
@@ -135,6 +139,10 @@ namespace WealthManagementAssessment.WealthManagementService
                             RealStateSumup += transaction.Value;
 
                         }
+
+
+
+
                     }
 
 
