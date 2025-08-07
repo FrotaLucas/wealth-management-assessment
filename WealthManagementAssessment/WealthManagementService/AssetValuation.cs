@@ -11,8 +11,8 @@ namespace WealthManagementAssessment.WealthManagementService
     {
 
         static string baseDirectory = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\..\"));
-        string fileInvestments = Path.Combine(baseDirectory, "Csv\\Investments.csv");
-        string fileTransactions = Path.Combine(baseDirectory, "Csv\\Transactions.csv");
+        string fileInvestments = Path.Combine(baseDirectory, "Csv\\InvestmentsT.csv");
+        string fileTransactions = Path.Combine(baseDirectory, "Csv\\TransactionsT.csv");
 
         public string OwnerId { get; set; }
 
@@ -46,22 +46,23 @@ namespace WealthManagementAssessment.WealthManagementService
 
             Console.WriteLine($"total investor90: {Investor.Investments.Count}");
 
+            var trans = new Transaction();
 
-            foreach (var investment in Investor.Investments)
-            {
-                investment.Transactions = File.ReadLines(fileTransactions)
-                    .Skip(1)
-                    .Select(line => line.Split(";"))
-                    .Where(parts => parts[0] == investment.InvestmentId)
-                    .Select(parts => new Transaction
-                    {
-                        InvestmentId = parts[0],
-                        Type = parts[1],
-                        //DateTime = DateTime.Parse(parts[2]),
-                        Value = Double.Parse(parts[2])
+            //foreach (var investment in Investor.Investments)
+            //{
+            //    investment.Transactions = File.ReadLines(fileTransactions)
+            //        .Skip(1)
+            //        .Select(line => line.Split(";"))
+            //        .Where(parts => parts[0] == investment.InvestmentId)
+            //        .Select(parts => new Transaction
+            //        {
+            //            InvestmentId = parts[0],
+            //            Type = parts[1],
+            //            //DateTime = DateTime.Parse(parts[2]),
+            //            Value = Double.Parse(parts[2])
 
-                    }).ToList();
-            }
+            //        }).ToList();
+            //}
 
 
             //foreach (var investment in Investor.Investments)
@@ -71,6 +72,17 @@ namespace WealthManagementAssessment.WealthManagementService
             //    Console.WriteLine($"invesment Type: {investment.InvestmentType}\n");
             //    Console.WriteLine($"City: {investment.City} \n");
             //}
+
+            foreach (var investment in Investor.Investments)
+            {
+               foreach(var transaction in investment.Transactions)
+                {
+                    Console.WriteLine($"transactionsId: { transaction.InvestmentId}\n");
+                    Console.WriteLine($"type: {transaction.Type}\n");
+                    Console.WriteLine($"invesment Type: {transaction.Value}\n");
+                    Console.WriteLine($"City: {transaction.DateTime} \n");
+                }
+            }
 
         }
 
