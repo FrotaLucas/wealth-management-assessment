@@ -13,14 +13,17 @@ namespace WealthManagementAssessment.WealthManagementService
         static string baseDirectory = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\..\"));
         string fileInvestments = Path.Combine(baseDirectory, "Csv\\Investments.csv");
         string fileTransactions = Path.Combine(baseDirectory, "Csv\\Transactions.csv");
-        public Investor Investor { get; set; }
+
+        //try to use one single Investor and save all investments
+        //public Investor Investor { get; set; }
+
+        public List<Investor> MyProperty { get; set; }
         public AssetValuation()
         {
             
         }
         public void FileReader()
         {
-           
         }
 
     }
