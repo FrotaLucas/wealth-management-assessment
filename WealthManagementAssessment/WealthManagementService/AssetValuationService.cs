@@ -1,7 +1,7 @@
 ﻿using WealthManagementAssessment.Domain;
 
 namespace WealthManagementAssessment.WealthManagementService
-{
+{       //ValuationMangement or valuationEngine or PortifolioManagement or AssetManagement or AssetValuation
     public class AssetValuationService
     {
 
