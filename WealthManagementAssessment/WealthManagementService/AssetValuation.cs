@@ -33,6 +33,7 @@ namespace WealthManagementAssessment.WealthManagementService
                 .Skip(1)
                 .Select(line => line.Split(';'))
                 .Where(parts => parts[0] == OwnerId)
+                .OrderByDescending(parts => parts[2].Length)
                 .Select(parst => new Investment
                 {
                     InvestmentId = parst[1],
@@ -43,7 +44,15 @@ namespace WealthManagementAssessment.WealthManagementService
                     FondsInvestor = parst[5]
                 }).ToList();
 
-            Console.WriteLine($"total investor90: {Investor.Investments.Count}");
+            //Console.WriteLine($"total investor90: {Investor.Investments.Count}");
+
+            foreach(var investment in Investor.Investments)
+            {
+                Console.WriteLine($"investorId: {investment.InvestorId}\n");
+                Console.WriteLine($"investmentId: {investment.InvestmentId}\n");
+                Console.WriteLine($"invesment Type: {investment.InvestmentType}\n");
+                Console.WriteLine($"City: {investment.City} \n");
+            }
 
         }
 
