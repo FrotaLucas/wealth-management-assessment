@@ -6,7 +6,17 @@ using System.Threading.Tasks;
 
 namespace WealthManagementAssessment.WealthManagementService
 {
-    internal class AssetValuation
+    public class AssetValuation
     {
+
+        public AssetValuation()
+        {
+            
+        }
+        public void FileReader()
+        {
+
+        }
+
     }
 }
