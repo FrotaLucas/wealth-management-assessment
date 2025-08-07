@@ -14,7 +14,7 @@ namespace WealthManagementAssessment.Domain
 
         public string Isin { get; set; }
 
-    
+        public string City { get; set; }
 
         public List<Investment> Investments { get; set; }
     }
