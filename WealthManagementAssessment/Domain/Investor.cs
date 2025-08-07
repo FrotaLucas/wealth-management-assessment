@@ -4,6 +4,6 @@
     {
         public string InvestorId { get; set; }
 
-        public List<Investment> Investments { get; set; }
+        public List<Investment> Investments { get; set; } = new List<Investment>();
     }
 }
