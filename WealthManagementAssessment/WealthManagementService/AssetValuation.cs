@@ -59,7 +59,7 @@ namespace WealthManagementAssessment.WealthManagementService
                         InvestmentId = parts[0],
                         Type = parts[1],
                         //DateTime = DateTime.Parse(parts[2]),
-                        Value = Double.Parse(parts[2])
+                        Value = Double.Parse(parts[3])
 
                     }).ToList();
             }
@@ -75,14 +75,15 @@ namespace WealthManagementAssessment.WealthManagementService
 
             foreach (var investment in Investor.Investments)
             {
-               foreach(var transaction in investment.Transactions)
+                foreach (var transaction in investment.Transactions)
                 {
-                    Console.WriteLine($"transactionsId: { transaction.InvestmentId}\n");
+                    Console.WriteLine($"transactionsId: {transaction.InvestmentId}\n");
                     Console.WriteLine($"type: {transaction.Type}\n");
-                    Console.WriteLine($"invesment Type: {transaction.Value}\n");
-                    Console.WriteLine($"City: {transaction.DateTime} \n");
+                    Console.WriteLine($"Value: {transaction.Value}\n");
+                    //Console.WriteLine($"City: {transaction.DateTime} \n");
                 }
             }
+
 
         }
 
