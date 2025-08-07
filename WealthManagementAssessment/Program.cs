@@ -6,7 +6,7 @@ class Program
     private static void Main(string[] args)
     {
         string investorId = "Investor90";
-        string dateString = "06-28-2016";
+        string dateString = "12-31-2017";
 
         //var line = Console.ReadLine();
         //var steps = line.Split(";");
