@@ -27,8 +27,8 @@ class Program
         //Console.WriteLine("Valuation Stocks: " + obj.StockSumup);
 
         //Sol2
-        //var obj = new AssetValuation(investorId, date);
-        //obj.FilesReader();
+        var obj = new AssetValuation(investorId, date);
+        obj.FilesReader();
 
     }
 
