@@ -12,7 +12,10 @@ namespace WealthManagementAssessment.Domain
 
         public string InvestmentType { get; set; }
 
-     
+        public string Isin { get; set; }
+
+    
+
         public List<Investment> Investments { get; set; }
     }
 }
