@@ -32,7 +32,7 @@ namespace WealthManagementAssessment.WealthManagementService
         }
 
 
-        //delete Function!!
+        //correct format to original csv
         public string ConvertValuationDateToString()
         {
             string date = this.ValuationDate.ToString("yyyy-MM-dd");
