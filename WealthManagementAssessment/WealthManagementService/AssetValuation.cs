@@ -19,7 +19,7 @@ namespace WealthManagementAssessment.WealthManagementService
         //EndDate or ReferenceDate?
         public DateTime ValuationDate { get; set; }
 
-        public Investor Investor {  get; set; } = new Investor();
+        public Investor Investor { get; set; } = new Investor();
 
         public AssetValuation(string ownerId, DateTime valuationDate)
         {
@@ -47,21 +47,30 @@ namespace WealthManagementAssessment.WealthManagementService
             Console.WriteLine($"total investor90: {Investor.Investments.Count}");
 
 
-            //foreach(var investment in Investor.Investments)
-            //{
-            //    investment.Transactions = File.ReadLines(fileTransactions)
-            //        .Skip(1)
-            //        .Select(line => line.Split(";"))
-            //}
-
-
             foreach (var investment in Investor.Investments)
             {
-                Console.WriteLine($"investmentId: {investment.InvestmentId}\n");
-                Console.WriteLine($"investorId: {investment.InvestorId}\n");
-                //Console.WriteLine($"invesment Type: {investment.InvestmentType}\n");
-                //Console.WriteLine($"City: {investment.City} \n");
+                investment.Transactions = File.ReadLines(fileTransactions)
+                    .Skip(1)
+                    .Select(line => line.Split(";"))
+                    .Where(parts => parts[0] == investment.InvestmentId)
+                    .Select(parts => new Transaction
+                    {
+                        InvestmentId = parts[0],
+                        Type = parts[1],
+                        //DateTime = DateTime.Parse(parts[2]),
+                        Value = Double.Parse(parts[2])
+
+                    }).ToList();
             }
+
+
+            //foreach (var investment in Investor.Investments)
+            //{
+            //    Console.WriteLine($"investmentId: {investment.InvestmentId}\n");
+            //    Console.WriteLine($"investorId: {investment.InvestorId}\n");
+            //    Console.WriteLine($"invesment Type: {investment.InvestmentType}\n");
+            //    Console.WriteLine($"City: {investment.City} \n");
+            //}
 
         }
 
