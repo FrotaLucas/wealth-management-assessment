@@ -11,7 +11,7 @@ namespace WealthManagementAssessment.WealthManagementService
     {
 
         static string baseDirectory = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\..\"));
-        string fileInvestments = Path.Combine(baseDirectory, "Csv\\InvestmentsT.csv");
+        string fileInvestments = Path.Combine(baseDirectory, "Csv\\Investments.csv");
         string fileTransactions = Path.Combine(baseDirectory, "Csv\\Transactions.csv");
 
         public string OwnerId { get; set; }
@@ -19,9 +19,7 @@ namespace WealthManagementAssessment.WealthManagementService
         //EndDate or ReferenceDate?
         public DateTime ValuationDate { get; set; }
 
-        //try to use one single Investor and save all investments
-        public Investor Investor { get; set; }
-
+        public Investor Investor {  get; set; } = new Investor();
 
         public AssetValuation(string ownerId, DateTime valuationDate)
         {
@@ -30,6 +28,7 @@ namespace WealthManagementAssessment.WealthManagementService
         }
         public void FileReader()
         {
+
             Investor.Investments = File.ReadLines(fileInvestments)
                 .Skip(1)
                 .Select(line => line.Split(';'))
