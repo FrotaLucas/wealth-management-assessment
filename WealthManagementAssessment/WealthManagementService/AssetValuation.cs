@@ -14,13 +14,20 @@ namespace WealthManagementAssessment.WealthManagementService
         string fileInvestments = Path.Combine(baseDirectory, "Csv\\Investments.csv");
         string fileTransactions = Path.Combine(baseDirectory, "Csv\\Transactions.csv");
 
+
+        public string OwnerId { get; set; }
+
+        //EndDate or ReferenceDate?
+        public DateTime ValuationDate { get; set; }
+
         //try to use one single Investor and save all investments
         //public Investor Investor { get; set; }
 
         public List<Investor> MyProperty { get; set; }
-        public AssetValuation()
+        public AssetValuation(string ownerId, DateTime valuationDate)
         {
-            
+            OwnerId = ownerId;
+            ValuationDate = valuationDate;
         }
         public void FileReader()
         {
