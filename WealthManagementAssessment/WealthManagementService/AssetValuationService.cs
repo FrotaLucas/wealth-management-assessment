@@ -146,8 +146,9 @@ namespace WealthManagementAssessment.WealthManagementService
                             RealStateSumup += transaction.Value;
 
                         }
+                        DateTime limitDate = DateTime.Parse("12-31-2018");
 
-                        if ("Investment1464" == fields[0] && investment.InvestmentId == "Investment1464" && investment.InvestmentType == "Stock" && ValuationDate > transationDate)
+                        if ("Investment20812" == fields[0] && investment.InvestmentId == "Investment20812" && investment.InvestmentType == "Stock" && ValuationDate < transationDate && transationDate < limitDate)
                         {
                             var transaction = new Transaction();
                             transaction.InvestmentId = investment.InvestmentId;
