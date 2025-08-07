@@ -6,7 +6,8 @@ class Program
     private static void Main(string[] args)
     {
         string investorId = "Investor90";
-        string dateString = "12-31-2017";
+        string dateString = "2017-12-31";
+
 
         //var line = Console.ReadLine();
         //var steps = line.Split(";");
@@ -24,10 +25,10 @@ class Program
 
         //Console.WriteLine("Valuation RealState Bulding + ESTATE: " + obj.RealStateSumup);
         //Console.WriteLine("Valuation Stocks: " + obj.StockSumup);
-        
+
         //Sol2
-        var obj = new AssetValuation(investorId, date);
-        obj.FilesReader();
+        //var obj = new AssetValuation(investorId, date);
+        //obj.FilesReader();
 
     }
 
