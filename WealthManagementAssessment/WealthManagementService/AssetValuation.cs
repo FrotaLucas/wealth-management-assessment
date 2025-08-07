@@ -26,7 +26,7 @@ namespace WealthManagementAssessment.WealthManagementService
             OwnerId = ownerId;
             ValuationDate = valuationDate;
         }
-        public void FileReader()
+        public void FilesReader()
         {
 
             Investor.Investments = File.ReadLines(fileInvestments)

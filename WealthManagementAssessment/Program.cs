@@ -15,14 +15,19 @@ class Program
         Console.WriteLine("DateTime format: " + date);
         //1/16/2016 12:00:00 AM
 
-        var obj = new AssetValuationService(investorId, date);
 
-        Console.WriteLine("total investments: " + obj.TotalInvestments());
-        obj.RealStateEngine();
+        //Sol1
+        //var obj = new AssetValuationService(investorId, date);
 
-        Console.WriteLine("Valuation RealState Bulding + ESTATE: " + obj.RealStateSumup);
-        Console.WriteLine("Valuation Stocks: " + obj.StockSumup);
+        //Console.WriteLine("total investments: " + obj.TotalInvestments());
+        //obj.RealStateEngine();
+
+        //Console.WriteLine("Valuation RealState Bulding + ESTATE: " + obj.RealStateSumup);
+        //Console.WriteLine("Valuation Stocks: " + obj.StockSumup);
         
+        //Sol2
+        var obj = new AssetValuation(investorId, date);
+        obj.FilesReader();
 
     }
 
