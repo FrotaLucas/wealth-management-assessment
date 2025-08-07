@@ -48,21 +48,21 @@ namespace WealthManagementAssessment.WealthManagementService
 
             var trans = new Transaction();
 
-            //foreach (var investment in Investor.Investments)
-            //{
-            //    investment.Transactions = File.ReadLines(fileTransactions)
-            //        .Skip(1)
-            //        .Select(line => line.Split(";"))
-            //        .Where(parts => parts[0] == investment.InvestmentId)
-            //        .Select(parts => new Transaction
-            //        {
-            //            InvestmentId = parts[0],
-            //            Type = parts[1],
-            //            //DateTime = DateTime.Parse(parts[2]),
-            //            Value = Double.Parse(parts[2])
+            foreach (var investment in Investor.Investments)
+            {
+                investment.Transactions = File.ReadLines(fileTransactions)
+                    .Skip(1)
+                    .Select(line => line.Split(";"))
+                    .Where(parts => parts[0] == investment.InvestmentId)
+                    .Select(parts => new Transaction
+                    {
+                        InvestmentId = parts[0],
+                        Type = parts[1],
+                        //DateTime = DateTime.Parse(parts[2]),
+                        Value = Double.Parse(parts[2])
 
-            //        }).ToList();
-            //}
+                    }).ToList();
+            }
 
 
             //foreach (var investment in Investor.Investments)
