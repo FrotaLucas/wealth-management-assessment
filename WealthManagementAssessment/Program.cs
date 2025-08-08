@@ -6,7 +6,7 @@ class Program
     private static void Main(string[] args)
     {
         string investorId = "Investor90";
-        string dateString = "2017-12-31";
+        string dateString = "2018-12-31";
 
 
         //var line = Console.ReadLine();
@@ -29,7 +29,8 @@ class Program
         //Sol2
         var obj = new AssetValuation(investorId, date);
         obj.FilesReader();
-
+        obj.RealStateEngine();
+        
     }
 
 }
