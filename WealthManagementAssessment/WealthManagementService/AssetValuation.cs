@@ -62,7 +62,7 @@ namespace WealthManagementAssessment.WealthManagementService
                     {
                         InvestmentId = parts[0],
                         Type = parts[1],
-                        DateTime = DateTime.Parse(parts[2]),
+                        Date = DateTime.Parse(parts[2]),
                         Value = Double.Parse(parts[3])
 
                     }).ToList();
@@ -84,7 +84,7 @@ namespace WealthManagementAssessment.WealthManagementService
                     Console.WriteLine($"investment Id: {transaction.InvestmentId}\n");
                     Console.WriteLine($"Type: {transaction.Type}\n");
                     Console.WriteLine($"Value: {transaction.Value}\n");
-                    Console.WriteLine($"Datetime: {transaction.DateTime} \n");
+                    Console.WriteLine($"Datetime: {transaction.Date} \n");
                 }
             }
 
@@ -98,7 +98,7 @@ namespace WealthManagementAssessment.WealthManagementService
             RealStateSumup = Investor.Investments
                 .Where(investment => investment.InvestmentType == "RealEstate")
                 .SelectMany(investment => investment.Transactions)
-                .Where( transaction => transaction.DateTime > ValuationDate)
+                .Where( transaction => transaction.Date > ValuationDate)
                 .Sum(transaction => transaction.Value);
                 //.SelectMany(investment => investment.Transactions)
                 //.Where(Investment => Investment.Type == "Estate")

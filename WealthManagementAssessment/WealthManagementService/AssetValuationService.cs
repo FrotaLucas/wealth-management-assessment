@@ -122,7 +122,7 @@ namespace WealthManagementAssessment.WealthManagementService
                             transaction.InvestmentId = investment.InvestmentId; //or fields[0]
                             transaction.Type = fields[1];
                             transaction.Value = Double.Parse(fields[3]);
-                            transaction.DateTime = DateTime.Parse(fields[2]);
+                            transaction.Date = DateTime.Parse(fields[2]);
 
                             selectedEstate.Add(transaction);
                             RealStateSumup += transaction.Value;
@@ -135,7 +135,7 @@ namespace WealthManagementAssessment.WealthManagementService
                             transaction.InvestmentId = investment.InvestmentId; //or fields[0]
                             transaction.Type = fields[1];
                             transaction.Value = Double.Parse(fields[3]);
-                            transaction.DateTime = DateTime.Parse(fields[2]);
+                            transaction.Date = DateTime.Parse(fields[2]);
 
                             selectedBuilding.Add(transaction);
                             RealStateSumup += transaction.Value;
@@ -149,7 +149,7 @@ namespace WealthManagementAssessment.WealthManagementService
                             transaction.InvestmentId = investment.InvestmentId;
                             transaction.Type = fields[1];
                             transaction.Value = Double.Parse(fields[3]);
-                            transaction.DateTime = DateTime.Parse(fields[2]);
+                            transaction.Date = DateTime.Parse(fields[2]);
 
                             selectedStocks.Add(transaction);
                             StockSumup += transaction.Value;
