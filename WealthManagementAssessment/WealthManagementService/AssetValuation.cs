@@ -14,6 +14,10 @@ namespace WealthManagementAssessment.WealthManagementService
         string fileInvestments = Path.Combine(baseDirectory, "Csv\\InvestmentsT.csv");
         string fileTransactions = Path.Combine(baseDirectory, "Csv\\TransactionsT.csv");
 
+        public double RealStateSumup { get; set; } = 0;
+
+        public double StockSumup { get; set; } = 0;
+
         public string OwnerId { get; set; }
 
         //EndDate or ReferenceDate?
@@ -44,7 +48,7 @@ namespace WealthManagementAssessment.WealthManagementService
                     FondsInvestor = parst[5]
                 }).ToList();
 
-            Console.WriteLine($"total investor90: {Investor.Investments.Count}");
+            Console.WriteLine($"total investment investor90: {Investor.Investments.Count}");
 
             var trans = new Transaction();
 
@@ -77,15 +81,40 @@ namespace WealthManagementAssessment.WealthManagementService
             {
                 foreach (var transaction in investment.Transactions)
                 {
-                    Console.WriteLine($"transactionsId: {transaction.InvestmentId}\n");
-                    Console.WriteLine($"type: {transaction.Type}\n");
+                    Console.WriteLine($"investment Id: {transaction.InvestmentId}\n");
+                    Console.WriteLine($"Type: {transaction.Type}\n");
                     Console.WriteLine($"Value: {transaction.Value}\n");
                     Console.WriteLine($"Datetime: {transaction.DateTime} \n");
                 }
             }
 
+            int count = Investor.Investments.Sum(i => i.Transactions.Count);
+
+
+            Console.WriteLine($"Finish totaltransactions: {count}");
+        }
+
+        public void RealStateEngine()
+        {
+
+            RealStateSumup = Investor.Investments
+                .Where(investment => investment.InvestmentType == "RealEstate")
+                .SelectMany(investment => investment.Transactions)
+                .Where( transaction => transaction.DateTime > ValuationDate)
+                .Sum(transaction => transaction.Value);
+                //.SelectMany(investment => investment.Transactions)
+                //.Where(Investment => Investment.Type == "Estate")
+                //.Sum(transaction => transaction.Value);
+
+            Console.WriteLine($"Sumup RealEstate: {RealStateSumup}");
 
         }
+
+        public void StockEngine()
+        {
+            
+        }
+       
 
     }
 }
