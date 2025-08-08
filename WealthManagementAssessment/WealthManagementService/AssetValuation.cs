@@ -25,6 +25,8 @@ namespace WealthManagementAssessment.WealthManagementService
 
         public Investor Investor { get; set; } = new Investor();
 
+        
+
         public AssetValuation(string ownerId, DateTime valuationDate)
         {
             OwnerId = ownerId;
@@ -110,7 +112,14 @@ namespace WealthManagementAssessment.WealthManagementService
 
         public void StockEngine()
         {
-            
+            StockSumup = Investor.Investments
+                 .Where(investment => investment.InvestmentType == "Stock")
+                 .SelectMany(investment => investment.Transactions)
+                 .Sum(transaction => transaction.Value / 10);
+
+
+            Console.WriteLine($"Sumup Stocks: {RealStateSumup}");
+
         }
 
 
