@@ -89,8 +89,6 @@ namespace WealthManagementAssessment.WealthManagementService
             }
 
             int count = Investor.Investments.Sum(i => i.Transactions.Count);
-
-
             Console.WriteLine($"Finish totaltransactions: {count}");
         }
 
@@ -112,7 +110,7 @@ namespace WealthManagementAssessment.WealthManagementService
 
         public void StockEngine()
         {
-            //imple
+            
         }
 
 
