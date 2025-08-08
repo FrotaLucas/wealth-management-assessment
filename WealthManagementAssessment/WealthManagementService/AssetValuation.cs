@@ -112,9 +112,9 @@ namespace WealthManagementAssessment.WealthManagementService
 
         public void StockEngine()
         {
-            
+            //imple
         }
-       
+
 
     }
 }
