@@ -30,7 +30,7 @@ class Program
         var obj = new AssetValuation(investorId, date);
         obj.FilesReader();
         //obj.RealStateEngine();
-        //obj.StockEngine();
+        obj.StockEngine();
         
     }
 
