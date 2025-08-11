@@ -73,22 +73,22 @@ namespace WealthManagementAssessment.WealthManagementService
             }
 
             //Storing Quotes
-            foreach( var investment in Investor.Investments )
+            foreach (var investment in Investor.Investments)
             {
                 var quotes = File.ReadLines(fileQuotes)
                     .Skip(1)
                     .Select(parts => parts.Split(";"))
                     .Where(parts => parts[0] == investment.Isin)
-                    .Select( parts => new Quotes
+                    .Select(parts => new Quotes
                     {
                         Isin = parts[0],
                         Date = DateTime.Parse(parts[1]),
                         PricePerShare = float.Parse(parts[2])
 
-                    } ).ToList();
+                    }).ToList();
 
 
-            }   
+            }
 
             Console.WriteLine($"Total Quotes: {QuotesOfInvestor.Count}");
 
@@ -131,11 +131,11 @@ namespace WealthManagementAssessment.WealthManagementService
             RealStateSumup = Investor.Investments
                 .Where(investment => investment.InvestmentType == "RealEstate")
                 .SelectMany(investment => investment.Transactions)
-                .Where( transaction => transaction.Date > ValuationDate)
+                .Where(transaction => transaction.Date > ValuationDate)
                 .Sum(transaction => transaction.Value);
-                //.SelectMany(investment => investment.Transactions)
-                //.Where(Investment => Investment.Type == "Estate")
-                //.Sum(transaction => transaction.Value);
+            //.SelectMany(investment => investment.Transactions)
+            //.Where(Investment => Investment.Type == "Estate")
+            //.Sum(transaction => transaction.Value);
 
             Console.WriteLine($"Sumup RealEstate: {RealStateSumup}");
 
