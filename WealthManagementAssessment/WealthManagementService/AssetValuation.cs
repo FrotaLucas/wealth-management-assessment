@@ -27,7 +27,7 @@ namespace WealthManagementAssessment.WealthManagementService
         public Investor Investor { get; set; } = new Investor();
 
         //chose a better name
-        public List<Quotes> QuotesOfInvestor { get; set; } = new List<Quotes>();
+        public List<Quote> QuotesOfInvestor { get; set; } = new List<Quote>();
 
         public AssetValuation(string ownerId, DateTime valuationDate)
         {
@@ -79,7 +79,7 @@ namespace WealthManagementAssessment.WealthManagementService
                     .Skip(1)
                     .Select(parts => parts.Split(";"))
                     .Where(parts => parts[0] == investment.Isin)
-                    .Select(parts => new Quotes
+                    .Select(parts => new Quote
                     {
                         Isin = parts[0],
                         Date = DateTime.Parse(parts[1]),

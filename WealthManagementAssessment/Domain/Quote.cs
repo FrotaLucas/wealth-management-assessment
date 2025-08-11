@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WealthManagementAssessment.Domain
 {
-    public class Quotes
+    public class Quote
     {
         public string Isin { get; set; }
 
