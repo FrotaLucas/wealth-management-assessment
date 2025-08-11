@@ -13,6 +13,7 @@ namespace WealthManagementAssessment.WealthManagementService
         static string baseDirectory = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\..\"));
         string fileInvestments = Path.Combine(baseDirectory, "Csv\\InvestmentsT.csv");
         string fileTransactions = Path.Combine(baseDirectory, "Csv\\TransactionsT.csv");
+        string fileQuotes = Path.Combine(baseDirectory, "Csv\\Quotes.csv");
 
         public double RealStateSumup { get; set; } = 0;
 
@@ -25,7 +26,8 @@ namespace WealthManagementAssessment.WealthManagementService
 
         public Investor Investor { get; set; } = new Investor();
 
-        
+        //chose a better name
+        public List<Quotes> QuotesOfInvestor { get; set; } = new List<Quotes>();
 
         public AssetValuation(string ownerId, DateTime valuationDate)
         {
@@ -50,7 +52,7 @@ namespace WealthManagementAssessment.WealthManagementService
                     FondsInvestor = parst[5]
                 }).ToList();
 
-            Console.WriteLine($"total investment investor90: {Investor.Investments.Count}");
+            Console.WriteLine($"total investment of investor90: {Investor.Investments.Count}");
 
             var trans = new Transaction();
 
@@ -70,17 +72,38 @@ namespace WealthManagementAssessment.WealthManagementService
                     }).ToList();
             }
 
+            //Storing Quotes
+            foreach( var investment in Investor.Investments )
+            {
+                var quotes = File.ReadLines(fileQuotes)
+                    .Skip(1)
+                    .Select(parts => parts.Split(";"))
+                    .Where(parts => parts[0] == investment.Isin)
+                    .Select( parts => new Quotes
+                    {
+                        Isin = parts[0],
+                        Date = DateTime.Parse(parts[1]),
+                        PricePerShare = float.Parse(parts[2])
+
+                    } ).ToList();
+
+
+            }   
+
+            Console.WriteLine($"Total Quotes: {QuotesOfInvestor.Count}");
 
             //foreach (var investment in Investor.Investments)
             //{
             //    Console.WriteLine($"investmentId: {investment.InvestmentId}\n");
             //    Console.WriteLine($"investorId: {investment.InvestorId}\n");
+            //    Console.WriteLine($"ISIN: {investment.Isin}\n");
             //    Console.WriteLine($"invesment Type: {investment.InvestmentType}\n");
             //    Console.WriteLine($"City: {investment.City} \n");
             //}
 
             foreach (var investment in Investor.Investments)
             {
+                Console.WriteLine($"ISIN:{investment.Isin}");
                 foreach (var transaction in investment.Transactions)
                 {
                     Console.WriteLine($"investment Id: {transaction.InvestmentId}\n");
@@ -89,6 +112,14 @@ namespace WealthManagementAssessment.WealthManagementService
                     Console.WriteLine($"Datetime: {transaction.Date} \n");
                 }
             }
+
+
+            //foreach (var quotes in QuotesOfInvestor)
+            //{
+            //    Console.WriteLine($"ISIN: {quotes.Isin}\n");
+            //    Console.WriteLine($"Date ISIN: {quotes.Date}\n");
+
+            //}
 
             int count = Investor.Investments.Sum(i => i.Transactions.Count);
             Console.WriteLine($"Finish totaltransactions: {count}");
@@ -118,7 +149,7 @@ namespace WealthManagementAssessment.WealthManagementService
                  .Sum(transaction => transaction.Value / 10);
 
 
-            Console.WriteLine($"Sumup Stocks: {RealStateSumup}");
+            Console.WriteLine($"Sumup Stocks: {StockSumup}");
 
         }
 
