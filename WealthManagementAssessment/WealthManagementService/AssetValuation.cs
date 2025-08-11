@@ -87,7 +87,7 @@ namespace WealthManagementAssessment.WealthManagementService
 
                     }).ToList();
 
-
+                QuotesOfInvestor.AddRange(quotes);
             }
 
             Console.WriteLine($"Total Quotes: {QuotesOfInvestor.Count}");
@@ -101,17 +101,17 @@ namespace WealthManagementAssessment.WealthManagementService
             //    Console.WriteLine($"City: {investment.City} \n");
             //}
 
-            foreach (var investment in Investor.Investments)
-            {
-                Console.WriteLine($"ISIN:{investment.Isin}");
-                foreach (var transaction in investment.Transactions)
-                {
-                    Console.WriteLine($"investment Id: {transaction.InvestmentId}\n");
-                    Console.WriteLine($"Type: {transaction.Type}\n");
-                    Console.WriteLine($"Value: {transaction.Value}\n");
-                    Console.WriteLine($"Datetime: {transaction.Date} \n");
-                }
-            }
+            //foreach (var investment in Investor.Investments)
+            //{
+            //    Console.WriteLine($"ISIN:{investment.Isin}");
+            //    foreach (var transaction in investment.Transactions)
+            //    {
+            //        Console.WriteLine($"investment Id: {transaction.InvestmentId}\n");
+            //        Console.WriteLine($"Type: {transaction.Type}\n");
+            //        Console.WriteLine($"Value: {transaction.Value}\n");
+            //        Console.WriteLine($"Datetime: {transaction.Date} \n");
+            //    }
+            //}
 
 
             //foreach (var quotes in QuotesOfInvestor)
@@ -143,13 +143,27 @@ namespace WealthManagementAssessment.WealthManagementService
 
         public void StockEngine()
         {
-            StockSumup = Investor.Investments
-                 .Where(investment => investment.InvestmentType == "Stock")
-                 .SelectMany(investment => investment.Transactions)
-                 .Sum(transaction => transaction.Value / 10);
+            //StockSumup = Investor.Investments
+            //     .Where(investment => investment.InvestmentType == "Stock")
+            //     .SelectMany(investment => investment.Transactions)
+            //     .Sum(transaction => transaction.Value / 10);
 
+            double summ = 0;
+            foreach (var investment in Investor.Investments) {
 
-            Console.WriteLine($"Sumup Stocks: {StockSumup}");
+                Console.WriteLine($"Isin of investment:{investment.Isin}");
+                //NAO SAO TODOS investment que tem ISIN. nao seria melhor filtrar antes somente os stocks?
+                foreach(var transaction in investment.Transactions)
+                {
+                    //v quote = QuotesOfInvestor
+                    //    .Select(quote => quote.Date == transaction.Date && quote.Isin == investment.Isin);
+
+                    //summ = transaction.Value/ quote.PricePerShare;
+                }
+                //var quote = QuotesOfInvestor.Select(quote => quote.Isin == investment.Isin);
+            
+            }
+            //Console.WriteLine($"Sumup Stocks: {StockSumup}");
 
         }
 
