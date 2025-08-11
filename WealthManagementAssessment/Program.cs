@@ -29,7 +29,8 @@ class Program
         //Sol2
         var obj = new AssetValuation(investorId, date);
         obj.FilesReader();
-        obj.RealStateEngine();
+        //obj.RealStateEngine();
+        //obj.StockEngine();
         
     }
 
