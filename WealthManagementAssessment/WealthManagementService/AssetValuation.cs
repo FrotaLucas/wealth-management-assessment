@@ -168,7 +168,7 @@ namespace WealthManagementAssessment.WealthManagementService
 
                     Console.WriteLine($"data escolhida: {quote.Date}");
 
-                    totalShares += transaction.Value / quote.PricePerShare;
+                    totalShares += Math.Round(transaction.Value / quote.PricePerShare);
 
                 }
 
