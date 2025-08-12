@@ -150,25 +150,33 @@ namespace WealthManagementAssessment.WealthManagementService
             //     .Sum(transaction => transaction.Value / 10);
 
             double totalShares = 0;
-            
-            //foreach (var investment in Investor.Investments) {
 
-            //    Console.WriteLine($"Isin of investment:{investment.Isin}");
-            //    //NAO SAO TODOS investment que tem ISIN. nao seria melhor filtrar antes somente os stocks?
-            //    foreach(var transaction in investment.Transactions)
-            //    {
-            //        Quote quote = QuotesOfInvestor
-            //            .Single(quote => quote.Date == transaction.Date && quote.Isin == investment.Isin);
+            foreach (var investment in Investor.Investments)
+            {
 
-            //        totalShares += transaction.Value / quote.PricePerShare;
+                Console.WriteLine($"Isin of investment:{investment.Isin}");
+                //NAO SAO TODOS investment que tem ISIN. nao seria melhor filtrar antes somente os stocks?
+                foreach (var transaction in investment.Transactions)
+                {
+                    var quote = QuotesOfInvestor
+                        .FirstOrDefault(quote => quote.Date <= transaction.Date && quote.Isin == investment.Isin);
 
-            //    }
+                    if(quote == null)
+                    {
+                        quote = QuotesOfInvestor.LastOrDefault();
+                    }
 
-            //    //var todaysValue = 10;
-            //    var marketValue = totalShares * 10;
-            //    Console.WriteLine($"value for stocks:{marketValue}");
-            //    StockSumup += marketValue;
-            //}
+                    Console.WriteLine($"data escolhida: {quote.Date}");
+
+                    totalShares += transaction.Value / quote.PricePerShare;
+
+                }
+
+                //var todaysValue = 10;
+                var marketValue = totalShares * 10;
+                Console.WriteLine($"value for stocks:{marketValue}");
+                StockSumup += marketValue;
+            }
             Console.WriteLine($"Sumup Stocks: {StockSumup}");
 
         }
