@@ -149,10 +149,10 @@ namespace WealthManagementAssessment.WealthManagementService
             //     .SelectMany(investment => investment.Transactions)
             //     .Sum(transaction => transaction.Value / 10);
 
-            double totalShares = 0;
 
             foreach (var investment in Investor.Investments)
             {
+                var totalShares = 0;
 
                 Console.WriteLine($"Isin of investment:{investment.Isin}");
                 //NAO SAO TODOS investment que tem ISIN. nao seria melhor filtrar antes somente os stocks?
@@ -170,9 +170,10 @@ namespace WealthManagementAssessment.WealthManagementService
 
                     Console.WriteLine($"data escolhida: {quote.Date}");
 
-                    totalShares += Math.Round(transaction.Value / quote.PricePerShare);
+                    totalShares += (int)Math.Round(transaction.Value / quote.PricePerShare);
 
                 }
+
 
                 //var todaysValue = 10;
                 var marketValue = totalShares * 10;
