@@ -165,10 +165,8 @@ namespace WealthManagementAssessment.WealthManagementService
                     var quote = QuotesOfInvestor
                         .FirstOrDefault(quote => quote.Date <= transaction.Date && quote.Isin == investment.Isin);
 
-                    if(quote == null)
-                    {
+                    if (quote == null)
                         quote = QuotesOfInvestor.LastOrDefault();
-                    }
 
                     Console.WriteLine($"data escolhida: {quote.Date}");
 
