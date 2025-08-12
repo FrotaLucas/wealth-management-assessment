@@ -79,6 +79,7 @@ namespace WealthManagementAssessment.WealthManagementService
                     .Skip(1)
                     .Select(parts => parts.Split(";"))
                     .Where(parts => parts[0] == investment.Isin)
+                    .OrderByDescending( parts => parts[1]) 
                     .Select(parts => new Quote
                     {
                         Isin = parts[0],
@@ -114,12 +115,12 @@ namespace WealthManagementAssessment.WealthManagementService
             //}
 
 
-            //foreach (var quotes in QuotesOfInvestor)
-            //{
-            //    Console.WriteLine($"ISIN: {quotes.Isin}\n");
-            //    Console.WriteLine($"Date ISIN: {quotes.Date}\n");
+            foreach (var quotes in QuotesOfInvestor)
+            {
+                Console.WriteLine($"ISIN: {quotes.Isin}\n");
+                Console.WriteLine($"Date ISIN: {quotes.Date}\n");
 
-            //}
+            }
 
             int count = Investor.Investments.Sum(i => i.Transactions.Count);
             Console.WriteLine($"Finish totaltransactions: {count}");
@@ -148,22 +149,27 @@ namespace WealthManagementAssessment.WealthManagementService
             //     .SelectMany(investment => investment.Transactions)
             //     .Sum(transaction => transaction.Value / 10);
 
-            double summ = 0;
-            foreach (var investment in Investor.Investments) {
-
-                Console.WriteLine($"Isin of investment:{investment.Isin}");
-                //NAO SAO TODOS investment que tem ISIN. nao seria melhor filtrar antes somente os stocks?
-                foreach(var transaction in investment.Transactions)
-                {
-                    //v quote = QuotesOfInvestor
-                    //    .Select(quote => quote.Date == transaction.Date && quote.Isin == investment.Isin);
-
-                    //summ = transaction.Value/ quote.PricePerShare;
-                }
-                //var quote = QuotesOfInvestor.Select(quote => quote.Isin == investment.Isin);
+            double totalShares = 0;
             
-            }
-            //Console.WriteLine($"Sumup Stocks: {StockSumup}");
+            //foreach (var investment in Investor.Investments) {
+
+            //    Console.WriteLine($"Isin of investment:{investment.Isin}");
+            //    //NAO SAO TODOS investment que tem ISIN. nao seria melhor filtrar antes somente os stocks?
+            //    foreach(var transaction in investment.Transactions)
+            //    {
+            //        Quote quote = QuotesOfInvestor
+            //            .Single(quote => quote.Date == transaction.Date && quote.Isin == investment.Isin);
+
+            //        totalShares += transaction.Value / quote.PricePerShare;
+
+            //    }
+
+            //    //var todaysValue = 10;
+            //    var marketValue = totalShares * 10;
+            //    Console.WriteLine($"value for stocks:{marketValue}");
+            //    StockSumup += marketValue;
+            //}
+            Console.WriteLine($"Sumup Stocks: {StockSumup}");
 
         }
 
