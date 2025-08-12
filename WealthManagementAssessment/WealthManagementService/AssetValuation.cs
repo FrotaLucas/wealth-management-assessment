@@ -156,6 +156,10 @@ namespace WealthManagementAssessment.WealthManagementService
 
                 Console.WriteLine($"Isin of investment:{investment.Isin}");
                 //NAO SAO TODOS investment que tem ISIN. nao seria melhor filtrar antes somente os stocks?
+                if (string.IsNullOrEmpty(investment.Isin))
+                    continue;
+
+
                 foreach (var transaction in investment.Transactions)
                 {
                     var quote = QuotesOfInvestor
