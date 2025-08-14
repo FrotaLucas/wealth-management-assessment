@@ -11,8 +11,8 @@ namespace WealthManagementAssessment.WealthManagementService
     {
 
         static string baseDirectory = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\..\"));
-        string fileInvestments = Path.Combine(baseDirectory, "Csv\\Investments.csv");
-        string fileTransactions = Path.Combine(baseDirectory, "Csv\\Transactions.csv");
+        string fileInvestments = Path.Combine(baseDirectory, "Csv\\InvestmentsT.csv");
+        string fileTransactions = Path.Combine(baseDirectory, "Csv\\TransactionsT.csv");
         string fileQuotes = Path.Combine(baseDirectory, "Csv\\Quotes.csv");
 
         public double RealStateSumup { get; set; } = 0;
@@ -73,23 +73,23 @@ namespace WealthManagementAssessment.WealthManagementService
             }
 
             //Storing Quotes
-            //foreach (var investment in Investor.Investments)
-            //{
-            //    var quotes = File.ReadLines(fileQuotes)
-            //        .Skip(1)
-            //        .Select(parts => parts.Split(";"))
-            //        .Where(parts => parts[0] == investment.Isin)
-            //        .OrderByDescending( parts => parts[1]) 
-            //        .Select(parts => new Quote
-            //        {
-            //            Isin = parts[0],
-            //            Date = DateTime.Parse(parts[1]),
-            //            PricePerShare = float.Parse(parts[2])
+            foreach (var investment in Investor.Investments)
+            {
+                var quotes = File.ReadLines(fileQuotes)
+                    .Skip(1)
+                    .Select(parts => parts.Split(";"))
+                    .Where(parts => parts[0] == investment.Isin && DateTime.Parse(parts[1]) < ValuationDate) //cut out unused quote range
+                    .OrderByDescending(parts => parts[1])
+                    .Select(parts => new Quote
+                    {
+                        Isin = parts[0],
+                        Date = DateTime.Parse(parts[1]),
+                        PricePerShare = float.Parse(parts[2])
 
-            //        }).ToList();
+                    }).ToList();
 
-            //    QuotesOfInvestor.AddRange(quotes);
-            //}
+                QuotesOfInvestor.AddRange(quotes);
+            }
 
             Console.WriteLine($"Total Quotes: {QuotesOfInvestor.Count}");
 
@@ -132,7 +132,6 @@ namespace WealthManagementAssessment.WealthManagementService
             RealStateSumup = Investor.Investments
                 .Where(investment => investment.InvestmentType == "RealEstate")
                 .SelectMany(investment => investment.Transactions)
-                .Where(transaction => transaction.Date < ValuationDate)
                 .Sum(transaction => transaction.Value);
             //.SelectMany(investment => investment.Transactions)
             //.Where(Investment => Investment.Type == "Estate")
