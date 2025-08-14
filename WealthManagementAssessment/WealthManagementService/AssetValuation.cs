@@ -132,7 +132,7 @@ namespace WealthManagementAssessment.WealthManagementService
             RealStateSumup = Investor.Investments
                 .Where(investment => investment.InvestmentType == "RealEstate")
                 .SelectMany(investment => investment.Transactions)
-                .Where(transaction => transaction.Date > ValuationDate)
+                .Where(transaction => transaction.Date < ValuationDate)
                 .Sum(transaction => transaction.Value);
             //.SelectMany(investment => investment.Transactions)
             //.Where(Investment => Investment.Type == "Estate")
