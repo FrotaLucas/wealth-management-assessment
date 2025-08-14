@@ -273,13 +273,13 @@ namespace WealthManagementAssessment.WealthManagementService
             //RealStateEngine();
             //StockEngine();
 
-            var percentageReal = Investor.Investments
+            var percentageRealState = Investor.Investments
                 .Where(investement => investement.FondsInvestor == fond1.InvestorId)
                 .SelectMany(investment => investment.Transactions)
                 .Where(transaction => transaction.Date < ValuationDate)
                 .Sum(transaction => transaction.Value);
 
-            Console.WriteLine($"percentage total: {percentageReal}");
+            Console.WriteLine($"percentage total: {percentageRealState}");
 
             //var assetRealState =  RealStateSumup
 
