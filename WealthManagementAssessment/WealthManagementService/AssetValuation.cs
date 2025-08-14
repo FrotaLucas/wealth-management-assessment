@@ -93,36 +93,8 @@ namespace WealthManagementAssessment.WealthManagementService
                 QuotesOfInvestor.AddRange(quotes);
             }
 
-            //Console.WriteLine($"Total Quotes: {QuotesOfInvestor.Count}");
+            Console.WriteLine($"Total Quotes: {QuotesOfInvestor.Count}");
 
-            //foreach (var investment in Investor.Investments)
-            //{
-            //    Console.WriteLine($"investmentId: {investment.InvestmentId}\n");
-            //    Console.WriteLine($"investorId: {investment.InvestorId}\n");
-            //    Console.WriteLine($"ISIN: {investment.Isin}\n");
-            //    Console.WriteLine($"invesment Type: {investment.InvestmentType}\n");
-            //    Console.WriteLine($"City: {investment.City} \n");
-            //}
-
-            //foreach (var investment in Investor.Investments)
-            //{
-            //    Console.WriteLine($"ISIN:{investment.Isin}");
-            //    foreach (var transaction in investment.Transactions)
-            //    {
-            //        Console.WriteLine($"investment Id: {transaction.InvestmentId}\n");
-            //        Console.WriteLine($"Type: {transaction.Type}\n");
-            //        Console.WriteLine($"Value: {transaction.Value}\n");
-            //        Console.WriteLine($"Datetime: {transaction.Date} \n");
-            //    }
-            //}
-
-
-            //foreach (var quotes in QuotesOfInvestor)
-            //{
-            //    Console.WriteLine($"ISIN: {quotes.Isin}\n");
-            //    Console.WriteLine($"Date ISIN: {quotes.Date}\n");
-
-            //}
 
             int count = Investor.Investments.Sum(i => i.Transactions.Count);
             Console.WriteLine($"Finish totaltransactions: {count}");
