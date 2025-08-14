@@ -115,12 +115,12 @@ namespace WealthManagementAssessment.WealthManagementService
             //}
 
 
-            foreach (var quotes in QuotesOfInvestor)
-            {
-                Console.WriteLine($"ISIN: {quotes.Isin}\n");
-                Console.WriteLine($"Date ISIN: {quotes.Date}\n");
+            //foreach (var quotes in QuotesOfInvestor)
+            //{
+            //    Console.WriteLine($"ISIN: {quotes.Isin}\n");
+            //    Console.WriteLine($"Date ISIN: {quotes.Date}\n");
 
-            }
+            //}
 
             int count = Investor.Investments.Sum(i => i.Transactions.Count);
             Console.WriteLine($"Finish totaltransactions: {count}");
@@ -166,7 +166,7 @@ namespace WealthManagementAssessment.WealthManagementService
                         .FirstOrDefault(quote => quote.Date <= transaction.Date && quote.Isin == investment.Isin);
 
                     if (quote == null)
-                        quote = QuotesOfInvestor.LastOrDefault();
+                        quote = QuotesOfInvestor.LastOrDefault(); 
 
                     Console.WriteLine($"data escolhida: {quote.Date}");
 
