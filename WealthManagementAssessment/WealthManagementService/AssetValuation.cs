@@ -244,7 +244,8 @@ namespace WealthManagementAssessment.WealthManagementService
             //continue ... fonds[1] , fonds[2], fonds[3]
 
 
-
+            //sum of all funds of Investor OwnerId
+            //FondSumup = assetOfFond1 + assetOfFond2 + ...
 
             Console.WriteLine($"total fonds: {fonds.Count}");
         }
