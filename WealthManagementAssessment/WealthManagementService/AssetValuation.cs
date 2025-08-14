@@ -120,8 +120,6 @@ namespace WealthManagementAssessment.WealthManagementService
             {
                 double totalShares = 0;
 
-                Console.WriteLine($"Isin of investment:{investment.Isin}");
-                //NAO SAO TODOS investment que tem ISIN. nao seria melhor filtrar antes somente os stocks?
                 if (string.IsNullOrEmpty(investment.Isin))
                     continue;
 
@@ -134,19 +132,10 @@ namespace WealthManagementAssessment.WealthManagementService
                     if (quote == null)
                         quote = QuotesOfInvestor.LastOrDefault();
 
-                    //Console.WriteLine($"data escolhida: {quote.Date}");
-
-
-                    //Console.WriteLine($"bought or sold shares:    {(int)Math.Round(transaction.Value / quote.PricePerShare)}");
-
                     totalShares += (int)Math.Round(transaction.Value / quote.PricePerShare);
 
-                    //Console.WriteLine($"total shares updated:   {totalShares}");
 
                 }
-
-                //Console.WriteLine($"Fiinal total shares today:   {totalShares}");
-
 
                 //get quote of today to calculate Asset
                 var quoteToday = QuotesOfInvestor
