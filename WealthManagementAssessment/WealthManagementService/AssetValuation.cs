@@ -11,8 +11,8 @@ namespace WealthManagementAssessment.WealthManagementService
     {
 
         static string baseDirectory = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\..\"));
-        string fileInvestments = Path.Combine(baseDirectory, "Csv\\InvestmentsT.csv");
-        string fileTransactions = Path.Combine(baseDirectory, "Csv\\TransactionsT.csv");
+        string fileInvestments = Path.Combine(baseDirectory, "Csv\\Investments.csv");
+        string fileTransactions = Path.Combine(baseDirectory, "Csv\\Transactions.csv");
         string fileQuotes = Path.Combine(baseDirectory, "Csv\\Quotes.csv");
 
         public double RealStateSumup { get; set; } = 0;
@@ -61,7 +61,7 @@ namespace WealthManagementAssessment.WealthManagementService
                 investment.Transactions = File.ReadLines(fileTransactions)
                     .Skip(1)
                     .Select(line => line.Split(";"))
-                    .Where(parts => parts[0] == investment.InvestmentId)
+                    .Where(parts => parts[0] == investment.InvestmentId && DateTime.Parse(parts[2]) < ValuationDate) //cut out future transactions
                     .Select(parts => new Transaction
                     {
                         InvestmentId = parts[0],
@@ -73,23 +73,23 @@ namespace WealthManagementAssessment.WealthManagementService
             }
 
             //Storing Quotes
-            foreach (var investment in Investor.Investments)
-            {
-                var quotes = File.ReadLines(fileQuotes)
-                    .Skip(1)
-                    .Select(parts => parts.Split(";"))
-                    .Where(parts => parts[0] == investment.Isin)
-                    .OrderByDescending( parts => parts[1]) 
-                    .Select(parts => new Quote
-                    {
-                        Isin = parts[0],
-                        Date = DateTime.Parse(parts[1]),
-                        PricePerShare = float.Parse(parts[2])
+            //foreach (var investment in Investor.Investments)
+            //{
+            //    var quotes = File.ReadLines(fileQuotes)
+            //        .Skip(1)
+            //        .Select(parts => parts.Split(";"))
+            //        .Where(parts => parts[0] == investment.Isin)
+            //        .OrderByDescending( parts => parts[1]) 
+            //        .Select(parts => new Quote
+            //        {
+            //            Isin = parts[0],
+            //            Date = DateTime.Parse(parts[1]),
+            //            PricePerShare = float.Parse(parts[2])
 
-                    }).ToList();
+            //        }).ToList();
 
-                QuotesOfInvestor.AddRange(quotes);
-            }
+            //    QuotesOfInvestor.AddRange(quotes);
+            //}
 
             Console.WriteLine($"Total Quotes: {QuotesOfInvestor.Count}");
 
@@ -168,19 +168,36 @@ namespace WealthManagementAssessment.WealthManagementService
                     if (quote == null)
                         quote = QuotesOfInvestor.LastOrDefault(); 
 
-                    Console.WriteLine($"data escolhida: {quote.Date}");
+                    //Console.WriteLine($"data escolhida: {quote.Date}");
+
+
+                    //Console.WriteLine($"bought or sold shares:    {(int)Math.Round(transaction.Value / quote.PricePerShare)}");
 
                     totalShares += (int)Math.Round(transaction.Value / quote.PricePerShare);
 
+                    //Console.WriteLine($"total shares updated:   {totalShares}");
+
                 }
 
+                //Console.WriteLine($"Fiinal total shares today:   {totalShares}");
+
+
+                //get quote of today to calculate Asset
+                var quoteToday = QuotesOfInvestor
+                    .FirstOrDefault(quote => quote.Date <= ValuationDate && quote.Isin == investment.Isin);
+
+
+                if (quoteToday == null)
+                    quoteToday = QuotesOfInvestor.LastOrDefault();
+
+                //Console.WriteLine($"Price share today:   {quoteToday.PricePerShare}");
 
                 //var todaysValue = 10;
-                var marketValue = totalShares * 10;
-                Console.WriteLine($"value for stocks:{marketValue}");
+                var marketValue = totalShares * quoteToday.PricePerShare;
+                Console.WriteLine($"value for stocks:   {marketValue}");
                 StockSumup += marketValue;
             }
-            Console.WriteLine($"Sumup Stocks: {StockSumup}");
+            Console.WriteLine($"Sumup Stocks:   {StockSumup}");
 
         }
 
