@@ -270,20 +270,26 @@ namespace WealthManagementAssessment.WealthManagementService
                 QuoteofFond1.AddRange(quotes);
             }
 
-            //RealStateEngine();
-            //StockEngine();
 
-            var percentageRealState = Investor.Investments
+            //Calculate  RealStateSumup and  StockSumup for fond1 
+            RealStateEngine();
+            StockEngine();
+            
+            var percentageOfFond1 = Investor.Investments
                 .Where(investement => investement.FondsInvestor == fond1.InvestorId)
                 .SelectMany(investment => investment.Transactions)
                 .Where(transaction => transaction.Date < ValuationDate)
                 .Sum(transaction => transaction.Value);
 
-            Console.WriteLine($"percentage total: {percentageRealState}");
+            Console.WriteLine($"percentage total: {percentageOfFond1}");
 
-            //var assetRealState =  RealStateSumup
+            var assetOfFond1 = percentageOfFond1 * (StockSumup + RealStateSumup);
+
+
 
             //continue ... fonds[1] , fonds[2], fonds[3]
+
+
 
 
             Console.WriteLine($"total fonds: {fonds.Count}");
