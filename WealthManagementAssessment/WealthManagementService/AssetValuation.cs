@@ -158,6 +158,7 @@ namespace WealthManagementAssessment.WealthManagementService
 
         public void FondEngine()
         {
+            //filter only fonds of investor
             List<Investor> fonds = Investor.Investments
                 .Where(investment => investment.InvestmentType == "Fonds")
                 .Select(investment => new Investor
