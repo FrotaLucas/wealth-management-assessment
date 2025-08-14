@@ -187,7 +187,7 @@ namespace WealthManagementAssessment.WealthManagementService
                     FondsInvestor = parst[5]
                 }).ToList();
 
-            //reading transations for fond1
+            //reading transactions for fond1
             foreach (var investment in fond1.Investments)
             {
                 investment.Transactions = File.ReadLines(fileTransactions)
@@ -227,8 +227,9 @@ namespace WealthManagementAssessment.WealthManagementService
             }
 
 
-            //Calculate  RealStateSumup and  StockSumup for fond1 
+            //use RealStateEngine for fond1 and calculate new RealStateSumup
             RealStateEngine();
+            //use StockEngine for fond1 and calculate new StockSumup
             StockEngine();
             
             var percentageOfFond1 = Investor.Investments
