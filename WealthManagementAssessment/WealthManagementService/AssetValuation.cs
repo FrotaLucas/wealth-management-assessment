@@ -205,6 +205,9 @@ namespace WealthManagementAssessment.WealthManagementService
 
         public void FondEngine()
         {
+
+            FondSumup = 0;
+
             List<Investor> fonds = Investor.Investments
                 .Where(investment => investment.InvestmentType == "Fonds")
                 .Select(investment => new Investor
@@ -292,7 +295,8 @@ namespace WealthManagementAssessment.WealthManagementService
             //continue ... fonds[1] , fonds[2], fonds[3]
 
 
-
+            // calculate total of Fond
+            //FondSumup = assetOfFond1 + assetFond2 + + assetFond3
 
             Console.WriteLine($"total fonds: {fonds.Count}");
         }
