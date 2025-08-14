@@ -19,6 +19,8 @@ namespace WealthManagementAssessment.WealthManagementService
 
         public double StockSumup { get; set; }
 
+        public double FondSumup { get; set; }
+
         public string OwnerId { get; set; }
 
         //EndDate or ReferenceDate?
