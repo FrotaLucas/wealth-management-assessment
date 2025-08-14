@@ -107,9 +107,6 @@ namespace WealthManagementAssessment.WealthManagementService
                 .Where(investment => investment.InvestmentType == "RealEstate")
                 .SelectMany(investment => investment.Transactions)
                 .Sum(transaction => transaction.Value);
-            //.SelectMany(investment => investment.Transactions)
-            //.Where(Investment => Investment.Type == "Estate")
-            //.Sum(transaction => transaction.Value);
 
             Console.WriteLine($"Sumup RealEstate: {RealStateSumup}");
 
