@@ -27,3 +27,10 @@ List<Transaction> selectedBuilding = new List<Transaction>();
 Talvez outras datas tbm não importa. 
 Logo, para saber o patrimônio em acoes vou usar sempre a ultima data com cotação valida da acao.
 
+
+7.stocks Pensar em algoritmo que encontra a menor distancia quando nao existir data de cotacao!!
+se a ultima data de cotacao disponivel foi muito antiga. Tipo 1 ano. Mas a data futura esta mais perto. 
+Nao deveria entao usar a data futura ao inves da data antiga?
+
+
+
