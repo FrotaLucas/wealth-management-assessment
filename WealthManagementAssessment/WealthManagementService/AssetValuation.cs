@@ -134,7 +134,6 @@ namespace WealthManagementAssessment.WealthManagementService
 
                     totalShares += (int)Math.Round(transaction.Value / quote.PricePerShare);
 
-
                 }
 
                 //get quote of today to calculate Asset
