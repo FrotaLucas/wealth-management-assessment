@@ -171,6 +171,7 @@ namespace WealthManagementAssessment.WealthManagementService
 
             var fond1 = fonds[0];
 
+            //CODIGO REPETIDO
             //reading investment of 1. Fond
             fond1.Investments = File.ReadLines(fileInvestments)
                 .Skip(1)
@@ -187,6 +188,7 @@ namespace WealthManagementAssessment.WealthManagementService
                     FondsInvestor = parst[5]
                 }).ToList();
 
+            //CODIGO REPETIDO
             //reading transactions for fond1
             foreach (var investment in fond1.Investments)
             {
@@ -205,7 +207,7 @@ namespace WealthManagementAssessment.WealthManagementService
             }
 
 
-
+            //CODIGO REPETIDO
             //Reading quote for fond1
             List<Quote> QuoteofFond1 = new List<Quote>();
             foreach (var investment in fond1.Investments)
