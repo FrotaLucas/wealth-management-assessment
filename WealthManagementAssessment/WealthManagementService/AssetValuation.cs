@@ -15,9 +15,9 @@ namespace WealthManagementAssessment.WealthManagementService
         string fileTransactions = Path.Combine(baseDirectory, "Csv\\TransactionsT.csv");
         string fileQuotes = Path.Combine(baseDirectory, "Csv\\Quotes.csv");
 
-        public double RealStateSumup { get; set; } = 0;
+        public double RealStateSumup { get; set; }
 
-        public double StockSumup { get; set; } = 0;
+        public double StockSumup { get; set; }
 
         public string OwnerId { get; set; }
 
@@ -91,7 +91,7 @@ namespace WealthManagementAssessment.WealthManagementService
                 QuotesOfInvestor.AddRange(quotes);
             }
 
-            Console.WriteLine($"Total Quotes: {QuotesOfInvestor.Count}");
+            //Console.WriteLine($"Total Quotes: {QuotesOfInvestor.Count}");
 
             //foreach (var investment in Investor.Investments)
             //{
@@ -128,7 +128,7 @@ namespace WealthManagementAssessment.WealthManagementService
 
         public void RealStateEngine()
         {
-
+            RealStateSumup = 0;
             RealStateSumup = Investor.Investments
                 .Where(investment => investment.InvestmentType == "RealEstate")
                 .SelectMany(investment => investment.Transactions)
@@ -147,7 +147,7 @@ namespace WealthManagementAssessment.WealthManagementService
             //     .Where(investment => investment.InvestmentType == "Stock")
             //     .SelectMany(investment => investment.Transactions)
             //     .Sum(transaction => transaction.Value / 10);
-
+            StockSumup = 0;
 
             foreach (var investment in Investor.Investments)
             {
@@ -165,7 +165,7 @@ namespace WealthManagementAssessment.WealthManagementService
                         .FirstOrDefault(quote => quote.Date <= transaction.Date && quote.Isin == investment.Isin);
 
                     if (quote == null)
-                        quote = QuotesOfInvestor.LastOrDefault(); 
+                        quote = QuotesOfInvestor.LastOrDefault();
 
                     //Console.WriteLine($"data escolhida: {quote.Date}");
 
@@ -203,7 +203,90 @@ namespace WealthManagementAssessment.WealthManagementService
 
         public void FondEngine()
         {
+            List<Investor> fonds = Investor.Investments
+                .Where(investment => investment.InvestmentType == "Fonds")
+                .Select(investment => new Investor
+                {
+                    InvestorId = investment.FondsInvestor
 
+                })
+                .ToList();
+
+
+            var fond1 = fonds[0];
+
+            //reading investment of 1. Fond
+            fond1.Investments = File.ReadLines(fileInvestments)
+                .Skip(1)
+                .Select(line => line.Split(';'))
+                .Where(parts => parts[0] == fond1.InvestorId)
+                .OrderByDescending(parts => parts[1]) //92.. 82.. 81.. 
+                .Select(parst => new Investment
+                {
+                    InvestmentId = parst[1],
+                    InvestorId = parst[0],
+                    InvestmentType = parst[2],
+                    Isin = parst[3],
+                    City = parst[4],
+                    FondsInvestor = parst[5]
+                }).ToList();
+
+            //reading transations for fond1
+            foreach (var investment in fond1.Investments)
+            {
+                investment.Transactions = File.ReadLines(fileTransactions)
+                    .Skip(1)
+                    .Select(line => line.Split(";"))
+                    .Where(parts => parts[0] == investment.InvestmentId && DateTime.Parse(parts[2]) < ValuationDate) //cut out future transactions
+                    .Select(parts => new Transaction
+                    {
+                        InvestmentId = parts[0],
+                        Type = parts[1],
+                        Date = DateTime.Parse(parts[2]),
+                        Value = Double.Parse(parts[3])
+
+                    }).ToList();
+            }
+
+
+
+            //Reading quote for fond1
+            List<Quote> QuoteofFond1 = new List<Quote>();
+            foreach (var investment in fond1.Investments)
+            {
+                var quotes = File.ReadLines(fileQuotes)
+                    .Skip(1)
+                    .Select(parts => parts.Split(";"))
+                    .Where(parts => parts[0] == investment.Isin && DateTime.Parse(parts[1]) < ValuationDate) //cut out unused quote range
+                    .OrderByDescending(parts => parts[1])
+                    .Select(parts => new Quote
+                    {
+                        Isin = parts[0],
+                        Date = DateTime.Parse(parts[1]),
+                        PricePerShare = float.Parse(parts[2])
+
+                    }).ToList();
+
+                QuoteofFond1.AddRange(quotes);
+            }
+
+            //RealStateEngine();
+            //StockEngine();
+
+            var percentageReal = Investor.Investments
+                .Where(investement => investement.FondsInvestor == fond1.InvestorId)
+                .SelectMany(investment => investment.Transactions)
+                .Where(transaction => transaction.Date < ValuationDate)
+                .Sum(transaction => transaction.Value);
+
+            Console.WriteLine($"percentage total: {percentageReal}");
+
+            //var assetRealState =  RealStateSumup
+
+            //continue ... fonds[1] , fonds[2], fonds[3]
+
+
+            Console.WriteLine($"total fonds: {fonds.Count}");
         }
 
     }
