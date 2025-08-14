@@ -114,10 +114,6 @@ namespace WealthManagementAssessment.WealthManagementService
 
         public void StockEngine()
         {
-            //StockSumup = Investor.Investments
-            //     .Where(investment => investment.InvestmentType == "Stock")
-            //     .SelectMany(investment => investment.Transactions)
-            //     .Sum(transaction => transaction.Value / 10);
             StockSumup = 0;
 
             foreach (var investment in Investor.Investments)
