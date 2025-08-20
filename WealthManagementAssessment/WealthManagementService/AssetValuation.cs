@@ -132,10 +132,9 @@ namespace WealthManagementAssessment.WealthManagementService
             return realStateSumup;
         }
 
-        public void StockEngine(List<Investment> investments)
+        public double StockEngine(List<Investment> investments)
         {
-            StockSumup = 0;
-
+            double stockSumup = 0;
             foreach (var investment in investments)
             {
                 double totalShares = 0;
@@ -169,10 +168,11 @@ namespace WealthManagementAssessment.WealthManagementService
                 //var todaysValue = 10;
                 var marketValue = totalShares * quoteToday.PricePerShare;
                 Console.WriteLine($"value for stocks:   {marketValue}");
-                StockSumup += marketValue;
+                stockSumup += marketValue;
             }
-            Console.WriteLine($"Sumup Stocks:   {StockSumup}");
+            Console.WriteLine($"Sumup Stocks:   {stockSumup}");
 
+            return stockSumup;
         }
 
 
