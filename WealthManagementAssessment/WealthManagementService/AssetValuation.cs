@@ -182,9 +182,13 @@ namespace WealthManagementAssessment.WealthManagementService
 
             //Console.WriteLine(fonds[4].InvestmentId);
 
-            foreach( var investment in fonds)
+            foreach( var fond in fonds)
             {
+                //realstate
+                var investments = ReadInvestments(fond.FondsInvestor);
 
+
+                //stocks
             }
         }
 
