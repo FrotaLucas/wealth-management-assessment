@@ -73,6 +73,10 @@ namespace WealthManagementAssessment.WealthManagementService
 
         public void FilesReader()
         {
+        }
+
+        private void ReadQuotes()
+        {
 
             //Storing Quotes
             foreach (var investment in Investor.Investments)
@@ -100,7 +104,6 @@ namespace WealthManagementAssessment.WealthManagementService
             Console.WriteLine($"Finish totaltransactions: {count}");
         }
 
-     
 
         public void RealStateEngine()
         {
