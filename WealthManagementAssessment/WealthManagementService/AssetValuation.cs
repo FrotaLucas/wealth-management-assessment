@@ -169,7 +169,7 @@ namespace WealthManagementAssessment.WealthManagementService
             return stockSumup;
         }
 
-        public void FondEngine()
+        public double FondEngine()
         {
             double fondSumup = 0;
             var fonds = Investor.Investments
@@ -193,6 +193,8 @@ namespace WealthManagementAssessment.WealthManagementService
                 fondSumup = fondSumup + totalPercentage * (realStateSumup + stockSumup);
             }
             Console.WriteLine("total asset value of fonds: " + fondSumup);
+
+            return fondSumup;
         }
 
         public void AssetEngine()
