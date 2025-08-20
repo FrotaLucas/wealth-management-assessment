@@ -182,6 +182,7 @@ namespace WealthManagementAssessment.WealthManagementService
             {
                 double totalPercentage = fond.Transactions.Sum( t => t.Value );
                 List<Investment> listOfinvestments = ReadInvestments(fond.FondsInvestor);
+                ReadTransactions(listOfinvestments);
 
                 //total Asset for realstate
                 double realStateSumup = RealStateEngine(listOfinvestments);
@@ -191,6 +192,7 @@ namespace WealthManagementAssessment.WealthManagementService
 
                 fondSumup = fondSumup + totalPercentage * (realStateSumup + stockSumup);
             }
+            Console.WriteLine("total asset value of fonds: " + fondSumup);
         }
 
         public void AssetEngine()
