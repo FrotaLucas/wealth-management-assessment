@@ -169,7 +169,7 @@ namespace WealthManagementAssessment.WealthManagementService
             return stockSumup;
         }
 
-        public void FondEngineV2()
+        public void FondEngine()
         {
             double fondSumup = 0;
             var fonds = Investor.Investments
