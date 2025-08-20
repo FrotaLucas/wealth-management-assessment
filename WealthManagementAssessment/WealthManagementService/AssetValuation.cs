@@ -299,7 +299,7 @@ namespace WealthManagementAssessment.WealthManagementService
             RealStateEngine(Investor.Investments);
 
             //Stocks
-
+            StockEngine(Investor.Investments);
             //Fonds
         }
     }
