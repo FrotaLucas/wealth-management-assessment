@@ -180,27 +180,29 @@ namespace WealthManagementAssessment.WealthManagementService
 
             foreach( var fond in fonds)
             {
+                double totalPercentage = fond.Transactions.Sum( t => t.Value );
                 List<Investment> listOfinvestments = ReadInvestments(fond.FondsInvestor);
 
-                //realstate  NAO PODERIA COLOCAR List<Investment> ao inves de var ???
+                //total Asset for realstate
                 double realStateSumup = RealStateEngine(listOfinvestments);
 
-                //stocks
+                //total Asset for stocks
                 double stockSumup = StockEngine(listOfinvestments);
 
-                fondSumup += realStateSumup + stockSumup;
+                fondSumup = fondSumup + totalPercentage * (realStateSumup + stockSumup);
             }
         }
 
         public void AssetEngine()
         {
             //RealState
-            RealStateEngine(Investor.Investments);
+            //RealStateEngine(Investor.Investments);
 
             //Stocks
             //StockEngine(Investor.Investments);
 
             //Fonds
+            FondEngine();
         }
     }
 }
