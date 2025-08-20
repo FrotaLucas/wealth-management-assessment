@@ -31,13 +31,13 @@ namespace WealthManagementAssessment.WealthManagementService
             OwnerId = ownerId;
             ValuationDate = valuationDate;
         }
-
-        public List<Investment> ReadInvestments(string ownerId)
+        
+        public void ReadInvestments()
         {
-            var investments = File.ReadLines(fileInvestments)
+            Investor.Investments = File.ReadLines(fileInvestments)
                 .Skip(1)
                 .Select(line => line.Split(';'))
-                .Where(parts => parts[0] == ownerId)
+                .Where(parts => parts[0] == OwnerId)
                 .OrderByDescending(parts => parts[1]) //92.. 82.. 81.. 
                 .Select(parst => new Investment
                 {
@@ -49,9 +49,9 @@ namespace WealthManagementAssessment.WealthManagementService
                     FondsInvestor = parst[5]
                 }).ToList();
 
-            return investments;
+            Console.WriteLine($"total investment of investor90: {Investor.Investments.Count}");
         }
-        
+
         public void ReadTransactions(List<Investment> investments)
         {
             foreach (var investment in investments)
@@ -70,44 +70,9 @@ namespace WealthManagementAssessment.WealthManagementService
                     }).ToList();
             }
         }
-        
+
         public void FilesReader()
         {
-
-            Investor.Investments = File.ReadLines(fileInvestments)
-                .Skip(1)
-                .Select(line => line.Split(';'))
-                .Where(parts => parts[0] == OwnerId)
-                .OrderByDescending(parts => parts[1]) //92.. 82.. 81.. 
-                .Select(parst => new Investment
-                {
-                    InvestmentId = parst[1],
-                    InvestorId = parst[0],
-                    InvestmentType = parst[2],
-                    Isin = parst[3],
-                    City = parst[4],
-                    FondsInvestor = parst[5]
-                }).ToList();
-
-            Console.WriteLine($"total investment of investor90: {Investor.Investments.Count}");
-
-            var trans = new Transaction();
-
-            foreach (var investment in Investor.Investments)
-            {
-                investment.Transactions = File.ReadLines(fileTransactions)
-                    .Skip(1)
-                    .Select(line => line.Split(";"))
-                    .Where(parts => parts[0] == investment.InvestmentId && DateTime.Parse(parts[2]) < ValuationDate) //cut out future transactions
-                    .Select(parts => new Transaction
-                    {
-                        InvestmentId = parts[0],
-                        Type = parts[1],
-                        Date = DateTime.Parse(parts[2]),
-                        Value = Double.Parse(parts[3])
-
-                    }).ToList();
-            }
 
             //Storing Quotes
             foreach (var investment in Investor.Investments)
@@ -134,6 +99,8 @@ namespace WealthManagementAssessment.WealthManagementService
             int count = Investor.Investments.Sum(i => i.Transactions.Count);
             Console.WriteLine($"Finish totaltransactions: {count}");
         }
+
+     
 
         public void RealStateEngine()
         {
