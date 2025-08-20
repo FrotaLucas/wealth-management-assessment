@@ -112,12 +112,10 @@ namespace WealthManagementAssessment.WealthManagementService
             //read transactions
             ReadTransactions(Investor.Investments);
             //read quotes of Investor
-            QuotesOfInvestor = ReadQuotes(Investor.Investments);
+            //QuotesOfInvestor = ReadQuotes(Investor.Investments);
         }
 
         
-
-
         public void RealStateEngine()
         {
             RealStateSumup = 0;
@@ -173,6 +171,22 @@ namespace WealthManagementAssessment.WealthManagementService
 
         }
 
+
+
+        public void FondEngineV2()
+        {
+            FondSumup = 0;
+            var fonds = Investor.Investments
+                .Where(i => i.InvestmentType == "Fonds")
+                .ToList();
+
+            //Console.WriteLine(fonds[4].InvestmentId);
+
+            foreach( var investment in fonds)
+            {
+
+            }
+        }
 
         public void FondEngine()
         {
