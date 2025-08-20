@@ -75,13 +75,14 @@ namespace WealthManagementAssessment.WealthManagementService
         {
         }
 
-        private void ReadQuotes()
+        private List<Quote> ReadQuotes(List<Investment> investments)
         {
+            var quotes = new List<Quote>();
 
             //Storing Quotes
-            foreach (var investment in Investor.Investments)
+            foreach (var investment in investments)
             {
-                var quotes = File.ReadLines(fileQuotes)
+                var invQuotes = File.ReadLines(fileQuotes)
                     .Skip(1)
                     .Select(parts => parts.Split(";"))
                     .Where(parts => parts[0] == investment.Isin && DateTime.Parse(parts[1]) < ValuationDate) //cut out unused quote range
@@ -94,14 +95,16 @@ namespace WealthManagementAssessment.WealthManagementService
 
                     }).ToList();
 
-                QuotesOfInvestor.AddRange(quotes);
+                quotes.AddRange(invQuotes);
             }
 
-            Console.WriteLine($"Total Quotes: {QuotesOfInvestor.Count}");
+            Console.WriteLine($"Total Quotes: {quotes.Count}");
 
 
-            int count = Investor.Investments.Sum(i => i.Transactions.Count);
+            int count = investments.Sum(i => i.Transactions.Count);
             Console.WriteLine($"Finish totaltransactions: {count}");
+
+            return quotes;
         }
 
 
