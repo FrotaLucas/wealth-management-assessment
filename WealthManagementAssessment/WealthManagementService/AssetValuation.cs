@@ -32,12 +32,12 @@ namespace WealthManagementAssessment.WealthManagementService
             ValuationDate = valuationDate;
         }
         
-        public void ReadInvestments()
+        public List<Investment> ReadInvestments(string ownerId)
         {
-            Investor.Investments = File.ReadLines(fileInvestments)
+            var investments = File.ReadLines(fileInvestments)
                 .Skip(1)
                 .Select(line => line.Split(';'))
-                .Where(parts => parts[0] == OwnerId)
+                .Where(parts => parts[0] == ownerId)
                 .OrderByDescending(parts => parts[1]) //92.. 82.. 81.. 
                 .Select(parst => new Investment
                 {
@@ -49,7 +49,9 @@ namespace WealthManagementAssessment.WealthManagementService
                     FondsInvestor = parst[5]
                 }).ToList();
 
-            Console.WriteLine($"total investment of investor90: {Investor.Investments.Count}");
+            Console.WriteLine($"total investment of investor90: {investments.Count}");
+
+            return investments;
         }
 
         public void ReadTransactions(List<Investment> investments)
