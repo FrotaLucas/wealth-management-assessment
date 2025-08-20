@@ -31,6 +31,11 @@ namespace WealthManagementAssessment.WealthManagementService
             OwnerId = ownerId;
             ValuationDate = valuationDate;
         }
+
+        public List<Investment> ReadInvestments(string ownerId)
+        {
+            return null;
+        }
         public void FilesReader()
         {
 
