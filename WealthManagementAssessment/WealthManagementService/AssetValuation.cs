@@ -113,13 +113,14 @@ namespace WealthManagementAssessment.WealthManagementService
             ReadTransactions(Investor.Investments);
             //read quotes of Investor
             //QuotesOfInvestor = ReadQuotes(Investor.Investments);
+
         }
 
         
-        public void RealStateEngine()
+        public void RealStateEngine(List<Investment> investments)
         {
             RealStateSumup = 0;
-            RealStateSumup = Investor.Investments
+            RealStateSumup = investments
                 .Where(investment => investment.InvestmentType == "RealEstate")
                 .SelectMany(investment => investment.Transactions)
                 .Sum(transaction => transaction.Value);
@@ -291,5 +292,15 @@ namespace WealthManagementAssessment.WealthManagementService
             Console.WriteLine($"total fonds: {fonds.Count}");
         }
 
+
+        public void AssetEngine()
+        {
+            //RealState
+            RealStateEngine(Investor.Investments);
+
+            //Stocks
+
+            //Fonds
+        }
     }
 }
