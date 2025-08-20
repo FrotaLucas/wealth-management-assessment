@@ -107,6 +107,12 @@ namespace WealthManagementAssessment.WealthManagementService
 
         public void FilesReader()
         {
+            //read investment
+            Investor.Investments = ReadInvestments(OwnerId);
+            //read transactions
+            ReadTransactions(Investor.Investments);
+            //read quotes of Investor
+            QuotesOfInvestor = ReadQuotes(Investor.Investments);
         }
 
         
