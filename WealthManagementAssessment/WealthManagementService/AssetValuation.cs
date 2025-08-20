@@ -169,8 +169,6 @@ namespace WealthManagementAssessment.WealthManagementService
             return stockSumup;
         }
 
-
-
         public void FondEngineV2()
         {
             double fondSumup = 0;
