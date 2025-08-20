@@ -129,11 +129,11 @@ namespace WealthManagementAssessment.WealthManagementService
 
         }
 
-        public void StockEngine()
+        public void StockEngine(List<Investment> investments)
         {
             StockSumup = 0;
 
-            foreach (var investment in Investor.Investments)
+            foreach (var investment in investments)
             {
                 double totalShares = 0;
 
