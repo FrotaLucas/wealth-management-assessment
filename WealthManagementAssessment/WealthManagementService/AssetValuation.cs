@@ -109,24 +109,27 @@ namespace WealthManagementAssessment.WealthManagementService
         {
             //read investment
             Investor.Investments = ReadInvestments(OwnerId);
+
             //read transactions
             ReadTransactions(Investor.Investments);
+
             //read quotes of Investor
             //QuotesOfInvestor = ReadQuotes(Investor.Investments);
 
         }
 
         
-        public void RealStateEngine(List<Investment> investments)
+        public double RealStateEngine(List<Investment> investments)
         {
-            RealStateSumup = 0;
-            RealStateSumup = investments
+            
+            var realStateSumup = investments
                 .Where(investment => investment.InvestmentType == "RealEstate")
                 .SelectMany(investment => investment.Transactions)
                 .Sum(transaction => transaction.Value);
 
-            Console.WriteLine($"Sumup RealEstate: {RealStateSumup}");
+            Console.WriteLine($"Sumup RealEstate: {realStateSumup}");
 
+            return realStateSumup;
         }
 
         public void StockEngine(List<Investment> investments)
