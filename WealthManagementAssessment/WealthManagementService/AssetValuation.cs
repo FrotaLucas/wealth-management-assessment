@@ -173,7 +173,7 @@ namespace WealthManagementAssessment.WealthManagementService
 
         public void FondEngineV2()
         {
-            var fondSumup = 0;
+            double fondSumup = 0;
             var fonds = Investor.Investments
                 .Where(i => i.InvestmentType == "Fonds")
                 .ToList();
@@ -182,11 +182,15 @@ namespace WealthManagementAssessment.WealthManagementService
 
             foreach( var fond in fonds)
             {
-                //realstate  NAO PODERIA COLOCAR List<Investment> ao inves de var ???
-                var Listinvestments = ReadInvestments(fond.FondsInvestor);
+                List<Investment> listOfinvestments = ReadInvestments(fond.FondsInvestor);
 
+                //realstate  NAO PODERIA COLOCAR List<Investment> ao inves de var ???
+                double realStateSumup = RealStateEngine(listOfinvestments);
 
                 //stocks
+                double stockSumup = StockEngine(listOfinvestments);
+
+                fondSumup += realStateSumup + stockSumup;
             }
         }
 
