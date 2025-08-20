@@ -34,8 +34,29 @@ namespace WealthManagementAssessment.WealthManagementService
 
         public List<Investment> ReadInvestments(string ownerId)
         {
-            return null;
+            var investments = File.ReadLines(fileInvestments)
+                .Skip(1)
+                .Select(line => line.Split(';'))
+                .Where(parts => parts[0] == ownerId)
+                .OrderByDescending(parts => parts[1]) //92.. 82.. 81.. 
+                .Select(parst => new Investment
+                {
+                    InvestmentId = parst[1],
+                    InvestorId = parst[0],
+                    InvestmentType = parst[2],
+                    Isin = parst[3],
+                    City = parst[4],
+                    FondsInvestor = parst[5]
+                }).ToList();
+
+            return investments;
         }
+        
+        public void ReadTransactions(List<Investment> investments)
+        {
+
+        }
+        
         public void FilesReader()
         {
 
