@@ -71,10 +71,6 @@ namespace WealthManagementAssessment.WealthManagementService
             }
         }
 
-        public void FilesReader()
-        {
-        }
-
         private List<Quote> ReadQuotes(List<Investment> investments)
         {
             var quotes = new List<Quote>();
@@ -106,6 +102,12 @@ namespace WealthManagementAssessment.WealthManagementService
 
             return quotes;
         }
+
+        public void FilesReader()
+        {
+        }
+
+        
 
 
         public void RealStateEngine()
