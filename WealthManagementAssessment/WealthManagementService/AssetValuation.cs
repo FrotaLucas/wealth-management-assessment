@@ -10,12 +10,6 @@ namespace WealthManagementAssessment.WealthManagementService
         string fileTransactions = Path.Combine(baseDirectory, "Csv\\TransactionsT.csv");
         string fileQuotes = Path.Combine(baseDirectory, "Csv\\Quotes.csv");
 
-        public double RealStateSumup { get; set; }
-
-        public double StockSumup { get; set; }
-
-        public double FondSumup { get; set; }
-
         public string OwnerId { get; set; }
 
         //EndDate or ReferenceDate?
@@ -179,7 +173,7 @@ namespace WealthManagementAssessment.WealthManagementService
 
         public void FondEngineV2()
         {
-            FondSumup = 0;
+            var fondSumup = 0;
             var fonds = Investor.Investments
                 .Where(i => i.InvestmentType == "Fonds")
                 .ToList();
@@ -188,8 +182,8 @@ namespace WealthManagementAssessment.WealthManagementService
 
             foreach( var fond in fonds)
             {
-                //realstate
-                var investments = ReadInvestments(fond.FondsInvestor);
+                //realstate  NAO PODERIA COLOCAR List<Investment> ao inves de var ???
+                var Listinvestments = ReadInvestments(fond.FondsInvestor);
 
 
                 //stocks
@@ -270,9 +264,9 @@ namespace WealthManagementAssessment.WealthManagementService
 
 
             //use RealStateEngine for fond1 and calculate new RealStateSumup
-            RealStateEngine();
+            //RealStateEngine();
             //use StockEngine for fond1 and calculate new StockSumup
-            StockEngine();
+            //StockEngine();
             
             var percentageOfFond1 = Investor.Investments
                 .Where(investement => investement.FondsInvestor == fond1.InvestorId)
@@ -282,7 +276,7 @@ namespace WealthManagementAssessment.WealthManagementService
 
             Console.WriteLine($"percentage total: {percentageOfFond1}");
 
-            var assetOfFond1 = percentageOfFond1 * (StockSumup + RealStateSumup);
+            //var assetOfFond1 = percentageOfFond1 * (StockSumup + RealStateSumup);
 
 
 
@@ -302,7 +296,8 @@ namespace WealthManagementAssessment.WealthManagementService
             RealStateEngine(Investor.Investments);
 
             //Stocks
-            StockEngine(Investor.Investments);
+            //StockEngine(Investor.Investments);
+
             //Fonds
         }
     }
