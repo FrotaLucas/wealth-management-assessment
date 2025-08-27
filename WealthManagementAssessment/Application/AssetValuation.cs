@@ -7,9 +7,9 @@ namespace WealthManagementAssessment.WealthManagementService
     {
 
         static string baseDirectory = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\..\"));
-        string fileInvestments = Path.Combine(baseDirectory, "Csv\\InvestmentsT.csv");
-        string fileTransactions = Path.Combine(baseDirectory, "Csv\\TransactionsT.csv");
-        string fileQuotes = Path.Combine(baseDirectory, "Csv\\Quotes.csv");
+        string fileInvestments = Path.Combine(baseDirectory, "Infrastructure\\InvestmentsT.csv");
+        string fileTransactions = Path.Combine(baseDirectory, "Infrastructure\\TransactionsT.csv");
+        string fileQuotes = Path.Combine(baseDirectory, "Infrastructure\\Quotes.csv");
 
         public string OwnerId { get; set; }
 
