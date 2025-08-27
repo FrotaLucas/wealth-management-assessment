@@ -13,11 +13,11 @@ namespace WealthManagementAssessment.Application.Configuration
 
         public sealed class DataFileCsv
         {
-            public string InvestmentsFile { get; set; }
+            public string InvestmentsPath { get; set; }
 
-            public string TransactionsFile { get; set; }
+            public string TransactionsPath { get; set; }
 
-            public string QuotesFile { get; set; }
+            public string QuotesFilePath { get; set; }
 
         }
     }
