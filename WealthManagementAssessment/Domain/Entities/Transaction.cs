@@ -1,4 +1,4 @@
-﻿namespace WealthManagementAssessment.Domain
+﻿namespace WealthManagementAssessment.Domain.Entities
 {
     public class Transaction
     {
