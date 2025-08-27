@@ -9,7 +9,9 @@ namespace WealthManagementAssessment.Application.Configuration
     public class AppConfig
     {
 
-        sealed class DataFileCsv
+        public DataFileCsv DataFile { get; set; }
+
+        public sealed class DataFileCsv
         {
             public string InvestmentsFile { get; set; }
 
