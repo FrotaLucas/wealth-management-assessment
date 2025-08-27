@@ -17,7 +17,7 @@ namespace WealthManagementAssessment.Application.Configuration
 
             public string TransactionsPath { get; set; }
 
-            public string QuotesFilePath { get; set; }
+            public string QuotesPath { get; set; }
 
         }
     }
