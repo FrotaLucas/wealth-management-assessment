@@ -31,8 +31,9 @@ class Program
         obj.FilesReader();
         //obj.RealStateEngine();
         //obj.StockEngine();
-        obj.FondEngineV2();
         
+        //obj.FondEngineV2();
+        obj.AssetEngine();
     }
 
 }
