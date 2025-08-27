@@ -1,4 +1,5 @@
 ﻿using WealthManagementAssessment.Domain;
+using WealthManagementAssessment.Domain.Entities;
 
 namespace WealthManagementAssessment.WealthManagementService
 {

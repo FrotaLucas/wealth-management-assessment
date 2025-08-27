@@ -1,4 +1,4 @@
-﻿using WealthManagementAssessment.Domain;
+﻿using WealthManagementAssessment.Domain.Entities;
 
 namespace WealthManagementAssessment.WealthManagementService
 {       //ValuationMangement or valuationEngine or PortifolioManagement or AssetManagement or AssetValuation
