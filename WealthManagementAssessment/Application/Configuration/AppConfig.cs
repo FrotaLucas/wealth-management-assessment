@@ -9,7 +9,7 @@ namespace WealthManagementAssessment.Application.Configuration
     public class AppConfig
     {
 
-        public DataFileCsv DataFile { get; set; }
+        public DataFileCsv DataFilePath { get; set; } = new DataFileCsv();
 
         public sealed class DataFileCsv
         {
