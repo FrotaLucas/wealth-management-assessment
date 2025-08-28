@@ -7,8 +7,8 @@ namespace WealthManagementAssessment.Domain.Contracts.Interfaces
 
         List<Investment> ReadInvestments(string ownerId);
 
-        void ReadTransactions(List<Investment> investments);
+        void ReadTransactions(List<Investment> investments, DateTime valuationDate);
 
-        List<Quote> ReadQuotes(List<Investment> investments); 
+        List<Quote> ReadQuotes(List<Investment> investments, DateTime valuationsDate); 
     }
 }
