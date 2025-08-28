@@ -1,8 +1,9 @@
-﻿using WealthManagementAssessment.Domain.Entities;
+﻿using WealthManagementAssessment.Domain.Contracts.Interfaces;
+using WealthManagementAssessment.Domain.Entities;
 
 namespace WealthManagementAssessment.Infrastructure.Repository
 {
-    public class FilesReader
+    public class FilesReader : IFilesReader
     {
 
         public readonly string fileInvestments;
