@@ -65,6 +65,7 @@ namespace WealthManagementAssessment.Infrastructure.Repository
         }
 
 
+        //read quotes of Investor
         public List<Quote> ReadQuotes(List<Investment> investments)
         {
             var quotes = new List<Quote>();
