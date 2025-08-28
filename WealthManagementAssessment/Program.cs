@@ -1,4 +1,5 @@
-﻿using WealthManagementAssessment.WealthManagementService;
+﻿using WealthManagementAssessment.Domain.Contracts.Services;
+using WealthManagementAssessment.WealthManagementService;
 
 class Program
 {

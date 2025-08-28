@@ -1,6 +1,6 @@
 ﻿using WealthManagementAssessment.Domain.Entities;
 
-namespace WealthManagementAssessment.WealthManagementService
+namespace WealthManagementAssessment.Domain.Contracts.Services
 {       //ValuationMangement or valuationEngine or PortifolioManagement or AssetManagement or AssetValuation
     public class AssetValuationService
     {
@@ -35,7 +35,7 @@ namespace WealthManagementAssessment.WealthManagementService
         //correct format to original csv
         public string ConvertValuationDateToString()
         {
-            string date = this.ValuationDate.ToString("yyyy-MM-dd");
+            string date = ValuationDate.ToString("yyyy-MM-dd");
 
             return date;
         }
@@ -121,7 +121,7 @@ namespace WealthManagementAssessment.WealthManagementService
                             var transaction = new Transaction();
                             transaction.InvestmentId = investment.InvestmentId; //or fields[0]
                             transaction.Type = fields[1];
-                            transaction.Value = Double.Parse(fields[3]);
+                            transaction.Value = double.Parse(fields[3]);
                             transaction.Date = DateTime.Parse(fields[2]);
 
                             selectedEstate.Add(transaction);
@@ -134,7 +134,7 @@ namespace WealthManagementAssessment.WealthManagementService
                             var transaction = new Transaction();
                             transaction.InvestmentId = investment.InvestmentId; //or fields[0]
                             transaction.Type = fields[1];
-                            transaction.Value = Double.Parse(fields[3]);
+                            transaction.Value = double.Parse(fields[3]);
                             transaction.Date = DateTime.Parse(fields[2]);
 
                             selectedBuilding.Add(transaction);
@@ -148,7 +148,7 @@ namespace WealthManagementAssessment.WealthManagementService
                             var transaction = new Transaction();
                             transaction.InvestmentId = investment.InvestmentId;
                             transaction.Type = fields[1];
-                            transaction.Value = Double.Parse(fields[3]);
+                            transaction.Value = double.Parse(fields[3]);
                             transaction.Date = DateTime.Parse(fields[2]);
 
                             selectedStocks.Add(transaction);

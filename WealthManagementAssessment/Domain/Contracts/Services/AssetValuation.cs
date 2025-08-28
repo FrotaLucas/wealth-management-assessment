@@ -2,7 +2,7 @@
 using WealthManagementAssessment.Domain.Contracts.Interfaces;
 using WealthManagementAssessment.Domain.Entities;
 
-namespace WealthManagementAssessment.WealthManagementService
+namespace WealthManagementAssessment.Domain.Contracts.Services
 {
     public class AssetValuation : IAssetValuation
     {
@@ -63,7 +63,7 @@ namespace WealthManagementAssessment.WealthManagementService
                         InvestmentId = parts[0],
                         Type = parts[1],
                         Date = DateTime.Parse(parts[2]),
-                        Value = Double.Parse(parts[3])
+                        Value = double.Parse(parts[3])
 
                     }).ToList();
             }
