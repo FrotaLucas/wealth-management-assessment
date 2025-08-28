@@ -22,4 +22,9 @@
 	</ItemGroup>
 
 
+	<ItemGroup>
+	  <Folder Include="Domain\Contracts\Services\" />
+	</ItemGroup>
+
+
 </Project>
