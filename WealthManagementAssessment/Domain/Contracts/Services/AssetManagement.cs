@@ -5,11 +5,11 @@ namespace WealthManagementAssessment.Domain.Contracts.Services
     public class AssetManagement
     {
 
-        private readonly IAssetRepository _assetValuation;
+        private readonly IAssetRepository _assetRepository;
 
-        public AssetManagement (IAssetRepository assetValuation)
+        public AssetManagement (IAssetRepository assetRepository)
         {
-            _assetValuation = assetValuation;
+            _assetRepository = assetRepository;
         }
 
 
