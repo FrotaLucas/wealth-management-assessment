@@ -5,12 +5,6 @@ namespace WealthManagementAssessment.Domain.Contracts.Interfaces
     public interface IAssetRepository
     {
 
-        List<Investment> ReadInvestments(string ownerId);
-
-        void ReadTransactions(List<Investment> investments);
-
-        List<Quote> ReadQuotes(List<Investment> investments);
-
         void FilesReader();
 
 
