@@ -10,6 +10,7 @@ namespace WealthManagementAssessment.Infrastructure.Repository
         public readonly string fileTransactions;
         public readonly string fileQuotes;
 
+
         public FilesReader(string baseDirectory)
         {
             fileInvestments = Path.Combine(baseDirectory, "Infrastructure\\InvestmentsT.csv");
@@ -17,6 +18,7 @@ namespace WealthManagementAssessment.Infrastructure.Repository
             fileTransactions = Path.Combine(baseDirectory, "Infrastructure\\TransactionsT.csv");
 
             fileQuotes = Path.Combine(baseDirectory, "Infrastructure\\Quotes.csv");
+
         }
 
 
@@ -45,14 +47,14 @@ namespace WealthManagementAssessment.Infrastructure.Repository
 
 
 
-        public void ReadTransactions(List<Investment> investments)
+        public void ReadTransactions(List<Investment> investments, DateTime valuationDate)
         {
             foreach (var investment in investments)
             {
                 investment.Transactions = File.ReadLines(fileTransactions)
                     .Skip(1)
                     .Select(line => line.Split(";"))
-                    .Where(parts => parts[0] == investment.InvestmentId && DateTime.Parse(parts[2]) < ValuationDate) //cut out future transactions
+                    .Where(parts => parts[0] == investment.InvestmentId && DateTime.Parse(parts[2]) < valuationDate) //cut out future transactions
                     .Select(parts => new Transaction
                     {
                         InvestmentId = parts[0],
@@ -66,7 +68,7 @@ namespace WealthManagementAssessment.Infrastructure.Repository
 
 
         //read quotes of Investor
-        public List<Quote> ReadQuotes(List<Investment> investments)
+        public List<Quote> ReadQuotes(List<Investment> investments, DateTime valuationDate)
         {
             var quotes = new List<Quote>();
 
@@ -76,7 +78,7 @@ namespace WealthManagementAssessment.Infrastructure.Repository
                 var invQuotes = File.ReadLines(fileQuotes)
                     .Skip(1)
                     .Select(parts => parts.Split(";"))
-                    .Where(parts => parts[0] == investment.Isin && DateTime.Parse(parts[1]) < ValuationDate) //cut out unused quote range
+                    .Where(parts => parts[0] == investment.Isin && DateTime.Parse(parts[1]) < valuationDate) //cut out unused quote range
                     .OrderByDescending(parts => parts[1])
                     .Select(parts => new Quote
                     {
