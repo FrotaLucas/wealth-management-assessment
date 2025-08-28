@@ -62,5 +62,38 @@ namespace WealthManagementAssessment.Infrastructure.Repository
                     }).ToList();
             }
         }
+
+
+        public List<Quote> ReadQuotes(List<Investment> investments)
+        {
+            var quotes = new List<Quote>();
+
+            //Storing Quotes
+            foreach (var investment in investments)
+            {
+                var invQuotes = File.ReadLines(fileQuotes)
+                    .Skip(1)
+                    .Select(parts => parts.Split(";"))
+                    .Where(parts => parts[0] == investment.Isin && DateTime.Parse(parts[1]) < ValuationDate) //cut out unused quote range
+                    .OrderByDescending(parts => parts[1])
+                    .Select(parts => new Quote
+                    {
+                        Isin = parts[0],
+                        Date = DateTime.Parse(parts[1]),
+                        PricePerShare = float.Parse(parts[2])
+
+                    }).ToList();
+
+                quotes.AddRange(invQuotes);
+            }
+
+            Console.WriteLine($"Total Quotes: {quotes.Count}");
+
+
+            int count = investments.Sum(i => i.Transactions.Count);
+            Console.WriteLine($"Finish totaltransactions: {count}");
+
+            return quotes;
+        }
     }
 }
