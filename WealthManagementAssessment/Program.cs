@@ -1,4 +1,8 @@
-﻿using WealthManagementAssessment.Infrastructure.Repository;
+﻿using WealthManagementAssessment.Domain.Contracts.Interfaces;
+using WealthManagementAssessment.Domain.Contracts.Services;
+using WealthManagementAssessment.Domain.Entities;
+using WealthManagementAssessment.Infrastructure.Repository;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 class Program
 {
@@ -31,9 +35,18 @@ class Program
         obj.FilesReader();
         //obj.RealStateEngine();
         //obj.StockEngine();
-        
+
         //obj.FondEngineV2();
         obj.AssetEngine();
+
+
+        //sol 3
+        IAssetRepository interfaceRepository = new AssetRepository(investorId, date);
+
+        //precisa LER antes os files dentro de repository
+        AssetManagement asset = new AssetManagement(interfaceRepository);
+
+        asset.DisplayAsset();
     }
 
 }
