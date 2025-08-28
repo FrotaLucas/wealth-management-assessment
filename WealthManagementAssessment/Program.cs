@@ -1,5 +1,4 @@
-﻿using WealthManagementAssessment.Domain.Contracts.Services;
-using WealthManagementAssessment.WealthManagementService;
+﻿using WealthManagementAssessment.Infrastructure.Repository;
 
 class Program
 {
@@ -28,7 +27,7 @@ class Program
         //Console.WriteLine("Valuation Stocks: " + obj.StockSumup);
 
         //Sol2
-        var obj = new AssetValuation(investorId, date);
+        var obj = new AssetRepository(investorId, date);
         obj.FilesReader();
         //obj.RealStateEngine();
         //obj.StockEngine();

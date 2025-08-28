@@ -1,10 +1,9 @@
-﻿using WealthManagementAssessment.Domain;
-using WealthManagementAssessment.Domain.Contracts.Interfaces;
+﻿using WealthManagementAssessment.Domain.Contracts.Interfaces;
 using WealthManagementAssessment.Domain.Entities;
 
-namespace WealthManagementAssessment.Domain.Contracts.Services
+namespace WealthManagementAssessment.Infrastructure.Repository
 {
-    public class AssetValuation : IAssetValuation
+    public class AssetRepository : IAssetValuation
     {
 
         static string baseDirectory = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\..\"));
@@ -22,7 +21,7 @@ namespace WealthManagementAssessment.Domain.Contracts.Services
         //chose a better name
         public List<Quote> QuotesOfInvestor { get; set; } = new List<Quote>();
 
-        public AssetValuation(string ownerId, DateTime valuationDate)
+        public AssetRepository(string ownerId, DateTime valuationDate)
         {
             OwnerId = ownerId;
             ValuationDate = valuationDate;

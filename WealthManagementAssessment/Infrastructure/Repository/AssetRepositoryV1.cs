@@ -1,8 +1,8 @@
 ﻿using WealthManagementAssessment.Domain.Entities;
 
-namespace WealthManagementAssessment.Domain.Contracts.Services
+namespace WealthManagementAssessment.Infrastructure.Repository
 {       //ValuationMangement or valuationEngine or PortifolioManagement or AssetManagement or AssetValuation
-    public class AssetValuationService
+    public class AssetRepositoryV1
     {
 
 
@@ -25,7 +25,7 @@ namespace WealthManagementAssessment.Domain.Contracts.Services
 
         public double StockSumup { get; set; }
 
-        public AssetValuationService(string ownerId, DateTime dateTime)
+        public AssetRepositoryV1(string ownerId, DateTime dateTime)
         {
             OwnerId = ownerId;
             ValuationDate = dateTime;
