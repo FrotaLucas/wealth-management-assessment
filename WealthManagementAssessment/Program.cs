@@ -31,13 +31,10 @@ class Program
         //Console.WriteLine("Valuation Stocks: " + obj.StockSumup);
 
         //Sol2
-        var obj = new AssetRepository(investorId, date);
-        obj.FilesReader();
-        //obj.RealStateEngine();
-        //obj.StockEngine();
-
-        //obj.FondEngineV2();
-        obj.AssetEngine();
+        //var obj = new AssetRepository(investorId, date);
+        //obj.FilesReader();
+      
+        //obj.AssetEngine();
 
 
         //sol 3
