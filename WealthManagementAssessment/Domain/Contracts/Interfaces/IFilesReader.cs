@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WealthManagementAssessment.Domain.Entities;
+﻿using WealthManagementAssessment.Domain.Entities;
 
 namespace WealthManagementAssessment.Domain.Contracts.Interfaces
 {
