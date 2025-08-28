@@ -3,10 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WealthManagementAssessment.Domain.Entities;
 
 namespace WealthManagementAssessment.Domain.Contracts.Interfaces
 {
     public interface IFilesReader
     {
+
+        List<Investment> ReadInvestments(string ownerId);
+
+        void ReadTransactions(List<Investment> investments);
+
+        List<Quote> ReadQuotes(List<Investment> investments); 
     }
 }
