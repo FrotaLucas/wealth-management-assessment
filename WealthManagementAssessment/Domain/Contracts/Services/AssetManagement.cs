@@ -16,6 +16,7 @@ namespace WealthManagementAssessment.Domain.Contracts.Services
 
         public void DisplayAsset()
         {
+            _assetRepository.AssetEngine();
 
         }
     }
