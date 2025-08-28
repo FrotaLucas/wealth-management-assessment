@@ -3,7 +3,7 @@ using WealthManagementAssessment.Domain.Entities;
 
 namespace WealthManagementAssessment.Infrastructure.Repository
 {
-    public class AssetRepository : IAssetValuation
+    public class AssetRepository : IAssetRepository
     {
 
         static string baseDirectory = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\..\"));

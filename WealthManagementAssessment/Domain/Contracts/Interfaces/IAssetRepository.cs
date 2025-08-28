@@ -2,7 +2,7 @@
 
 namespace WealthManagementAssessment.Domain.Contracts.Interfaces
 {
-    public interface IAssetValuation
+    public interface IAssetRepository
     {
 
         List<Investment> ReadInvestments(string ownerId);
