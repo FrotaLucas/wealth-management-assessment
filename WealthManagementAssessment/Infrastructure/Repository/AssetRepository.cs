@@ -6,15 +6,13 @@ namespace WealthManagementAssessment.Infrastructure.Repository
     public class AssetRepository : IAssetRepository
     {
 
+        private readonly IFilesReader _filesReader;
+
         static string baseDirectory = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\..\"));
-        string fileInvestments = Path.Combine(baseDirectory, "Infrastructure\\InvestmentsT.csv");
-        string fileTransactions = Path.Combine(baseDirectory, "Infrastructure\\TransactionsT.csv");
-        string fileQuotes = Path.Combine(baseDirectory, "Infrastructure\\Quotes.csv");
 
         public string OwnerId { get; set; }
 
-        //EndDate or ReferenceDate?
-        public DateTime ValuationDate { get; set; }
+        public DateTime ValuationDate { get; set; } // EndDate or ReferenceDate?
 
         public Investor Investor { get; set; } = new Investor();
 
@@ -25,95 +23,23 @@ namespace WealthManagementAssessment.Infrastructure.Repository
         {
             OwnerId = ownerId;
             ValuationDate = valuationDate;
-        }
-        
-        public List<Investment> ReadInvestments(string ownerId)
-        {
-            var investments = File.ReadLines(fileInvestments)
-                .Skip(1)
-                .Select(line => line.Split(';'))
-                .Where(parts => parts[0] == ownerId)
-                .OrderByDescending(parts => parts[1]) //92.. 82.. 81.. 
-                .Select(parst => new Investment
-                {
-                    InvestmentId = parst[1],
-                    InvestorId = parst[0],
-                    InvestmentType = parst[2],
-                    Isin = parst[3],
-                    City = parst[4],
-                    FondsInvestor = parst[5]
-                }).ToList();
+            _filesReader = new FilesReader(baseDirectory);  
 
-            Console.WriteLine($"total investment of investor90: {investments.Count}");
-
-            return investments;
+            LoadFiles();
         }
 
-        public void ReadTransactions(List<Investment> investments)
+        public void LoadFiles()
         {
-            foreach (var investment in investments)
-            {
-                investment.Transactions = File.ReadLines(fileTransactions)
-                    .Skip(1)
-                    .Select(line => line.Split(";"))
-                    .Where(parts => parts[0] == investment.InvestmentId && DateTime.Parse(parts[2]) < ValuationDate) //cut out future transactions
-                    .Select(parts => new Transaction
-                    {
-                        InvestmentId = parts[0],
-                        Type = parts[1],
-                        Date = DateTime.Parse(parts[2]),
-                        Value = double.Parse(parts[3])
+            Investor.Investments = _filesReader.ReadInvestments(OwnerId);
 
-                    }).ToList();
-            }
-        }
-
-        public List<Quote> ReadQuotes(List<Investment> investments)
-        {
-            var quotes = new List<Quote>();
-
-            //Storing Quotes
-            foreach (var investment in investments)
-            {
-                var invQuotes = File.ReadLines(fileQuotes)
-                    .Skip(1)
-                    .Select(parts => parts.Split(";"))
-                    .Where(parts => parts[0] == investment.Isin && DateTime.Parse(parts[1]) < ValuationDate) //cut out unused quote range
-                    .OrderByDescending(parts => parts[1])
-                    .Select(parts => new Quote
-                    {
-                        Isin = parts[0],
-                        Date = DateTime.Parse(parts[1]),
-                        PricePerShare = float.Parse(parts[2])
-
-                    }).ToList();
-
-                quotes.AddRange(invQuotes);
-            }
-
-            Console.WriteLine($"Total Quotes: {quotes.Count}");
-
-
-            int count = investments.Sum(i => i.Transactions.Count);
-            Console.WriteLine($"Finish totaltransactions: {count}");
-
-            return quotes;
-        }
-
-        public void FilesReader()
-        {
-            //read investment
-            Investor.Investments = ReadInvestments(OwnerId);
-
-            //read transactions
-            ReadTransactions(Investor.Investments);
+            _filesReader.ReadTransactions(Investor.Investments, ValuationDate);
 
             //read quotes of Investor
-            //QuotesOfInvestor = ReadQuotes(Investor.Investments);
+            QuotesOfInvestor = _filesReader.ReadQuotes(Investor.Investments, ValuationDate);
 
         }
 
-        
+     
         public double RealStateEngine(List<Investment> investments)
         {
             
@@ -182,8 +108,8 @@ namespace WealthManagementAssessment.Infrastructure.Repository
             foreach( var fond in fonds)
             {
                 double totalPercentage = fond.Transactions.Sum( t => t.Value );
-                List<Investment> listOfinvestments = ReadInvestments(fond.FondsInvestor);
-                ReadTransactions(listOfinvestments);
+                List<Investment> listOfinvestments = _filesReader.ReadInvestments(fond.FondsInvestor);
+                _filesReader.ReadTransactions(listOfinvestments, ValuationDate);
 
                 //total Asset for realstate
                 double realStateSumup = RealStateEngine(listOfinvestments);
