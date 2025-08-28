@@ -41,5 +41,26 @@ namespace WealthManagementAssessment.Infrastructure.Repository
 
             return investments;
         }
+
+
+
+        public void ReadTransactions(List<Investment> investments)
+        {
+            foreach (var investment in investments)
+            {
+                investment.Transactions = File.ReadLines(fileTransactions)
+                    .Skip(1)
+                    .Select(line => line.Split(";"))
+                    .Where(parts => parts[0] == investment.InvestmentId && DateTime.Parse(parts[2]) < ValuationDate) //cut out future transactions
+                    .Select(parts => new Transaction
+                    {
+                        InvestmentId = parts[0],
+                        Type = parts[1],
+                        Date = DateTime.Parse(parts[2]),
+                        Value = double.Parse(parts[3])
+
+                    }).ToList();
+            }
+        }
     }
 }
