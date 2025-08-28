@@ -1,9 +1,10 @@
 ﻿using WealthManagementAssessment.Domain;
+using WealthManagementAssessment.Domain.Contracts.Interfaces;
 using WealthManagementAssessment.Domain.Entities;
 
 namespace WealthManagementAssessment.WealthManagementService
 {
-    public class AssetValuation
+    public class AssetValuation : IAssetValuation
     {
 
         static string baseDirectory = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\..\"));
@@ -68,7 +69,7 @@ namespace WealthManagementAssessment.WealthManagementService
             }
         }
 
-        private List<Quote> ReadQuotes(List<Investment> investments)
+        public List<Quote> ReadQuotes(List<Investment> investments)
         {
             var quotes = new List<Quote>();
 
@@ -209,5 +210,6 @@ namespace WealthManagementAssessment.WealthManagementService
             //Fonds
             FondEngine();
         }
+
     }
 }
