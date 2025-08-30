@@ -8,23 +8,11 @@ namespace WealthManagementAssessment.Infrastructure.Repository
     public class FilesReader : IFilesReader
     {
 
-        public readonly string fileInvestments;
-        public readonly string fileTransactions;
-        public readonly string fileQuotes;
-
-        static string baseDirectory = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\..\"));
-
         private readonly AppConfig _appConfig;
 
         public FilesReader(IOptions<AppConfig> appConfig)
         {
             _appConfig = appConfig.Value;
-            fileInvestments = Path.Combine(baseDirectory, "Infrastructure\\WorkLoad\\InvestmentsT.csv");
-
-            fileTransactions = Path.Combine(baseDirectory, "Infrastructure\\WorkLoad\\TransactionsT.csv");
-
-            fileQuotes = Path.Combine(baseDirectory, "Infrastructure\\WorkLoad\\Quotes.csv");
-
         }
 
         public List<Investment> ReadInvestments(string ownerId)
@@ -55,7 +43,7 @@ namespace WealthManagementAssessment.Infrastructure.Repository
         {
             foreach (var investment in investments)
             {
-                investment.Transactions = File.ReadLines(fileTransactions)
+                investment.Transactions = File.ReadLines(_appConfig.CsvPath.Transactions)
                     .Skip(1)
                     .Select(line => line.Split(";"))
                     .Where(parts => parts[0] == investment.InvestmentId && DateTime.Parse(parts[2]) < valuationDate) //cut out future transactions
@@ -79,7 +67,7 @@ namespace WealthManagementAssessment.Infrastructure.Repository
             //Storing Quotes
             foreach (var investment in investments)
             {
-                var invQuotes = File.ReadLines(fileQuotes)
+                var invQuotes = File.ReadLines(_appConfig.CsvPath.Quotes)
                     .Skip(1)
                     .Select(parts => parts.Split(";"))
                     .Where(parts => parts[0] == investment.Isin && DateTime.Parse(parts[1]) < valuationDate) //cut out unused quote range
