@@ -3,7 +3,7 @@
     public class AppConfig
     {
 
-        public CsvPathConfig CsvsPaths { get; set; } = new CsvPathConfig();
+        public CsvPathConfig CsvPath { get; set; } = new CsvPathConfig();
 
         public sealed class CsvPathConfig
         {

@@ -43,9 +43,9 @@ class Program
                 {
                     ctx.Configuration.Bind(options);
 
-                    options.CsvsPaths.Investments = Path.Combine(projectDirectory, options.CsvsPaths.Investments);
-                    options.CsvsPaths.Transactions = Path.Combine( projectDirectory, options.CsvsPaths.Transactions );
-                    options.CsvsPaths.Quotes = Path.Combine(projectDirectory, options.CsvsPaths.Quotes);
+                    options.CsvPath.Investments = Path.Combine(projectDirectory, options.CsvPath.Investments);
+                    options.CsvPath.Transactions = Path.Combine( projectDirectory, options.CsvPath.Transactions );
+                    options.CsvPath.Quotes = Path.Combine(projectDirectory, options.CsvPath.Quotes);
 
                 });
 

@@ -29,7 +29,7 @@ namespace WealthManagementAssessment.Infrastructure.Repository
 
         public List<Investment> ReadInvestments(string ownerId)
         {
-            var investments = File.ReadLines(_appConfig.CsvsPaths.Investments)
+            var investments = File.ReadLines(_appConfig.CsvPath.Investments)
                 .Skip(1)
                 .Select(line => line.Split(';'))
                 .Where(parts => parts[0] == ownerId)
