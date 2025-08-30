@@ -17,7 +17,8 @@ namespace WealthManagementAssessment.Infrastructure.Repository
             _filesReader = filesReader;
         }
 
-        public void LoadFiles(string ownerId, DateTime valuationDate)
+        //dont need that
+        public void LoadFilesJustOnce(string ownerId, DateTime valuationDate)
         {
             Investor.Investments = _filesReader.ReadInvestments(ownerId);
 
@@ -27,7 +28,16 @@ namespace WealthManagementAssessment.Infrastructure.Repository
             QuotesOfInvestor = _filesReader.ReadQuotes(Investor.Investments, valuationDate);
 
         }
-     
+
+        public List<Investment> GetAllInvestments(string ownerId, DateTime valuationDate)
+        {
+            List<Investment> investments = _filesReader.ReadInvestments(ownerId);
+
+            _filesReader.ReadTransactions(investments, valuationDate);
+
+            return investments;
+        }
+
         public double RealStateEngine(List<Investment> investments)
         {
             
@@ -111,7 +121,5 @@ namespace WealthManagementAssessment.Infrastructure.Repository
 
             return fondSumup;
         }
-
-
     }
 }
