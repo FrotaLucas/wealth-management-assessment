@@ -1,4 +1,6 @@
-﻿using WealthManagementAssessment.Domain.Contracts.Interfaces;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
+using WealthManagementAssessment.Domain.Contracts.Interfaces;
 using WealthManagementAssessment.Domain.Contracts.Services;
 using WealthManagementAssessment.Infrastructure.Repository;
 
@@ -7,6 +9,11 @@ class Program
 
     private static void Main(string[] args)
     {
+
+        string baseDir = AppContext.BaseDirectory;
+        string projectDirectory = Directory.GetParent(baseDir)!.Parent!.Parent!.Parent.FullName;
+
+
         string investorId = "Investor90";
         string dateString = "2018-12-31";
 
@@ -17,6 +24,23 @@ class Program
 
         Console.WriteLine("DateTime format: " + date);
         //1/16/2016 12:00:00 AM
+
+        var host = Host.CreateDefaultBuilder(args)
+            .ConfigureAppConfiguration( (ctx, cfg) =>
+            { 
+                cfg.SetBasePath(AppContext.BaseDirectory);
+                cfg.AddJsonFile(Path.Combine("Application","appsettings.json"), optional: true, reloadOnChange: true );
+
+                //realmente precisa de MAIS um addJsonFile?
+                //o que significa essa segunda parte da string 
+                //{ctx.HostingEnvironment.EnvironmentName}.
+
+                cfg.AddJsonFile(Path.Combine("Application", $"appsetings.{ctx.HostingEnvironment.EnvironmentName}.json"), optional: true, reloadOnChange: true);
+                cfg.AddEnvironmentVariables();
+
+            })
+            .ConfigureServices()
+            .Build();
 
 
         //Sol1
