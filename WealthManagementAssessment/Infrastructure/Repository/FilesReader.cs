@@ -1,4 +1,6 @@
-﻿using WealthManagementAssessment.Domain.Contracts.Interfaces;
+﻿using Microsoft.Extensions.Options;
+using WealthManagementAssessment.Application.Configuration;
+using WealthManagementAssessment.Domain.Contracts.Interfaces;
 using WealthManagementAssessment.Domain.Entities;
 
 namespace WealthManagementAssessment.Infrastructure.Repository
@@ -12,8 +14,11 @@ namespace WealthManagementAssessment.Infrastructure.Repository
 
         static string baseDirectory = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\..\"));
 
-        public FilesReader()
+        private readonly AppConfig _appConfig;
+
+        public FilesReader(IOptions<AppConfig> appConfig)
         {
+            _appConfig = appConfig.Value;
             fileInvestments = Path.Combine(baseDirectory, "Infrastructure\\WorkLoad\\InvestmentsT.csv");
 
             fileTransactions = Path.Combine(baseDirectory, "Infrastructure\\WorkLoad\\TransactionsT.csv");
@@ -24,7 +29,7 @@ namespace WealthManagementAssessment.Infrastructure.Repository
 
         public List<Investment> ReadInvestments(string ownerId)
         {
-            var investments = File.ReadLines(fileInvestments)
+            var investments = File.ReadLines(_appConfig.CsvsPaths.Investments)
                 .Skip(1)
                 .Select(line => line.Split(';'))
                 .Where(parts => parts[0] == ownerId)
