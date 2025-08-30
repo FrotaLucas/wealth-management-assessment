@@ -32,7 +32,7 @@ class Program
                 cfg.SetBasePath(AppContext.BaseDirectory);
 
                 cfg.AddJsonFile(Path.Combine("Application","appsettings.json"), optional: true, reloadOnChange: true );
-                cfg.AddJsonFile(Path.Combine("Application", $"appsetings.{ctx.HostingEnvironment.EnvironmentName}.json"), optional: true, reloadOnChange: true);
+                cfg.AddJsonFile(Path.Combine("Application", $"appsettings.{ctx.HostingEnvironment.EnvironmentName}.json"), optional: true, reloadOnChange: true);
                 
                 cfg.AddEnvironmentVariables();
 
