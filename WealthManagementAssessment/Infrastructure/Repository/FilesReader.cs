@@ -32,7 +32,7 @@ namespace WealthManagementAssessment.Infrastructure.Repository
                     FondsInvestor = parst[5]
                 }).ToList();
 
-            Console.WriteLine($"total investment of investor90: {investments.Count}");
+            //Console.WriteLine($"total investment of investor90: {investments.Count}");
 
             return investments;
         }
@@ -83,11 +83,11 @@ namespace WealthManagementAssessment.Infrastructure.Repository
                 quotes.AddRange(invQuotes);
             }
 
-            Console.WriteLine($"Total Quotes: {quotes.Count}");
+            //Console.WriteLine($"Total Quotes: {quotes.Count}");
 
 
             int count = investments.Sum(i => i.Transactions.Count);
-            Console.WriteLine($"Finish totaltransactions: {count}");
+            //Console.WriteLine($"Finish totaltransactions: {count}");
 
             return quotes;
         }
