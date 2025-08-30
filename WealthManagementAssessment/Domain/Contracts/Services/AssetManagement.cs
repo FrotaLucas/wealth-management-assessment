@@ -16,7 +16,7 @@ namespace WealthManagementAssessment.Domain.Contracts.Services
 
         public void DisplayAsset(string ownerId, DateTime valuationDate)
         {
-            _assetRepository.LoadFiles(ownerId, valuationDate); 
+            _assetRepository.LoadFiles(ownerId, valuationDate);
             _assetRepository.FondEngine(valuationDate);
 
         }
