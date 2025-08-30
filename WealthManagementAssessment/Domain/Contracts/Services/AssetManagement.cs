@@ -2,7 +2,7 @@
 
 namespace WealthManagementAssessment.Domain.Contracts.Services
 {
-    public class AssetManagement
+    public class AssetManagement : IAssetManagement
     {
 
         private readonly IAssetRepository _assetRepository;
