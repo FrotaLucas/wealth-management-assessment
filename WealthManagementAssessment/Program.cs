@@ -8,7 +8,6 @@ using WealthManagementAssessment.Infrastructure.Repository;
 
 class Program
 {
-
     private static void Main(string[] args)
     {
 
@@ -48,14 +47,12 @@ class Program
                     options.CsvsPaths.TransactionsPath = Path.Combine( projectDirectory, options.CsvsPaths.TransactionsPath );
                     options.CsvsPaths.QuotesPath = Path.Combine(projectDirectory, options.CsvsPaths.QuotesPath);
 
+                });
 
-                    services.AddSingleton<IFilesReader, FilesReader>();
-                    services.AddSingleton<IAssetRepository, AssetRepository>();
-                    services.AddSingleton<IAssetManagement, AssetManagement>();
+                services.AddSingleton<IFilesReader, FilesReader>();
+                services.AddSingleton<IAssetRepository, AssetRepository>();
+                services.AddSingleton<IAssetManagement, AssetManagement>();
 
-                });    
-            
-            
             })
             .Build();
 
