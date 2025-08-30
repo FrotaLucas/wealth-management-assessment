@@ -3,9 +3,9 @@
     public class AppConfig
     {
 
-        public CsvPath CsvsPaths { get; set; } = new CsvPath();
+        public CsvPathConfig CsvsPaths { get; set; } = new CsvPathConfig();
 
-        public sealed class CsvPath
+        public sealed class CsvPathConfig
         {
             public string Investments { get; set; }
 
