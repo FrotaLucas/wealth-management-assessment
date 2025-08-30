@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using WealthManagementAssessment.Application.Configuration;
 using WealthManagementAssessment.Domain.Contracts.Interfaces;
 using WealthManagementAssessment.Domain.Contracts.Services;
 using WealthManagementAssessment.Infrastructure.Repository;
@@ -39,7 +41,24 @@ class Program
                 cfg.AddEnvironmentVariables();
 
             })
-            .ConfigureServices()
+            .ConfigureServices( (ctx, services) =>
+            {
+                services.Configure<AppConfig>(options =>
+                {
+                    ctx.Configuration.Bind(options);
+
+                    options.CsvsPaths.InvestmentsPath = Path.Combine(projectDirectory, options.CsvsPaths.InvestmentsPath);
+                    options.CsvsPaths.TransactionsPath = Path.Combine( projectDirectory, options.CsvsPaths.TransactionsPath );
+                    options.CsvsPaths.QuotesPath = Path.Combine(projectDirectory, options.CsvsPaths.QuotesPath);
+
+
+                    services.AddSingleton<IFilesReader, FilesReader>();
+                    services.AddSingleton<IAssetRepository, AssetRepository>();
+
+                });    
+            
+            
+            })
             .Build();
 
 
