@@ -14,11 +14,11 @@ namespace WealthManagementAssessment.Infrastructure.Repository
 
         public FilesReader()
         {
-            fileInvestments = Path.Combine(baseDirectory, "Infrastructure\\InvestmentsT.csv");
+            fileInvestments = Path.Combine(baseDirectory, "Infrastructure\\WorkLoad\\InvestmentsT.csv");
 
-            fileTransactions = Path.Combine(baseDirectory, "Infrastructure\\TransactionsT.csv");
+            fileTransactions = Path.Combine(baseDirectory, "Infrastructure\\WorkLoad\\TransactionsT.csv");
 
-            fileQuotes = Path.Combine(baseDirectory, "Infrastructure\\Quotes.csv");
+            fileQuotes = Path.Combine(baseDirectory, "Infrastructure\\WorkLoad\\Quotes.csv");
 
         }
 
