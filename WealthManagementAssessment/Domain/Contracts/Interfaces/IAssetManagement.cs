@@ -2,5 +2,6 @@
 {
     public interface IAssetManagement
     {
+        void DisplayAsset();
     }
 }
