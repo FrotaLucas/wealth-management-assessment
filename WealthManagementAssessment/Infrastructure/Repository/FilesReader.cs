@@ -10,8 +10,9 @@ namespace WealthManagementAssessment.Infrastructure.Repository
         public readonly string fileTransactions;
         public readonly string fileQuotes;
 
+        static string baseDirectory = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\..\"));
 
-        public FilesReader(string baseDirectory)
+        public FilesReader()
         {
             fileInvestments = Path.Combine(baseDirectory, "Infrastructure\\InvestmentsT.csv");
 
@@ -20,8 +21,6 @@ namespace WealthManagementAssessment.Infrastructure.Repository
             fileQuotes = Path.Combine(baseDirectory, "Infrastructure\\Quotes.csv");
 
         }
-
-
 
         public List<Investment> ReadInvestments(string ownerId)
         {
