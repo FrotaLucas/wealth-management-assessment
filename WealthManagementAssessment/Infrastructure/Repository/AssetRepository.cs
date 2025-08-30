@@ -8,7 +8,7 @@ namespace WealthManagementAssessment.Infrastructure.Repository
 
         private readonly IFilesReader _filesReader;
 
-        static string baseDirectory = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\..\"));
+        //static string baseDirectory = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\..\"));
 
         public string OwnerId { get; set; }
 
@@ -19,11 +19,12 @@ namespace WealthManagementAssessment.Infrastructure.Repository
         //chose a better name
         public List<Quote> QuotesOfInvestor { get; set; } = new List<Quote>();
 
-        public AssetRepository(string ownerId, DateTime valuationDate)
+        public AssetRepository(string ownerId, DateTime valuationDate, IFilesReader filesReader)
         {
             OwnerId = ownerId;
             ValuationDate = valuationDate;
-            _filesReader = new FilesReader(baseDirectory);  
+            //_filesReader = new FilesReader(baseDirectory);  
+            _filesReader = filesReader;
 
             LoadFiles();
         }
