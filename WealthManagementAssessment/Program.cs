@@ -33,12 +33,15 @@ class Program
         //Sol2
         //var obj = new AssetRepository(investorId, date);
         //obj.FilesReader();
-      
+
         //obj.AssetEngine();
 
 
         //sol 3
-        IAssetRepository interfaceRepository = new AssetRepository(investorId, date);
+
+        IFilesReader filesReader = new FilesReader();
+
+        IAssetRepository interfaceRepository = new AssetRepository(investorId, date, filesReader);
 
         //precisa LER antes os files dentro de repository
         AssetManagement asset = new AssetManagement(interfaceRepository);
