@@ -15,15 +15,24 @@ namespace WealthManagementAssessment.Domain.Contracts.Services
 
         public void DisplayAsset(string ownerId, DateTime valuationDate)
         {
-            //_assetRepository.LoadFilesJustOnce(ownerId, valuationDate);
-
+            //only realstate
             var investments = _assetRepository.GetAllInvestments(ownerId, valuationDate);
 
             _assetRepository.RealStateEngine(investments);
 
+
+            //fonds
+            //_assetRepository.LoadFilesJustOnce(ownerId, valuationDate);
+
             //_assetRepository.FondEngine(valuationDate);
 
         }
+
+        //   public void DisplayRealState
+
+        //    public void DisplayStocks
+
+        //   public void DisplayFonds
     }
 
 }
