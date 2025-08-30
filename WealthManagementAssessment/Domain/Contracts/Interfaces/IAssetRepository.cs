@@ -6,10 +6,11 @@ namespace WealthManagementAssessment.Domain.Contracts.Interfaces
     {
         double RealStateEngine(List<Investment> investments);
 
-        double StockEngine(List<Investment> investments);
+        double StockEngine(List<Investment> investments, DateTime valuationDate);
 
-        double FondEngine();
+        double FondEngine(DateTime valuationDate);
 
-        void AssetEngine();
+        void LoadFiles(string ownerId, DateTime valuationDate);
+
     }
 }

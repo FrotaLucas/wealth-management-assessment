@@ -2,6 +2,6 @@
 {
     public interface IAssetManagement
     {
-        void DisplayAsset();
+        void DisplayAsset(string ownerId, DateTime valuationDate);
     }
 }

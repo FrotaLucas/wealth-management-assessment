@@ -8,35 +8,31 @@ namespace WealthManagementAssessment.Infrastructure.Repository
 
         private readonly IFilesReader _filesReader;
 
-        //static string baseDirectory = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\..\"));
-
-        public string OwnerId { get; set; }
-
-        public DateTime ValuationDate { get; set; } // EndDate or ReferenceDate?
-
         public Investor Investor { get; set; } = new Investor();
 
         //chose a better name
         public List<Quote> QuotesOfInvestor { get; set; } = new List<Quote>();
 
-        public AssetRepository(string ownerId, DateTime valuationDate, IFilesReader filesReader)
+        public AssetRepository(IFilesReader filesReader)
         {
-            OwnerId = ownerId;
-            ValuationDate = valuationDate;
+            //OwnerId = ownerId;
+            //ValuationDate = valuationDate;
             //_filesReader = new FilesReader(baseDirectory);  
             _filesReader = filesReader;
 
-            LoadFiles();
         }
 
-        public void LoadFiles()
+        public void LoadFiles(string ownerId, DateTime valuationDate)
         {
-            Investor.Investments = _filesReader.ReadInvestments(OwnerId);
+            //Investor.Investments = _filesReader.ReadInvestments(OwnerId);
+            Investor.Investments = _filesReader.ReadInvestments(ownerId);
 
-            _filesReader.ReadTransactions(Investor.Investments, ValuationDate);
+            //_filesReader.ReadTransactions(Investor.Investments, ValuationDate);
+            _filesReader.ReadTransactions(Investor.Investments, valuationDate);
 
             //read quotes of Investor
-            QuotesOfInvestor = _filesReader.ReadQuotes(Investor.Investments, ValuationDate);
+           // QuotesOfInvestor = _filesReader.ReadQuotes(Investor.Investments, ValuationDate);
+            QuotesOfInvestor = _filesReader.ReadQuotes(Investor.Investments, valuationDate);
 
         }
 
@@ -54,7 +50,7 @@ namespace WealthManagementAssessment.Infrastructure.Repository
             return realStateSumup;
         }
 
-        public double StockEngine(List<Investment> investments)
+        public double StockEngine(List<Investment> investments, DateTime valuationDate)
         {
             double stockSumup = 0;
             foreach (var investment in investments)
@@ -79,7 +75,7 @@ namespace WealthManagementAssessment.Infrastructure.Repository
 
                 //get quote of today to calculate Asset
                 var quoteToday = QuotesOfInvestor
-                    .FirstOrDefault(quote => quote.Date <= ValuationDate && quote.Isin == investment.Isin);
+                    .FirstOrDefault(quote => quote.Date <= valuationDate && quote.Isin == investment.Isin);
 
 
                 if (quoteToday == null)
@@ -97,7 +93,7 @@ namespace WealthManagementAssessment.Infrastructure.Repository
             return stockSumup;
         }
 
-        public double FondEngine()
+        public double FondEngine(DateTime valuationDate)
         {
             double fondSumup = 0;
             var fonds = Investor.Investments
@@ -110,13 +106,13 @@ namespace WealthManagementAssessment.Infrastructure.Repository
             {
                 double totalPercentage = fond.Transactions.Sum( t => t.Value );
                 List<Investment> listOfinvestments = _filesReader.ReadInvestments(fond.FondsInvestor);
-                _filesReader.ReadTransactions(listOfinvestments, ValuationDate);
+                _filesReader.ReadTransactions(listOfinvestments, valuationDate);
 
                 //total Asset for realstate
                 double realStateSumup = RealStateEngine(listOfinvestments);
 
                 //total Asset for stocks
-                double stockSumup = StockEngine(listOfinvestments);
+                double stockSumup = StockEngine(listOfinvestments, valuationDate);
 
                 fondSumup = fondSumup + totalPercentage * (realStateSumup + stockSumup);
             }
@@ -125,17 +121,6 @@ namespace WealthManagementAssessment.Infrastructure.Repository
             return fondSumup;
         }
 
-        public void AssetEngine()
-        {
-            //RealState
-            //RealStateEngine(Investor.Investments);
-
-            //Stocks
-            //StockEngine(Investor.Investments);
-
-            //Fonds
-            FondEngine();
-        }
 
     }
 }

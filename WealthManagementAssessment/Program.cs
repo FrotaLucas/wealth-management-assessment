@@ -59,7 +59,7 @@ class Program
 
         var assetManagemetn = host.Services.GetRequiredService<IAssetManagement>();
 
-        assetManagemetn.DisplayAsset();
+        assetManagemetn.DisplayAsset(investorId, date);
 
         //Sol1
         //var obj = new AssetValuationService(investorId, date);
@@ -79,14 +79,15 @@ class Program
 
         //sol 3
 
+        //void AssetEngine();
         IFilesReader filesReader = new FilesReader();
 
-        IAssetRepository interfaceRepository = new AssetRepository(investorId, date, filesReader);
+        IAssetRepository interfaceRepository = new AssetRepository(filesReader);
 
         //precisa LER antes os files dentro de repository
         AssetManagement asset = new AssetManagement(interfaceRepository);
 
-        //asset.DisplayAsset();
+        asset.DisplayAsset(investorId , date);
     }
 
 }
