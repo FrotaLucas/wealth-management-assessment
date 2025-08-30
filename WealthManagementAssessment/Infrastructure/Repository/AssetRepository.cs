@@ -5,7 +5,6 @@ namespace WealthManagementAssessment.Infrastructure.Repository
 {
     public class AssetRepository : IAssetRepository
     {
-
         private readonly IFilesReader _filesReader;
 
         public Investor Investor { get; set; } = new Investor();
@@ -15,27 +14,19 @@ namespace WealthManagementAssessment.Infrastructure.Repository
 
         public AssetRepository(IFilesReader filesReader)
         {
-            //OwnerId = ownerId;
-            //ValuationDate = valuationDate;
-            //_filesReader = new FilesReader(baseDirectory);  
             _filesReader = filesReader;
-
         }
 
         public void LoadFiles(string ownerId, DateTime valuationDate)
         {
-            //Investor.Investments = _filesReader.ReadInvestments(OwnerId);
             Investor.Investments = _filesReader.ReadInvestments(ownerId);
 
-            //_filesReader.ReadTransactions(Investor.Investments, ValuationDate);
             _filesReader.ReadTransactions(Investor.Investments, valuationDate);
 
             //read quotes of Investor
-           // QuotesOfInvestor = _filesReader.ReadQuotes(Investor.Investments, ValuationDate);
             QuotesOfInvestor = _filesReader.ReadQuotes(Investor.Investments, valuationDate);
 
         }
-
      
         public double RealStateEngine(List<Investment> investments)
         {
