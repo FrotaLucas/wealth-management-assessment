@@ -1,8 +1,6 @@
 ﻿using WealthManagementAssessment.Domain.Contracts.Interfaces;
 using WealthManagementAssessment.Domain.Contracts.Services;
-using WealthManagementAssessment.Domain.Entities;
 using WealthManagementAssessment.Infrastructure.Repository;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 class Program
 {
