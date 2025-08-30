@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WealthManagementAssessment.Application.Configuration
+﻿namespace WealthManagementAssessment.Application.Configuration
 {
     public class AppConfig
     {
@@ -13,11 +7,11 @@ namespace WealthManagementAssessment.Application.Configuration
 
         public sealed class CsvPaths
         {
-            public string InvestmentsPath { get; set; }
+            public string Investments { get; set; }
 
-            public string TransactionsPath { get; set; }
+            public string Transactions { get; set; }
 
-            public string QuotesPath { get; set; }
+            public string Quotes { get; set; }
 
         }
     }
