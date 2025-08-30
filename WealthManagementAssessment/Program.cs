@@ -43,9 +43,9 @@ class Program
                 {
                     ctx.Configuration.Bind(options);
 
-                    options.CsvsPaths.InvestmentsPath = Path.Combine(projectDirectory, options.CsvsPaths.InvestmentsPath);
-                    options.CsvsPaths.TransactionsPath = Path.Combine( projectDirectory, options.CsvsPaths.TransactionsPath );
-                    options.CsvsPaths.QuotesPath = Path.Combine(projectDirectory, options.CsvsPaths.QuotesPath);
+                    options.CsvsPaths.Investments = Path.Combine(projectDirectory, options.CsvsPaths.Investments);
+                    options.CsvsPaths.Transactions = Path.Combine( projectDirectory, options.CsvsPaths.Transactions );
+                    options.CsvsPaths.Quotes = Path.Combine(projectDirectory, options.CsvsPaths.Quotes);
 
                 });
 
@@ -80,14 +80,14 @@ class Program
         //sol 3
 
         //void AssetEngine();
-        IFilesReader filesReader = new FilesReader();
+        //IFilesReader filesReader = new FilesReader();
 
-        IAssetRepository interfaceRepository = new AssetRepository(filesReader);
+        //IAssetRepository interfaceRepository = new AssetRepository(filesReader);
 
-        //precisa LER antes os files dentro de repository
-        AssetManagement asset = new AssetManagement(interfaceRepository);
+        ////precisa LER antes os files dentro de repository
+        //AssetManagement asset = new AssetManagement(interfaceRepository);
 
-        asset.DisplayAsset(investorId , date);
+        //asset.DisplayAsset(investorId , date);
     }
 
 }
