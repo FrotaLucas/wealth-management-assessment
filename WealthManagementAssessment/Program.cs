@@ -31,13 +31,10 @@ class Program
             .ConfigureAppConfiguration( (ctx, cfg) =>
             { 
                 cfg.SetBasePath(AppContext.BaseDirectory);
+
                 cfg.AddJsonFile(Path.Combine("Application","appsettings.json"), optional: true, reloadOnChange: true );
-
-                //realmente precisa de MAIS um addJsonFile?
-                //o que significa essa segunda parte da string 
-                //{ctx.HostingEnvironment.EnvironmentName}.
-
                 cfg.AddJsonFile(Path.Combine("Application", $"appsetings.{ctx.HostingEnvironment.EnvironmentName}.json"), optional: true, reloadOnChange: true);
+                
                 cfg.AddEnvironmentVariables();
 
             })
@@ -62,6 +59,10 @@ class Program
             })
             .Build();
 
+
+        var assetManagemetn = host.Services.GetRequiredService<IAssetManagement>();
+
+        assetManagemetn.DisplayAsset();
 
         //Sol1
         //var obj = new AssetValuationService(investorId, date);
@@ -88,7 +89,7 @@ class Program
         //precisa LER antes os files dentro de repository
         AssetManagement asset = new AssetManagement(interfaceRepository);
 
-        asset.DisplayAsset();
+        //asset.DisplayAsset();
     }
 
 }
