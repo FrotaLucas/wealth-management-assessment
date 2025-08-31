@@ -16,7 +16,7 @@ class Program
 
 
         string investorId = "Investor90";
-        string dateString = "2028-12-31";
+        string dateString = "2018-12-31";
 
 
         //var line = Console.ReadLine();
