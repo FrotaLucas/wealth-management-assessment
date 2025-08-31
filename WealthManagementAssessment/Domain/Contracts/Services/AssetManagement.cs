@@ -18,13 +18,15 @@ namespace WealthManagementAssessment.Domain.Contracts.Services
             //only realstate
             var investments = _assetRepository.GetAllInvestments(ownerId, valuationDate);
 
-            _assetRepository.RealStateEngine(investments);
+            //_assetRepository.RealStateEngine(investments);
 
 
             //fonds
-            //_assetRepository.LoadFilesJustOnce(ownerId, valuationDate);
+            _assetRepository.LoadFilesJustOnce(ownerId, valuationDate);
 
             //_assetRepository.FondEngine(valuationDate);
+
+            _assetRepository.StockEngine(investments, valuationDate);
 
         }
 
