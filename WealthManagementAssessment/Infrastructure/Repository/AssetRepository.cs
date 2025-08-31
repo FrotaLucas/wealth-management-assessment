@@ -53,6 +53,8 @@ namespace WealthManagementAssessment.Infrastructure.Repository
 
         public double StockEngine(List<Investment> investments, DateTime valuationDate)
         {
+            QuotesOfInvestor = _filesReader.ReadQuotes(investments, valuationDate);
+
             double stockSumup = 0;
             foreach (var investment in investments)
             {
@@ -70,23 +72,28 @@ namespace WealthManagementAssessment.Infrastructure.Repository
                     if (quote == null)
                         quote = QuotesOfInvestor.LastOrDefault();
 
+                    Console.WriteLine(  $"volume trasaction : {transaction.Value}  quote: {quote.PricePerShare}\n");
                     totalShares += (int)Math.Round(transaction.Value / quote.PricePerShare);
+
+                    Console.WriteLine($"rounded value {Math.Round(transaction.Value / quote.PricePerShare)}" );
+
 
                 }
 
                 //get quote of today to calculate Asset
                 var quoteToday = QuotesOfInvestor
                     .FirstOrDefault(quote => quote.Date <= valuationDate && quote.Isin == investment.Isin);
+                
+                //all quotes older than valuationDate are no available
+                //if (quoteToday == null)
+                //    quoteToday = QuotesOfInvestor
+                //        .Where(quote => quote.Isin == investment.Isin)
+                //        .LastOrDefault();
 
+                Console.WriteLine($"Price share today:   {quoteToday.PricePerShare}");
 
-                if (quoteToday == null)
-                    quoteToday = QuotesOfInvestor.LastOrDefault();
-
-                //Console.WriteLine($"Price share today:   {quoteToday.PricePerShare}");
-
-                //var todaysValue = 10;
                 var marketValue = totalShares * quoteToday.PricePerShare;
-                Console.WriteLine($"value for stocks:   {marketValue}");
+                //Console.WriteLine($"value for stocks:   {marketValue}");
                 stockSumup += marketValue;
             }
             Console.WriteLine($"Sumup Stocks:   {stockSumup}");
