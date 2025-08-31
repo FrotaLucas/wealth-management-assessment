@@ -71,14 +71,16 @@ namespace WealthManagementAssessment.Infrastructure.Repository
                     .Skip(1)
                     .Select(parts => parts.Split(";"))
                     .Where(parts => parts[0] == investment.Isin && DateTime.Parse(parts[1]) < valuationDate) //cut out unused quote range
-                    .OrderByDescending(parts => parts[1])
                     .Select(parts => new Quote
                     {
                         Isin = parts[0],
                         Date = DateTime.Parse(parts[1]),
                         PricePerShare = float.Parse(parts[2])
 
-                    }).ToList();
+                    })
+                    .OrderBy(quote => quote.Isin)
+                    .ThenByDescending(quote => quote.Date)
+                    .ToList();
 
                 quotes.AddRange(invQuotes);
             }
