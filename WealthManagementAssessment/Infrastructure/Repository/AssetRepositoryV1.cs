@@ -67,7 +67,7 @@ namespace WealthManagementAssessment.Infrastructure.Repository
                         investment.InvestorId = fields[0];
                         investment.InvestmentId = fields[1];
                         investment.InvestmentType = fields[2]; 
-                        investment.Isin = fields[3];
+                        investment.ISIN = fields[3];
 
                         //not used
                         //RealState

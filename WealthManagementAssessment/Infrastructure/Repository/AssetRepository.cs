@@ -65,14 +65,14 @@ namespace WealthManagementAssessment.Infrastructure.Repository
             {
                 double totalShares = 0;
 
-                if (string.IsNullOrEmpty(investment.Isin))
+                if (string.IsNullOrEmpty(investment.ISIN))
                     continue;
 
 
                 foreach (var transaction in investment.Transactions)
                 {
                     var quote = QuotesOfInvestor
-                        .FirstOrDefault(quote => quote.Date <= transaction.Date && quote.ISIN == investment.Isin);
+                        .FirstOrDefault(quote => quote.Date <= transaction.Date && quote.ISIN == investment.ISIN);
 
                     // E QUANTO o ARQUIVO csv NAO TIVER A  cotacao que eu procuro ???
                     // vai buscar uma cotacao aleatorio ?
@@ -90,7 +90,7 @@ namespace WealthManagementAssessment.Infrastructure.Repository
 
                 //get quote of today to calculate Asset
                 var quoteToday = QuotesOfInvestor
-                    .FirstOrDefault(quote => quote.Date <= valuationDate && quote.ISIN == investment.Isin);
+                    .FirstOrDefault(quote => quote.Date <= valuationDate && quote.ISIN == investment.ISIN);
                 
                 //all quotes older than valuationDate are no available
                 //if (quoteToday == null)
