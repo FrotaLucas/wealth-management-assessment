@@ -44,21 +44,30 @@ namespace WealthManagementAssessment.Infrastructure.Repository
 
         public void ReadTransactions(List<Investment> investments, DateTime valuationDate)
         {
-            foreach (var investment in investments)
+            var config = new CsvConfiguration(CultureInfo.InvariantCulture)
             {
-                investment.Transactions = File.ReadLines(_appConfig.CsvPath.Transactions)
-                    .Skip(1)
-                    .Select(line => line.Split(";"))
-                    .Where(parts => parts[0] == investment.InvestmentId && DateTime.Parse(parts[2]) < valuationDate) //cut out future transactions
-                    .Select(parts => new Transaction
-                    {
-                        InvestmentId = parts[0],
-                        Type = parts[1],
-                        Date = DateTime.Parse(parts[2]),
-                        Value = double.Parse(parts[3])
+                Delimiter = ";",
+                HasHeaderRecord = true,
+                TrimOptions = TrimOptions.Trim, // remove espaços extras nos cabeçalhos e valores
+            };
 
-                    }).ToList();
+            using (var reader = new StreamReader(_appConfig.CsvPath.Transactions))
+
+            using (var csv = new CsvReader(reader, config))
+            {
+                //LER TODO ARQUIVO transactions de 700K linhas
+                var allTransactions = csv.GetRecords<Transaction>()
+                    .Where(t => t.Date < valuationDate) 
+                    .ToList();
+
+                foreach (var investment in investments)
+                {
+                    investment.Transactions = allTransactions
+                        .Where(t => t.InvestmentId == investment.InvestmentId)
+                        .ToList();
+                }
             }
+
         }
 
 
@@ -67,32 +76,9 @@ namespace WealthManagementAssessment.Infrastructure.Repository
         {
             var quotes = new List<Quote>();
 
-            //old code
-            //Storing Quotes
-            //foreach (var investment in investments)
-            //{
-            //    var invQuotes = File.ReadLines(_appConfig.CsvPath.Quotes)
-            //        .Skip(1)
-            //        .Select(parts => parts.Split(";"))
-            //        .Where(parts => parts[0] == investment.Isin && DateTime.Parse(parts[1]) < valuationDate) //cut out unused quote range
-            //        .Select(parts => new Quote
-            //        {
-            //            Isin = parts[0],
-            //            Date = DateTime.Parse(parts[1]),
-            //            PricePerShare = float.Parse(parts[2])
-
-            //        })
-            //        .OrderBy(quote => quote.Isin)
-            //        .ThenByDescending(quote => quote.Date)
-            //        .ToList();
-
-            //    quotes.AddRange(invQuotes);
-            //}
-
-            //new code
             var config = new CsvConfiguration(CultureInfo.InvariantCulture)
             {
-                Delimiter = ";", 
+                Delimiter = ";",
                 HasHeaderRecord = true,
                 TrimOptions = TrimOptions.Trim, // remove espaços extras nos cabeçalhos e valores
             };
@@ -112,15 +98,11 @@ namespace WealthManagementAssessment.Infrastructure.Repository
                         .ToList();
                     quotes.AddRange(invQuotes);
                 }
-
-
             }
 
 
             //Console.WriteLine($"Total Quotes: {quotes.Count}");
-
-
-            int count = investments.Sum(i => i.Transactions.Count);
+            //int count = investments.Sum(i => i.Transactions.Count);
             //Console.WriteLine($"Finish totaltransactions: {count}");
 
             return quotes;
