@@ -53,7 +53,12 @@ namespace WealthManagementAssessment.Infrastructure.Repository
 
         public double StockEngine(List<Investment> investments, DateTime valuationDate)
         {
+            //50k * 250k
             QuotesOfInvestor = _filesReader.ReadQuotes(investments, valuationDate);
+
+            //var dic = new Dictionary<>;
+            /// como transformar uma lista de objetos em diciionario 
+            /// 
 
             double stockSumup = 0;
             foreach (var investment in investments)
@@ -68,6 +73,9 @@ namespace WealthManagementAssessment.Infrastructure.Repository
                 {
                     var quote = QuotesOfInvestor
                         .FirstOrDefault(quote => quote.Date <= transaction.Date && quote.Isin == investment.Isin);
+
+                    // E QUANTO o ARQUIVO csv NAO TIVER A  cotacao que eu procuro ???
+                    // vai buscar uma cotacao aleatorio ?
 
                     if (quote == null)
                         quote = QuotesOfInvestor.LastOrDefault();
