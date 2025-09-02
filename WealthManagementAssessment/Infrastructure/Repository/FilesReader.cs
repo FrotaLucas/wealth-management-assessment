@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Options;
+﻿using System.Globalization;
+using CsvHelper;
+using Microsoft.Extensions.Options;
 using WealthManagementAssessment.Application.Configuration;
 using WealthManagementAssessment.Domain.Contracts.Interfaces;
 using WealthManagementAssessment.Domain.Entities;
@@ -62,28 +64,54 @@ namespace WealthManagementAssessment.Infrastructure.Repository
         //read quotes of Investor
         public List<Quote> ReadQuotes(List<Investment> investments, DateTime valuationDate)
         {
+
+            //investor90
+               //fonds de investor 90
+                 // isim de todos fonds
+
+
             var quotes = new List<Quote>();
 
+            //old code
             //Storing Quotes
-            foreach (var investment in investments)
+            //foreach (var investment in investments)
+            //{
+            //    var invQuotes = File.ReadLines(_appConfig.CsvPath.Quotes)
+            //        .Skip(1)
+            //        .Select(parts => parts.Split(";"))
+            //        .Where(parts => parts[0] == investment.Isin && DateTime.Parse(parts[1]) < valuationDate) //cut out unused quote range
+            //        .Select(parts => new Quote
+            //        {
+            //            Isin = parts[0],
+            //            Date = DateTime.Parse(parts[1]),
+            //            PricePerShare = float.Parse(parts[2])
+
+            //        })
+            //        .OrderBy(quote => quote.Isin)
+            //        .ThenByDescending(quote => quote.Date)
+            //        .ToList();
+
+            //    quotes.AddRange(invQuotes);
+            //}
+
+            //new code
+            using (var reader = new StreamReader(_appConfig.CsvPath.Quotes))
+
+            using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
             {
-                var invQuotes = File.ReadLines(_appConfig.CsvPath.Quotes)
-                    .Skip(1)
-                    .Select(parts => parts.Split(";"))
-                    .Where(parts => parts[0] == investment.Isin && DateTime.Parse(parts[1]) < valuationDate) //cut out unused quote range
-                    .Select(parts => new Quote
-                    {
-                        Isin = parts[0],
-                        Date = DateTime.Parse(parts[1]),
-                        PricePerShare = float.Parse(parts[2])
+                foreach (var investment in investments)
+                {
+                    var invQuotes = csv.GetRecords<Quote>()
+                        .Where(parts => parts.Isin == investment.Isin && parts.Date < valuationDate) //cut out unused quote range
+                        .OrderBy(quote => quote.Isin)
+                        .ThenByDescending(quote => quote.Date)
+                        .ToList();
+                    quotes.AddRange(invQuotes);
+                }
 
-                    })
-                    .OrderBy(quote => quote.Isin)
-                    .ThenByDescending(quote => quote.Date)
-                    .ToList();
 
-                quotes.AddRange(invQuotes);
             }
+
 
             //Console.WriteLine($"Total Quotes: {quotes.Count}");
 
