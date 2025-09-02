@@ -2,7 +2,7 @@
 {
     public class Quote
     {
-        public string Isin { get; set; }
+        public string ISIN { get; set; }
 
         public DateTime Date { get; set; }
 

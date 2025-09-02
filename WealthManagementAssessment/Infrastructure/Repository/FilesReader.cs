@@ -102,8 +102,8 @@ namespace WealthManagementAssessment.Infrastructure.Repository
                 foreach (var investment in investments)
                 {
                     var invQuotes = csv.GetRecords<Quote>()
-                        .Where(parts => parts.Isin == investment.Isin && parts.Date < valuationDate) //cut out unused quote range
-                        .OrderBy(quote => quote.Isin)
+                        .Where(parts => parts.ISIN == investment.Isin && parts.Date < valuationDate) //cut out unused quote range
+                        .OrderBy(quote => quote.ISIN)
                         .ThenByDescending(quote => quote.Date)
                         .ToList();
                     quotes.AddRange(invQuotes);
