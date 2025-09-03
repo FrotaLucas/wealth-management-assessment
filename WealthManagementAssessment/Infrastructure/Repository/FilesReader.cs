@@ -19,7 +19,7 @@ namespace WealthManagementAssessment.Infrastructure.Repository
         }
 
 
-        //carregar todos os dados sem discriminar o INvestorId
+        //NAO DEVERIA USAR MAIS ESSE METODO
         public List<Investment> ReadInvestmentByInvestor(string ownerId)
         {
 
@@ -28,7 +28,7 @@ namespace WealthManagementAssessment.Infrastructure.Repository
             {
                 Delimiter = ";",
                 HasHeaderRecord = true,
-                TrimOptions = TrimOptions.Trim, // remove espaços extras nos cabeçalhos e valores
+                TrimOptions = TrimOptions.Trim,
             };
 
             using (var reader = new StreamReader(_appConfig.CsvPath.Investments))
@@ -55,31 +55,14 @@ namespace WealthManagementAssessment.Infrastructure.Repository
             {
                 Delimiter = ";",
                 HasHeaderRecord = true,
-                TrimOptions = TrimOptions.Trim, // remove espaços extras nos cabeçalhos e valores
+                TrimOptions = TrimOptions.Trim, 
             };
 
             using (var reader = new StreamReader(_appConfig.CsvPath.Transactions))
 
             using (var csv = new CsvReader(reader, config))
             {
-                //LER TODO ARQUIVO transactions de 700K linhas
-                //var allTransactions = csv.GetRecords<Transaction>()
-                //    .Where(t => t.Date < valuationDate)
-                //    .ToList();
 
-
-                ////id investmentId e value eh uma lista de transactions
-
-                //// N N +1 
-                //foreach (var investment in investments)
-                //{
-                //    investment.Transactions = allTransactions
-                //        .Where(t => t.InvestmentId == investment.InvestmentId)
-                //        .ToList();
-                //}
-
-
-                //new code 
                 var allTransactions = csv.GetRecords<Transaction>()
                  .Where(t => t.Date < valuationDate)
                  .GroupBy(transaction => transaction.InvestmentId)
@@ -88,19 +71,13 @@ namespace WealthManagementAssessment.Infrastructure.Repository
                 foreach (var investment in investments)
                 {
                     if (allTransactions.TryGetValue(investment.InvestmentId, out var transactions))
-                    {
                         investment.Transactions = transactions;
-                    }
                     else
-                    {
                         investment.Transactions = new List<Transaction>();
-                    }
                 }
-
             }
 
         }
-
 
         //read quotes of Investor
 
@@ -143,6 +120,7 @@ namespace WealthManagementAssessment.Infrastructure.Repository
             using (var csv = new CsvReader(reader, config))
             {
                 var allQuotes = csv.GetRecords<Quote>()
+                    .Where(quote => quote.Date < valuationDate )
                     .GroupBy(t => t.ISIN)
                     .ToDictionary(line => line.Key, line => line.ToList());
 
@@ -156,18 +134,14 @@ namespace WealthManagementAssessment.Infrastructure.Repository
                             .Where(parts => parts.Date < valuationDate) //cut out unused quote range
                             .OrderBy(quote => quote.Date)
                             .ToList();
+
                         quotes.AddRange(invQuotes);
                     }
 
                     else
-                    {
                         quotes.AddRange(new List<Quote>());
-                    }
-
                 }
-
-
-        }
+            }
 
 
 
@@ -198,5 +172,5 @@ namespace WealthManagementAssessment.Infrastructure.Repository
             return quotes;
         }
 
-}
+    }
 }
