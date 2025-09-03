@@ -5,7 +5,9 @@ namespace WealthManagementAssessment.Domain.Contracts.Interfaces
     public interface IFilesReader
     {
 
-        List<Investment> ReadInvestments(string ownerId);
+        List<Investment> ReadInvestmentByInvestor(string ownerId);
+
+        List<Investment> ReadInvestments();
 
         void ReadTransactions(List<Investment> investments, DateTime valuationDate);
 
