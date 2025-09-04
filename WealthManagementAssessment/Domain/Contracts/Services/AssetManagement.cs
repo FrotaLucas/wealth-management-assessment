@@ -12,6 +12,22 @@ namespace WealthManagementAssessment.Domain.Contracts.Services
             _assetRepository = assetRepository;
         }
 
+        public void GetFundAsset(string ownerId, DateTime valuationDate)
+        {
+            double asset = _assetRepository.FondEngine(ownerId, valuationDate);
+
+            Console.WriteLine($"Your wallet in Funds represent: {asset} Euros.");
+        }
+
+        public void GetRealEstateAsset(string ownerId, DateTime valuationDate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void GetStockAsset(string ownerId, DateTime valuationDate)
+        {
+            throw new NotImplementedException();
+        }
 
         public void GetTotalAsset(string ownerId, DateTime valuationDate)
         {
