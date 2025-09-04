@@ -15,5 +15,7 @@
         public string FondsInvestor { get; set; }
 
         public List<Transaction> Transactions { get; set; } = new List<Transaction>();  
+
+
     }
 }
