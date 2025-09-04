@@ -4,6 +4,7 @@ using Microsoft.Extensions.Hosting;
 using WealthManagementAssessment.Application.Configuration;
 using WealthManagementAssessment.Domain.Contracts.Interfaces;
 using WealthManagementAssessment.Domain.Contracts.Services;
+using WealthManagementAssessment.Infrastructure.Helper;
 using WealthManagementAssessment.Infrastructure.Repository;
 
 class Program
@@ -16,7 +17,7 @@ class Program
 
 
         string investorId = "Investor90";
-        string dateString = "2018-12-31";
+        string dateString = "2028-12-31";
 
 
         //var line = Console.ReadLine();
@@ -59,7 +60,7 @@ class Program
 
         var assetManagemetn = host.Services.GetRequiredService<IAssetManagement>();
 
-        assetManagemetn.DisplayAsset(investorId, date);
+        assetManagemetn.GetTotalAsset(investorId, date);
 
         //Sol1
         //var obj = new AssetValuationService(investorId, date);

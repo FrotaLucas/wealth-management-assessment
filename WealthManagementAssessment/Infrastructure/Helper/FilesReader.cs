@@ -6,7 +6,7 @@ using WealthManagementAssessment.Application.Configuration;
 using WealthManagementAssessment.Domain.Contracts.Interfaces;
 using WealthManagementAssessment.Domain.Entities;
 
-namespace WealthManagementAssessment.Infrastructure.Repository
+namespace WealthManagementAssessment.Infrastructure.Helper
 {
     public class FilesReader : IFilesReader
     {

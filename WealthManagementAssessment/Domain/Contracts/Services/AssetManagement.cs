@@ -24,7 +24,7 @@ namespace WealthManagementAssessment.Domain.Contracts.Services
         {
             List<Investment> investments = _assetRepository.GetAllInvestments(ownerId, valuationDate);
 
-            double asset = (_assetRepository.RealStateEngine(investments);
+            double asset = _assetRepository.RealStateEngine(investments);
 
             Console.WriteLine($"Your Real Estate wallet is : {asset} Euros.");
 
@@ -41,7 +41,6 @@ namespace WealthManagementAssessment.Domain.Contracts.Services
 
         public void GetTotalAsset(string ownerId, DateTime valuationDate)
         {
-            //only realstate
             List<Investment> investments = _assetRepository.GetAllInvestments(ownerId, valuationDate);
 
             double realEstateAsset = _assetRepository.RealStateEngine(investments);
