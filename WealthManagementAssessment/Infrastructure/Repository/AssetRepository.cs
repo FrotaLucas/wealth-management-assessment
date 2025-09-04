@@ -123,32 +123,31 @@ namespace WealthManagementAssessment.Infrastructure.Repository
         {
             double fondSumup = 0;
 
-            //old code
-            //var fonds = Investor.Investments
-            //    .Where(i => i.InvestmentType == "Fonds")
-            //    .ToList();
 
-
-            //new code
             List<Investment> fonds = GetAllInvestmentsByInvestor(ownerId, valuationDate)
                 .Where(investment => investment.InvestmentType == "Fonds")
                 .ToList();
 
+            //old code
             List<Investment> allInvestments = _filesReader.ReadInvestments();
 
-            //var fonds = investments
-            //    .Where(investment => investment.InvestorId == ownerId && investment.InvestmentType == "Fonds" )
-            //    .ToList();
-            //_filesReader.ReadTransactions(fonds, valuationDate);
+            
+            _filesReader.ReadTransactions(fonds, valuationDate);
 
-            foreach( var fond in fonds)
+            //new code
+            ///Dictionary<string, List<Investment>> dictionary = _filesReader.GetDictionary( valuationDate);
+
+            foreach (var fond in fonds)
             {
                 double totalPercentage = fond.Transactions.Sum( t => t.Value );
 
                 //old code
                 List<Investment> investmentsOfFound = allInvestments.Where(i => i.InvestorId == fond.FondsInvestor).ToList();
-
                 _filesReader.ReadTransactions(investmentsOfFound, valuationDate);
+
+                //new code
+                //dictionary.TryGetValue(fond.FondsInvestor, out var investmentsOfFound);
+
 
                 double realStateSumup = RealStateEngine(investmentsOfFound);
 
