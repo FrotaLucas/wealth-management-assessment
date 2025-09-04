@@ -60,24 +60,23 @@ namespace WealthManagementAssessment.Infrastructure.Repository
         public double StockEngine(List<Investment> investments, DateTime valuationDate)
         {
             //50k * 250k
+            //var dic = new Dictionary<>;
+            // como transformar uma lista de objetos em diciionario 
 
-            var start = DateTime.Now;
+            var stockInvestments = investments
+                .Where( investment => !string.IsNullOrEmpty(investment.ISIN))
+                .ToList();
 
             QuotesOfInvestor = _filesReader.ReadQuotes(investments, valuationDate);
 
-            Console.WriteLine($" reade quotes: {DateTime.Now  - start}"); // data e hora local
-
-            //var dic = new Dictionary<>;
-            // como transformar uma lista de objetos em diciionario 
-            
 
             double stockSumup = 0;
-            foreach (var investment in investments)
+            foreach (var investment in stockInvestments)
             {
                 double totalShares = 0;
 
-                if (string.IsNullOrEmpty(investment.ISIN))
-                    continue;
+                //if (string.IsNullOrEmpty(investment.ISIN))
+                //    continue;
 
                 //A stocks in euro amount
                 //foreach (var transaction in investment.Transactions)
@@ -99,11 +98,11 @@ namespace WealthManagementAssessment.Infrastructure.Repository
 
 
                 //B stocks in shares
-                totalShares = investment.Transactions.Sum( transaction => transaction.Value);   
+                totalShares = investment.Transactions.Sum( transaction => transaction.Value);
 
 
 
-                //get quote of today to calculate Asset
+                //cuidado se valuationDate for Muito ALTO ou MUITO baixo da erro 
                 var quoteToday = QuotesOfInvestor
                     .FirstOrDefault(quote => quote.Date <= valuationDate && quote.ISIN == investment.ISIN);
                 
