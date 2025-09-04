@@ -8,7 +8,6 @@ namespace WealthManagementAssessment.Infrastructure.Repository
         private readonly IFilesReader _filesReader;
 
 
-
         //public Dictionary<int investorId, List<Investment>> dictinary = new Dictionary();
 
 
@@ -51,8 +50,6 @@ namespace WealthManagementAssessment.Infrastructure.Repository
                 .Where(investment => investment.InvestmentType == "RealEstate")
                 .SelectMany(investment => investment.Transactions)
                 .Sum(transaction => transaction.Value);
-
-            Console.WriteLine($"Sumup RealEstate: {realStateSumup}");
 
             return realStateSumup;
         }
@@ -118,7 +115,6 @@ namespace WealthManagementAssessment.Infrastructure.Repository
                 //Console.WriteLine($"value for stocks:   {marketValue}");
                 stockSumup += marketValue;
             }
-            Console.WriteLine($"Sumup Stocks:   {stockSumup}");
 
             return stockSumup;
         }
@@ -134,22 +130,23 @@ namespace WealthManagementAssessment.Infrastructure.Repository
 
 
             //new code
-            List<Investment> investments = _filesReader.ReadInvestments();
-
-            var fonds = investments
-                .Where(investment => investment.InvestorId == ownerId && investment.InvestmentType == "Fonds" )
+            List<Investment> fonds = GetAllInvestmentsByInvestor(ownerId, valuationDate)
+                .Where(investment => investment.InvestmentType == "Fonds")
                 .ToList();
 
-            _filesReader.ReadTransactions(fonds, valuationDate);
+            List<Investment> allInvestments = _filesReader.ReadInvestments();
+
+            //var fonds = investments
+            //    .Where(investment => investment.InvestorId == ownerId && investment.InvestmentType == "Fonds" )
+            //    .ToList();
+            //_filesReader.ReadTransactions(fonds, valuationDate);
 
             foreach( var fond in fonds)
             {
                 double totalPercentage = fond.Transactions.Sum( t => t.Value );
 
                 //old code
-                //List<Investment> investmentsOfFound = _filesReader.ReadInvestmentByInvestor(fond.FondsInvestor);
-                //new code
-                List<Investment> investmentsOfFound = investments.Where(i => i.InvestorId == fond.FondsInvestor).ToList();
+                List<Investment> investmentsOfFound = allInvestments.Where(i => i.InvestorId == fond.FondsInvestor).ToList();
 
                 _filesReader.ReadTransactions(investmentsOfFound, valuationDate);
 
