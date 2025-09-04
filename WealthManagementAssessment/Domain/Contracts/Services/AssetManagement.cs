@@ -7,13 +7,13 @@ namespace WealthManagementAssessment.Domain.Contracts.Services
 
         private readonly IAssetRepository _assetRepository;
 
-        public AssetManagement (IAssetRepository assetRepository)
+        public AssetManagement(IAssetRepository assetRepository)
         {
             _assetRepository = assetRepository;
         }
 
 
-        public void DisplayAsset(string ownerId, DateTime valuationDate)
+        public void GetTotalAsset(string ownerId, DateTime valuationDate)
         {
             //only realstate
             var investments = _assetRepository.GetAllInvestments(ownerId, valuationDate);
@@ -22,9 +22,9 @@ namespace WealthManagementAssessment.Domain.Contracts.Services
 
 
             //fonds
-            _assetRepository.LoadFilesJustOnce(ownerId, valuationDate);
+            //_assetRepository.LoadFilesJustOnce(ownerId, valuationDate);
 
-            //_assetRepository.FondEngine(valuationDate);
+            //_assetRepository.FondEngine(ownerId, valuationDate);
 
             _assetRepository.StockEngine(investments, valuationDate);
 
