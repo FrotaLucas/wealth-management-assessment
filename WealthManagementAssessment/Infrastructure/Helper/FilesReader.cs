@@ -68,6 +68,24 @@ namespace WealthManagementAssessment.Infrastructure.Helper
             return investments;
         }
 
+        public Dictionary<string, List<Investment>> GetDictionary(DateTime valuationDate) 
+        {
+            List<Investment> allInvestments = ReadInvestments();
+
+            var dictionary = allInvestments
+                .GroupBy(investment => investment.InvestorId)
+                .ToDictionary(group => group.Key, group => group.ToList());
+
+            foreach( var kvp in dictionary) 
+            {
+                var investments = kvp.Value;
+
+                ReadTransactions(investments, valuationDate);
+            }
+                 
+            return dictionary;    
+        }
+
         public void ReadTransactions(List<Investment> investments, DateTime valuationDate)
         {
             var config = new CsvConfiguration(CultureInfo.InvariantCulture)

@@ -9,6 +9,8 @@ namespace WealthManagementAssessment.Domain.Contracts.Interfaces
 
         List<Investment> ReadInvestments();
 
+        Dictionary<string, List<Investment>> GetDictionary(DateTime valuationTime);
+
         void ReadTransactions(List<Investment> investments, DateTime valuationDate);
 
         List<Quote> ReadQuotes(List<Investment> investments, DateTime valuationsDate); 
