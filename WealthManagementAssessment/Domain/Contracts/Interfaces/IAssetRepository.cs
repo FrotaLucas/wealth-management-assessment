@@ -10,7 +10,7 @@ namespace WealthManagementAssessment.Domain.Contracts.Interfaces
 
         double FondEngine(string ownerId ,DateTime valuationDate);
 
-        List<Investment> GetAllInvestments(string ownerId, DateTime valuationDate);
+        List<Investment> GetAllInvestmentsByInvestor(string ownerId, DateTime valuationDate);
 
         void LoadFilesJustOnce(string ownerId, DateTime valuationDate);
 

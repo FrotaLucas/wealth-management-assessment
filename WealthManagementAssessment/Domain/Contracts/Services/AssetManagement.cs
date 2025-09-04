@@ -22,7 +22,7 @@ namespace WealthManagementAssessment.Domain.Contracts.Services
 
         public void GetRealEstateAsset(string ownerId, DateTime valuationDate)
         {
-            List<Investment> investments = _assetRepository.GetAllInvestments(ownerId, valuationDate);
+            List<Investment> investments = _assetRepository.GetAllInvestmentsByInvestor(ownerId, valuationDate);
 
             double asset = _assetRepository.RealStateEngine(investments);
 
@@ -32,7 +32,7 @@ namespace WealthManagementAssessment.Domain.Contracts.Services
 
         public void GetStockAsset(string ownerId, DateTime valuationDate)
         {
-            List<Investment> investments = _assetRepository.GetAllInvestments(ownerId, valuationDate);
+            List<Investment> investments = _assetRepository.GetAllInvestmentsByInvestor(ownerId, valuationDate);
 
             double asset = _assetRepository.StockEngine(investments, valuationDate);
 
@@ -41,7 +41,7 @@ namespace WealthManagementAssessment.Domain.Contracts.Services
 
         public void GetTotalAsset(string ownerId, DateTime valuationDate)
         {
-            List<Investment> investments = _assetRepository.GetAllInvestments(ownerId, valuationDate);
+            List<Investment> investments = _assetRepository.GetAllInvestmentsByInvestor(ownerId, valuationDate);
 
             double realEstateAsset = _assetRepository.RealStateEngine(investments);
 

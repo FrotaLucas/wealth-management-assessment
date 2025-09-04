@@ -35,7 +35,7 @@ namespace WealthManagementAssessment.Infrastructure.Repository
 
         }
 
-        public List<Investment> GetAllInvestments(string ownerId, DateTime valuationDate)
+        public List<Investment> GetAllInvestmentsByInvestor(string ownerId, DateTime valuationDate)
         {
             List<Investment> investments = _filesReader.ReadInvestmentByInvestor(ownerId);
 
