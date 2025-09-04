@@ -48,6 +48,25 @@ namespace WealthManagementAssessment.Infrastructure.Repository
             //return investmentss;
         }
 
+        public List<Investment> ReadInvestments()
+        {
+            List<Investment> investments = new List<Investment>();
+            var config = new CsvConfiguration(CultureInfo.InvariantCulture)
+            {
+                Delimiter = ";",
+                HasHeaderRecord = true,
+                TrimOptions = TrimOptions.Trim,
+            };
+
+            using (var reader = new StreamReader(_appConfig.CsvPath.Investments))
+            using (var csv = new CsvReader(reader, config))
+            {
+                investments = csv.GetRecords<Investment>()
+                     .ToList();
+            }
+
+            return investments;
+        }
 
         public void ReadTransactions(List<Investment> investments, DateTime valuationDate)
         {
@@ -77,26 +96,6 @@ namespace WealthManagementAssessment.Infrastructure.Repository
                 }
             }
 
-        }
-
-        public List<Investment> ReadInvestments()
-        {
-            List<Investment> investments = new List<Investment>();
-            var config = new CsvConfiguration(CultureInfo.InvariantCulture)
-            {
-                Delimiter = ";",
-                HasHeaderRecord = true,
-                TrimOptions = TrimOptions.Trim, 
-            };
-
-            using (var reader = new StreamReader(_appConfig.CsvPath.Investments))
-            using (var csv = new CsvReader(reader, config))
-            {
-                investments = csv.GetRecords<Investment>()
-                     .ToList();
-            }
-
-            return investments;
         }
 
         public List<Quote> ReadQuotes(List<Investment> investments, DateTime valuationDate)
