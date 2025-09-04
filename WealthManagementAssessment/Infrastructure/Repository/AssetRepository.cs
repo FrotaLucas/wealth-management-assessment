@@ -79,25 +79,29 @@ namespace WealthManagementAssessment.Infrastructure.Repository
                 if (string.IsNullOrEmpty(investment.ISIN))
                     continue;
 
+                //A stocks in euro amount
+                //foreach (var transaction in investment.Transactions)
+                //{
+                //    var quote = QuotesOfInvestor
+                //        .FirstOrDefault(quote => quote.Date <= transaction.Date && quote.ISIN == investment.ISIN);
 
-                foreach (var transaction in investment.Transactions)
-                {
-                    var quote = QuotesOfInvestor
-                        .FirstOrDefault(quote => quote.Date <= transaction.Date && quote.ISIN == investment.ISIN);
+                //    // E QUANTO o ARQUIVO csv NAO TIVER A  cotacao que eu procuro ???
+                //    // vai buscar uma cotacao aleatorio ?
 
-                    // E QUANTO o ARQUIVO csv NAO TIVER A  cotacao que eu procuro ???
-                    // vai buscar uma cotacao aleatorio ?
+                //    if (quote == null)
+                //        quote = QuotesOfInvestor.LastOrDefault();
 
-                    if (quote == null)
-                        quote = QuotesOfInvestor.LastOrDefault();
+                //    //Console.WriteLine(  $"volume trasaction : {transaction.Value}  quote: {quote.PricePerShare}\n");
+                //    totalShares += (int)Math.Round(transaction.Value / quote.PricePerShare);
 
-                    //Console.WriteLine(  $"volume trasaction : {transaction.Value}  quote: {quote.PricePerShare}\n");
-                    totalShares += (int)Math.Round(transaction.Value / quote.PricePerShare);
-
-                    //Console.WriteLine($"rounded value {Math.Round(transaction.Value / quote.PricePerShare)}" );
+                //    //Console.WriteLine($"rounded value {Math.Round(transaction.Value / quote.PricePerShare)}" );
+                //}
 
 
-                }
+                //B stocks in shares
+                totalShares = investment.Transactions.Sum( transaction => transaction.Value);   
+
+
 
                 //get quote of today to calculate Asset
                 var quoteToday = QuotesOfInvestor
