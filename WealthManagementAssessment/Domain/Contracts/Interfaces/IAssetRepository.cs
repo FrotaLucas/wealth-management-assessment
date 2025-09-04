@@ -8,7 +8,7 @@ namespace WealthManagementAssessment.Domain.Contracts.Interfaces
 
         double StockEngine(List<Investment> investments, DateTime valuationDate);
 
-        double FondEngine(DateTime valuationDate);
+        double FondEngine(string ownerId ,DateTime valuationDate);
 
         List<Investment> GetAllInvestments(string ownerId, DateTime valuationDate);
 
