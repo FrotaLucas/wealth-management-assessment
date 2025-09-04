@@ -1,4 +1,5 @@
 ﻿using WealthManagementAssessment.Domain.Contracts.Interfaces;
+using WealthManagementAssessment.Domain.Entities;
 
 namespace WealthManagementAssessment.Domain.Contracts.Services
 {
@@ -16,41 +17,45 @@ namespace WealthManagementAssessment.Domain.Contracts.Services
         {
             double asset = _assetRepository.FondEngine(ownerId, valuationDate);
 
-            Console.WriteLine($"Your wallet in Funds represent: {asset} Euros.");
+            Console.WriteLine($"Your Fund wallet is : {asset} Euros.");
         }
 
         public void GetRealEstateAsset(string ownerId, DateTime valuationDate)
         {
-            throw new NotImplementedException();
+            List<Investment> investments = _assetRepository.GetAllInvestments(ownerId, valuationDate);
+
+            double asset = (_assetRepository.RealStateEngine(investments);
+
+            Console.WriteLine($"Your Real Estate wallet is : {asset} Euros.");
+
         }
 
         public void GetStockAsset(string ownerId, DateTime valuationDate)
         {
-            throw new NotImplementedException();
+            List<Investment> investments = _assetRepository.GetAllInvestments(ownerId, valuationDate);
+
+            double asset = _assetRepository.StockEngine(investments, valuationDate);
+
+            Console.WriteLine($"Your Stock wallet is : {asset} Euros.");
         }
 
         public void GetTotalAsset(string ownerId, DateTime valuationDate)
         {
             //only realstate
-            var investments = _assetRepository.GetAllInvestments(ownerId, valuationDate);
+            List<Investment> investments = _assetRepository.GetAllInvestments(ownerId, valuationDate);
 
-            //_assetRepository.RealStateEngine(investments);
+            double realEstateAsset = _assetRepository.RealStateEngine(investments);
+
+            double stockAsset = _assetRepository.StockEngine(investments, valuationDate);
 
 
-            //fonds
-            //_assetRepository.LoadFilesJustOnce(ownerId, valuationDate);
+            double fundAsset = _assetRepository.FondEngine(ownerId, valuationDate);
 
-            //_assetRepository.FondEngine(ownerId, valuationDate);
+            Console.WriteLine($"Your total wallet is : {realEstateAsset + stockAsset + fundAsset} Euros.");
 
-            _assetRepository.StockEngine(investments, valuationDate);
 
         }
 
-        //   public void DisplayRealState
-
-        //    public void DisplayStocks
-
-        //   public void DisplayFonds
     }
 
 }
