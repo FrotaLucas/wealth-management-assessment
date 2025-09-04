@@ -7,6 +7,11 @@ namespace WealthManagementAssessment.Infrastructure.Repository
     {
         private readonly IFilesReader _filesReader;
 
+
+
+        //public Dictionary<int investorId, List<Investment>> dictinary = new Dictionary();
+
+
         public Investor Investor { get; set; } = new Investor();
 
         //chose a better name
@@ -17,10 +22,11 @@ namespace WealthManagementAssessment.Infrastructure.Repository
             _filesReader = filesReader;
         }
 
+
         //dont need that
         public void LoadFilesJustOnce(string ownerId, DateTime valuationDate)
         {
-            Investor.Investments = _filesReader.ReadInvestments(ownerId);
+            Investor.Investments = _filesReader.ReadInvestmentByInvestor(ownerId);
 
             _filesReader.ReadTransactions(Investor.Investments, valuationDate);
 
@@ -31,7 +37,7 @@ namespace WealthManagementAssessment.Infrastructure.Repository
 
         public List<Investment> GetAllInvestments(string ownerId, DateTime valuationDate)
         {
-            List<Investment> investments = _filesReader.ReadInvestments(ownerId);
+            List<Investment> investments = _filesReader.ReadInvestmentByInvestor(ownerId);
 
             _filesReader.ReadTransactions(investments, valuationDate);
 
@@ -54,11 +60,16 @@ namespace WealthManagementAssessment.Infrastructure.Repository
         public double StockEngine(List<Investment> investments, DateTime valuationDate)
         {
             //50k * 250k
+
+            var start = DateTime.Now;
+
             QuotesOfInvestor = _filesReader.ReadQuotes(investments, valuationDate);
 
+            Console.WriteLine($" reade quotes: {DateTime.Now  - start}"); // data e hora local
+
             //var dic = new Dictionary<>;
-            /// como transformar uma lista de objetos em diciionario 
-            /// 
+            // como transformar uma lista de objetos em diciionario 
+            
 
             double stockSumup = 0;
             foreach (var investment in investments)
@@ -80,10 +91,10 @@ namespace WealthManagementAssessment.Infrastructure.Repository
                     if (quote == null)
                         quote = QuotesOfInvestor.LastOrDefault();
 
-                    Console.WriteLine(  $"volume trasaction : {transaction.Value}  quote: {quote.PricePerShare}\n");
+                    //Console.WriteLine(  $"volume trasaction : {transaction.Value}  quote: {quote.PricePerShare}\n");
                     totalShares += (int)Math.Round(transaction.Value / quote.PricePerShare);
 
-                    Console.WriteLine($"rounded value {Math.Round(transaction.Value / quote.PricePerShare)}" );
+                    //Console.WriteLine($"rounded value {Math.Round(transaction.Value / quote.PricePerShare)}" );
 
 
                 }
@@ -98,7 +109,7 @@ namespace WealthManagementAssessment.Infrastructure.Repository
                 //        .Where(quote => quote.Isin == investment.Isin)
                 //        .LastOrDefault();
 
-                Console.WriteLine($"Price share today:   {quoteToday.PricePerShare}");
+                //Console.WriteLine($"Price share today:   {quoteToday.PricePerShare}");
 
                 var marketValue = totalShares * quoteToday.PricePerShare;
                 //Console.WriteLine($"value for stocks:   {marketValue}");
@@ -109,26 +120,39 @@ namespace WealthManagementAssessment.Infrastructure.Repository
             return stockSumup;
         }
 
-        public double FondEngine(DateTime valuationDate)
+        public double FondEngine(string ownerId, DateTime valuationDate)
         {
             double fondSumup = 0;
-            var fonds = Investor.Investments
-                .Where(i => i.InvestmentType == "Fonds")
+
+            //old code
+            //var fonds = Investor.Investments
+            //    .Where(i => i.InvestmentType == "Fonds")
+            //    .ToList();
+
+
+            //new code
+            List<Investment> investments = _filesReader.ReadInvestments();
+
+            var fonds = investments
+                .Where(investment => investment.InvestorId == ownerId && investment.InvestmentType == "Fonds" )
                 .ToList();
 
-            //Console.WriteLine(fonds[4].InvestmentId);
+            _filesReader.ReadTransactions(fonds, valuationDate);
 
             foreach( var fond in fonds)
             {
                 double totalPercentage = fond.Transactions.Sum( t => t.Value );
-                List<Investment> listOfinvestments = _filesReader.ReadInvestments(fond.FondsInvestor);
-                _filesReader.ReadTransactions(listOfinvestments, valuationDate);
 
-                //total Asset for realstate
-                double realStateSumup = RealStateEngine(listOfinvestments);
+                //old code
+                //List<Investment> investmentsOfFound = _filesReader.ReadInvestmentByInvestor(fond.FondsInvestor);
+                //new code
+                List<Investment> investmentsOfFound = investments.Where(i => i.InvestorId == fond.FondsInvestor).ToList();
 
-                //total Asset for stocks
-                double stockSumup = StockEngine(listOfinvestments, valuationDate);
+                _filesReader.ReadTransactions(investmentsOfFound, valuationDate);
+
+                double realStateSumup = RealStateEngine(investmentsOfFound);
+
+                double stockSumup = StockEngine(investmentsOfFound, valuationDate);
 
                 fondSumup = fondSumup + totalPercentage * (realStateSumup + stockSumup);
             }
