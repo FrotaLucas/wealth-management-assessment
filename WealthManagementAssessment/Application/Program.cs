@@ -60,35 +60,9 @@ class Program
 
         var assetManagemetn = host.Services.GetRequiredService<IAssetManagement>();
 
-        assetManagemetn.GetTotalAsset(investorId, date);
-
-        //Sol1
-        //var obj = new AssetValuationService(investorId, date);
-
-        //Console.WriteLine("total investments: " + obj.TotalInvestments());
-        //obj.RealStateEngine();
-
-        //Console.WriteLine("Valuation RealState Bulding + ESTATE: " + obj.RealStateSumup);
-        //Console.WriteLine("Valuation Stocks: " + obj.StockSumup);
-
-        //Sol2
-        //var obj = new AssetRepository(investorId, date);
-        //obj.FilesReader();
-
-        //obj.AssetEngine();
-
-
-        //sol 3
-
-        //void AssetEngine();
-        //IFilesReader filesReader = new FilesReader();
-
-        //IAssetRepository interfaceRepository = new AssetRepository(filesReader);
-
-        ////precisa LER antes os files dentro de repository
-        //AssetManagement asset = new AssetManagement(interfaceRepository);
-
-        //asset.DisplayAsset(investorId , date);
+        //assetManagemetn.GetTotalAsset(investorId, date);
+        assetManagemetn.GetFundAsset(investorId, date);
+        //assetManagemetn.GetStockAsset(investorId, date);
     }
 
 }
