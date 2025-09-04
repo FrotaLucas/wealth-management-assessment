@@ -122,7 +122,7 @@ namespace WealthManagementAssessment.Infrastructure.Repository
                     if (allQuotes.TryGetValue(investment.ISIN, out var listOfQuotes))
                     {
                         var invQuotes = listOfQuotes
-                            .OrderBy(quote => quote.Date)
+                            .OrderByDescending(quote => quote.Date)
                             .ToList();
 
                         quotes.AddRange(invQuotes);
