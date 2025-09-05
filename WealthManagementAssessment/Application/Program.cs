@@ -52,7 +52,7 @@ class Program
 
                 services.AddSingleton<IFilesReader, FilesReader>();
                 services.AddSingleton<IAssetRepository, AssetRepository>();
-                services.AddSingleton<IAssetManagement, AssetManagement>();
+                services.AddSingleton<IAssetManagement, AssetManagementService>();
 
             })
             .Build();

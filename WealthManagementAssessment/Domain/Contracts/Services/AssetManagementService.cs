@@ -3,12 +3,12 @@ using WealthManagementAssessment.Domain.Entities;
 
 namespace WealthManagementAssessment.Domain.Contracts.Services
 {
-    public class AssetManagement : IAssetManagement
+    public class AssetManagementService : IAssetManagement
     {
 
         private readonly IAssetRepository _assetRepository;
 
-        public AssetManagement(IAssetRepository assetRepository)
+        public AssetManagementService(IAssetRepository assetRepository)
         {
             _assetRepository = assetRepository;
         }
@@ -39,6 +39,9 @@ namespace WealthManagementAssessment.Domain.Contracts.Services
             Console.WriteLine($"Your Stock wallet is : {asset} Euros.");
         }
 
+        
+        
+        //chamar de balance
         public void GetTotalAsset(string ownerId, DateTime valuationDate)
         {
             List<Investment> investments = _assetRepository.GetAllInvestmentsByInvestor(ownerId, valuationDate);

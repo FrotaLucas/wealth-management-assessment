@@ -99,6 +99,8 @@ namespace WealthManagementAssessment.Infrastructure.Helper
 
             using (var csv = new CsvReader(reader, config))
             {
+                //N --> N +1 
+                // id inves --> list de transacao 
 
                 var allTransactions = csv.GetRecords<Transaction>()
                  .Where(t => t.Date < valuationDate)

@@ -123,7 +123,6 @@ namespace WealthManagementAssessment.Infrastructure.Repository
         {
             double fondSumup = 0;
 
-
             List<Investment> fonds = GetAllInvestmentsByInvestor(ownerId, valuationDate)
                 .Where(investment => investment.InvestmentType == "Fonds")
                 .ToList();
