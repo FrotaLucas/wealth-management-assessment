@@ -61,7 +61,7 @@ namespace WealthManagementAssessment.Infrastructure.Repository
             // como transformar uma lista de objetos em diciionario 
 
             var stockInvestments = investments
-                .Where( investment => !string.IsNullOrEmpty(investment.ISIN))
+                .Where( investment => investment.InvestmentType.Equals("Stock") )
                 .ToList();
 
             QuotesOfInvestor = _filesReader.ReadQuotes(investments, valuationDate);
@@ -123,29 +123,32 @@ namespace WealthManagementAssessment.Infrastructure.Repository
         {
             double fondSumup = 0;
 
+            //USAR ENUM ao inves de STRING!!!!!!!!
             List<Investment> fonds = GetAllInvestmentsByInvestor(ownerId, valuationDate)
                 .Where(investment => investment.InvestmentType == "Fonds")
                 .ToList();
 
-            //old code
-            List<Investment> allInvestments = _filesReader.ReadInvestments();
-
-            
             _filesReader.ReadTransactions(fonds, valuationDate);
 
+            //old code
+            //List<Investment> allInvestments = _filesReader.ReadInvestments();
+
+            
+
             //new code
-            ///Dictionary<string, List<Investment>> dictionary = _filesReader.GetDictionary( valuationDate);
+            Dictionary<string, List<Investment>> dictionary = _filesReader.GetDictionary( ownerId, valuationDate);
+
 
             foreach (var fond in fonds)
             {
                 double totalPercentage = fond.Transactions.Sum( t => t.Value );
 
                 //old code
-                List<Investment> investmentsOfFound = allInvestments.Where(i => i.InvestorId == fond.FondsInvestor).ToList();
-                _filesReader.ReadTransactions(investmentsOfFound, valuationDate);
+                //List<Investment> investmentsOfFound = allInvestments.Where(i => i.InvestorId == fond.FondsInvestor).ToList();
+                //_filesReader.ReadTransactions(investmentsOfFound, valuationDate);
 
                 //new code
-                //dictionary.TryGetValue(fond.FondsInvestor, out var investmentsOfFound);
+                dictionary.TryGetValue(fond.FondsInvestor, out var investmentsOfFound);
 
 
                 double realStateSumup = RealStateEngine(investmentsOfFound);
