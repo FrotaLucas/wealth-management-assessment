@@ -70,18 +70,17 @@ namespace WealthManagementAssessment.Infrastructure.Helper
         }
 
 
+        //create better method name
         public List<Investment> ReadAllFondsByInvestor(string ownerId)
         {
             List<Investment> listOfFonds = new List<Investment>();
             
-            
-            List<Investment> fondsOfInvestor = ReadInvestmentByInvestor(ownerId)
-             .Where(investment => investment.InvestmentType.Equals("Fonds"))
-             .ToList();
-
-            List<string> fonds = fondsOfInvestor
-                .Select(Investment => Investment.FondsInvestor)
+            List<string> fonds = ReadInvestmentByInvestor(ownerId)
+                .Where(investment => investment.InvestmentType.Equals("Fonds"))
+                .Select(investment => investment.FondsInvestor)
+                .Distinct()
                 .ToList();
+           
 
             List<Investment> investments = ReadInvestments();
 
@@ -91,7 +90,7 @@ namespace WealthManagementAssessment.Infrastructure.Helper
             {
                 foreach (string fond in fonds)
                 {
-                    if(investment.InvestorId.Equals(fond))
+                    if(investment.InvestorId == fond)
                       listOfFonds.Add(investment);
                 }
             }
