@@ -20,6 +20,7 @@ namespace WealthManagementAssessment.Infrastructure.Helper
 
 
         //NAO DEVERIA USAR MAIS ESSE METODO
+
         public List<Investment> ReadInvestmentByInvestor(string ownerId)
         {
 
@@ -68,9 +69,45 @@ namespace WealthManagementAssessment.Infrastructure.Helper
             return investments;
         }
 
-        public Dictionary<string, List<Investment>> GetDictionary(DateTime valuationDate) 
+
+        public List<Investment> ReadAllFondsByInvestor(string ownerId)
         {
-            List<Investment> allInvestments = ReadInvestments();
+            List<Investment> listOfFonds = new List<Investment>();
+            
+            
+            List<Investment> fondsOfInvestor = ReadInvestmentByInvestor(ownerId)
+             .Where(investment => investment.InvestmentType.Equals("Fonds"))
+             .ToList();
+
+            List<string> fonds = fondsOfInvestor
+                .Select(Investment => Investment.FondsInvestor)
+                .ToList();
+
+            List<Investment> investments = ReadInvestments();
+
+
+
+            foreach(var investment in investments)
+            {
+                foreach (string fond in fonds)
+                {
+                    if(investment.InvestorId.Equals(fond))
+                      listOfFonds.Add(investment);
+                }
+            }
+
+
+
+            return listOfFonds;
+        }
+
+        public Dictionary<string, List<Investment>> GetDictionary(string ownerId, DateTime valuationDate) 
+        {
+            //List<Investment> allInvestments = ReadInvestments();
+
+
+            //pegar lista de investimentos do fundo
+            List<Investment> allInvestments = ReadAllFondsByInvestor(ownerId); 
 
             var dictionary = allInvestments
                 .GroupBy(investment => investment.InvestorId)
