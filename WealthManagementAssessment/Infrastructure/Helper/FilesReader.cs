@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using System.Text.RegularExpressions;
 using CsvHelper;
 using CsvHelper.Configuration;
 using Microsoft.Extensions.Options;
@@ -70,45 +71,19 @@ namespace WealthManagementAssessment.Infrastructure.Helper
         }
 
 
-        //create better method name
-        public List<Investment> ReadAllFondsByInvestor(string ownerId)
-        {
-            List<Investment> listOfFonds = new List<Investment>();
-            
-            List<string> fonds = ReadInvestmentByInvestor(ownerId)
-                .Where(investment => investment.InvestmentType.Equals("Fonds"))
-                .Select(investment => investment.FondsInvestor)
-                .Distinct()
-                .ToList();
-           
-
-            List<Investment> investments = ReadInvestments();
-
-
-
-            foreach(var investment in investments)
-            {
-                foreach (string fond in fonds)
-                {
-                    if(investment.InvestorId == fond)
-                      listOfFonds.Add(investment);
-                }
-            }
-
-
-
-            return listOfFonds;
-        }
-
         public Dictionary<string, List<Investment>> GetDictionary(string ownerId, DateTime valuationDate) 
         {
-            //List<Investment> allInvestments = ReadInvestments();
+            //unique id
+            var fondsId = new HashSet<string>(ReadInvestmentByInvestor(ownerId)
+                .Where(investment => investment.InvestmentType.Equals("Fonds"))
+                .Select(investment => investment.FondsInvestor));
 
 
-            //pegar lista de investimentos do fundo
-            List<Investment> allInvestments = ReadAllFondsByInvestor(ownerId); 
+            List<Investment> allFondsOfInvestor = ReadInvestments()
+                .Where(investment => fondsId.Contains(investment.InvestorId))
+                .ToList();
 
-            var dictionary = allInvestments
+            var dictionary = allFondsOfInvestor
                 .GroupBy(investment => investment.InvestorId)
                 .ToDictionary(group => group.Key, group => group.ToList());
 
