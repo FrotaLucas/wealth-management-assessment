@@ -10,11 +10,7 @@ namespace WealthManagementAssessment.Infrastructure.Repository
 
         //public Dictionary<int investorId, List<Investment>> dictinary = new Dictionary();
 
-
         public Investor Investor { get; set; } = new Investor();
-
-        //chose a better name
-        public List<Quote> QuotesOfInvestor { get; set; } = new List<Quote>();
 
         public AssetRepository(IFilesReader filesReader)
         {
@@ -51,7 +47,7 @@ namespace WealthManagementAssessment.Infrastructure.Repository
                 .Where( investment => investment.InvestmentType.Equals("Stock") )
                 .ToList();
 
-            QuotesOfInvestor = _filesReader.ReadQuotes(investments, valuationDate);
+            List<Quote> quoteOfInvestor = _filesReader.ReadQuotes(investments, valuationDate);
 
 
             double stockSumup = 0;
@@ -61,7 +57,7 @@ namespace WealthManagementAssessment.Infrastructure.Repository
                 double totalShares = investment.Transactions.Sum( transaction => transaction.Value);
 
                 //cuidado se valuationDate for Muito ALTO ou MUITO baixo da erro 
-                var quoteToday = QuotesOfInvestor
+                var quoteToday = List<Quote> quoteOfInvestor
                     .FirstOrDefault(quote => quote.Date <= valuationDate && quote.ISIN == investment.ISIN);
 
                 // E QUANTO o ARQUIVO csv NAO TIVER A  cotacao que eu procuro ???
