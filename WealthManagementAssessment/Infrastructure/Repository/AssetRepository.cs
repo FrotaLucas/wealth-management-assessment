@@ -10,8 +10,6 @@ namespace WealthManagementAssessment.Infrastructure.Repository
 
         //public Dictionary<int investorId, List<Investment>> dictinary = new Dictionary();
 
-        public Investor Investor { get; set; } = new Investor();
-
         public AssetRepository(IFilesReader filesReader)
         {
             _filesReader = filesReader;
@@ -106,20 +104,18 @@ namespace WealthManagementAssessment.Infrastructure.Repository
                 //_filesReader.ReadTransactions(investmentsOfFound, valuationDate);
 
                 //new code
-                //DateTime t3 = DateTime.Now;
                 dictionary.TryGetValue(fond.FondsInvestor, out var investmentsOfFound);
-                //DateTime t4 = DateTime.Now;
-                //Console.WriteLine($"try Get Dictionary: {t4-t3}");
+         
 
-                //DateTime t5 = DateTime.Now;
+                DateTime t5 = DateTime.Now;
                 double realStateSumup = RealStateEngine(investmentsOfFound);
-                //DateTime t6 = DateTime.Now;
-                //Console.WriteLine($"real state engine: {t6 - t5}");
+                DateTime t6 = DateTime.Now;
+                Console.WriteLine($"real state engine: {t6 - t5}");
 
-                //DateTime t7 = DateTime.Now;
+                DateTime t7 = DateTime.Now;
                 double stockSumup = StockEngine(investmentsOfFound, valuationDate);
-                //DateTime t8 = DateTime.Now;
-                //Console.WriteLine($"stockEngine {t8-t7}");
+                DateTime t8 = DateTime.Now;
+                Console.WriteLine($"stockEngine {t8 - t7}");
 
 
                 fondSumup = fondSumup + totalPercentage * (realStateSumup + stockSumup);
