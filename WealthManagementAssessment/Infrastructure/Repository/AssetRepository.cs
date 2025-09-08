@@ -21,19 +21,6 @@ namespace WealthManagementAssessment.Infrastructure.Repository
             _filesReader = filesReader;
         }
 
-
-        //dont need that
-        public void LoadFilesJustOnce(string ownerId, DateTime valuationDate)
-        {
-            Investor.Investments = _filesReader.ReadInvestmentByInvestor(ownerId);
-
-            _filesReader.ReadTransactions(Investor.Investments, valuationDate);
-
-            //read quotes of Investor
-            QuotesOfInvestor = _filesReader.ReadQuotes(Investor.Investments, valuationDate);
-
-        }
-
         public List<Investment> GetAllInvestmentsByInvestor(string ownerId, DateTime valuationDate)
         {
             List<Investment> investments = _filesReader.ReadInvestmentByInvestor(ownerId);
@@ -70,49 +57,22 @@ namespace WealthManagementAssessment.Infrastructure.Repository
             double stockSumup = 0;
             foreach (var investment in stockInvestments)
             {
-                double totalShares = 0;
 
-                //if (string.IsNullOrEmpty(investment.ISIN))
-                //    continue;
-
-                //A stocks in euro amount
-                //foreach (var transaction in investment.Transactions)
-                //{
-                //    var quote = QuotesOfInvestor
-                //        .FirstOrDefault(quote => quote.Date <= transaction.Date && quote.ISIN == investment.ISIN);
-
-                //    // E QUANTO o ARQUIVO csv NAO TIVER A  cotacao que eu procuro ???
-                //    // vai buscar uma cotacao aleatorio ?
-
-                //    if (quote == null)
-                //        quote = QuotesOfInvestor.LastOrDefault();
-
-                //    //Console.WriteLine(  $"volume trasaction : {transaction.Value}  quote: {quote.PricePerShare}\n");
-                //    totalShares += (int)Math.Round(transaction.Value / quote.PricePerShare);
-
-                //    //Console.WriteLine($"rounded value {Math.Round(transaction.Value / quote.PricePerShare)}" );
-                //}
-
-
-                //B stocks in shares
-                totalShares = investment.Transactions.Sum( transaction => transaction.Value);
-
-
+                double totalShares = investment.Transactions.Sum( transaction => transaction.Value);
 
                 //cuidado se valuationDate for Muito ALTO ou MUITO baixo da erro 
                 var quoteToday = QuotesOfInvestor
                     .FirstOrDefault(quote => quote.Date <= valuationDate && quote.ISIN == investment.ISIN);
-                
+
+                // E QUANTO o ARQUIVO csv NAO TIVER A  cotacao que eu procuro ???
                 //all quotes older than valuationDate are no available
                 //if (quoteToday == null)
                 //    quoteToday = QuotesOfInvestor
                 //        .Where(quote => quote.Isin == investment.Isin)
                 //        .LastOrDefault();
 
-                //Console.WriteLine($"Price share today:   {quoteToday.PricePerShare}");
 
                 var marketValue = totalShares * quoteToday.PricePerShare;
-                //Console.WriteLine($"value for stocks:   {marketValue}");
                 stockSumup += marketValue;
             }
 

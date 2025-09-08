@@ -12,7 +12,5 @@ namespace WealthManagementAssessment.Domain.Contracts.Interfaces
 
         List<Investment> GetAllInvestmentsByInvestor(string ownerId, DateTime valuationDate);
 
-        void LoadFilesJustOnce(string ownerId, DateTime valuationDate);
-
     }
 }
