@@ -40,7 +40,6 @@ namespace WealthManagementAssessment.Infrastructure.Helper
                 investments = csv.GetRecords<Investment>()
                      .Where(inv => inv.InvestorId == ownerId)
                      .ToList();
-
             }
 
             return investments;
