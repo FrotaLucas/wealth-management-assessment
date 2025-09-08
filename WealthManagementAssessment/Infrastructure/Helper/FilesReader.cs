@@ -113,7 +113,7 @@ namespace WealthManagementAssessment.Infrastructure.Helper
                 // id inves --> list de transacao 
 
                 var allTransactions = csv.GetRecords<Transaction>()
-                 .Where(t => t.Date < valuationDate)
+                 .Where(t => t.Date <= valuationDate)
                  .GroupBy(transaction => transaction.InvestmentId)
                  .ToDictionary(group => group.Key, group => group.ToList());
 
@@ -143,7 +143,7 @@ namespace WealthManagementAssessment.Infrastructure.Helper
             using (var csv = new CsvReader(reader, config))
             {
                 var allQuotes = csv.GetRecords<Quote>()
-                    .Where(quote => quote.Date < valuationDate)
+                    .Where(quote => quote.Date <= valuationDate)
                     .GroupBy(quote => quote.ISIN)
                     .ToDictionary(quote => quote.Key, quote => quote.ToList());
 
