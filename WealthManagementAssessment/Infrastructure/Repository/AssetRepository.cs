@@ -47,29 +47,30 @@ namespace WealthManagementAssessment.Infrastructure.Repository
                 .Where( investment => investment.InvestmentType.Equals("Stock") )
                 .ToList();
 
-            List<Quote> quoteOfInvestor = _filesReader.ReadQuotes(investments, valuationDate);
+            List<Quote> quotes = _filesReader.ReadQuotes(stockInvestments, valuationDate);
+            var quotesByIsin = quotes
+                .GroupBy(quote => quote.ISIN)
+                .ToDictionary(group => group.Key, group => group.OrderByDescending(quote => quote.Date).ToList());  
 
 
             double stockSumup = 0;
-            foreach (var investment in stockInvestments)
+
+            foreach(var investment in stockInvestments)
             {
+                double totalShares = investment.Transactions.Sum(transaction => transaction.Value);
 
-                double totalShares = investment.Transactions.Sum( transaction => transaction.Value);
+                if (!quotesByIsin.TryGetValue(investment.ISIN, out var listOfIsin))
+                    continue;
 
-                //cuidado se valuationDate for Muito ALTO ou MUITO baixo da erro 
-                var quoteToday = quoteOfInvestor
-                    .FirstOrDefault(quote => quote.Date <= valuationDate && quote.ISIN == investment.ISIN);
+                var quoteToday = listOfIsin.FirstOrDefault(quote => quote.Date <= valuationDate);
 
-                // E QUANTO o ARQUIVO csv NAO TIVER A  cotacao que eu procuro ???
-                //all quotes older than valuationDate are no available
-                //if (quoteToday == null)
-                //    quoteToday = QuotesOfInvestor
-                //        .Where(quote => quote.Isin == investment.Isin)
-                //        .LastOrDefault();
-
+                //if valuationDate is too small
+                if (quoteToday == null)
+                    quoteToday = listOfIsin.LastOrDefault();
 
                 var marketValue = totalShares * quoteToday.PricePerShare;
                 stockSumup += marketValue;
+
             }
 
             return stockSumup;
