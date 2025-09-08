@@ -57,7 +57,7 @@ namespace WealthManagementAssessment.Infrastructure.Repository
                 double totalShares = investment.Transactions.Sum( transaction => transaction.Value);
 
                 //cuidado se valuationDate for Muito ALTO ou MUITO baixo da erro 
-                var quoteToday = List<Quote> quoteOfInvestor
+                var quoteToday = quoteOfInvestor
                     .FirstOrDefault(quote => quote.Date <= valuationDate && quote.ISIN == investment.ISIN);
 
                 // E QUANTO o ARQUIVO csv NAO TIVER A  cotacao que eu procuro ???
