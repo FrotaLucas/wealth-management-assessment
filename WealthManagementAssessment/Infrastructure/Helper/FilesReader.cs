@@ -128,9 +128,8 @@ namespace WealthManagementAssessment.Infrastructure.Helper
 
         }
 
-        public List<Quote> ReadQuotes(List<Investment> investments, DateTime valuationDate)
+        public Dictionary<string, List<Quote>> ReadQuotes()
         {
-            var quotes = new List<Quote>();
 
             var config = new CsvConfiguration(CultureInfo.InvariantCulture)
             {
@@ -140,34 +139,18 @@ namespace WealthManagementAssessment.Infrastructure.Helper
             };
 
             using (var reader = new StreamReader(_appConfig.CsvPath.Quotes))
+
             using (var csv = new CsvReader(reader, config))
             {
-                var allQuotes = csv.GetRecords<Quote>()
-                    .Where(quote => quote.Date <= valuationDate)
+                var allqQuotes = csv.GetRecords<Quote>()
                     .GroupBy(quote => quote.ISIN)
-                    .ToDictionary(quote => quote.Key, quote => quote.ToList());
+                    .ToDictionary(group => group.Key, group => group.OrderByDescending(quote => quote.Date).ToList());
 
-                foreach (var investment in investments)
-                {
-                    if (allQuotes.TryGetValue(investment.ISIN, out var listOfQuotes))
-                    {
-                        var invQuotes = listOfQuotes
-                            .OrderByDescending(quote => quote.Date)
-                            .ToList();
 
-                        quotes.AddRange(invQuotes);
-                    }
-
-                    else
-                        quotes.AddRange(new List<Quote>());
-                }
+                return allqQuotes;
+        
             }
 
-            //Console.WriteLine($"Total Quotes: {quotes.Count}");
-            //int count = investments.Sum(i => i.Transactions.Count);
-            //Console.WriteLine($"Finish totaltransactions: {count}");
-
-            return quotes;
         }
 
     }
