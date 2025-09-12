@@ -49,9 +49,8 @@ namespace WealthManagementAssessment.Infrastructure.Helper
             //return investmentss;
         }
 
-        public List<Investment> ReadInvestments()
+        public Dictionary<string, List<Investment>> ReadInvestments()
         {
-            List<Investment> investments = new List<Investment>();
             var config = new CsvConfiguration(CultureInfo.InvariantCulture)
             {
                 Delimiter = ";",
@@ -62,29 +61,31 @@ namespace WealthManagementAssessment.Infrastructure.Helper
             using (var reader = new StreamReader(_appConfig.CsvPath.Investments))
             using (var csv = new CsvReader(reader, config))
             {
-                investments = csv.GetRecords<Investment>()
-                     .ToList();
+                var investments = csv.GetRecords<Investment>()
+                     .GroupBy(investment => investment.InvestorId)
+                     .ToDictionary(group => group.Key, group => group.ToList());
+
+                return investments;
             }
 
-            return investments;
         }
 
 
-        public Dictionary<string, List<Investment>> GetDictionary(string ownerId, DateTime valuationDate) 
+        public Dictionary<string, List<Investment>> GetDictionary(string ownerId, DateTime valuationDate)
         {
             //unique id
-            var fondsId = new HashSet<string>(ReadInvestmentByInvestor(ownerId)
-                .Where(investment => investment.InvestmentType.Equals("Fonds"))
-                .Select(investment => investment.FondsInvestor));
+            //var fondsId = new HashSet<string>(ReadInvestmentByInvestor(ownerId)
+            //    .Where(investment => investment.InvestmentType.Equals("Fonds"))
+            //    .Select(investment => investment.FondsInvestor));
 
 
-            List<Investment> allFondsOfInvestor = ReadInvestments()
-                .Where(investment => fondsId.Contains(investment.InvestorId))
-                .ToList();
+            //List<Investment> allFondsOfInvestor = ReadInvestments()
+            //    .Where(investment => fondsId.Contains(investment.InvestorId))
+            //    .ToList();
 
-            var dictionary = allFondsOfInvestor
-                .GroupBy(investment => investment.InvestorId)
-                .ToDictionary(group => group.Key, group => group.ToList());
+            //var dictionary = allFondsOfInvestor
+            //    .GroupBy(investment => investment.InvestorId)
+            //    .ToDictionary(group => group.Key, group => group.ToList());
 
             //foreach( var kvp in dictionary) 
             //{
@@ -92,8 +93,10 @@ namespace WealthManagementAssessment.Infrastructure.Helper
 
             //    ReadTransactions(investments, valuationDate);
             //}
-                 
-            return dictionary;    
+
+            //return dictionary;
+
+            return new Dictionary<string, List<Investment>>();
         }
 
         public Dictionary<string, List<Transaction>> ReadTransactions()
@@ -102,7 +105,7 @@ namespace WealthManagementAssessment.Infrastructure.Helper
             {
                 Delimiter = ";",
                 HasHeaderRecord = true,
-                TrimOptions = TrimOptions.Trim, 
+                TrimOptions = TrimOptions.Trim,
             };
 
             using (var reader = new StreamReader(_appConfig.CsvPath.Transactions))
@@ -140,7 +143,7 @@ namespace WealthManagementAssessment.Infrastructure.Helper
 
 
                 return allqQuotes;
-        
+
             }
 
         }
