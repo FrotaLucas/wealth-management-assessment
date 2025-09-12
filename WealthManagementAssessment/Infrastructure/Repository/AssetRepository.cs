@@ -18,13 +18,25 @@ namespace WealthManagementAssessment.Infrastructure.Repository
             _filesReader = filesReader;
 
             QuotesByIsin = _filesReader.ReadQuotes();
+
+            TransactionsByInvestmentId = _filesReader.ReadTransactions();
+            
         }
 
         public List<Investment> GetAllInvestmentsByInvestor(string ownerId, DateTime valuationDate)
         {
             List<Investment> investments = _filesReader.ReadInvestmentByInvestor(ownerId);
 
-            _filesReader.ReadTransactions(investments, valuationDate);
+            foreach(var investment in investments)
+            {
+
+                if (TransactionsByInvestmentId.TryGetValue(investment.InvestmentId, out var transactions))
+                    investment.Transactions = transactions.Where(transation => transation.Date <= valuationDate).ToList();
+                else
+                    investment.Transactions = new List<Transaction>();
+            }
+
+        
 
             return investments;
         }
@@ -39,6 +51,8 @@ namespace WealthManagementAssessment.Infrastructure.Repository
 
             return realStateSumup;
         }
+
+
 
         public double StockEngine(List<Investment> investments, DateTime valuationDate)
         {
@@ -84,7 +98,7 @@ namespace WealthManagementAssessment.Infrastructure.Repository
                 .Where(investment => investment.InvestmentType == "Fonds")
                 .ToList();
 
-            _filesReader.ReadTransactions(fonds, valuationDate);
+            //_filesReader.ReadTransactions(fonds, valuationDate);
 
             //old code
             //List<Investment> allInvestments = _filesReader.ReadInvestments();
