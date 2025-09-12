@@ -9,7 +9,9 @@ namespace WealthManagementAssessment.Infrastructure.Repository
         //NAO VOU PRECISAR DESSA PROPRIEDADE E SO BASTA O PARAMETRO filesReader no CTOR MAS PQ ?
         private readonly IFilesReader _filesReader;
 
-        public Dictionary<string, List<Quote>> QuotesByIsin = new Dictionary<string, List<Quote>>();
+        public Dictionary<string, List<Quote>> QuotesByIsin;
+
+        public Dictionary<string, List<Transaction>> TransactionsByInvestmentId;
 
         public AssetRepository(IFilesReader filesReader)
         {
