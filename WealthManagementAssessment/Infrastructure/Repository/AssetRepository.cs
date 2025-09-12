@@ -130,5 +130,10 @@ namespace WealthManagementAssessment.Infrastructure.Repository
 
             return fondSumup;
         }
+
+        public Dictionary<string, List<Investment>> GetAllInvestmentsByFonds()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
