@@ -8,12 +8,15 @@ namespace WealthManagementAssessment.Domain.Contracts.Services
 
         private readonly IAssetRepository _assetRepository;
 
+
         public AssetManagementService(IAssetRepository assetRepository)
         {
             _assetRepository = assetRepository;
         }
 
-        public void GetFundAsset(string ownerId, DateTime valuationDate)
+
+
+        public void GetFondAsset(string ownerId, DateTime valuationDate)
         {
             double asset = _assetRepository.FondEngine(ownerId, valuationDate);
 

@@ -61,8 +61,9 @@ class Program
         var assetManagemetn = host.Services.GetRequiredService<IAssetManagement>();
 
         //assetManagemetn.GetTotalAsset(investorId, date);
-        assetManagemetn.GetFundAsset(investorId, date);
-        //assetManagemetn.GetStockAsset(investorId, date);
+        assetManagemetn.GetFondAsset(investorId, date);
+        assetManagemetn.GetStockAsset(investorId, date);
+        //assetManagemetn.GetRealEstateAsset(investorId, date);
     }
 
 }
