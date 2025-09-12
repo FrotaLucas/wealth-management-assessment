@@ -86,17 +86,17 @@ namespace WealthManagementAssessment.Infrastructure.Helper
                 .GroupBy(investment => investment.InvestorId)
                 .ToDictionary(group => group.Key, group => group.ToList());
 
-            foreach( var kvp in dictionary) 
-            {
-                var investments = kvp.Value;
+            //foreach( var kvp in dictionary) 
+            //{
+            //    var investments = kvp.Value;
 
-                ReadTransactions(investments, valuationDate);
-            }
+            //    ReadTransactions(investments, valuationDate);
+            //}
                  
             return dictionary;    
         }
 
-        public void ReadTransactions(List<Investment> investments, DateTime valuationDate)
+        public Dictionary<string, List<Transaction>> ReadTransactions()
         {
             var config = new CsvConfiguration(CultureInfo.InvariantCulture)
             {
@@ -109,21 +109,13 @@ namespace WealthManagementAssessment.Infrastructure.Helper
 
             using (var csv = new CsvReader(reader, config))
             {
-                //N --> N +1 
-                // id inves --> list de transacao 
 
                 var allTransactions = csv.GetRecords<Transaction>()
-                 .Where(t => t.Date <= valuationDate)
-                 .GroupBy(transaction => transaction.InvestmentId)
-                 .ToDictionary(group => group.Key, group => group.ToList());
+                    .GroupBy(transacion => transacion.InvestmentId)
+                    .ToDictionary(group => group.Key, group => group.ToList());
 
-                foreach (var investment in investments)
-                {
-                    if (allTransactions.TryGetValue(investment.InvestmentId, out var transactions))
-                        investment.Transactions = transactions;
-                    else
-                        investment.Transactions = new List<Transaction>();
-                }
+                return allTransactions;
+
             }
 
         }
