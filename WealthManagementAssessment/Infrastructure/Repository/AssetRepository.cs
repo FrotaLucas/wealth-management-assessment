@@ -58,8 +58,6 @@ namespace WealthManagementAssessment.Infrastructure.Repository
             return realStateSumup;
         }
 
-
-
         public double StockEngine(List<Investment> investments, DateTime valuationDate)
         {
 
@@ -90,9 +88,6 @@ namespace WealthManagementAssessment.Infrastructure.Repository
 
             return stockSumup;
         }
-
-
-
 
         //PENSAR EM JA PASSAR A LISTA DE INVESTIMENTOS POR PARAMETRO PARA FondEngine tbm !!
         public double FondEngine(string ownerId, DateTime valuationDate)
