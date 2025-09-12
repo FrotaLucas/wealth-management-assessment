@@ -74,6 +74,10 @@ namespace WealthManagementAssessment.Infrastructure.Repository
             return stockSumup;
         }
 
+
+
+
+        //PENSAR EM JA PASSAR A LISTA DE INVESTIMENTOS POR PARAMETRO PARA FondEngine tbm !!
         public double FondEngine(string ownerId, DateTime valuationDate)
         {
             double fondSumup = 0;
@@ -90,10 +94,7 @@ namespace WealthManagementAssessment.Infrastructure.Repository
 
 
             //new code
-            DateTime t1 = DateTime.Now;
             Dictionary<string, List<Investment>> dictionary = _filesReader.GetDictionary( ownerId, valuationDate);
-            DateTime t2 = DateTime.Now;
-            Console.WriteLine($"return Dictionary: {t2- t1}");
 
             foreach (var fond in fonds)
             {
@@ -107,20 +108,13 @@ namespace WealthManagementAssessment.Infrastructure.Repository
                 dictionary.TryGetValue(fond.FondsInvestor, out var investmentsOfFound);
          
 
-                DateTime t5 = DateTime.Now;
                 double realStateSumup = RealStateEngine(investmentsOfFound);
-                DateTime t6 = DateTime.Now;
-                Console.WriteLine($"real state engine: {t6 - t5}");
 
-                DateTime t7 = DateTime.Now;
                 double stockSumup = StockEngine(investmentsOfFound, valuationDate);
-                DateTime t8 = DateTime.Now;
-                Console.WriteLine($"stockEngine {t8 - t7}");
 
 
                 fondSumup = fondSumup + totalPercentage * (realStateSumup + stockSumup);
             }
-            Console.WriteLine("total asset value of fonds: " + fondSumup);
 
             return fondSumup;
         }
