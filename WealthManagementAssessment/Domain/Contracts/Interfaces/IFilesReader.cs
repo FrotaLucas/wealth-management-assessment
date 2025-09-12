@@ -7,7 +7,7 @@ namespace WealthManagementAssessment.Domain.Contracts.Interfaces
 
         List<Investment> ReadInvestmentByInvestor(string ownerId);
 
-        List<Investment> ReadInvestments();
+        Dictionary<string, List<Investment>> ReadInvestments();
 
         Dictionary<string, List<Transaction>> ReadTransactions();
 
