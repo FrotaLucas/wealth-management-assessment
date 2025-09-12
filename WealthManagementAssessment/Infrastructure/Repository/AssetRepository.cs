@@ -35,7 +35,6 @@ namespace WealthManagementAssessment.Infrastructure.Repository
                 return new List<Investment>();
             }
 
-
             foreach (var investment in investments)
             {
 
@@ -44,9 +43,7 @@ namespace WealthManagementAssessment.Infrastructure.Repository
                 else
                     investment.Transactions = new List<Transaction>();
             }
-
         
-
             return investments;
         }
 
