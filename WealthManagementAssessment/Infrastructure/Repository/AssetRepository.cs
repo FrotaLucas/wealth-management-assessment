@@ -10,6 +10,8 @@ namespace WealthManagementAssessment.Infrastructure.Repository
 
         //public Dictionary<int investorId, List<Investment>> dictinary = new Dictionary();
 
+        public Dictionary<string, List<Quote>> QuotesByIsin = new Dictionary<string, List<Quote>>();
+
         public AssetRepository(IFilesReader filesReader)
         {
             _filesReader = filesReader;
@@ -45,11 +47,12 @@ namespace WealthManagementAssessment.Infrastructure.Repository
                 .Where( investment => investment.InvestmentType.Equals("Stock") )
                 .ToList();
 
-            List<Quote> quotes = _filesReader.ReadQuotes(stockInvestments, valuationDate);
-            var quotesByIsin = quotes
-                .GroupBy(quote => quote.ISIN)
-                .ToDictionary(group => group.Key, group => group.OrderByDescending(quote => quote.Date).ToList());  
+            //List<Quote> quotes = _filesReader.ReadQuotes(stockInvestments, valuationDate);
+            //var quotesByIsin = quotes
+            //    .GroupBy(quote => quote.ISIN)
+            //    .ToDictionary(group => group.Key, group => group.OrderByDescending(quote => quote.Date).ToList());  
 
+            
 
             double stockSumup = 0;
 
@@ -57,14 +60,14 @@ namespace WealthManagementAssessment.Infrastructure.Repository
             {
                 double totalShares = investment.Transactions.Sum(transaction => transaction.Value);
 
-                if (!quotesByIsin.TryGetValue(investment.ISIN, out var listOfIsin))
+                if (!QuotesByIsin.TryGetValue(investment.ISIN, out var isinQuotes))
                     continue;
 
-                var quoteToday = listOfIsin.FirstOrDefault(quote => quote.Date <= valuationDate);
+                var quoteToday = isinQuotes.FirstOrDefault(quote => quote.Date <= valuationDate);
 
                 //if valuationDate is too small
                 if (quoteToday == null)
-                    quoteToday = listOfIsin.LastOrDefault();
+                    quoteToday = isinQuotes.LastOrDefault();
 
                 var marketValue = totalShares * quoteToday.PricePerShare;
                 stockSumup += marketValue;
