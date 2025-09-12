@@ -22,14 +22,21 @@ namespace WealthManagementAssessment.Infrastructure.Repository
             QuotesByIsin = _filesReader.ReadQuotes();
 
             TransactionsByInvestmentId = _filesReader.ReadTransactions();
+
+            InvestmentsByOwnerId = _filesReader.ReadInvestments();
             
         }
 
         public List<Investment> GetAllInvestmentsByInvestor(string ownerId, DateTime valuationDate)
         {
-            List<Investment> investments = _filesReader.ReadInvestmentByInvestor(ownerId);
+            if(!InvestmentsByOwnerId.TryGetValue(ownerId, out var investments))
+            {
+                Console.WriteLine("Investor does not have investments.");
+                return new List<Investment>();
+            }
 
-            foreach(var investment in investments)
+
+            foreach (var investment in investments)
             {
 
                 if (TransactionsByInvestmentId.TryGetValue(investment.InvestmentId, out var transactions))
