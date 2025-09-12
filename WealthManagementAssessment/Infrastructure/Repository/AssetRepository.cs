@@ -40,19 +40,10 @@ namespace WealthManagementAssessment.Infrastructure.Repository
 
         public double StockEngine(List<Investment> investments, DateTime valuationDate)
         {
-            //50k * 250k
-            //var dic = new Dictionary<>;
-            // como transformar uma lista de objetos em diciionario 
 
             var stockInvestments = investments
                 .Where( investment => investment.InvestmentType.Equals("Stock") )
                 .ToList();
-
-            //List<Quote> quotes = _filesReader.ReadQuotes(stockInvestments, valuationDate);
-            //var quotesByIsin = quotes
-            //    .GroupBy(quote => quote.ISIN)
-            //    .ToDictionary(group => group.Key, group => group.OrderByDescending(quote => quote.Date).ToList());  
-
             
 
             double stockSumup = 0;
