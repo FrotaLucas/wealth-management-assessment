@@ -5,16 +5,17 @@ namespace WealthManagementAssessment.Infrastructure.Repository
 {
     public class AssetRepository : IAssetRepository
     {
+
+        //NAO VOU PRECISAR DESSA PROPRIEDADE E SO BASTA O PARAMETRO filesReader no CTOR MAS PQ ?
         private readonly IFilesReader _filesReader;
-
-
-        //public Dictionary<int investorId, List<Investment>> dictinary = new Dictionary();
 
         public Dictionary<string, List<Quote>> QuotesByIsin = new Dictionary<string, List<Quote>>();
 
         public AssetRepository(IFilesReader filesReader)
         {
             _filesReader = filesReader;
+
+            QuotesByIsin = _filesReader.ReadQuotes();
         }
 
         public List<Investment> GetAllInvestmentsByInvestor(string ownerId, DateTime valuationDate)
