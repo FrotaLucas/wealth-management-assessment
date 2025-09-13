@@ -24,12 +24,12 @@ namespace WealthManagementAssessment.Infrastructure.Repository
             TransactionsByInvestmentId = _filesReader.ReadTransactions();
 
             InvestmentsByOwnerId = _filesReader.ReadInvestments();
-            
+
         }
 
         public List<Investment> GetAllInvestmentsByInvestor(string ownerId, DateTime valuationDate)
         {
-            if(!InvestmentsByOwnerId.TryGetValue(ownerId, out var investments))
+            if (!InvestmentsByOwnerId.TryGetValue(ownerId, out var investments))
             {
                 Console.WriteLine("Investor does not have investments.");
                 return new List<Investment>();
@@ -43,13 +43,13 @@ namespace WealthManagementAssessment.Infrastructure.Repository
                 else
                     investment.Transactions = new List<Transaction>();
             }
-        
+
             return investments;
         }
 
         public double RealStateEngine(List<Investment> investments)
         {
-            
+
             var realStateSumup = investments
                 .Where(investment => investment.InvestmentType == "RealEstate")
                 .SelectMany(investment => investment.Transactions)
@@ -62,13 +62,13 @@ namespace WealthManagementAssessment.Infrastructure.Repository
         {
 
             var stockInvestments = investments
-                .Where( investment => investment.InvestmentType.Equals("Stock") )
+                .Where(investment => investment.InvestmentType.Equals("Stock"))
                 .ToList();
-            
+
 
             double stockSumup = 0;
 
-            foreach(var investment in stockInvestments)
+            foreach (var investment in stockInvestments)
             {
                 double totalShares = investment.Transactions.Sum(transaction => transaction.Value);
 
@@ -91,7 +91,7 @@ namespace WealthManagementAssessment.Infrastructure.Repository
 
 
         //PENSAR EM JA PASSAR A LISTA DE INVESTIMENTOS POR PARAMETRO PARA FondEngine tbm !!
-        
+
         public double FondEngine(string ownerId, DateTime valuationDate)
         {
             double fondSumup = 0;
@@ -108,11 +108,11 @@ namespace WealthManagementAssessment.Infrastructure.Repository
 
 
             //new code
-            Dictionary<string, List<Investment>> dictionary = _filesReader.GetDictionary( ownerId, valuationDate);
+            Dictionary<string, List<Investment>> dictionary = _filesReader.GetDictionary(ownerId, valuationDate);
 
             foreach (var fond in fonds)
             {
-                double totalPercentage = fond.Transactions.Sum( t => t.Value );
+                double totalPercentage = fond.Transactions.Sum(t => t.Value);
 
                 //old code
                 //List<Investment> investmentsOfFound = allInvestments.Where(i => i.InvestorId == fond.FondsInvestor).ToList();
@@ -120,7 +120,7 @@ namespace WealthManagementAssessment.Infrastructure.Repository
 
                 //new code
                 dictionary.TryGetValue(fond.FondsInvestor, out var investmentsOfFound);
-         
+
 
                 double realStateSumup = RealStateEngine(investmentsOfFound);
 
@@ -145,27 +145,27 @@ namespace WealthManagementAssessment.Infrastructure.Repository
 
 
             var fondList = new HashSet<string>(fonds
-                .Where(investment => investment.InvestmentType.Equals("Fonds") )
-                .Select(investment => investment.FondsInvestor ));
+                .Where(investment => investment.InvestmentType.Equals("Fonds"))
+                .Select(investment => investment.FondsInvestor));
 
 
             List<Investment> fondInvestment = new List<Investment>();
-            foreach(string fond in fondList )
+            foreach (string fond in fondList)
             {
                 if (InvestmentsByOwnerId.TryGetValue(fond, out var investments))
                     fondInvestment.AddRange(investments);
             }
-            
+
             var dictionary = fondInvestment
                 .GroupBy(investment => investment.InvestorId)
                 .ToDictionary(group => group.Key, group => group.ToList());
 
-            foreach(var kvp in dictionary)
+            foreach (var kvp in dictionary)
             {
-             
-                var investments = kvp.Value;    
 
-                foreach(var investment in investments)
+                var investments = kvp.Value;
+
+                foreach (var investment in investments)
                 {
                     if (TransactionsByInvestmentId.TryGetValue(investment.InvestmentId, out var transactions))
                         investment.Transactions = transactions.Where(transaction => transaction.Date < valuationDate).ToList();
