@@ -89,7 +89,9 @@ namespace WealthManagementAssessment.Infrastructure.Repository
             return stockSumup;
         }
 
+
         //PENSAR EM JA PASSAR A LISTA DE INVESTIMENTOS POR PARAMETRO PARA FondEngine tbm !!
+        
         public double FondEngine(string ownerId, DateTime valuationDate)
         {
             double fondSumup = 0;
@@ -131,9 +133,49 @@ namespace WealthManagementAssessment.Infrastructure.Repository
             return fondSumup;
         }
 
-        public Dictionary<string, List<Investment>> GetAllInvestmentsByFonds()
+        public Dictionary<string, List<Investment>> GetAllInvestmentsByFonds(string ownerId, DateTime valuationDate)
         {
-            throw new NotImplementedException();
+
+            //TALVEZ NAO PRECISE DESSA LINHA 
+            if (!InvestmentsByOwnerId.TryGetValue(ownerId, out var fonds))
+            {
+                Console.WriteLine("Investments not found for this investor");
+                return new Dictionary<string, List<Investment>>();
+            }
+
+
+            var fondList = new HashSet<string>(fonds
+                .Where(investment => investment.InvestmentType.Equals("Fonds") )
+                .Select(investment => investment.FondsInvestor ));
+
+
+            List<Investment> fondInvestment = new List<Investment>();
+            foreach(string fond in fondList )
+            {
+                if (InvestmentsByOwnerId.TryGetValue(fond, out var investments))
+                    fondInvestment.AddRange(investments);
+            }
+            
+            var dictionary = fondInvestment
+                .GroupBy(investment => investment.InvestorId)
+                .ToDictionary(group => group.Key, group => group.ToList());
+
+            foreach(var kvp in dictionary)
+            {
+             
+                var investments = kvp.Value;    
+
+                foreach(var investment in investments)
+                {
+                    if (TransactionsByInvestmentId.TryGetValue(investment.InvestmentId, out var transactions))
+                        investment.Transactions = transactions.Where(transaction => transaction.Date < valuationDate).ToList();
+                    else
+                        investment.Transactions = new List<Transaction>();
+                }
+            }
+
+            return dictionary;
+
         }
     }
 }
