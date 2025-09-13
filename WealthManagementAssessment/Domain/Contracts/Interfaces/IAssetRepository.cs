@@ -12,7 +12,7 @@ namespace WealthManagementAssessment.Domain.Contracts.Interfaces
 
         List<Investment> GetAllInvestmentsByInvestor(string ownerId, DateTime valuationDate);
 
-        Dictionary<string, List<Investment>> GetAllInvestmentsByFonds();
+        Dictionary<string, List<Investment>> GetAllInvestmentsByFonds(string ownerId, DateTime valuationDate);
 
     }
 }
