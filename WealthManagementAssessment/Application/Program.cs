@@ -59,9 +59,32 @@ class Program
 
 
         var assetManagemetn = host.Services.GetRequiredService<IAssetManagement>();
+        while(true)
+        {
+
+            Console.WriteLine(" 1 - RealState Engine");
+            Console.WriteLine(" 2 - Stock Engine");
+            Console.WriteLine(" 3 - FundEngine");
+
+            string choice = Console.ReadLine();
+            switch(choice)
+            {
+                case "1":
+                    assetManagemetn.GetRealEstateAsset(investorId, date);
+                    break;
+                case "2":
+                    assetManagemetn.GetStockAsset(investorId, date);
+                    break;
+                case "3":
+                    assetManagemetn.GetFundAsset(investorId, date);
+                    break;
+            }
+        }
+
+
 
         //assetManagemetn.GetTotalAsset(investorId, date);
-        assetManagemetn.GetFundAsset(investorId, date);
+        //assetManagemetn.GetFundAsset(investorId, date);
         //assetManagemetn.GetStockAsset(investorId, date);
     }
 
