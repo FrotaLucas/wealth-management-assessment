@@ -18,33 +18,6 @@ namespace WealthManagementAssessment.Infrastructure.Helper
             _appConfig = appConfig.Value;
         }
 
-
-        //NAO DEVERIA USAR MAIS ESSE METODO
-
-        public List<Investment> ReadInvestmentByInvestor(string ownerId)
-        {
-
-            List<Investment> investments = new List<Investment>();
-            var config = new CsvConfiguration(CultureInfo.InvariantCulture)
-            {
-                Delimiter = ";",
-                HasHeaderRecord = true,
-                TrimOptions = TrimOptions.Trim,
-            };
-
-            using (var reader = new StreamReader(_appConfig.CsvPath.Investments))
-
-            using (var csv = new CsvReader(reader, config))
-            {
-                investments = csv.GetRecords<Investment>()
-                     .Where(inv => inv.InvestorId == ownerId)
-                     .ToList();
-            }
-
-            return investments;
-
-        }
-
         public Dictionary<string, List<Investment>> ReadInvestments()
         {
             var config = new CsvConfiguration(CultureInfo.InvariantCulture)
