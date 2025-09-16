@@ -36,7 +36,6 @@ namespace WealthManagementAssessment.Infrastructure.Helper
 
                 return investments;
             }
-
         }
 
         public Dictionary<string, List<Transaction>> ReadTransactions()
@@ -49,7 +48,6 @@ namespace WealthManagementAssessment.Infrastructure.Helper
             };
 
             using (var reader = new StreamReader(_appConfig.CsvPath.Transactions))
-
             using (var csv = new CsvReader(reader, config))
             {
 
@@ -58,14 +56,11 @@ namespace WealthManagementAssessment.Infrastructure.Helper
                     .ToDictionary(group => group.Key, group => group.ToList());
 
                 return allTransactions;
-
             }
-
         }
 
         public Dictionary<string, List<Quote>> ReadQuotes()
         {
-
             var config = new CsvConfiguration(CultureInfo.InvariantCulture)
             {
                 Delimiter = ";",
@@ -74,19 +69,14 @@ namespace WealthManagementAssessment.Infrastructure.Helper
             };
 
             using (var reader = new StreamReader(_appConfig.CsvPath.Quotes))
-
             using (var csv = new CsvReader(reader, config))
             {
                 var allqQuotes = csv.GetRecords<Quote>()
                     .GroupBy(quote => quote.ISIN)
                     .ToDictionary(group => group.Key, group => group.OrderByDescending(quote => quote.Date).ToList());
 
-
                 return allqQuotes;
-
             }
-
         }
-
     }
 }
