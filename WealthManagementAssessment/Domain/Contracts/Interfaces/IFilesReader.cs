@@ -12,8 +12,5 @@ namespace WealthManagementAssessment.Domain.Contracts.Interfaces
         Dictionary<string, List<Transaction>> ReadTransactions();
 
         Dictionary<string, List<Quote>> ReadQuotes();
-
-        Dictionary<string, List<Investment>> GetDictionary(string ownerId, DateTime valuationTime);
-
     }
 }
