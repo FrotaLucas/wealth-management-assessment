@@ -6,11 +6,11 @@ namespace WealthManagementAssessment.Infrastructure.Repository
     public class AssetRepository : IAssetRepository
     {
 
-        public Dictionary<string, List<Investment>> InvestmentsByOwnerId;
+        private IReadOnlyDictionary<string, List<Investment>> InvestmentsByOwnerId { get; }
 
-        public Dictionary<string, List<Quote>> QuotesByIsin;
+        private IReadOnlyDictionary<string, List<Quote>> QuotesByIsin { get; }
 
-        public Dictionary<string, List<Transaction>> TransactionsByInvestmentId;
+        private IReadOnlyDictionary<string, List<Transaction>> TransactionsByInvestmentId { get; }  
 
         public AssetRepository(IFilesReader filesReader)
         {
