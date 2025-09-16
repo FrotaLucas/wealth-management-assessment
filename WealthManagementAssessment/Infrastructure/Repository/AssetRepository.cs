@@ -6,9 +6,6 @@ namespace WealthManagementAssessment.Infrastructure.Repository
     public class AssetRepository : IAssetRepository
     {
 
-        //NAO VOU PRECISAR DESSA PROPRIEDADE E SO BASTA O PARAMETRO filesReader no CTOR MAS PQ ?
-        private readonly IFilesReader _filesReader;
-
         public Dictionary<string, List<Investment>> InvestmentsByOwnerId;
 
         public Dictionary<string, List<Quote>> QuotesByIsin;
@@ -17,13 +14,12 @@ namespace WealthManagementAssessment.Infrastructure.Repository
 
         public AssetRepository(IFilesReader filesReader)
         {
-            _filesReader = filesReader;
 
-            QuotesByIsin = _filesReader.ReadQuotes();
+            QuotesByIsin = filesReader.ReadQuotes();
 
-            TransactionsByInvestmentId = _filesReader.ReadTransactions();
+            TransactionsByInvestmentId = filesReader.ReadTransactions();
 
-            InvestmentsByOwnerId = _filesReader.ReadInvestments();
+            InvestmentsByOwnerId = filesReader.ReadInvestments();
 
         }
 
@@ -108,7 +104,10 @@ namespace WealthManagementAssessment.Infrastructure.Repository
 
 
             //new code
-            Dictionary<string, List<Investment>> dictionary = _filesReader.GetDictionary(ownerId, valuationDate);
+            //Dictionary<string, List<Investment>> dictionary = _filesReader.GetDictionary(ownerId, valuationDate);
+            Dictionary<string, List<Investment>> dictionary = GetAllInvestmentsByFonds(ownerId, valuationDate);
+
+
 
             foreach (var fond in fonds)
             {
