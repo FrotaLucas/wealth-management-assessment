@@ -70,35 +70,6 @@ namespace WealthManagementAssessment.Infrastructure.Helper
 
         }
 
-
-        public Dictionary<string, List<Investment>> GetDictionary(string ownerId, DateTime valuationDate)
-        {
-            //unique id
-            //var fondsId = new HashSet<string>(ReadInvestmentByInvestor(ownerId)
-            //    .Where(investment => investment.InvestmentType.Equals("Fonds"))
-            //    .Select(investment => investment.FondsInvestor));
-
-
-            //List<Investment> allFondsOfInvestor = ReadInvestments()
-            //    .Where(investment => fondsId.Contains(investment.InvestorId))
-            //    .ToList();
-
-            //var dictionary = allFondsOfInvestor
-            //    .GroupBy(investment => investment.InvestorId)
-            //    .ToDictionary(group => group.Key, group => group.ToList());
-
-            //foreach( var kvp in dictionary) 
-            //{
-            //    var investments = kvp.Value;
-
-            //    ReadTransactions(investments, valuationDate);
-            //}
-
-            //return dictionary;
-
-            return new Dictionary<string, List<Investment>>();
-        }
-
         public Dictionary<string, List<Transaction>> ReadTransactions()
         {
             var config = new CsvConfiguration(CultureInfo.InvariantCulture)
