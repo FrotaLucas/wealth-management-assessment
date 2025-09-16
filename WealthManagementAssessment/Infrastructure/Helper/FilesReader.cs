@@ -1,5 +1,4 @@
 ﻿using System.Globalization;
-using System.Text.RegularExpressions;
 using CsvHelper;
 using CsvHelper.Configuration;
 using Microsoft.Extensions.Options;
@@ -44,9 +43,6 @@ namespace WealthManagementAssessment.Infrastructure.Helper
 
             return investments;
 
-            //Console.WriteLine($"total investment of investor90: {investments.Count}");
-
-            //return investmentss;
         }
 
         public Dictionary<string, List<Investment>> ReadInvestments()
