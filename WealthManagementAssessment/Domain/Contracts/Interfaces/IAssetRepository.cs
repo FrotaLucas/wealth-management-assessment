@@ -4,9 +4,9 @@ namespace WealthManagementAssessment.Domain.Contracts.Interfaces
 {
     public interface IAssetRepository
     {
-        double RealStateEngine(List<Investment> investments);
+        //double RealStateEngine(List<Investment> investments);
 
-        double StockEngine(List<Investment> investments, DateTime valuationDate);
+        //double StockEngine(List<Investment> investments, DateTime valuationDate);
 
         //double FondEngine(string ownerId ,DateTime valuationDate);
 
