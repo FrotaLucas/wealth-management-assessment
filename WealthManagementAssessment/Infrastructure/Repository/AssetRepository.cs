@@ -42,7 +42,7 @@ namespace WealthManagementAssessment.Infrastructure.Repository
             return investments;
         }
 
-        public Dictionary<string, List<Investment>> GetAllInvestmentsByFonderId(string ownerId, DateTime valuationDate)
+        public Dictionary<string, List<Investment>> GetAllFondsByInvestor(string ownerId, DateTime valuationDate)
         {
 
             //TALVEZ NAO PRECISE DESSA LINHA 
