@@ -25,9 +25,9 @@ namespace WealthManagementAssessment.Application.Orchestration
 
         public void GetFundAsset(string ownerId, DateTime valuationDate)
         {
-            //double asset = _assetRepository.FondEngine(ownerId, valuationDate);
+            double asset = _fondService.FondEngine(ownerId, valuationDate);
 
-            //Console.WriteLine($"Your Fund wallet is : {asset} Euros.");
+            Console.WriteLine($"Your Fund wallet is : {asset} Euros.");
         }
 
         public void GetRealEstateAsset(string ownerId, DateTime valuationDate)
