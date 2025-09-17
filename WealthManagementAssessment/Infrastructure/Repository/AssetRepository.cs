@@ -6,11 +6,11 @@ namespace WealthManagementAssessment.Infrastructure.Repository
     public class AssetRepository : IAssetRepository
     {
 
-        private IReadOnlyDictionary<string, List<Investment>> InvestmentsByOwnerId { get; }
+        public IReadOnlyDictionary<string, List<Investment>> InvestmentsByOwnerId { get; }
 
-        private IReadOnlyDictionary<string, List<Quote>> QuotesByIsin { get; }
+        public IReadOnlyDictionary<string, List<Quote>> QuotesByIsin { get; }
 
-        private IReadOnlyDictionary<string, List<Transaction>> TransactionsByInvestmentId { get; }  
+        public IReadOnlyDictionary<string, List<Transaction>> TransactionsByInvestmentId { get; }  
 
         public AssetRepository(IFilesReader filesReader)
         {
@@ -43,50 +43,50 @@ namespace WealthManagementAssessment.Infrastructure.Repository
             return investments;
         }
 
-        public Dictionary<string, List<Investment>> GetAllInvestmentsByFonds(string ownerId, DateTime valuationDate)
-        {
+        //public Dictionary<string, List<Investment>> GetAllInvestmentsByFonds(string ownerId, DateTime valuationDate)
+        //{
 
-            //TALVEZ NAO PRECISE DESSA LINHA 
-            if (!InvestmentsByOwnerId.TryGetValue(ownerId, out var fonds))
-            {
-                Console.WriteLine("Investments not found for this investor");
-                return new Dictionary<string, List<Investment>>();
-            }
-
-
-            var fondList = new HashSet<string>(fonds
-                .Where(investment => investment.InvestmentType.Equals("Fonds"))
-                .Select(investment => investment.FondsInvestor));
+        //    //TALVEZ NAO PRECISE DESSA LINHA 
+        //    if (!InvestmentsByOwnerId.TryGetValue(ownerId, out var fonds))
+        //    {
+        //        Console.WriteLine("Investments not found for this investor");
+        //        return new Dictionary<string, List<Investment>>();
+        //    }
 
 
-            List<Investment> fondInvestment = new List<Investment>();
-            foreach (string fond in fondList)
-            {
-                if (InvestmentsByOwnerId.TryGetValue(fond, out var investments))
-                    fondInvestment.AddRange(investments);
-            }
+        //    var fondList = new HashSet<string>(fonds
+        //        .Where(investment => investment.InvestmentType.Equals("Fonds"))
+        //        .Select(investment => investment.FondsInvestor));
 
-            var dictionary = fondInvestment
-                .GroupBy(investment => investment.InvestorId)
-                .ToDictionary(group => group.Key, group => group.ToList());
 
-            foreach (var kvp in dictionary)
-            {
+        //    List<Investment> fondInvestment = new List<Investment>();
+        //    foreach (string fond in fondList)
+        //    {
+        //        if (InvestmentsByOwnerId.TryGetValue(fond, out var investments))
+        //            fondInvestment.AddRange(investments);
+        //    }
 
-                var investments = kvp.Value;
+        //    var dictionary = fondInvestment
+        //        .GroupBy(investment => investment.InvestorId)
+        //        .ToDictionary(group => group.Key, group => group.ToList());
 
-                foreach (var investment in investments)
-                {
-                    if (TransactionsByInvestmentId.TryGetValue(investment.InvestmentId, out var transactions))
-                        investment.Transactions = transactions.Where(transaction => transaction.Date < valuationDate).ToList();
-                    else
-                        investment.Transactions = new List<Transaction>();
-                }
-            }
+        //    foreach (var kvp in dictionary)
+        //    {
 
-            return dictionary;
+        //        var investments = kvp.Value;
 
-        }
+        //        foreach (var investment in investments)
+        //        {
+        //            if (TransactionsByInvestmentId.TryGetValue(investment.InvestmentId, out var transactions))
+        //                investment.Transactions = transactions.Where(transaction => transaction.Date < valuationDate).ToList();
+        //            else
+        //                investment.Transactions = new List<Transaction>();
+        //        }
+        //    }
+
+        //    return dictionary;
+
+        //}
 
         public double RealStateEngine(List<Investment> investments)
         {
@@ -133,49 +133,49 @@ namespace WealthManagementAssessment.Infrastructure.Repository
 
         //PENSAR EM JA PASSAR A LISTA DE INVESTIMENTOS POR PARAMETRO PARA FondEngine tbm !!
 
-        public double FondEngine(string ownerId, DateTime valuationDate)
-        {
-            double fondSumup = 0;
+        //public double FondEngine(string ownerId, DateTime valuationDate)
+        //{
+        //    double fondSumup = 0;
 
-            //USAR ENUM ao inves de STRING!!!!!!!!
-            List<Investment> fonds = GetAllInvestmentsByInvestor(ownerId, valuationDate)
-                .Where(investment => investment.InvestmentType == "Fonds")
-                .ToList();
+        //    //USAR ENUM ao inves de STRING!!!!!!!!
+        //    List<Investment> fonds = GetAllInvestmentsByInvestor(ownerId, valuationDate)
+        //        .Where(investment => investment.InvestmentType == "Fonds")
+        //        .ToList();
 
-            //_filesReader.ReadTransactions(fonds, valuationDate);
+        //    //_filesReader.ReadTransactions(fonds, valuationDate);
 
-            //old code
-            //List<Investment> allInvestments = _filesReader.ReadInvestments();
-
-
-            //new code
-            //Dictionary<string, List<Investment>> dictionary = _filesReader.GetDictionary(ownerId, valuationDate);
-            Dictionary<string, List<Investment>> dictionary = GetAllInvestmentsByFonds(ownerId, valuationDate);
+        //    //old code
+        //    //List<Investment> allInvestments = _filesReader.ReadInvestments();
 
 
-
-            foreach (var fond in fonds)
-            {
-                double totalPercentage = fond.Transactions.Sum(t => t.Value);
-
-                //old code
-                //List<Investment> investmentsOfFound = allInvestments.Where(i => i.InvestorId == fond.FondsInvestor).ToList();
-                //_filesReader.ReadTransactions(investmentsOfFound, valuationDate);
-
-                //new code
-                dictionary.TryGetValue(fond.FondsInvestor, out var investmentsOfFound);
+        //    //new code
+        //    //Dictionary<string, List<Investment>> dictionary = _filesReader.GetDictionary(ownerId, valuationDate);
+        //    Dictionary<string, List<Investment>> dictionary = GetAllInvestmentsByFonds(ownerId, valuationDate);
 
 
-                double realStateSumup = RealStateEngine(investmentsOfFound);
 
-                double stockSumup = StockEngine(investmentsOfFound, valuationDate);
+        //    foreach (var fond in fonds)
+        //    {
+        //        double totalPercentage = fond.Transactions.Sum(t => t.Value);
+
+        //        //old code
+        //        //List<Investment> investmentsOfFound = allInvestments.Where(i => i.InvestorId == fond.FondsInvestor).ToList();
+        //        //_filesReader.ReadTransactions(investmentsOfFound, valuationDate);
+
+        //        //new code
+        //        dictionary.TryGetValue(fond.FondsInvestor, out var investmentsOfFound);
 
 
-                fondSumup = fondSumup + totalPercentage * (realStateSumup + stockSumup);
-            }
+        //        double realStateSumup = RealStateEngine(investmentsOfFound);
 
-            return fondSumup;
-        }
+        //        double stockSumup = StockEngine(investmentsOfFound, valuationDate);
+
+
+        //        fondSumup = fondSumup + totalPercentage * (realStateSumup + stockSumup);
+        //    }
+
+        //    return fondSumup;
+        //}
 
     }
 }
