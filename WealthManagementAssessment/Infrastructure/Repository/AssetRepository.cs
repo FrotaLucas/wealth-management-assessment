@@ -87,7 +87,7 @@ namespace WealthManagementAssessment.Infrastructure.Repository
 
         }
 
-        //public double RealStateEngine(List<Investment> investments)
+        //public decimal RealStateEngine(List<Investment> investments)
         //{
 
         //    var realStateSumup = investments
@@ -98,7 +98,7 @@ namespace WealthManagementAssessment.Infrastructure.Repository
         //    return realStateSumup;
         //}
 
-        //public double StockEngine(List<Investment> investments, DateTime valuationDate)
+        //public decimal StockEngine(List<Investment> investments, DateTime valuationDate)
         //{
 
         //    var stockInvestments = investments
@@ -106,11 +106,11 @@ namespace WealthManagementAssessment.Infrastructure.Repository
         //        .ToList();
 
 
-        //    double stockSumup = 0;
+        //    decimal stockSumup = 0;
 
         //    foreach (var investment in stockInvestments)
         //    {
-        //        double totalShares = investment.Transactions.Sum(transaction => transaction.Value);
+        //        decimal totalShares = investment.Transactions.Sum(transaction => transaction.Value);
 
         //        if (!QuotesByIsin.TryGetValue(investment.ISIN, out var isinQuotes))
         //            continue;
@@ -132,9 +132,9 @@ namespace WealthManagementAssessment.Infrastructure.Repository
 
         //PENSAR EM JA PASSAR A LISTA DE INVESTIMENTOS POR PARAMETRO PARA FondEngine tbm !!
 
-        //public double FondEngine(string ownerId, DateTime valuationDate)
+        //public decimal FondEngine(string ownerId, DateTime valuationDate)
         //{
-        //    double fondSumup = 0;
+        //    decimal fondSumup = 0;
 
         //    //USAR ENUM ao inves de STRING!!!!!!!!
         //    List<Investment> fonds = GetAllInvestmentsByInvestor(ownerId, valuationDate)
@@ -155,7 +155,7 @@ namespace WealthManagementAssessment.Infrastructure.Repository
 
         //    foreach (var fond in fonds)
         //    {
-        //        double totalPercentage = fond.Transactions.Sum(t => t.Value);
+        //        decimal totalPercentage = fond.Transactions.Sum(t => t.Value);
 
         //        //old code
         //        //List<Investment> investmentsOfFound = allInvestments.Where(i => i.InvestorId == fond.FondsInvestor).ToList();
@@ -165,9 +165,9 @@ namespace WealthManagementAssessment.Infrastructure.Repository
         //        dictionary.TryGetValue(fond.FondsInvestor, out var investmentsOfFound);
 
 
-        //        double realStateSumup = RealStateEngine(investmentsOfFound);
+        //        decimal realStateSumup = RealStateEngine(investmentsOfFound);
 
-        //        double stockSumup = StockEngine(investmentsOfFound, valuationDate);
+        //        decimal stockSumup = StockEngine(investmentsOfFound, valuationDate);
 
 
         //        fondSumup = fondSumup + totalPercentage * (realStateSumup + stockSumup);

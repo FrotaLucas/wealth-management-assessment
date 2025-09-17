@@ -21,9 +21,9 @@ namespace WealthManagementAssessment.Infrastructure.Repository
         //EndDate or ReferenceDate?
         public DateTime ValuationDate { get; set; }
 
-        public double RealStateSumup { get; set; }
+        public decimal RealStateSumup { get; set; }
 
-        public double StockSumup { get; set; }
+        public decimal StockSumup { get; set; }
 
         public AssetRepositoryV1(string ownerId, DateTime dateTime)
         {
@@ -40,7 +40,7 @@ namespace WealthManagementAssessment.Infrastructure.Repository
             return date;
         }
 
-        public double TotalInvestments()
+        public decimal TotalInvestments()
         {
             bool firstLine = true;
 
@@ -121,7 +121,7 @@ namespace WealthManagementAssessment.Infrastructure.Repository
                             var transaction = new Transaction();
                             transaction.InvestmentId = investment.InvestmentId; //or fields[0]
                             transaction.Type = fields[1];
-                            transaction.Value = double.Parse(fields[3]);
+                            transaction.Value = decimal.Parse(fields[3]);
                             transaction.Date = DateTime.Parse(fields[2]);
 
                             selectedEstate.Add(transaction);
@@ -134,7 +134,7 @@ namespace WealthManagementAssessment.Infrastructure.Repository
                             var transaction = new Transaction();
                             transaction.InvestmentId = investment.InvestmentId; //or fields[0]
                             transaction.Type = fields[1];
-                            transaction.Value = double.Parse(fields[3]);
+                            transaction.Value = decimal.Parse(fields[3]);
                             transaction.Date = DateTime.Parse(fields[2]);
 
                             selectedBuilding.Add(transaction);
@@ -148,7 +148,7 @@ namespace WealthManagementAssessment.Infrastructure.Repository
                             var transaction = new Transaction();
                             transaction.InvestmentId = investment.InvestmentId;
                             transaction.Type = fields[1];
-                            transaction.Value = double.Parse(fields[3]);
+                            transaction.Value = decimal.Parse(fields[3]);
                             transaction.Date = DateTime.Parse(fields[2]);
 
                             selectedStocks.Add(transaction);

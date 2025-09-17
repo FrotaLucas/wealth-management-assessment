@@ -6,6 +6,6 @@
 
         public DateTime Date { get; set; }
 
-        public float PricePerShare { get; set; }
+        public decimal PricePerShare { get; set; }
     }
 }

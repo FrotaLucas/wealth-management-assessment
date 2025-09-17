@@ -5,7 +5,7 @@ namespace WealthManagementAssessment.Domain.Contracts.Services
 {
     public class RealStateService : IRealStateService
     {
-        public double RealStateEngine(List<Investment> investments)
+        public decimal RealStateEngine(List<Investment> investments)
         {
 
             var realStateSumup = investments

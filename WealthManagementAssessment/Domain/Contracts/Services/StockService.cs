@@ -13,7 +13,7 @@ namespace WealthManagementAssessment.Domain.Contracts.Services
             _assetRepository = assetRepository;
         }
 
-        public double StockEngine(List<Investment> investments, DateTime valuationDate)
+        public decimal StockEngine(List<Investment> investments, DateTime valuationDate)
         {
 
             var stockInvestments = investments
@@ -21,11 +21,11 @@ namespace WealthManagementAssessment.Domain.Contracts.Services
                 .ToList();
 
 
-            double stockSumup = 0;
+            decimal stockSumup = 0;
 
             foreach (var investment in stockInvestments)
             {
-                double totalShares = investment.Transactions.Sum(transaction => transaction.Value);
+                decimal totalShares = investment.Transactions.Sum(transaction => transaction.Value);
 
                 
                 if (!_assetRepository.QuotesByIsin.TryGetValue(investment.ISIN, out var isinQuotes))

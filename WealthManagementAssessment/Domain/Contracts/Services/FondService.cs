@@ -18,9 +18,9 @@ namespace WealthManagementAssessment.Domain.Contracts.Services
             _stockService = stockService;
         }
 
-        public double FondEngine(string ownerId, DateTime valuationDate)
+        public decimal FondEngine(string ownerId, DateTime valuationDate)
         {
-            double fondSumup = 0;
+            decimal fondSumup = 0;
 
             //USAR ENUM ao inves de STRING!!!!!!!!
             List<Investment> fonds = _assetRepository.GetAllInvestmentsByInvestor(ownerId, valuationDate)
@@ -31,11 +31,11 @@ namespace WealthManagementAssessment.Domain.Contracts.Services
 
             foreach (var fond in fonds)
             {
-                double totalPercentage = fond.Transactions.Sum(t => t.Value);
+                decimal totalPercentage = fond.Transactions.Sum(t => t.Value);
 
                 dictionary.TryGetValue(fond.FondsInvestor, out var investmentsOfFound);
-                double realStateSumup = _realStateService.RealStateEngine(investmentsOfFound);
-                double stockSumup = _stockService.StockEngine(investmentsOfFound, valuationDate);
+                decimal realStateSumup = _realStateService.RealStateEngine(investmentsOfFound);
+                decimal stockSumup = _stockService.StockEngine(investmentsOfFound, valuationDate);
                 
                 fondSumup = fondSumup + totalPercentage * (realStateSumup + stockSumup);
             }

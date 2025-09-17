@@ -2,6 +2,6 @@
 {
     public interface IFondService
     {
-        double FondEngine(string ownerId, DateTime valuationDate);
+        decimal FondEngine(string ownerId, DateTime valuationDate);
     }
 }

@@ -25,7 +25,7 @@ namespace WealthManagementAssessment.Application.Orchestration
 
         public void GetFundAsset(string ownerId, DateTime valuationDate)
         {
-            double asset = _fondService.FondEngine(ownerId, valuationDate);
+            decimal asset = _fondService.FondEngine(ownerId, valuationDate);
 
             Console.WriteLine($"Your Fund wallet is : {asset} Euros.");
         }
@@ -34,7 +34,7 @@ namespace WealthManagementAssessment.Application.Orchestration
         {
             List<Investment> investments = _portfolioService.GetAllInvestmentsByInvestor(ownerId, valuationDate);
 
-            double asset = _realStateService.RealStateEngine(investments);
+            decimal asset = _realStateService.RealStateEngine(investments);
 
             Console.WriteLine($"Your Real Estate wallet is : {asset} Euros.");
 
@@ -44,7 +44,7 @@ namespace WealthManagementAssessment.Application.Orchestration
         {
             List<Investment> investments = _portfolioService.GetAllInvestmentsByInvestor(ownerId, valuationDate);
 
-            double asset = _stockService.StockEngine(investments, valuationDate);
+            decimal asset = _stockService.StockEngine(investments, valuationDate);
 
             Console.WriteLine($"Your Stock wallet is : {asset} Euros.");
         }
@@ -56,11 +56,11 @@ namespace WealthManagementAssessment.Application.Orchestration
         {
             List<Investment> investments = _portfolioService.GetAllInvestmentsByInvestor(ownerId, valuationDate);
 
-            double realEstateAsset = _realStateService.RealStateEngine(investments);
+            decimal realEstateAsset = _realStateService.RealStateEngine(investments);
 
-            double stockAsset = _stockService.StockEngine(investments, valuationDate);
+            decimal stockAsset = _stockService.StockEngine(investments, valuationDate);
 
-            double fundAsset = _fondService.FondEngine(ownerId, valuationDate);
+            decimal fundAsset = _fondService.FondEngine(ownerId, valuationDate);
 
             Console.WriteLine($"Your total wallet is : {realEstateAsset + stockAsset + fundAsset} Euros.");
 
