@@ -56,14 +56,13 @@ namespace WealthManagementAssessment.Application.Orchestration
         {
             List<Investment> investments = _portfolioService.GetAllInvestmentsByInvestor(ownerId, valuationDate);
 
-            //double realEstateAsset = _assetRepository.RealStateEngine(investments);
+            double realEstateAsset = _realStateService.RealStateEngine(investments);
 
-            //double stockAsset = _assetRepository.StockEngine(investments, valuationDate);
+            double stockAsset = _stockService.StockEngine(investments, valuationDate);
 
+            double fundAsset = _fondService.FondEngine(ownerId, valuationDate);
 
-            //double fundAsset = _assetRepository.FondEngine(ownerId, valuationDate);
-
-            //Console.WriteLine($"Your total wallet is : {realEstateAsset + stockAsset + fundAsset} Euros.");
+            Console.WriteLine($"Your total wallet is : {realEstateAsset + stockAsset + fundAsset} Euros.");
 
 
         }
