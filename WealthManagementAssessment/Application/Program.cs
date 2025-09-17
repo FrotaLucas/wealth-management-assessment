@@ -2,8 +2,8 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WealthManagementAssessment.Application.Configuration;
+using WealthManagementAssessment.Application.Orchestration;
 using WealthManagementAssessment.Domain.Contracts.Interfaces;
-using WealthManagementAssessment.Domain.Contracts.Services;
 using WealthManagementAssessment.Infrastructure.Helper;
 using WealthManagementAssessment.Infrastructure.Repository;
 

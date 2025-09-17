@@ -26,6 +26,7 @@
 	<ItemGroup>
 	  <Folder Include="Application\Models\" />
 	  <Folder Include="Application\Orchestration\Interfaces\" />
+	  <Folder Include="Domain\Contracts\Services\" />
 	</ItemGroup>
 
 

@@ -1,7 +1,7 @@
 ﻿using WealthManagementAssessment.Domain.Contracts.Interfaces;
 using WealthManagementAssessment.Domain.Entities;
 
-namespace WealthManagementAssessment.Domain.Contracts.Services
+namespace WealthManagementAssessment.Application.Orchestration
 {
     public class AssetManagementService : IAssetManagement
     {
