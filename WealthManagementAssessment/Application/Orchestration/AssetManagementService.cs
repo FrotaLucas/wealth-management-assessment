@@ -8,9 +8,12 @@ namespace WealthManagementAssessment.Application.Orchestration
     {
         private readonly IPortfolioService _portfolioService;
 
-        public AssetManagementService(IPortfolioService portfolioService)
+        private readonly IStockService _stockService;
+
+        public AssetManagementService(IPortfolioService portfolioService, IStockService stockService)
         {
             _portfolioService = portfolioService;
+            _stockService = stockService;
         }
 
         public void GetFundAsset(string ownerId, DateTime valuationDate)
