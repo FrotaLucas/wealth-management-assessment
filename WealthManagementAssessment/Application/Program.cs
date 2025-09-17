@@ -91,7 +91,7 @@ class Program
                 Console.WriteLine(" 2 - Stock Asset");
                 Console.WriteLine(" 3 - Fund Asset");
                 Console.WriteLine(" 4 - Total Asset");
-                Console.WriteLine(" 0 - Enter new ID and Date\n"); // nova opção
+                Console.WriteLine(" 0 - Enter new InvestmentId and Date\n"); // nova opção
 
                 string choice = Console.ReadLine();
                 switch (choice)
@@ -117,7 +117,7 @@ class Program
                 }
             }
 
-            Console.WriteLine("\n=== Enter the date and the investment Id separated by ; to view your portfolio size ===\n");
+            Console.WriteLine($"\n=== Enter a valid date and InvestmentId to view your portfolio size. (ex. 2025-07-20;Investor90 )=== \n");
             line = Console.ReadLine();
         }
 
