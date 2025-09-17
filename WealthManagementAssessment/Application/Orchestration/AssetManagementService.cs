@@ -12,11 +12,15 @@ namespace WealthManagementAssessment.Application.Orchestration
 
         private readonly IRealStateService _realStateService;
 
-        public AssetManagementService(IPortfolioService portfolioService, IStockService stockService, IRealStateService realStateService)
+        private readonly IFondService _fondService;
+
+        //PENSAR NUNA FORMA DE REDUZIR ESSE TAMANHO DOS PARAMETROS DO CONSTRUTOR!!
+        public AssetManagementService(IPortfolioService portfolioService, IStockService stockService, IRealStateService realStateService, IFondService fondService)
         {
             _portfolioService = portfolioService;
             _stockService = stockService;
             _realStateService = realStateService;
+            _fondService = fondService;
         }
 
         public void GetFundAsset(string ownerId, DateTime valuationDate)
