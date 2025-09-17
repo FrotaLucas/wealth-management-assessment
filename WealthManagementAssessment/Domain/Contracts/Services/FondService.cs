@@ -7,9 +7,15 @@ namespace WealthManagementAssessment.Domain.Contracts.Services
     {
         private readonly IAssetRepository _assetRepository;
 
-        public FondService(IAssetRepository assetRepository)
+        private readonly IRealStateService _realStateService;
+
+        private readonly IStockService _stockService;
+        
+        public FondService(IAssetRepository assetRepository, IRealStateService realStateService, IStockService stockService)
         {
             _assetRepository = assetRepository;
+            _realStateService = realStateService;
+            _stockService = stockService;
         }
 
 
@@ -31,7 +37,7 @@ namespace WealthManagementAssessment.Domain.Contracts.Services
 
             //new code
             //Dictionary<string, List<Investment>> dictionary = _filesReader.GetDictionary(ownerId, valuationDate);
-            Dictionary<string, List<Investment>> dictionary = GetAllInvestmentsByFonds(ownerId, valuationDate);
+            Dictionary<string, List<Investment>> dictionary = _assetRepository.GetAllInvestmentsByFonds(ownerId, valuationDate);
 
 
 
@@ -47,9 +53,9 @@ namespace WealthManagementAssessment.Domain.Contracts.Services
                 dictionary.TryGetValue(fond.FondsInvestor, out var investmentsOfFound);
 
 
-                double realStateSumup = RealStateEngine(investmentsOfFound);
+                double realStateSumup = _realStateService.RealStateEngine(investmentsOfFound);
 
-                double stockSumup = StockEngine(investmentsOfFound, valuationDate);
+                double stockSumup = _stockService.StockEngine(investmentsOfFound, valuationDate);
 
 
                 fondSumup = fondSumup + totalPercentage * (realStateSumup + stockSumup);
