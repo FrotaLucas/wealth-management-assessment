@@ -53,7 +53,7 @@ class Program
                 });
 
                 services.AddSingleton<IFilesReader, FilesReader>();
-                services.AddSingleton<IAssetRepository, AssetRepository>();
+                services.AddSingleton<IAssetRepository, PortfolioRepository>();
                 services.AddSingleton<IAssetManagement, AssetManagementService>();
                 services.AddSingleton<IPortfolioService, PortfolioService>();
                 services.AddSingleton<IStockService, StockService>();

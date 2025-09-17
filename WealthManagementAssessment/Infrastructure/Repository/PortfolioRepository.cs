@@ -3,7 +3,7 @@ using WealthManagementAssessment.Domain.Entities;
 
 namespace WealthManagementAssessment.Infrastructure.Repository
 {
-    public class AssetRepository : IAssetRepository
+    public class PortfolioRepository : IAssetRepository
     {
         public IReadOnlyDictionary<string, List<Investment>> InvestmentsByOwnerId { get; }
 
@@ -11,7 +11,7 @@ namespace WealthManagementAssessment.Infrastructure.Repository
 
         public IReadOnlyDictionary<string, List<Transaction>> TransactionsByInvestmentId { get; }  
 
-        public AssetRepository(IFilesReader filesReader)
+        public PortfolioRepository(IFilesReader filesReader)
         {
 
             QuotesByIsin = filesReader.ReadQuotes();
