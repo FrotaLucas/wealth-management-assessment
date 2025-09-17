@@ -35,7 +35,7 @@ namespace WealthManagementAssessment.Domain.Contracts.Services
 
             //new code
             //Dictionary<string, List<Investment>> dictionary = _filesReader.GetDictionary(ownerId, valuationDate);
-            Dictionary<string, List<Investment>> dictionary = _assetRepository.GetAllInvestmentsByFonds(ownerId, valuationDate);
+            Dictionary<string, List<Investment>> dictionary = _assetRepository.GetAllInvestmentsByFonderId(ownerId, valuationDate);
 
 
 
