@@ -5,7 +5,6 @@ namespace WealthManagementAssessment.Infrastructure.Repository
 {
     public class AssetRepository : IAssetRepository
     {
-
         public IReadOnlyDictionary<string, List<Investment>> InvestmentsByOwnerId { get; }
 
         public IReadOnlyDictionary<string, List<Quote>> QuotesByIsin { get; }
