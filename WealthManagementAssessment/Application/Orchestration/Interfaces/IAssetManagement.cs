@@ -1,4 +1,4 @@
-﻿namespace WealthManagementAssessment.Domain.Contracts.Interfaces
+﻿namespace WealthManagementAssessment.Application.Orchestration.Interfaces
 {
     public interface IAssetManagement
     {

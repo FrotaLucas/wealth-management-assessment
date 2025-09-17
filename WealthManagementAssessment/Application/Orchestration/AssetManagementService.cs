@@ -1,4 +1,5 @@
-﻿using WealthManagementAssessment.Domain.Contracts.Interfaces;
+﻿using WealthManagementAssessment.Application.Orchestration.Interfaces;
+using WealthManagementAssessment.Domain.Contracts.Interfaces;
 using WealthManagementAssessment.Domain.Entities;
 
 namespace WealthManagementAssessment.Application.Orchestration
