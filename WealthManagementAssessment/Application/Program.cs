@@ -65,13 +65,19 @@ class Program
 
 
         var assetManagemetn = host.Services.GetRequiredService<IAssetManagement>();
-        while(true)
-        {
 
+        string greeting = DateTime.Now.Hour < 12 ? "Good morning" : DateTime.Now.Hour < 18 ? "Good afternoon" : "Good evenning";
+
+        while (true)
+        {
+            Console.WriteLine($"\n=== {greeting}, welcome to the Wealth Management Assessment! ===");
+            Console.WriteLine($"\n=== Please select the operation you would like to perform ===\n");
             Console.WriteLine(" 1 - RealState Asset");
             Console.WriteLine(" 2 - Stock Asset");
             Console.WriteLine(" 3 - Fund Asset");
             Console.WriteLine(" 4 - Total Asset");
+            Console.WriteLine(" 5 - Exit");
+            
 
             string choice = Console.ReadLine();
             switch(choice)
@@ -88,6 +94,11 @@ class Program
                 case "4":
                     assetManagemetn.GetTotalAsset(investorId, date);    
                     break;
+                default:
+                    Console.WriteLine("Wrong option! Choose a number from menu.");
+                    break;
+                case "0":
+                    return;
             }
         }
 
