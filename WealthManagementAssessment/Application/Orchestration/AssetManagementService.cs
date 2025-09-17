@@ -40,9 +40,9 @@ namespace WealthManagementAssessment.Application.Orchestration
         {
             List<Investment> investments = _portfolioService.GetAllInvestmentsByInvestor(ownerId, valuationDate);
 
-            //double asset = _assetRepository.StockEngine(investments, valuationDate);
+            double asset = _stockService.StockEngine(investments, valuationDate);
 
-            //Console.WriteLine($"Your Stock wallet is : {asset} Euros.");
+            Console.WriteLine($"Your Stock wallet is : {asset} Euros.");
         }
 
         
