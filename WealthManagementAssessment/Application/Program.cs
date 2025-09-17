@@ -54,7 +54,7 @@ class Program
                 services.AddSingleton<IFilesReader, FilesReader>();
                 services.AddSingleton<IAssetRepository, AssetRepository>();
                 services.AddSingleton<IAssetManagement, AssetManagementService>();
-                services.AddSingleton<IPortifolioService, PortifolioService>();
+                services.AddSingleton<IPortfolioService, PortfolioService>();
 
             })
             .Build();

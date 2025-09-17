@@ -6,19 +6,22 @@ namespace WealthManagementAssessment.Application.Orchestration
 {
     public class AssetManagementService : IAssetManagement
     {
+        private readonly IPortfolioService _portifolioService;
 
         private readonly IAssetRepository _assetRepository;
 
-        public AssetManagementService(IAssetRepository assetRepository)
+
+        public AssetManagementService(IAssetRepository assetRepository, IPortfolioService portifolioService)
         {
             _assetRepository = assetRepository;
+            _portifolioService = portifolioService;
         }
 
         public void GetFundAsset(string ownerId, DateTime valuationDate)
         {
-            double asset = _assetRepository.FondEngine(ownerId, valuationDate);
+            //double asset = _assetRepository.FondEngine(ownerId, valuationDate);
 
-            Console.WriteLine($"Your Fund wallet is : {asset} Euros.");
+            //Console.WriteLine($"Your Fund wallet is : {asset} Euros.");
         }
 
         public void GetRealEstateAsset(string ownerId, DateTime valuationDate)
@@ -52,9 +55,9 @@ namespace WealthManagementAssessment.Application.Orchestration
             double stockAsset = _assetRepository.StockEngine(investments, valuationDate);
 
 
-            double fundAsset = _assetRepository.FondEngine(ownerId, valuationDate);
+            //double fundAsset = _assetRepository.FondEngine(ownerId, valuationDate);
 
-            Console.WriteLine($"Your total wallet is : {realEstateAsset + stockAsset + fundAsset} Euros.");
+            //Console.WriteLine($"Your total wallet is : {realEstateAsset + stockAsset + fundAsset} Euros.");
 
 
         }
