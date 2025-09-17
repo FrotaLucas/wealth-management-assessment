@@ -27,7 +27,7 @@ namespace WealthManagementAssessment.Application.Orchestration
         {
             decimal asset = _fondService.FondEngine(ownerId, valuationDate);
 
-            Console.WriteLine($"Your Fund wallet is : {asset} Euros.");
+            Console.WriteLine($"Your Fund wallet is : {asset:N2} Euros.\n");
         }
 
         public void GetRealEstateAsset(string ownerId, DateTime valuationDate)
@@ -36,7 +36,7 @@ namespace WealthManagementAssessment.Application.Orchestration
 
             decimal asset = _realStateService.RealStateEngine(investments);
 
-            Console.WriteLine($"Your Real Estate wallet is : {asset} Euros.");
+            Console.WriteLine($"Your Real Estate wallet is : {asset:N2} Euros.\n");
 
         }
 
@@ -46,7 +46,7 @@ namespace WealthManagementAssessment.Application.Orchestration
 
             decimal asset = _stockService.StockEngine(investments, valuationDate);
 
-            Console.WriteLine($"Your Stock wallet is : {asset} Euros.");
+            Console.WriteLine($"Your Stock wallet is : {asset:N2} Euros.\n");
         }
 
         
@@ -62,8 +62,7 @@ namespace WealthManagementAssessment.Application.Orchestration
 
             decimal fundAsset = _fondService.FondEngine(ownerId, valuationDate);
 
-            Console.WriteLine($"Your total wallet is : {realEstateAsset + stockAsset + fundAsset} Euros.");
-
+            Console.WriteLine($"Your total wallet is : {(realEstateAsset + stockAsset + fundAsset):N2} Euros.\n");
 
         }
 
