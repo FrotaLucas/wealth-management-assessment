@@ -43,50 +43,50 @@ namespace WealthManagementAssessment.Infrastructure.Repository
             return investments;
         }
 
-        //public Dictionary<string, List<Investment>> GetAllInvestmentsByFonds(string ownerId, DateTime valuationDate)
-        //{
+        public Dictionary<string, List<Investment>> GetAllInvestmentsByFonds(string ownerId, DateTime valuationDate)
+        {
 
-        //    //TALVEZ NAO PRECISE DESSA LINHA 
-        //    if (!InvestmentsByOwnerId.TryGetValue(ownerId, out var fonds))
-        //    {
-        //        Console.WriteLine("Investments not found for this investor");
-        //        return new Dictionary<string, List<Investment>>();
-        //    }
-
-
-        //    var fondList = new HashSet<string>(fonds
-        //        .Where(investment => investment.InvestmentType.Equals("Fonds"))
-        //        .Select(investment => investment.FondsInvestor));
+            //TALVEZ NAO PRECISE DESSA LINHA 
+            if (!InvestmentsByOwnerId.TryGetValue(ownerId, out var fonds))
+            {
+                Console.WriteLine("Investments not found for this investor");
+                return new Dictionary<string, List<Investment>>();
+            }
 
 
-        //    List<Investment> fondInvestment = new List<Investment>();
-        //    foreach (string fond in fondList)
-        //    {
-        //        if (InvestmentsByOwnerId.TryGetValue(fond, out var investments))
-        //            fondInvestment.AddRange(investments);
-        //    }
+            var fondList = new HashSet<string>(fonds
+                .Where(investment => investment.InvestmentType.Equals("Fonds"))
+                .Select(investment => investment.FondsInvestor));
 
-        //    var dictionary = fondInvestment
-        //        .GroupBy(investment => investment.InvestorId)
-        //        .ToDictionary(group => group.Key, group => group.ToList());
 
-        //    foreach (var kvp in dictionary)
-        //    {
+            List<Investment> fondInvestment = new List<Investment>();
+            foreach (string fond in fondList)
+            {
+                if (InvestmentsByOwnerId.TryGetValue(fond, out var investments))
+                    fondInvestment.AddRange(investments);
+            }
 
-        //        var investments = kvp.Value;
+            var dictionary = fondInvestment
+                .GroupBy(investment => investment.InvestorId)
+                .ToDictionary(group => group.Key, group => group.ToList());
 
-        //        foreach (var investment in investments)
-        //        {
-        //            if (TransactionsByInvestmentId.TryGetValue(investment.InvestmentId, out var transactions))
-        //                investment.Transactions = transactions.Where(transaction => transaction.Date < valuationDate).ToList();
-        //            else
-        //                investment.Transactions = new List<Transaction>();
-        //        }
-        //    }
+            foreach (var kvp in dictionary)
+            {
 
-        //    return dictionary;
+                var investments = kvp.Value;
 
-        //}
+                foreach (var investment in investments)
+                {
+                    if (TransactionsByInvestmentId.TryGetValue(investment.InvestmentId, out var transactions))
+                        investment.Transactions = transactions.Where(transaction => transaction.Date < valuationDate).ToList();
+                    else
+                        investment.Transactions = new List<Transaction>();
+                }
+            }
+
+            return dictionary;
+
+        }
 
         //public double RealStateEngine(List<Investment> investments)
         //{
