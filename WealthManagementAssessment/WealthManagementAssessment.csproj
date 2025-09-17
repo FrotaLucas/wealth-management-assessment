@@ -25,6 +25,7 @@
 
 	<ItemGroup>
 	  <Folder Include="Application\Models\" />
+	  <Folder Include="Application\Orchestration\" />
 	</ItemGroup>
 
 
