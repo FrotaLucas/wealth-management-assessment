@@ -18,8 +18,6 @@ namespace WealthManagementAssessment.Domain.Contracts.Services
             _stockService = stockService;
         }
 
-
-
         public double FondEngine(string ownerId, DateTime valuationDate)
         {
             double fondSumup = 0;
@@ -56,7 +54,6 @@ namespace WealthManagementAssessment.Domain.Contracts.Services
                 double realStateSumup = _realStateService.RealStateEngine(investmentsOfFound);
 
                 double stockSumup = _stockService.StockEngine(investmentsOfFound, valuationDate);
-
 
                 fondSumup = fondSumup + totalPercentage * (realStateSumup + stockSumup);
             }
