@@ -58,6 +58,7 @@ class Program
                 services.AddSingleton<IPortfolioService, PortfolioService>();
                 services.AddSingleton<IStockService, StockService>();
                 services.AddSingleton<IRealStateService, RealStateService>();
+                services.AddSingleton<IFondService, FondService>(); 
 
             })
             .Build();
