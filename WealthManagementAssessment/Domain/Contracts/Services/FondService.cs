@@ -27,34 +27,16 @@ namespace WealthManagementAssessment.Domain.Contracts.Services
                 .Where(investment => investment.InvestmentType == "Fonds")
                 .ToList();
 
-            //_filesReader.ReadTransactions(fonds, valuationDate);
-
-            //old code
-            //List<Investment> allInvestments = _filesReader.ReadInvestments();
-
-
-            //new code
-            //Dictionary<string, List<Investment>> dictionary = _filesReader.GetDictionary(ownerId, valuationDate);
             Dictionary<string, List<Investment>> dictionary = _assetRepository.GetAllFondsByInvestor(ownerId, valuationDate);
-
-
 
             foreach (var fond in fonds)
             {
                 double totalPercentage = fond.Transactions.Sum(t => t.Value);
 
-                //old code
-                //List<Investment> investmentsOfFound = allInvestments.Where(i => i.InvestorId == fond.FondsInvestor).ToList();
-                //_filesReader.ReadTransactions(investmentsOfFound, valuationDate);
-
-                //new code
                 dictionary.TryGetValue(fond.FondsInvestor, out var investmentsOfFound);
-
-
                 double realStateSumup = _realStateService.RealStateEngine(investmentsOfFound);
-
                 double stockSumup = _stockService.StockEngine(investmentsOfFound, valuationDate);
-
+                
                 fondSumup = fondSumup + totalPercentage * (realStateSumup + stockSumup);
             }
 
