@@ -1,4 +1,5 @@
 ﻿using WealthManagementAssessment.Domain.Contracts.Interfaces;
+using WealthManagementAssessment.Domain.Contracts.Repository;
 using WealthManagementAssessment.Domain.Entities;
 
 namespace WealthManagementAssessment.Domain.Services

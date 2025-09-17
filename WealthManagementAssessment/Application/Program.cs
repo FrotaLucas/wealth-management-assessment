@@ -5,6 +5,7 @@ using WealthManagementAssessment.Application.Configuration;
 using WealthManagementAssessment.Application.Orchestration;
 using WealthManagementAssessment.Application.Orchestration.Interfaces;
 using WealthManagementAssessment.Domain.Contracts.Interfaces;
+using WealthManagementAssessment.Domain.Contracts.Repository;
 using WealthManagementAssessment.Domain.Services;
 using WealthManagementAssessment.Infrastructure.Helper;
 using WealthManagementAssessment.Infrastructure.Repository;

@@ -3,7 +3,7 @@ using CsvHelper;
 using CsvHelper.Configuration;
 using Microsoft.Extensions.Options;
 using WealthManagementAssessment.Application.Configuration;
-using WealthManagementAssessment.Domain.Contracts.Interfaces;
+using WealthManagementAssessment.Domain.Contracts.Repository;
 using WealthManagementAssessment.Domain.Entities;
 
 namespace WealthManagementAssessment.Infrastructure.Helper
