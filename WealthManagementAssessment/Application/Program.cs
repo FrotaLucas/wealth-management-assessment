@@ -68,9 +68,10 @@ class Program
         while(true)
         {
 
-            Console.WriteLine(" 1 - RealState Engine");
-            Console.WriteLine(" 2 - Stock Engine");
-            Console.WriteLine(" 3 - FundEngine");
+            Console.WriteLine(" 1 - RealState Asset");
+            Console.WriteLine(" 2 - Stock Asset");
+            Console.WriteLine(" 3 - Fund Asset");
+            Console.WriteLine(" 4 - Total Asset");
 
             string choice = Console.ReadLine();
             switch(choice)
@@ -84,9 +85,11 @@ class Program
                 case "3":
                     assetManagemetn.GetFundAsset(investorId, date);
                     break;
+                case "4":
+                    assetManagemetn.GetTotalAsset(investorId, date);    
+                    break;
             }
         }
-
 
 
         //assetManagemetn.GetTotalAsset(investorId, date);
