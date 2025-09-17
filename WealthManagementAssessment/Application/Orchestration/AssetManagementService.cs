@@ -30,9 +30,9 @@ namespace WealthManagementAssessment.Application.Orchestration
         {
             List<Investment> investments = _portfolioService.GetAllInvestmentsByInvestor(ownerId, valuationDate);
 
-            //double asset = _assetRepository.RealStateEngine(investments);
+            double asset = _realStateService.RealStateEngine(investments);
 
-            //Console.WriteLine($"Your Real Estate wallet is : {asset} Euros.");
+            Console.WriteLine($"Your Real Estate wallet is : {asset} Euros.");
 
         }
 
