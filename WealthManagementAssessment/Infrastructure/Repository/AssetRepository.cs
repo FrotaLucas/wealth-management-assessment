@@ -88,47 +88,47 @@ namespace WealthManagementAssessment.Infrastructure.Repository
 
         //}
 
-        public double RealStateEngine(List<Investment> investments)
-        {
+        //public double RealStateEngine(List<Investment> investments)
+        //{
 
-            var realStateSumup = investments
-                .Where(investment => investment.InvestmentType == "RealEstate")
-                .SelectMany(investment => investment.Transactions)
-                .Sum(transaction => transaction.Value);
+        //    var realStateSumup = investments
+        //        .Where(investment => investment.InvestmentType == "RealEstate")
+        //        .SelectMany(investment => investment.Transactions)
+        //        .Sum(transaction => transaction.Value);
 
-            return realStateSumup;
-        }
+        //    return realStateSumup;
+        //}
 
-        public double StockEngine(List<Investment> investments, DateTime valuationDate)
-        {
+        //public double StockEngine(List<Investment> investments, DateTime valuationDate)
+        //{
 
-            var stockInvestments = investments
-                .Where(investment => investment.InvestmentType.Equals("Stock"))
-                .ToList();
+        //    var stockInvestments = investments
+        //        .Where(investment => investment.InvestmentType.Equals("Stock"))
+        //        .ToList();
 
 
-            double stockSumup = 0;
+        //    double stockSumup = 0;
 
-            foreach (var investment in stockInvestments)
-            {
-                double totalShares = investment.Transactions.Sum(transaction => transaction.Value);
+        //    foreach (var investment in stockInvestments)
+        //    {
+        //        double totalShares = investment.Transactions.Sum(transaction => transaction.Value);
 
-                if (!QuotesByIsin.TryGetValue(investment.ISIN, out var isinQuotes))
-                    continue;
+        //        if (!QuotesByIsin.TryGetValue(investment.ISIN, out var isinQuotes))
+        //            continue;
 
-                var quoteToday = isinQuotes.FirstOrDefault(quote => quote.Date <= valuationDate);
+        //        var quoteToday = isinQuotes.FirstOrDefault(quote => quote.Date <= valuationDate);
 
-                //if valuationDate is too small
-                if (quoteToday == null)
-                    quoteToday = isinQuotes.LastOrDefault();
+        //        //if valuationDate is too small
+        //        if (quoteToday == null)
+        //            quoteToday = isinQuotes.LastOrDefault();
 
-                var marketValue = totalShares * quoteToday.PricePerShare;
-                stockSumup += marketValue;
+        //        var marketValue = totalShares * quoteToday.PricePerShare;
+        //        stockSumup += marketValue;
 
-            }
+        //    }
 
-            return stockSumup;
-        }
+        //    return stockSumup;
+        //}
 
 
         //PENSAR EM JA PASSAR A LISTA DE INVESTIMENTOS POR PARAMETRO PARA FondEngine tbm !!
