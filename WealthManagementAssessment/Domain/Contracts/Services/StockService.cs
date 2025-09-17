@@ -6,9 +6,9 @@ namespace WealthManagementAssessment.Domain.Contracts.Services
     public class StockService : IStockService
     {
 
-        private readonly IAssetRepository _assetRepository;
+        private readonly IPortfolioRepository _assetRepository;
 
-        public StockService(IAssetRepository assetRepository)
+        public StockService(IPortfolioRepository assetRepository)
         {
             _assetRepository = assetRepository;
         }

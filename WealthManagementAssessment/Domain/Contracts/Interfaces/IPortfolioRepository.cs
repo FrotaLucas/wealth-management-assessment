@@ -2,7 +2,7 @@
 
 namespace WealthManagementAssessment.Domain.Contracts.Interfaces
 {
-    public interface IAssetRepository
+    public interface IPortfolioRepository
     {
         //decimal RealStateEngine(List<Investment> investments);
 

@@ -5,13 +5,13 @@ namespace WealthManagementAssessment.Domain.Contracts.Services
 {
     public class FondService : IFondService
     {
-        private readonly IAssetRepository _assetRepository;
+        private readonly IPortfolioRepository _assetRepository;
 
         private readonly IRealStateService _realStateService;
 
         private readonly IStockService _stockService;
         
-        public FondService(IAssetRepository assetRepository, IRealStateService realStateService, IStockService stockService)
+        public FondService(IPortfolioRepository assetRepository, IRealStateService realStateService, IStockService stockService)
         {
             _assetRepository = assetRepository;
             _realStateService = realStateService;

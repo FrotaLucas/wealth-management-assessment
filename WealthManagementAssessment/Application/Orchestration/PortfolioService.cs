@@ -6,9 +6,9 @@ namespace WealthManagementAssessment.Application.Orchestration
 {
     public class PortfolioService : IPortfolioService
     {
-        private readonly IAssetRepository _assetRepository;
+        private readonly IPortfolioRepository _assetRepository;
 
-        public PortfolioService(IAssetRepository assetRepository)
+        public PortfolioService(IPortfolioRepository assetRepository)
         {
             _assetRepository = assetRepository;
         }

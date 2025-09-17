@@ -3,7 +3,7 @@ using WealthManagementAssessment.Domain.Entities;
 
 namespace WealthManagementAssessment.Infrastructure.Repository
 {
-    public class PortfolioRepository : IAssetRepository
+    public class PortfolioRepository : IPortfolioRepository
     {
         public IReadOnlyDictionary<string, List<Investment>> InvestmentsByOwnerId { get; }
 
