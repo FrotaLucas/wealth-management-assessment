@@ -5,6 +5,7 @@ using WealthManagementAssessment.Application.Configuration;
 using WealthManagementAssessment.Application.Orchestration;
 using WealthManagementAssessment.Application.Orchestration.Interfaces;
 using WealthManagementAssessment.Domain.Contracts.Interfaces;
+using WealthManagementAssessment.Domain.Contracts.Services;
 using WealthManagementAssessment.Infrastructure.Helper;
 using WealthManagementAssessment.Infrastructure.Repository;
 
@@ -55,6 +56,8 @@ class Program
                 services.AddSingleton<IAssetRepository, AssetRepository>();
                 services.AddSingleton<IAssetManagement, AssetManagementService>();
                 services.AddSingleton<IPortfolioService, PortfolioService>();
+                services.AddSingleton<IStockService, StockService>();
+                services.AddSingleton<IRealStateService, RealStateService>();
 
             })
             .Build();
