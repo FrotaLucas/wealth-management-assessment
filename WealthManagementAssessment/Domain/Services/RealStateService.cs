@@ -13,15 +13,18 @@ namespace WealthManagementAssessment.Domain.Services
             _portfolioRepository = portfolioRepository;
         }
 
-        public decimal RealStateEngine(List<Investment> investments)
+        public decimal RealStateEngine(string ownerId, DateTime valuationDate)
         {
 
-            
-
-            var realStateSumup = investments
+            var realStateSumup = _portfolioRepository.GetAllInvestmentsByInvestor(ownerId, valuationDate)
                 .Where(investment => investment.InvestmentType == "RealEstate")
                 .SelectMany(investment => investment.Transactions)
                 .Sum(transaction => transaction.Value);
+
+            //var realStateSumup = investments
+            //    .Where(investment => investment.InvestmentType == "RealEstate")
+            //    .SelectMany(investment => investment.Transactions)
+            //    .Sum(transaction => transaction.Value);
 
             return realStateSumup;
         }
