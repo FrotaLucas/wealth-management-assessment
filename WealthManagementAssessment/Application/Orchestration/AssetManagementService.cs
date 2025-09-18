@@ -32,9 +32,9 @@ namespace WealthManagementAssessment.Application.Orchestration
 
         public void GetRealEstateAsset(string ownerId, DateTime valuationDate)
         {
-            List<Investment> investments = _portfolioService.GetAllInvestmentsByInvestor(ownerId, valuationDate);
+            //List<Investment> investments = _portfolioService.GetAllInvestmentsByInvestor(ownerId, valuationDate);
 
-            decimal asset = _realStateService.RealStateEngine(investments);
+            decimal asset = _realStateService.RealStateEngine(ownerId, valuationDate);
 
             Console.WriteLine($"Your Real Estate wallet is : {asset:N2} Euros.\n");
 
