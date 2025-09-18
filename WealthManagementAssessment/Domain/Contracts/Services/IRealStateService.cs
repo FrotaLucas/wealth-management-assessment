@@ -4,6 +4,6 @@ namespace WealthManagementAssessment.Domain.Contracts.Interfaces
 {
     public interface IRealStateService
     {
-        decimal RealStateEngine(List<Investment> investments);
+        decimal RealStateEngine(string ownerId, DateTime valuationDate);
     }
 }
