@@ -56,7 +56,7 @@ namespace WealthManagementAssessment.Application.Orchestration
         {
             List<Investment> investments = _portfolioService.GetAllInvestmentsByInvestor(ownerId, valuationDate);
 
-            decimal realEstateAsset = _realStateService.RealStateEngine(investments);
+            decimal realEstateAsset = _realStateService.RealStateEngine(ownerId, valuationDate);
 
             decimal stockAsset = _stockService.StockEngine(investments, valuationDate);
 
