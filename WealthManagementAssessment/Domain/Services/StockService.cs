@@ -1,6 +1,5 @@
 ﻿using WealthManagementAssessment.Domain.Contracts.Interfaces;
 using WealthManagementAssessment.Domain.Contracts.Repository;
-using WealthManagementAssessment.Domain.Entities;
 
 namespace WealthManagementAssessment.Domain.Services
 {
@@ -14,13 +13,12 @@ namespace WealthManagementAssessment.Domain.Services
             _assetRepository = assetRepository;
         }
 
-        public decimal StockEngine(List<Investment> investments, DateTime valuationDate)
+        public decimal StockEngine(string ownerId, DateTime valuationDate)
         {
 
-            var stockInvestments = investments
+            var stockInvestments = _assetRepository.GetAllInvestmentsByInvestor(ownerId, valuationDate)
                 .Where(investment => investment.InvestmentType.Equals("Stock"))
                 .ToList();
-
 
             decimal stockSumup = 0;
 
