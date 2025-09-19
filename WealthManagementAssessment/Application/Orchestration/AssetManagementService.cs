@@ -6,7 +6,6 @@ namespace WealthManagementAssessment.Application.Orchestration
 {
     public class AssetManagementService : IAssetManagement
     {
-        private readonly IPortfolioService _portfolioService;
 
         private readonly IStockService _stockService;
 
@@ -15,9 +14,8 @@ namespace WealthManagementAssessment.Application.Orchestration
         private readonly IFondService _fondService;
 
         //PENSAR NUNA FORMA DE REDUZIR ESSE TAMANHO DOS PARAMETROS DO CONSTRUTOR!!
-        public AssetManagementService(IPortfolioService portfolioService, IStockService stockService, IRealStateService realStateService, IFondService fondService)
+        public AssetManagementService(IStockService stockService, IRealStateService realStateService, IFondService fondService)
         {
-            _portfolioService = portfolioService;
             _stockService = stockService;
             _realStateService = realStateService;
             _fondService = fondService;
@@ -54,7 +52,7 @@ namespace WealthManagementAssessment.Application.Orchestration
         //chamar de balance
         public void GetTotalAsset(string ownerId, DateTime valuationDate)
         {
-            List<Investment> investments = _portfolioService.GetAllInvestmentsByInvestor(ownerId, valuationDate);
+            //List<Investment> investments = _portfolioService.GetAllInvestmentsByInvestor(ownerId, valuationDate);
 
             decimal realEstateAsset = _realStateService.RealStateEngine(ownerId, valuationDate);
 
