@@ -42,9 +42,9 @@ namespace WealthManagementAssessment.Application.Orchestration
 
         public void GetStockAsset(string ownerId, DateTime valuationDate)
         {
-            List<Investment> investments = _portfolioService.GetAllInvestmentsByInvestor(ownerId, valuationDate);
+            //List<Investment> investments = _portfolioService.GetAllInvestmentsByInvestor(ownerId, valuationDate);
 
-            decimal asset = _stockService.StockEngine(investments, valuationDate);
+            decimal asset = _stockService.StockEngine(ownerId, valuationDate);
 
             Console.WriteLine($"Your Stock wallet is : {asset:N2} Euros.\n");
         }
@@ -58,7 +58,7 @@ namespace WealthManagementAssessment.Application.Orchestration
 
             decimal realEstateAsset = _realStateService.RealStateEngine(ownerId, valuationDate);
 
-            decimal stockAsset = _stockService.StockEngine(investments, valuationDate);
+            decimal stockAsset = _stockService.StockEngine(ownerId, valuationDate);
 
             decimal fundAsset = _fondService.FondEngine(ownerId, valuationDate);
 
