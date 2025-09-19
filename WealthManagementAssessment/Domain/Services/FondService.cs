@@ -34,9 +34,8 @@ namespace WealthManagementAssessment.Domain.Services
             {
                 decimal totalPercentage = fond.Transactions.Sum(t => t.Value);
 
-                dictionary.TryGetValue(fond.FondsInvestor, out var investmentsOfFound);
                 decimal realStateSumup = _realStateService.RealStateEngine(fond.FondsInvestor, valuationDate);
-                decimal stockSumup = _stockService.StockEngine(investmentsOfFound, valuationDate);
+                decimal stockSumup = _stockService.StockEngine(fond.FondsInvestor, valuationDate);
                 
                 fondSumup = fondSumup + totalPercentage * (realStateSumup + stockSumup);
             }
