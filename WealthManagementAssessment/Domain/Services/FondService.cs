@@ -6,15 +6,15 @@ namespace WealthManagementAssessment.Domain.Services
 {
     public class FondService : IFondService
     {
-        private readonly IPortfolioRepository _assetRepository;
+        private readonly IPortfolioRepository _portfolioRepository;
 
         private readonly IRealStateService _realStateService;
 
         private readonly IStockService _stockService;
         
-        public FondService(IPortfolioRepository assetRepository, IRealStateService realStateService, IStockService stockService)
+        public FondService(IPortfolioRepository portfolioRepository, IRealStateService realStateService, IStockService stockService)
         {
-            _assetRepository = assetRepository;
+            _portfolioRepository = portfolioRepository;
             _realStateService = realStateService;
             _stockService = stockService;
         }
@@ -24,11 +24,11 @@ namespace WealthManagementAssessment.Domain.Services
             decimal fondSumup = 0;
 
             //USAR ENUM ao inves de STRING!!!!!!!!
-            List<Investment> fonds = _assetRepository.GetAllInvestmentsByInvestor(ownerId, valuationDate)
+            List<Investment> fonds = _portfolioRepository.GetAllInvestmentsByInvestor(ownerId, valuationDate)
                 .Where(investment => investment.InvestmentType == "Fonds")
                 .ToList();
 
-            Dictionary<string, List<Investment>> dictionary = _assetRepository.GetAllFondsByInvestor(ownerId, valuationDate);
+            Dictionary<string, List<Investment>> dictionary = _portfolioRepository.GetAllFondsByInvestor(ownerId, valuationDate);
 
             foreach (var fond in fonds)
             {
