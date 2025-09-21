@@ -28,8 +28,6 @@ namespace WealthManagementAssessment.Domain.Services
                 .Where(investment => investment.InvestmentType == "Fonds")
                 .ToList();
 
-            Dictionary<string, List<Investment>> dictionary = _portfolioRepository.GetAllFondsByInvestor(ownerId, valuationDate);
-
             foreach (var fond in fonds)
             {
                 decimal totalPercentage = fond.Transactions.Sum(t => t.Value);
