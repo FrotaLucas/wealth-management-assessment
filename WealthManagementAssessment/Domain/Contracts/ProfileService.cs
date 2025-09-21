@@ -5,11 +5,11 @@ namespace WealthManagementAssessment.Domain.Contracts
     public class ProfileService
     {
 
-        private readonly IPortfolioRepository portfolioRepository;
+        private readonly IPortfolioRepository _portfolioRepository;
 
         public ProfileService(IPortfolioRepository portfolioRepository)
         {
-            this.portfolioRepository = portfolioRepository;
+            portfolioRepository = portfolioRepository;
         }
 
 
