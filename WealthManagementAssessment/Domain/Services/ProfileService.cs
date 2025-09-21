@@ -3,7 +3,7 @@ using WealthManagementAssessment.Domain.Contracts.Interfaces;
 using WealthManagementAssessment.Domain.Contracts.Repository;
 using WealthManagementAssessment.Domain.Entities;
 
-namespace WealthManagementAssessment.Domain.Contracts
+namespace WealthManagementAssessment.Domain.Services
 {
     public class ProfileService
     {
@@ -52,7 +52,7 @@ namespace WealthManagementAssessment.Domain.Contracts
                 decimal investStock = _stockService.StockEngine(fond.FondsInvestor, date);
                 decimal totInvest = investStock + investRealState;
 
-                riskkSum = riskkSum + (investRealState * 1 + investStock * 2) / (totInvest);
+                riskkSum = riskkSum + (investRealState * 1 + investStock * 2) / totInvest;
 
             }
 
