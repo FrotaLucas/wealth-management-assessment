@@ -22,7 +22,8 @@ namespace WealthManagementAssessment.Infrastructure.Repository
 
         }
 
-        public List<Investment> GetAllInvestmentsByInvestor(string ownerId, DateTime valuationDate)
+        public List<Investment> GetAllInvestmentsByInvestor
+            (string ownerId, DateTime valuationDate)
         {
             if (!InvestmentsByOwnerId.TryGetValue(ownerId, out var investments))
             {
@@ -85,6 +86,11 @@ namespace WealthManagementAssessment.Infrastructure.Repository
 
             return dictionary;
 
+        }
+
+        public Dictionary<string, List<Investment>> GetAllInvestments()
+        {
+            throw new NotImplementedException();
         }
 
         //public decimal RealStateEngine(List<Investment> investments)
