@@ -1,11 +1,12 @@
 ﻿using System.Runtime.CompilerServices;
 using WealthManagementAssessment.Domain.Contracts.Interfaces;
 using WealthManagementAssessment.Domain.Contracts.Repository;
+using WealthManagementAssessment.Domain.Contracts.Services;
 using WealthManagementAssessment.Domain.Entities;
 
 namespace WealthManagementAssessment.Domain.Services
 {
-    public class ProfileService
+    public class ProfileService : IProfileService
     {
 
         private readonly IPortfolioRepository _portfolioRepository;
@@ -23,12 +24,14 @@ namespace WealthManagementAssessment.Domain.Services
             _stockService = stockService;
         }
 
-        public void ProfileEngine(string ownerId)
+        public decimal ProfileEngine(string ownerId)
         {
             //talvel possa deletar de portfolio
             //var allInVestments = _portfolioRepository.GetAllInvestments();
 
-            //pegar data de hoje
+
+
+            //pegar data de HOJE
             DateTime date = DateTime.Parse("2025-09-21");
 
             decimal investmentFond = _fondService.FondEngine(ownerId, date);
@@ -56,13 +59,15 @@ namespace WealthManagementAssessment.Domain.Services
 
             }
 
-            decimal riskBalance = riskkSum / fonds.Count; 
+            decimal riskFond = riskkSum / fonds.Count; 
 
             //lista 
             //fond0
             //
 
-            decimal profile = (investmentRealState * 1  + investmentStock * 2   )/ totalWallet; 
+            decimal riskProfile = (investmentRealState * 1  + investmentStock * 2  + investmentFond * riskFond )/ totalWallet; 
+
+           return riskProfile;
 
         }
         
