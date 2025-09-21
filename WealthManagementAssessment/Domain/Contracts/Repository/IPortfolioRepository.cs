@@ -14,6 +14,8 @@ namespace WealthManagementAssessment.Domain.Contracts.Repository
 
         Dictionary<string, List<Investment>> GetAllFondsByInvestor(string ownerId, DateTime valuationDate);
 
+        Dictionary<string, List<Investment>> GetAllInvestments();
+
 
         //NAO SERIA MELHOR DEFINIR COMO METODO AO INVES DE PROPRIEDADE ?????
         IReadOnlyDictionary<string, List<Investment>> InvestmentsByOwnerId { get; }
