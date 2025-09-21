@@ -22,8 +22,7 @@ namespace WealthManagementAssessment.Infrastructure.Repository
 
         }
 
-        public List<Investment> GetAllInvestmentsByInvestor
-            (string ownerId, DateTime valuationDate)
+        public List<Investment> GetAllInvestmentsByInvestor(string ownerId, DateTime valuationDate)
         {
             if (!InvestmentsByOwnerId.TryGetValue(ownerId, out var investments))
             {
@@ -88,28 +87,45 @@ namespace WealthManagementAssessment.Infrastructure.Repository
 
         }
 
+        
+        //PODE APAGARRRRRRR!!
         public Dictionary<string, List<Investment>> GetAllInvestments()
         {
-            
+            Dictionary<string, List<Investment>> result = new Dictionary<string, List<Investment>> ();
+
+
             foreach(var kvp in InvestmentsByOwnerId)
             {
-                List<Investment> investments = kvp.Value;
+                List<Investment> allInvestments = new List<Investment> ();
 
-
-                foreach(var investment in investments)
+                foreach(var investment in kvp.Value)
                 {
-                    if (TransactionsByInvestmentId.TryGetValue(investment.InvestmentId, out var transactions))
+                    Investment newInvestment = new Investment
                     {
-                        investment.Transactions = transactions;
-                    }
+                        InvestorId = investment.InvestorId,
+                        InvestmentId = investment.InvestmentId,
+                        InvestmentType = investment.InvestmentType,
+                        City = investment.City,
+                        ISIN = investment.ISIN,
+                        FondsInvestor = investment.FondsInvestor,
+                    };
+
+
+                    if (TransactionsByInvestmentId.TryGetValue(investment.InvestmentId, out var transactions))
+                        newInvestment.Transactions = transactions;
                     else
-                        investment.Transactions = new List<Transaction>();
+                        newInvestment.Transactions = new List<Transaction>();
+
+                    allInvestments.Add(newInvestment);
                 }
+
+                result[kvp.Key] = allInvestments;
+            
 
             }
 
 
-            return new Dictionary<string, List<Investment>>();
+            return result;
         }
 
         //public decimal RealStateEngine(List<Investment> investments)
