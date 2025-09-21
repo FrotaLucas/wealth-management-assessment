@@ -6,17 +6,17 @@ namespace WealthManagementAssessment.Domain.Services
     public class StockService : IStockService
     {
 
-        private readonly IPortfolioRepository _assetRepository;
+        private readonly IPortfolioRepository _portfolioRepository;
 
-        public StockService(IPortfolioRepository assetRepository)
+        public StockService(IPortfolioRepository portfolioRepository)
         {
-            _assetRepository = assetRepository;
+            _portfolioRepository = portfolioRepository;
         }
 
         public decimal StockEngine(string ownerId, DateTime valuationDate)
         {
 
-            var stockInvestments = _assetRepository.GetAllInvestmentsByInvestor(ownerId, valuationDate)
+            var stockInvestments = _portfolioRepository.GetAllInvestmentsByInvestor(ownerId, valuationDate)
                 .Where(investment => investment.InvestmentType.Equals("Stock"))
                 .ToList();
 
@@ -27,7 +27,7 @@ namespace WealthManagementAssessment.Domain.Services
                 decimal totalShares = investment.Transactions.Sum(transaction => transaction.Value);
 
                 
-                if (!_assetRepository.QuotesByIsin.TryGetValue(investment.ISIN, out var isinQuotes))
+                if (!_portfolioRepository.QuotesByIsin.TryGetValue(investment.ISIN, out var isinQuotes))
                     continue;
 
                 var quoteToday = isinQuotes.FirstOrDefault(quote => quote.Date <= valuationDate);
