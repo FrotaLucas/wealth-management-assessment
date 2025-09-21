@@ -90,7 +90,26 @@ namespace WealthManagementAssessment.Infrastructure.Repository
 
         public Dictionary<string, List<Investment>> GetAllInvestments()
         {
-            throw new NotImplementedException();
+            
+            foreach(var kvp in InvestmentsByOwnerId)
+            {
+                List<Investment> investments = kvp.Value;
+
+
+                foreach(var investment in investments)
+                {
+                    if (TransactionsByInvestmentId.TryGetValue(investment.InvestmentId, out var transactions))
+                    {
+                        investment.Transactions = transactions;
+                    }
+                    else
+                        investment.Transactions = new List<Transaction>();
+                }
+
+            }
+
+
+            return new Dictionary<string, List<Investment>>();
         }
 
         //public decimal RealStateEngine(List<Investment> investments)
