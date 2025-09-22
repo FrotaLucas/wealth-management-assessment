@@ -7,6 +7,7 @@ using WealthManagementAssessment.Application.Orchestration.Interfaces;
 using WealthManagementAssessment.Domain.Contracts.Interfaces;
 using WealthManagementAssessment.Domain.Contracts.Repository;
 using WealthManagementAssessment.Domain.Contracts.Services;
+using WealthManagementAssessment.Domain.Enums;
 using WealthManagementAssessment.Domain.Services;
 using WealthManagementAssessment.Infrastructure.Helper;
 using WealthManagementAssessment.Infrastructure.Repository;
@@ -114,7 +115,7 @@ class Program
                         break; 
 
                     case "5":
-                        string profile= profileManagement.GetRiskProfile(investorId);
+                        InvestorProfileEnum profile= profileManagement.GetRiskProfile(investorId);
                         Console.WriteLine($"{profile} risk profile");
                         break;
 
