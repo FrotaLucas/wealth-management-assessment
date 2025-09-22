@@ -1,5 +1,6 @@
 ﻿using WealthManagementAssessment.Application.Orchestration.Interfaces;
 using WealthManagementAssessment.Domain.Contracts.Services;
+using WealthManagementAssessment.Domain.Enums;
 
 namespace WealthManagementAssessment.Application.Orchestration
 {
@@ -12,20 +13,20 @@ namespace WealthManagementAssessment.Application.Orchestration
             _profileService = profileService;
         }
 
-        public string GetRiskProfile(string ownerId)
+        public InvestorProfileEnum GetRiskProfile(string ownerId)
         {
 
             decimal riskProfile =  _profileService.ProfileEngine(ownerId);
 
             if (riskProfile == 0)
-                return "profile not identified";
+                return InvestorProfileEnum.Unknown;
 
             if (riskProfile < 1.33m)
-                return "conservative";
+                return InvestorProfileEnum.Conservative;
             else if (riskProfile > 1.33m && riskProfile < 1.66m)
-                return "moderate";
+                return InvestorProfileEnum.Moderate;
             else
-                return "aggressive";
+                return InvestorProfileEnum.Aggressive;
         }
     }
 }
