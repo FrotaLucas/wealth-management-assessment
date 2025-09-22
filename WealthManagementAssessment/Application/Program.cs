@@ -68,14 +68,13 @@ class Program
 
 
         var assetManagemetn = host.Services.GetRequiredService<IAssetManagement>();
-
+        var profileManagement = host.Services.GetRequiredService<IProfileManagementService>();
 
 
         string greeting = DateTime.Now.Hour < 12 ? "Good morning" : DateTime.Now.Hour < 18 ? "Good afternoon" : "Good evenning";
 
-        Console.WriteLine($"\n=== {greeting}, welcome to the Wealth Management Platform ===");
-
-        Console.WriteLine($"\n=== Enter a valid date and InvestmentId to view your portfolio size. (ex. 2025-07-20;Investor90 )=== \n");
+        Console.WriteLine($"\n                    === {greeting}, welcome to the Wealth Management Platform ===");
+        Console.WriteLine($"\n=== Enter a valid date and InvestmentId to view your portfolio size. (ex. 2025-07-20;Investor90) === \n");
 
         var line = Console.ReadLine();
 
@@ -113,7 +112,7 @@ class Program
                         assetManagemetn.GetTotalAsset(investorId, date);
                         break; 
                     case "5":
-                        assetManagemetn.GetProfile(investorId);
+                        profileManagement.GetProfile(investorId);
                         break;
                     case "0":
                         voltar = true; // sai do menu e volta para digitar novo ID/Data
