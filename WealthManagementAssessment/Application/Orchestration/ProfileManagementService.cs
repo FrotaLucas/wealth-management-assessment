@@ -14,7 +14,15 @@ namespace WealthManagementAssessment.Application.Orchestration
 
         public string GetProfile(string ownerId)
         {
-            throw new NotImplementedException();
+
+            decimal riskProfile =  _profileService.ProfileEngine(ownerId);
+
+            if (riskProfile < 1.33m)
+                return "conservative";
+            else if (riskProfile > 1.33m && riskProfile < 1.66m)
+                return "moderate";
+            else
+                return "aggressive";
         }
     }
 }
