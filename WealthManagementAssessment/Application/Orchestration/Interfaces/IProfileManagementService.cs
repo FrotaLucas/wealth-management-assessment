@@ -4,7 +4,6 @@ namespace WealthManagementAssessment.Application.Orchestration.Interfaces
 {
     public interface IProfileManagementService
     {
-
-        List<Investment> GetAllInvestmentsByInvestor(string investmentId, DateTime valuationDate);
+        public string GetProfile(string ownerId);
     }
 }
