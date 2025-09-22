@@ -57,7 +57,7 @@ class Program
 
                 services.AddSingleton<IFilesReader, FilesReader>();
                 services.AddSingleton<IPortfolioRepository, PortfolioRepository>();
-                services.AddSingleton<IAssetManagement, AssetManagementService>();
+                services.AddSingleton<IAssetManagementService, AssetManagementService>();
                 services.AddSingleton<IProfileManagementService, ProfileManagementService>();
                 services.AddSingleton<IStockService, StockService>();
                 services.AddSingleton<IRealStateService, RealStateService>();
@@ -68,7 +68,7 @@ class Program
             .Build();
 
 
-        var assetManagemetn = host.Services.GetRequiredService<IAssetManagement>();
+        var assetManagemetn = host.Services.GetRequiredService<IAssetManagementService>();
         var profileManagement = host.Services.GetRequiredService<IProfileManagementService>();
 
 

@@ -3,7 +3,7 @@ using WealthManagementAssessment.Domain.Contracts.Interfaces;
 
 namespace WealthManagementAssessment.Application.Orchestration
 {
-    public class AssetManagementService : IAssetManagement
+    public class AssetManagementService : IAssetManagementService
     {
 
         private readonly IStockService _stockService;

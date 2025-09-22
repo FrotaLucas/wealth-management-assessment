@@ -1,6 +1,6 @@
 ﻿namespace WealthManagementAssessment.Application.Orchestration.Interfaces
 {
-    public interface IAssetManagement
+    public interface IAssetManagementService
     {
         void GetTotalAsset(string ownerId, DateTime valuationDate);
 
