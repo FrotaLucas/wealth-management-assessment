@@ -1,9 +1,10 @@
 ﻿using WealthManagementAssessment.Domain.Entities;
+using WealthManagementAssessment.Domain.Enums;
 
 namespace WealthManagementAssessment.Application.Orchestration.Interfaces
 {
     public interface IProfileManagementService
     {
-        public string GetRiskProfile(string ownerId);
+        public InvestorProfileEnum GetRiskProfile(string ownerId);
     }
 }
