@@ -86,8 +86,8 @@ class Program
             DateTime date = DateTime.Parse(input[0]);
             string investorId = input[1];
 
-            bool voltar = false; // flag para sair do menu e voltar para novo ID/data
-            while (!voltar)
+            bool showMenu = true; // flag para sair do menu e voltar para novo ID/data
+            while (showMenu)
             {
                 Console.WriteLine("Choose your investment type: \n");
                 Console.WriteLine(" 1 - RealState Asset");
@@ -116,11 +116,11 @@ class Program
 
                     case "5":
                         InvestorProfileEnum profile= profileManagement.GetRiskProfile(investorId);
-                        Console.WriteLine($"{profile} risk profile");
+                        Console.WriteLine($"{profile} risk profile\n");
                         break;
 
                     case "0":
-                        voltar = true; // sai do menu e volta para digitar novo ID/Data
+                        showMenu = false;
                         break;
                     default:
                         Console.WriteLine("Wrong option! Choose a number from menu.");
