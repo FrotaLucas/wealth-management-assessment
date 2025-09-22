@@ -9,5 +9,8 @@
         void GetStockAsset(string ownerId, DateTime valuationDate);
 
         void GetFundAsset(string ownerId, DateTime valuationDate);
+
+        void GetProfile(string ownerId);
+        
     }
 }
