@@ -12,9 +12,11 @@ namespace WealthManagementAssessment.Domain.Contracts.Repository
 
         List<Investment> GetAllInvestmentsByInvestor(string ownerId, DateTime valuationDate);
 
-        Dictionary<string, List<Investment>> GetAllFondsByInvestor(string ownerId, DateTime valuationDate);
+        //List<string> GetAll();
 
-        Dictionary<string, List<Investment>> GetAllInvestments();
+        //Dictionary<string, List<Investment>> GetAllFondsByInvestor(string ownerId, DateTime valuationDate);
+
+        //Dictionary<string, List<Investment>> GetAllInvestments();
 
 
         //NAO SERIA MELHOR DEFINIR COMO METODO AO INVES DE PROPRIEDADE ?????
