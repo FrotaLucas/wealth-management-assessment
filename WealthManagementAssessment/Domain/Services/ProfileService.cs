@@ -1,5 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-using WealthManagementAssessment.Domain.Contracts.Interfaces;
+﻿using WealthManagementAssessment.Domain.Contracts.Interfaces;
 using WealthManagementAssessment.Domain.Contracts.Repository;
 using WealthManagementAssessment.Domain.Contracts.Services;
 using WealthManagementAssessment.Domain.Entities;
