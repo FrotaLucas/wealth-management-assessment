@@ -6,6 +6,7 @@ using WealthManagementAssessment.Application.Orchestration;
 using WealthManagementAssessment.Application.Orchestration.Interfaces;
 using WealthManagementAssessment.Domain.Contracts.Interfaces;
 using WealthManagementAssessment.Domain.Contracts.Repository;
+using WealthManagementAssessment.Domain.Contracts.Services;
 using WealthManagementAssessment.Domain.Services;
 using WealthManagementAssessment.Infrastructure.Helper;
 using WealthManagementAssessment.Infrastructure.Repository;
@@ -59,6 +60,7 @@ class Program
                 services.AddSingleton<IPortfolioService, PortfolioService>();
                 services.AddSingleton<IStockService, StockService>();
                 services.AddSingleton<IRealStateService, RealStateService>();
+                services.AddSingleton<IProfileService, ProfileService>();
                 services.AddSingleton<IFondService, FondService>(); 
 
             })
@@ -92,6 +94,7 @@ class Program
                 Console.WriteLine(" 2 - Stock Asset");
                 Console.WriteLine(" 3 - Fund Asset");
                 Console.WriteLine(" 4 - Total Asset");
+                Console.WriteLine(" 5 - Check your risk profile");
                 Console.WriteLine(" 0 - Enter new InvestmentId and Date\n"); // nova opção
 
                 string choice = Console.ReadLine();
@@ -108,6 +111,9 @@ class Program
                         break;
                     case "4":
                         assetManagemetn.GetTotalAsset(investorId, date);
+                        break; 
+                    case "5":
+                        assetManagemetn.GetProfile(investorId);
                         break;
                     case "0":
                         voltar = true; // sai do menu e volta para digitar novo ID/Data
