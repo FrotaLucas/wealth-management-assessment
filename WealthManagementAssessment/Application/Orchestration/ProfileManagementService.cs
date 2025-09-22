@@ -1,23 +1,20 @@
 ﻿using WealthManagementAssessment.Application.Orchestration.Interfaces;
-using WealthManagementAssessment.Domain.Contracts.Repository;
-using WealthManagementAssessment.Domain.Entities;
+using WealthManagementAssessment.Domain.Contracts.Services;
 
 namespace WealthManagementAssessment.Application.Orchestration
 {
     public class ProfileManagementService : IProfileManagementService
     {
-        private readonly IPortfolioRepository _assetRepository;
+        private readonly IProfileService _profileService;
 
-        public ProfileManagementService(IPortfolioRepository assetRepository)
+        public ProfileManagementService(IProfileService profileService)
         {
-            _assetRepository = assetRepository;
+            _profileService = profileService;
         }
 
-        public List<Investment> GetAllInvestmentsByInvestor(string ownerId, DateTime valuationDate)
+        public string GetProfile(string ownerId)
         {
-            List<Investment> investments = _assetRepository.GetAllInvestmentsByInvestor(ownerId, valuationDate);
-
-            return investments;
+            throw new NotImplementedException();
         }
     }
 }
