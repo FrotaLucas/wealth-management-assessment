@@ -12,7 +12,7 @@ namespace WealthManagementAssessment.Application.Orchestration
             _profileService = profileService;
         }
 
-        public string GetProfile(string ownerId)
+        public string GetRiskProfile(string ownerId)
         {
 
             decimal riskProfile =  _profileService.ProfileEngine(ownerId);

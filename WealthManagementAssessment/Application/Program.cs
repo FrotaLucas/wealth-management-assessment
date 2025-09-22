@@ -108,12 +108,16 @@ class Program
                     case "3":
                         assetManagemetn.GetFundAsset(investorId, date);
                         break;
+
                     case "4":
                         assetManagemetn.GetTotalAsset(investorId, date);
                         break; 
+
                     case "5":
-                        profileManagement.GetProfile(investorId);
+                        string profile= profileManagement.GetRiskProfile(investorId);
+                        Console.WriteLine($"{profile} risk profile");
                         break;
+
                     case "0":
                         voltar = true; // sai do menu e volta para digitar novo ID/Data
                         break;

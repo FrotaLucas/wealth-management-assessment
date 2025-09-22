@@ -4,6 +4,6 @@ namespace WealthManagementAssessment.Application.Orchestration.Interfaces
 {
     public interface IProfileManagementService
     {
-        public string GetProfile(string ownerId);
+        public string GetRiskProfile(string ownerId);
     }
 }
