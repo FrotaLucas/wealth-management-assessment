@@ -4,11 +4,11 @@ using WealthManagementAssessment.Domain.Entities;
 
 namespace WealthManagementAssessment.Application.Orchestration
 {
-    public class PortfolioService : IPortfolioService
+    public class ProfileManagementService : IPortfolioService
     {
         private readonly IPortfolioRepository _assetRepository;
 
-        public PortfolioService(IPortfolioRepository assetRepository)
+        public ProfileManagementService(IPortfolioRepository assetRepository)
         {
             _assetRepository = assetRepository;
         }
