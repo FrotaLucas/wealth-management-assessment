@@ -4,7 +4,7 @@ using WealthManagementAssessment.Domain.Entities;
 
 namespace WealthManagementAssessment.Application.Orchestration
 {
-    public class ProfileManagementService : IPortfolioService
+    public class ProfileManagementService : IProfileManagementService
     {
         private readonly IPortfolioRepository _assetRepository;
 
