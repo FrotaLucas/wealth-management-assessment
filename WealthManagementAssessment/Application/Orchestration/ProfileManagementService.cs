@@ -6,6 +6,12 @@ namespace WealthManagementAssessment.Application.Orchestration
 {
     public class ProfileManagementService : IProfileManagementService
     {
+
+        private const decimal ConservativeUpperLimit = 1.33m;
+
+        private const decimal ModerateUpperLimit = 1.66m;
+
+
         private readonly IProfileService _profileService;
 
         public ProfileManagementService(IProfileService profileService)
@@ -21,10 +27,12 @@ namespace WealthManagementAssessment.Application.Orchestration
             if (riskProfile == 0)
                 return InvestorProfileEnum.Unknown;
 
-            if (riskProfile < 1.33m)
+            if (riskProfile < ConservativeUpperLimit)
                 return InvestorProfileEnum.Conservative;
-            else if (riskProfile > 1.33m && riskProfile < 1.66m)
+
+            else if (riskProfile > ConservativeUpperLimit && riskProfile < ModerateUpperLimit)
                 return InvestorProfileEnum.Moderate;
+
             else
                 return InvestorProfileEnum.Aggressive;
         }
