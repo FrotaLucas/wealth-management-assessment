@@ -1,5 +1,6 @@
 ﻿using WealthManagementAssessment.Application.Orchestration.Interfaces;
 using WealthManagementAssessment.Domain.Contracts.Interfaces;
+using WealthManagementAssessment.Domain.Enums;
 
 namespace WealthManagementAssessment.Application.Orchestration
 {
@@ -61,6 +62,13 @@ namespace WealthManagementAssessment.Application.Orchestration
 
             Console.WriteLine($"Your total wallet is : {(realEstateAsset + stockAsset + fundAsset):N2} Euros.\n");
 
+        }
+
+
+        public InvestorProfileEnum GetRiskProfile(string onwerId)
+        {
+
+            return InvestorProfileEnum.Unknown;
         }
 
     }
