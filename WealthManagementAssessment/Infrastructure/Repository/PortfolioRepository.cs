@@ -26,7 +26,6 @@ namespace WealthManagementAssessment.Infrastructure.Repository
         {
             if (!InvestmentsByOwnerId.TryGetValue(ownerId, out var investments))
             {
-                Console.WriteLine("Investor does not have investments.");
                 return new List<Investment>();
             }
 
