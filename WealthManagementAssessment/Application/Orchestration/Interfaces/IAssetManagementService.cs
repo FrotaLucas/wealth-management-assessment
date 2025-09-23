@@ -8,7 +8,7 @@ namespace WealthManagementAssessment.Application.Orchestration.Interfaces
 
         decimal GetRealEstateAsset(string ownerId, DateTime valuationDate);
 
-        void GetStockAsset(string ownerId, DateTime valuationDate);
+        decimal GetStockAsset(string ownerId, DateTime valuationDate);
 
         decimal GetFundAsset(string ownerId, DateTime valuationDate);
 
