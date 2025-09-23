@@ -1,4 +1,6 @@
-﻿namespace WealthManagementAssessment.Application.Orchestration.Interfaces
+﻿using WealthManagementAssessment.Domain.Enums;
+
+namespace WealthManagementAssessment.Application.Orchestration.Interfaces
 {
     public interface IAssetManagementService
     {
@@ -9,5 +11,7 @@
         void GetStockAsset(string ownerId, DateTime valuationDate);
 
         void GetFundAsset(string ownerId, DateTime valuationDate);
+
+        InvestorProfileEnum GetRiskProfile(string onwerId);
     }
 }
