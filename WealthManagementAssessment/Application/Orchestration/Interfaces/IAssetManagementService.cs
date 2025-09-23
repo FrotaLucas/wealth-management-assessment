@@ -1,4 +1,5 @@
-﻿using WealthManagementAssessment.Domain.Enums;
+﻿using WealthManagementAssessment.Application.Models;
+using WealthManagementAssessment.Domain.Enums;
 
 namespace WealthManagementAssessment.Application.Orchestration.Interfaces
 {
@@ -6,7 +7,7 @@ namespace WealthManagementAssessment.Application.Orchestration.Interfaces
     {
         decimal GetTotalAsset(string ownerId, DateTime valuationDate);
 
-        decimal GetRealEstateAsset(string ownerId, DateTime valuationDate);
+        InvestorBalanceResult GetRealEstateAsset(string ownerId, DateTime valuationDate);
 
         decimal GetStockAsset(string ownerId, DateTime valuationDate);
 
