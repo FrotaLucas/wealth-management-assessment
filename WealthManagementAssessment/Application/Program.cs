@@ -100,23 +100,34 @@ class Program
                 {
                     case "1":
                         InvestorBalanceResult rt = assetManagement.GetRealEstateAsset(investorId, date);
-                        Console.WriteLine($"Your Real Estate wallet is : {rt.RealStateBalance:N2} Euros.\n");
+                        if (rt.RealStateBalance == 0)
+                            Console.WriteLine("You don't have real estate investments.\n");
+                        else
+                            Console.WriteLine($"Your Real Estate wallet is : {rt.RealStateBalance:N2} Euros.\n");
                         break;
 
                     case "2":
                         InvestorBalanceResult st = assetManagement.GetStockAsset(investorId, date);
-                        Console.WriteLine($"Your Stock wallet is : {st.StockBalance:N2} Euros.\n");
+                        if(st.StockBalance == 0)
+                            Console.WriteLine("You don't have stock investments.\n");
+                        else
+                            Console.WriteLine($"Your Stock wallet is : {st.StockBalance:N2} Euros.\n");
                         break;
 
                     case "3":
                         InvestorBalanceResult fn = assetManagement.GetFondAsset(investorId, date);
-                        Console.WriteLine($"Your Fund wallet is : {fn:N2} Euros.\n");
+                        if (fn.FondBalance == 0)
+                            Console.WriteLine("You don't have fond investments.\n");
+                        else
+                            Console.WriteLine($"Your Fund wallet is : {fn.FondBalance:N2} Euros.\n");
                         break;
 
                     case "4":
                         InvestorBalanceResult asset = assetManagement.GetTotalAsset(investorId, date);
-                        Console.WriteLine($"Your total wallet is : {(asset.TotalBalance):N2} Euros.\n");
-
+                        if (asset.TotalBalance == 0)
+                            Console.WriteLine("You don't have investments.\n");
+                        else
+                            Console.WriteLine($"Your total wallet is : {(asset.TotalBalance):N2} Euros.\n");
                         break; 
 
                     case "5":
