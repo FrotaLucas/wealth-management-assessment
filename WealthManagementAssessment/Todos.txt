@@ -1,32 +1,12 @@
-1 formatar codigo para que os caminhos para encontrar arquivo transactions.csv e investments.csv
-estejam dentro de um appsettings.config
+1 segundo o projeto do YURI a classe portfolioService (APPLICATION) so esta servindo para pegar a lista de investimento e passar como paramentro dentro 
+dos metodos RealStateService e StockService. 
+QUE TAL SE ESSES METODOS POR SI SO ENCONTRAREM SUAS LISTAS DE INVESTIMENTOS INVTERNAMENTE USANDO PORTIFOLIOREPOSITORY ???????
+FondService ja esta fazendo isso de qualquer forma nao eh ?? ???
 
 
-2 Sugestao
 
-RealState, Stock, Fond nao poderiam ser classes ? cada uma com seu metodo ENGINE para calcular 
-o tamanho do patrimonio? 
-
-3 na verdade o preenchimento dessas listas abaixo talvez não seja necessário pq o objetivo eh calcular
-o somatório de RealState, Stock e Fonds e não os dados do csv
-
-//preenchimento desnecessario
-List<Investment> selectedInvestments = new List<Investment>();
-List<Transaction> selectedEstate = new List<Transaction>();
-List<Transaction> selectedBuilding = new List<Transaction>();
-
-
-4 como modelar a aplicacao de forma que o arquivo csv seja lido apenas uma unica vez !!!
-
-
-5 o que eh melhor para performance do código. 
-5.1 transformar toda a string do csv em data antes de comparar OU
-5.2 transformar o parâmetro data do usuário em string 
-
-6 verifiquei que as datas que estão faltando no arquivo quotes.csv são finais de semana e feriado. 
-Talvez outras datas tbm não importa. 
-Logo, para saber o patrimônio em acoes vou usar sempre a ultima data com cotação valida da acao.
-
+2 segundo a CLEAN ARQUITECTURE as classes dentro de APPLICATION deveriam depender de IPortifolioRepository para pegar os dados
+e das classes Service da DOMAIN para trazer as regras de negocio. 
 
 7.stocks Pensar em algoritmo que encontra a menor distancia quando nao existir data de cotacao!!
 se a ultima data de cotacao disponivel foi muito antiga. Tipo 1 ano. Mas a data futura esta mais perto. 
