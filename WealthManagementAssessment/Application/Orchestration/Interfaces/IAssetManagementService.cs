@@ -9,9 +9,9 @@ namespace WealthManagementAssessment.Application.Orchestration.Interfaces
 
         InvestorBalanceResult GetRealEstateAsset(string ownerId, DateTime valuationDate);
 
-        decimal GetStockAsset(string ownerId, DateTime valuationDate);
+        InvestorBalanceResult GetStockAsset(string ownerId, DateTime valuationDate);
 
-        decimal GetFundAsset(string ownerId, DateTime valuationDate);
+        InvestorBalanceResult GetFondAsset(string ownerId, DateTime valuationDate);
 
         InvestorProfileEnum GetRiskProfile(string onwerId);
     }
