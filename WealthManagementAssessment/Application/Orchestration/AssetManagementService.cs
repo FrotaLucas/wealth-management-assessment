@@ -1,4 +1,5 @@
-﻿using WealthManagementAssessment.Application.Orchestration.Interfaces;
+﻿using WealthManagementAssessment.Application.Models;
+using WealthManagementAssessment.Application.Orchestration.Interfaces;
 using WealthManagementAssessment.Domain.Contracts.Interfaces;
 using WealthManagementAssessment.Domain.Contracts.Services;
 using WealthManagementAssessment.Domain.Enums;
@@ -32,11 +33,13 @@ namespace WealthManagementAssessment.Application.Orchestration
             return fund;
         }
 
-        public decimal GetRealEstateAsset(string ownerId, DateTime valuationDate)
+        public InvestorBalanceResult GetRealEstateAsset(string ownerId, DateTime valuationDate)
         {
             decimal realEstate = _realStateService.RealStateEngine(ownerId, valuationDate);
 
-            return realEstate;
+            var result =  new InvestorBalanceResult { RealStateBalance = realEstate };
+
+            return result;
         }
 
         public decimal GetStockAsset(string ownerId, DateTime valuationDate)
