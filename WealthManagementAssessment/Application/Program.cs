@@ -98,8 +98,10 @@ class Program
                 switch (choice)
                 {
                     case "1":
-                        assetManagemetn.GetRealEstateAsset(investorId, date);
+                        decimal realEstate = assetManagemetn.GetRealEstateAsset(investorId, date);
+                        Console.WriteLine($"Your Real Estate wallet is : {realEstate:N2} Euros.\n");
                         break;
+
                     case "2":
                         assetManagemetn.GetStockAsset(investorId, date);
                         break;
