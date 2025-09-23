@@ -51,18 +51,15 @@ namespace WealthManagementAssessment.Application.Orchestration
 
 
         //chamar de balance
-        public void GetTotalAsset(string ownerId, DateTime valuationDate)
+        public decimal GetTotalAsset(string ownerId, DateTime valuationDate)
         {
-            //List<Investment> investments = _portfolioService.GetAllInvestmentsByInvestor(ownerId, valuationDate);
-
             decimal realEstateAsset = _realStateService.RealStateEngine(ownerId, valuationDate);
 
             decimal stockAsset = _stockService.StockEngine(ownerId, valuationDate);
 
             decimal fundAsset = _fondService.FondEngine(ownerId, valuationDate);
 
-            Console.WriteLine($"Your total wallet is : {(realEstateAsset + stockAsset + fundAsset):N2} Euros.\n");
-
+            return realEstateAsset + stockAsset + fundAsset;
         }
 
 
