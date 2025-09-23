@@ -26,11 +26,13 @@ namespace WealthManagementAssessment.Application.Orchestration
             _profileService = profileService;
         }
 
-        public decimal GetFundAsset(string ownerId, DateTime valuationDate)
+        public InvestorBalanceResult GetFondAsset(string ownerId, DateTime valuationDate)
         {
             decimal fund = _fondService.FondEngine(ownerId, valuationDate);
 
-            return fund;
+            var result = new InvestorBalanceResult { FondBalance = fund };  
+
+            return result;
         }
 
         public InvestorBalanceResult GetRealEstateAsset(string ownerId, DateTime valuationDate)
@@ -42,13 +44,15 @@ namespace WealthManagementAssessment.Application.Orchestration
             return result;
         }
 
-        public decimal GetStockAsset(string ownerId, DateTime valuationDate)
+        public InvestorBalanceResult GetStockAsset(string ownerId, DateTime valuationDate)
         {
             //List<Investment> investments = _portfolioService.GetAllInvestmentsByInvestor(ownerId, valuationDate);
 
             decimal stock = _stockService.StockEngine(ownerId, valuationDate);
 
-            return stock;
+            var result = new InvestorBalanceResult { StockBalance = stock };
+
+            return result;
         }
 
 
