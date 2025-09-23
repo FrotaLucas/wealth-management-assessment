@@ -27,25 +27,25 @@ namespace WealthManagementAssessment.Application.Orchestration
 
         public decimal GetFundAsset(string ownerId, DateTime valuationDate)
         {
-            decimal asset = _fondService.FondEngine(ownerId, valuationDate);
+            decimal fund = _fondService.FondEngine(ownerId, valuationDate);
 
-            return asset;
+            return fund;
         }
 
         public decimal GetRealEstateAsset(string ownerId, DateTime valuationDate)
         {
-            decimal asset = _realStateService.RealStateEngine(ownerId, valuationDate);
+            decimal realEstate = _realStateService.RealStateEngine(ownerId, valuationDate);
 
-            return asset;
+            return realEstate;
         }
 
-        public void GetStockAsset(string ownerId, DateTime valuationDate)
+        public decimal GetStockAsset(string ownerId, DateTime valuationDate)
         {
             //List<Investment> investments = _portfolioService.GetAllInvestmentsByInvestor(ownerId, valuationDate);
 
-            decimal asset = _stockService.StockEngine(ownerId, valuationDate);
+            decimal stock = _stockService.StockEngine(ownerId, valuationDate);
 
-            Console.WriteLine($"Your Stock wallet is : {asset:N2} Euros.\n");
+            return stock;
         }
 
 
