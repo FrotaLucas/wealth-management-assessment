@@ -1,0 +1,12 @@
+portfolioservice                                assetmanagementService                                                            (LAYER 1)
+
+	|			|              |            |                  |
+assetrepository          portfolioservice, stockservice, realstateservice, FondService                                              (LAYER 2)
+
+                              |                   |                            |
+                    assetRepository          assetRepository              assetRepository,stockservice,realstateservice
+    
+ 
+
+
+
