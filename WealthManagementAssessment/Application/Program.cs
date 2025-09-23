@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WealthManagementAssessment.Application.Configuration;
+using WealthManagementAssessment.Application.Models;
 using WealthManagementAssessment.Application.Orchestration;
 using WealthManagementAssessment.Application.Orchestration.Interfaces;
 using WealthManagementAssessment.Domain.Contracts.Interfaces;
@@ -98,23 +99,23 @@ class Program
                 switch (choice)
                 {
                     case "1":
-                        decimal realEstate = assetManagemetn.GetRealEstateAsset(investorId, date);
-                        Console.WriteLine($"Your Real Estate wallet is : {realEstate:N2} Euros.\n");
+                        InvestorBalanceResult rt = assetManagemetn.GetRealEstateAsset(investorId, date);
+                        Console.WriteLine($"Your Real Estate wallet is : {rt.RealStateBalance:N2} Euros.\n");
                         break;
 
                     case "2":
-                        decimal stock = assetManagemetn.GetStockAsset(investorId, date);
-                        Console.WriteLine($"Your Stock wallet is : {stock:N2} Euros.\n");
+                        InvestorBalanceResult st = assetManagemetn.GetStockAsset(investorId, date);
+                        Console.WriteLine($"Your Stock wallet is : {st.StockBalance:N2} Euros.\n");
                         break;
 
                     case "3":
-                        decimal fund = assetManagemetn.GetFundAsset(investorId, date);
-                        Console.WriteLine($"Your Fund wallet is : {fund:N2} Euros.\n");
+                        InvestorBalanceResult fn = assetManagemetn.GetFondAsset(investorId, date);
+                        Console.WriteLine($"Your Fund wallet is : {fn:N2} Euros.\n");
                         break;
 
                     case "4":
-                        decimal asset = assetManagemetn.GetTotalAsset(investorId, date);
-                        Console.WriteLine($"Your total wallet is : {(asset):N2} Euros.\n");
+                        InvestorBalanceResult asset = assetManagemetn.GetTotalAsset(investorId, date);
+                        Console.WriteLine($"Your total wallet is : {(asset.TotalBalance):N2} Euros.\n");
 
                         break; 
 
