@@ -4,11 +4,11 @@ using WealthManagementAssessment.Domain.Entities;
 
 namespace WealthManagementAssessment.Domain.Services
 {
-    public class RealStateService : IRealStateService
+    public class RealEstateService : IRealStateService
     {
         private readonly IPortfolioRepository _portfolioRepository;
 
-        public RealStateService(IPortfolioRepository portfolioRepository)
+        public RealEstateService(IPortfolioRepository portfolioRepository)
         {
             _portfolioRepository = portfolioRepository;
         }

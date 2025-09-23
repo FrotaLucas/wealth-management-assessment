@@ -60,7 +60,7 @@ class Program
                 services.AddSingleton<IAssetManagementService, AssetManagementService>();
                 services.AddSingleton<IProfileManagementService, ProfileManagementService>();
                 services.AddSingleton<IStockService, StockService>();
-                services.AddSingleton<IRealStateService, RealStateService>();
+                services.AddSingleton<IRealStateService, RealEstateService>();
                 services.AddSingleton<IProfileService, ProfileService>();
                 services.AddSingleton<IFondService, FondService>(); 
 
