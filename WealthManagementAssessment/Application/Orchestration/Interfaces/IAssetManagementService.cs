@@ -5,7 +5,7 @@ namespace WealthManagementAssessment.Application.Orchestration.Interfaces
 {
     public interface IAssetManagementService
     {
-        decimal GetTotalAsset(string ownerId, DateTime valuationDate);
+        InvestorBalanceResult GetTotalAsset(string ownerId, DateTime valuationDate);
 
         InvestorBalanceResult GetRealEstateAsset(string ownerId, DateTime valuationDate);
 
