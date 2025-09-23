@@ -32,11 +32,13 @@ namespace WealthManagementAssessment.Application.Orchestration
             Console.WriteLine($"Your Fund wallet is : {asset:N2} Euros.\n");
         }
 
-        public void GetRealEstateAsset(string ownerId, DateTime valuationDate)
+        public decimal GetRealEstateAsset(string ownerId, DateTime valuationDate)
         {
             //List<Investment> investments = _portfolioService.GetAllInvestmentsByInvestor(ownerId, valuationDate);
 
             decimal asset = _realStateService.RealStateEngine(ownerId, valuationDate);
+
+            return asset;
 
             Console.WriteLine($"Your Real Estate wallet is : {asset:N2} Euros.\n");
 
