@@ -51,8 +51,8 @@ namespace WealthManagementAssessment.Application.Orchestration
             Console.WriteLine($"Your Stock wallet is : {asset:N2} Euros.\n");
         }
 
-        
-        
+
+
         //chamar de balance
         public void GetTotalAsset(string ownerId, DateTime valuationDate)
         {
@@ -69,10 +69,27 @@ namespace WealthManagementAssessment.Application.Orchestration
         }
 
 
-        public InvestorProfileEnum GetRiskProfile(string onwerId)
+        public InvestorProfileEnum GetRiskProfile(string ownerId)
         {
+            //ENCONTRAR UMA FORMA DE DEFINIR UNIVERSALMENTE ESSES LIMITES
+            decimal ConservativeUpperLimit = 1.33m;
 
-            return InvestorProfileEnum.Unknown;
+            decimal ModerateUpperLimit = 1.66m;
+
+
+            decimal riskProfile = _profileService.ProfileEngine(ownerId);
+
+            if (riskProfile == 0)
+                return InvestorProfileEnum.Unknown;
+
+            if (riskProfile < ConservativeUpperLimit)
+                return InvestorProfileEnum.Conservative;
+
+            else if (riskProfile > ConservativeUpperLimit && riskProfile < ModerateUpperLimit)
+                return InvestorProfileEnum.Moderate;
+
+            else
+                return InvestorProfileEnum.Aggressive;
         }
 
     }
