@@ -69,8 +69,6 @@ class Program
 
 
         var assetManagemetn = host.Services.GetRequiredService<IAssetManagementService>();
-        var profileManagement = host.Services.GetRequiredService<IProfileManagementService>();
-
 
         string greeting = DateTime.Now.Hour < 12 ? "Good morning" : DateTime.Now.Hour < 18 ? "Good afternoon" : "Good evenning";
 
@@ -115,7 +113,7 @@ class Program
                         break; 
 
                     case "5":
-                        InvestorProfileEnum profile= profileManagement.GetRiskProfile(investorId);
+                        InvestorProfileEnum profile = assetManagemetn.GetRiskProfile(investorId);
                         Console.WriteLine($"{profile} risk profile\n");
                         break;
 
