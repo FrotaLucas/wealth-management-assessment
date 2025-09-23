@@ -68,7 +68,7 @@ class Program
             .Build();
 
 
-        var assetManagemetn = host.Services.GetRequiredService<IAssetManagementService>();
+        var assetManagement = host.Services.GetRequiredService<IAssetManagementService>();
 
         string greeting = DateTime.Now.Hour < 12 ? "Good morning" : DateTime.Now.Hour < 18 ? "Good afternoon" : "Good evenning";
 
@@ -99,28 +99,28 @@ class Program
                 switch (choice)
                 {
                     case "1":
-                        InvestorBalanceResult rt = assetManagemetn.GetRealEstateAsset(investorId, date);
+                        InvestorBalanceResult rt = assetManagement.GetRealEstateAsset(investorId, date);
                         Console.WriteLine($"Your Real Estate wallet is : {rt.RealStateBalance:N2} Euros.\n");
                         break;
 
                     case "2":
-                        InvestorBalanceResult st = assetManagemetn.GetStockAsset(investorId, date);
+                        InvestorBalanceResult st = assetManagement.GetStockAsset(investorId, date);
                         Console.WriteLine($"Your Stock wallet is : {st.StockBalance:N2} Euros.\n");
                         break;
 
                     case "3":
-                        InvestorBalanceResult fn = assetManagemetn.GetFondAsset(investorId, date);
+                        InvestorBalanceResult fn = assetManagement.GetFondAsset(investorId, date);
                         Console.WriteLine($"Your Fund wallet is : {fn:N2} Euros.\n");
                         break;
 
                     case "4":
-                        InvestorBalanceResult asset = assetManagemetn.GetTotalAsset(investorId, date);
+                        InvestorBalanceResult asset = assetManagement.GetTotalAsset(investorId, date);
                         Console.WriteLine($"Your total wallet is : {(asset.TotalBalance):N2} Euros.\n");
 
                         break; 
 
                     case "5":
-                        InvestorProfileEnum profile = assetManagemetn.GetRiskProfile(investorId);
+                        InvestorProfileEnum profile = assetManagement.GetRiskProfile(investorId);
                         Console.WriteLine($"{profile} risk profile\n");
                         break;
 
