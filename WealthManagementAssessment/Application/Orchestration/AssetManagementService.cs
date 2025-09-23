@@ -64,13 +64,13 @@ namespace WealthManagementAssessment.Application.Orchestration
 
             decimal stockAsset = _stockService.StockEngine(ownerId, valuationDate);
 
-            decimal fundAsset = _fondService.FondEngine(ownerId, valuationDate);
+            decimal fondAsset = _fondService.FondEngine(ownerId, valuationDate);
 
             var result = new InvestorBalanceResult
             {
                 RealStateBalance = realEstateAsset,
                 StockBalance = stockAsset,
-                FondBalance = fundAsset
+                FondBalance = fondAsset
             };
 
             return result;
