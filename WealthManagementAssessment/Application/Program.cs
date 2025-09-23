@@ -58,7 +58,6 @@ class Program
                 services.AddSingleton<IFilesReader, FilesReader>();
                 services.AddSingleton<IPortfolioRepository, PortfolioRepository>();
                 services.AddSingleton<IAssetManagementService, AssetManagementService>();
-                services.AddSingleton<IProfileManagementService, ProfileManagementService>();
                 services.AddSingleton<IStockService, StockService>();
                 services.AddSingleton<IRealStateService, RealEstateService>();
                 services.AddSingleton<IProfileService, ProfileService>();
