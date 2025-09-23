@@ -103,14 +103,19 @@ class Program
                         break;
 
                     case "2":
-                        assetManagemetn.GetStockAsset(investorId, date);
+                        decimal stock = assetManagemetn.GetStockAsset(investorId, date);
+                        Console.WriteLine($"Your Stock wallet is : {stock:N2} Euros.\n");
                         break;
+
                     case "3":
-                        assetManagemetn.GetFundAsset(investorId, date);
+                        decimal fund = assetManagemetn.GetFundAsset(investorId, date);
+                        Console.WriteLine($"Your Fund wallet is : {fund:N2} Euros.\n");
                         break;
 
                     case "4":
-                        assetManagemetn.GetTotalAsset(investorId, date);
+                        decimal asset = assetManagemetn.GetTotalAsset(investorId, date);
+                        Console.WriteLine($"Your total wallet is : {(asset):N2} Euros.\n");
+
                         break; 
 
                     case "5":
