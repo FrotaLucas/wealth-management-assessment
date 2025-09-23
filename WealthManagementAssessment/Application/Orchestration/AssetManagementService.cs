@@ -25,23 +25,18 @@ namespace WealthManagementAssessment.Application.Orchestration
             _profileService = profileService;
         }
 
-        public void GetFundAsset(string ownerId, DateTime valuationDate)
+        public decimal GetFundAsset(string ownerId, DateTime valuationDate)
         {
             decimal asset = _fondService.FondEngine(ownerId, valuationDate);
 
-            Console.WriteLine($"Your Fund wallet is : {asset:N2} Euros.\n");
+            return asset;
         }
 
         public decimal GetRealEstateAsset(string ownerId, DateTime valuationDate)
         {
-            //List<Investment> investments = _portfolioService.GetAllInvestmentsByInvestor(ownerId, valuationDate);
-
             decimal asset = _realStateService.RealStateEngine(ownerId, valuationDate);
 
             return asset;
-
-            Console.WriteLine($"Your Real Estate wallet is : {asset:N2} Euros.\n");
-
         }
 
         public void GetStockAsset(string ownerId, DateTime valuationDate)
