@@ -58,7 +58,7 @@ namespace WealthManagementAssessment.Application.Orchestration
 
 
         //chamar de balance
-        public decimal GetTotalAsset(string ownerId, DateTime valuationDate)
+        public InvestorBalanceResult GetTotalAsset(string ownerId, DateTime valuationDate)
         {
             decimal realEstateAsset = _realStateService.RealStateEngine(ownerId, valuationDate);
 
@@ -66,7 +66,14 @@ namespace WealthManagementAssessment.Application.Orchestration
 
             decimal fundAsset = _fondService.FondEngine(ownerId, valuationDate);
 
-            return realEstateAsset + stockAsset + fundAsset;
+            var result = new InvestorBalanceResult
+            {
+                RealStateBalance = realEstateAsset,
+                StockBalance = stockAsset,
+                FondBalance = fundAsset
+            };
+
+            return result;
         }
 
 
