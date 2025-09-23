@@ -10,7 +10,7 @@ namespace WealthManagementAssessment.Application.Orchestration.Interfaces
 
         void GetStockAsset(string ownerId, DateTime valuationDate);
 
-        void GetFundAsset(string ownerId, DateTime valuationDate);
+        decimal GetFundAsset(string ownerId, DateTime valuationDate);
 
         InvestorProfileEnum GetRiskProfile(string onwerId);
     }
