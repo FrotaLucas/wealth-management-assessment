@@ -1,5 +1,6 @@
 ﻿using WealthManagementAssessment.Application.Orchestration.Interfaces;
 using WealthManagementAssessment.Domain.Contracts.Interfaces;
+using WealthManagementAssessment.Domain.Contracts.Services;
 using WealthManagementAssessment.Domain.Enums;
 
 namespace WealthManagementAssessment.Application.Orchestration
@@ -13,12 +14,15 @@ namespace WealthManagementAssessment.Application.Orchestration
 
         private readonly IFondService _fondService;
 
+        private readonly IProfileService _profileService;
+
         //PENSAR NUNA FORMA DE REDUZIR ESSE TAMANHO DOS PARAMETROS DO CONSTRUTOR!!
-        public AssetManagementService(IStockService stockService, IRealStateService realStateService, IFondService fondService)
+        public AssetManagementService(IStockService stockService, IRealStateService realStateService, IFondService fondService, IProfileService profileService)
         {
             _stockService = stockService;
             _realStateService = realStateService;
             _fondService = fondService;
+            _profileService = profileService;
         }
 
         public void GetFundAsset(string ownerId, DateTime valuationDate)
