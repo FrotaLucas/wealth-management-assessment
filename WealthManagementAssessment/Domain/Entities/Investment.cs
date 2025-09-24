@@ -1,4 +1,6 @@
-﻿namespace WealthManagementAssessment.Domain.Entities
+﻿using WealthManagementAssessment.Domain.Enums;
+
+namespace WealthManagementAssessment.Domain.Entities
 {
     public class Investment
     {
@@ -6,7 +8,7 @@
 
         public string InvestmentId { get; set; }
 
-        public string InvestmentType { get; set; }
+        public InvestmentTypeEnum InvestmentType { get; set; }
 
         public string ISIN { get; set; }
 
