@@ -1,5 +1,6 @@
 ﻿using WealthManagementAssessment.Domain.Contracts.Interfaces;
 using WealthManagementAssessment.Domain.Contracts.Repository;
+using WealthManagementAssessment.Domain.Enums;
 
 namespace WealthManagementAssessment.Domain.Services
 {
@@ -17,7 +18,7 @@ namespace WealthManagementAssessment.Domain.Services
         {
 
             var stockInvestments = _portfolioRepository.GetAllInvestmentsByInvestor(ownerId, valuationDate)
-                .Where(investment => investment.InvestmentType.Equals("Stock"))
+                .Where(investment => investment.InvestmentType.Equals(InvestmentTypeEnum.Stock))
                 .ToList();
 
             decimal stockSumup = 0;
