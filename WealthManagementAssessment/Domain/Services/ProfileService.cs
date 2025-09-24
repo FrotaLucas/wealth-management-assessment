@@ -2,6 +2,7 @@
 using WealthManagementAssessment.Domain.Contracts.Repository;
 using WealthManagementAssessment.Domain.Contracts.Services;
 using WealthManagementAssessment.Domain.Entities;
+using WealthManagementAssessment.Domain.Enums;
 
 namespace WealthManagementAssessment.Domain.Services
 {
@@ -37,7 +38,7 @@ namespace WealthManagementAssessment.Domain.Services
             //peso fond
             //USAR ENUM ao inves de STRING!!!!!!!!
             List<Investment> fonds = _portfolioRepository.GetAllInvestmentsByInvestor(ownerId, date)
-                .Where(investment => investment.InvestmentType == "Fonds")
+                .Where(investment => investment.InvestmentType.Equals(InvestmentTypeEnum.Fonds))
                 .ToList();
 
             if (totalWallet == 0)
