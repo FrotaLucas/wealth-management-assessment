@@ -62,22 +62,17 @@ namespace WealthManagementAssessment.Domain.Services
         {
             DateTime date = DateTime.Today; 
             decimal totalRisk = 0;
-            int count = 0;
 
             foreach (var fond in fonds)
             {
-                decimal realEstate = _realStateService.RealStateEngine(fond.FondsInvestor, date);
-                decimal stock = _stockService.StockEngine(fond.FondsInvestor, date);
-                decimal totInvest = stock + realEstate;
+                decimal investmentRealEstate = _realStateService.RealStateEngine(fond.FondsInvestor, date);
+                decimal investmentStock = _stockService.StockEngine(fond.FondsInvestor, date);
+                decimal totalInvestments = investmentStock + investmentRealEstate;
 
-                if (totInvest == 0)
-                    continue;
-
-                totalRisk = totalRisk + (realEstate * 1 + stock * 2) / totInvest;
-                count++;
+                totalRisk = totalRisk + (investmentRealEstate * 1 + investmentStock * 2) / totalInvestments;
             }
 
-            decimal fundRisk = count == 0 ? 0 : totalRisk / count;
+            decimal fundRisk = totalRisk / fonds.Count;
 
             return fundRisk;
         }
