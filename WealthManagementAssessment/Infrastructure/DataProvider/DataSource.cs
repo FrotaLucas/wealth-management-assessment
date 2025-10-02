@@ -8,12 +8,12 @@ using WealthManagementAssessment.Domain.Entities;
 
 namespace WealthManagementAssessment.Infrastructure.Helper
 {
-    public class FilesReader : IFilesReader
+    public class DataSource : IFilesReader
     {
 
         private readonly AppConfig _appConfig;
 
-        public FilesReader(IOptions<AppConfig> appConfig)
+        public DataSource(IOptions<AppConfig> appConfig)
         {
             _appConfig = appConfig.Value;
         }
