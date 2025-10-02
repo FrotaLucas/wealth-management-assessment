@@ -11,7 +11,7 @@ namespace WealthManagementAssessment.Infrastructure.Repository
 
         public IReadOnlyDictionary<string, List<Transaction>> TransactionsByInvestmentId { get; }  
 
-        public PortfolioRepository(IFilesReader filesReader)
+        public PortfolioRepository(IDataSource filesReader)
         {
 
             QuotesByIsin = filesReader.ReadQuotes();

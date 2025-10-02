@@ -2,7 +2,7 @@
 
 namespace WealthManagementAssessment.Domain.Contracts.Repository
 {
-    public interface IFilesReader
+    public interface IDataSource
     {
         Dictionary<string, List<Investment>> ReadInvestments();
 

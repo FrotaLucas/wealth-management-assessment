@@ -8,7 +8,7 @@ using WealthManagementAssessment.Domain.Entities;
 
 namespace WealthManagementAssessment.Infrastructure.Helper
 {
-    public class DataSource : IFilesReader
+    public class DataSource : IDataSource
     {
 
         private readonly AppConfig _appConfig;
