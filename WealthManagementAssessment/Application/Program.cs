@@ -8,7 +8,7 @@ class Program
 {
     private static void Main(string[] args)
     {
-        var host = Startup.NewMethodd();
+        var host = Startup.CreateHost();
 
         var assetManagement = host.Services.GetRequiredService<IAssetManagementService>();
 

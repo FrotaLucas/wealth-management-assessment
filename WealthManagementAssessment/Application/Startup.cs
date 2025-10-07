@@ -15,7 +15,7 @@ namespace WealthManagementAssessment.Application
 {
     public class Startup
     {
-        public static IHost NewMethodd()
+        public static IHost CreateHost()
         {
             string baseDir = AppContext.BaseDirectory;
 
