@@ -1,6 +1,6 @@
 ﻿using WealthManagementAssessment.Domain.Contracts.Interfaces;
 using WealthManagementAssessment.Domain.Contracts.Repository;
-using WealthManagementAssessment.Domain.Enums;
+using WealthManagementAssessment.Domain.Entities;
 
 namespace WealthManagementAssessment.Domain.Services
 {
@@ -17,8 +17,7 @@ namespace WealthManagementAssessment.Domain.Services
         public decimal StockEngine(string ownerId, DateTime valuationDate)
         {
 
-            var stockInvestments = _portfolioRepository.GetAllInvestmentsByInvestor(ownerId, valuationDate)
-                .Where(investment => investment.InvestmentType.Equals(InvestmentTypeEnum.Stock))
+            List<Stock> stockInvestments = _portfolioRepository.GetStocksByInvestor(ownerId, valuationDate)
                 .ToList();
 
             decimal stockSumup = 0;
@@ -33,19 +32,14 @@ namespace WealthManagementAssessment.Domain.Services
 
                 var quoteToday = isinQuotes.FirstOrDefault(quote => quote.Date <= valuationDate);
 
-                //if valuationDate is too small
                 if (quoteToday == null)
                     quoteToday = isinQuotes.LastOrDefault();
 
                 var marketValue = totalShares * quoteToday.PricePerShare;
                 stockSumup += marketValue;
-
             }
 
             return stockSumup;
         }
-
-
     }
-
 }
