@@ -17,21 +17,10 @@ class Program
 {
     private static void Main(string[] args)
     {
-
         string baseDir = AppContext.BaseDirectory;
+
         string projectDirectory = Directory.GetParent(baseDir)!.Parent!.Parent!.Parent.FullName;
 
-
-        string investorId1 = "Investor90";
-        string dateString = "2028-12-31";
-
-
-        //var line = Console.ReadLine();
-        //var steps = line.Split(";");
-        DateTime date1 = DateTime.Parse(dateString);
-
-        //Console.WriteLine("DateTime format: " + date1);
-        //1/16/2016 12:00:00 AM
 
         var host = Host.CreateDefaultBuilder(args)
             .ConfigureAppConfiguration( (ctx, cfg) =>
@@ -67,7 +56,6 @@ class Program
             })
             .Build();
 
-
         var assetManagement = host.Services.GetRequiredService<IAssetManagementService>();
 
         string greeting = DateTime.Now.Hour < 12 ? "Good morning" : DateTime.Now.Hour < 18 ? "Good afternoon" : "Good evenning";
@@ -81,10 +69,10 @@ class Program
         {
             var input = line.Split(";");
 
-            DateTime date = DateTime.Parse(input[0]);
+            var date = DateTime.Parse(input[0]);
             string investorId = input[1];
 
-            bool showMenu = true; // flag para sair do menu e voltar para novo ID/data
+            bool showMenu = true; 
             while (showMenu)
             {
                 Console.WriteLine("Choose your investment type: \n");
@@ -93,7 +81,7 @@ class Program
                 Console.WriteLine(" 3 - Fund Asset");
                 Console.WriteLine(" 4 - Total Asset");
                 Console.WriteLine(" 5 - Check your risk profile");
-                Console.WriteLine(" 0 - Enter new InvestmentId and Date\n"); // nova opção
+                Console.WriteLine(" 0 - Enter new InvestmentId and Date\n"); 
 
                 string choice = Console.ReadLine();
                 switch (choice)
@@ -138,6 +126,7 @@ class Program
                     case "0":
                         showMenu = false;
                         break;
+
                     default:
                         Console.WriteLine("Wrong option! Choose a number from menu.");
                         break;
@@ -147,8 +136,5 @@ class Program
             Console.WriteLine($"\n=== Enter a valid date and InvestmentId to view your portfolio size. (ex. 2025-07-20;Investor90 )=== \n");
             line = Console.ReadLine();
         }
-
-
     }
-
 }
