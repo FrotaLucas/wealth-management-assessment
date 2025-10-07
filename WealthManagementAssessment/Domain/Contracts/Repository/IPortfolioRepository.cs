@@ -1,4 +1,5 @@
 ﻿using WealthManagementAssessment.Domain.Entities;
+using WealthManagementAssessment.Infrastructure.DataProvider;
 
 namespace WealthManagementAssessment.Domain.Contracts.Repository
 {
@@ -10,7 +11,14 @@ namespace WealthManagementAssessment.Domain.Contracts.Repository
 
         //decimal FondEngine(string ownerId ,DateTime valuationDate);
 
-        List<Investment> GetAllInvestmentsByInvestor(string ownerId, DateTime valuationDate);
+
+        List<Stock> GetStocksByInvestor(string ownerId, DateTime valuationDate);
+
+        List<RealEstate> GetRealEstatesByInvestor(string ownerId, DateTime valuationDate);
+
+        List<Fond> GetFondsByInvestor(string ownerId, DateTime valuationDate);
+
+
 
         //List<string> GetAll();
 
@@ -19,8 +27,9 @@ namespace WealthManagementAssessment.Domain.Contracts.Repository
         //Dictionary<string, List<Investment>> GetAllInvestments();
 
 
+
         //NAO SERIA MELHOR DEFINIR COMO METODO AO INVES DE PROPRIEDADE ?????
-        IReadOnlyDictionary<string, List<Investment>> InvestmentsByOwnerId { get; }
+        IReadOnlyDictionary<string, List<InvestmentData>> InvestmentsByOwnerId { get; }
 
         IReadOnlyDictionary<string, List<Quote>> QuotesByIsin { get; }
 
