@@ -1,5 +1,4 @@
 ﻿using WealthManagementAssessment.Domain.Entities;
-using WealthManagementAssessment.Infrastructure.DataProvider;
 
 namespace WealthManagementAssessment.Domain.Contracts.Repository
 {
