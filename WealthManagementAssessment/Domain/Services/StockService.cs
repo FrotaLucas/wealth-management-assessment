@@ -17,23 +17,27 @@ namespace WealthManagementAssessment.Domain.Services
         public decimal StockEngine(string ownerId, DateTime valuationDate)
         {
 
-            List<Stock> stockInvestments = _portfolioRepository.GetStocksByInvestor(ownerId, valuationDate)
+            List<Stock> stocks = _portfolioRepository.GetStocksByInvestor(ownerId, valuationDate)
                 .ToList();
 
             decimal stockSumup = 0;
 
-            foreach (var investment in stockInvestments)
+
+         
+            foreach (var stock in stocks)
             {
-                decimal totalShares = investment.Transactions.Sum(transaction => transaction.Value);
+                decimal totalShares = stock.Transactions.Sum(transaction => transaction.Value);
 
-                
-                if (!_portfolioRepository.QuotesByIsin.TryGetValue(investment.ISIN, out var isinQuotes))
-                    continue;
+                var quoteToday = _portfolioRepository.GetQuoteByDate(stock.ISIN, valuationDate);
 
-                var quoteToday = isinQuotes.FirstOrDefault(quote => quote.Date <= valuationDate);
+                //if (!_portfolioRepository.QuotesByIsin.TryGetValue(stock.ISIN, out var isinQuotes))
+                //    continue;
 
-                if (quoteToday == null)
-                    quoteToday = isinQuotes.LastOrDefault();
+
+                //var quoteToday = isinQuotes.FirstOrDefault(quote => quote.Date <= valuationDate);
+
+                //if (quoteToday == null)
+                //    quoteToday = isinQuotes.LastOrDefault();
 
                 var marketValue = totalShares * quoteToday.PricePerShare;
                 stockSumup += marketValue;
