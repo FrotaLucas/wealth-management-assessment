@@ -7,11 +7,11 @@ namespace WealthManagementAssessment.Infrastructure.Repository
 {
     public class PortfolioRepository : IPortfolioRepository
     {
-        public IReadOnlyDictionary<string, List<InvestmentData>> InvestmentsByOwnerId { get; }
+        private IReadOnlyDictionary<string, List<InvestmentData>> InvestmentsByOwnerId { get; }
 
-        public IReadOnlyDictionary<string, List<Quote>> QuotesByIsin { get; }
+        private IReadOnlyDictionary<string, List<Quote>> QuotesByIsin { get; }
 
-        public IReadOnlyDictionary<string, List<Transaction>> TransactionsByInvestmentId { get; }  
+        private IReadOnlyDictionary<string, List<Transaction>> TransactionsByInvestmentId { get; }  
 
         public PortfolioRepository(IDataSource dataSource)
         {
@@ -102,5 +102,22 @@ namespace WealthManagementAssessment.Infrastructure.Repository
 
             return fonds;
         }
-  }
+
+        public Quote GetQuoteByDate(string isin, DateTime valuationDate)
+        {
+            if (!QuotesByIsin.TryGetValue(isin, out var isinQuotes))
+                return new Quote();
+
+            
+           var quote = isinQuotes
+                .Where(quote => quote.Date <= valuationDate)
+                .FirstOrDefault();
+
+            if (quote == null)
+                return isinQuotes.LastOrDefault();
+            
+            return quote;
+
+        }
+    }
 }
