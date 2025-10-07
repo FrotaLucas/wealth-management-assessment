@@ -22,7 +22,7 @@ namespace WealthManagementAssessment.Application
             string projectDirectory = Directory.GetParent(baseDir)!.Parent!.Parent!.Parent.FullName;
 
 
-            var host = Host.CreateDefaultBuilder(args)
+            var host = Host.CreateDefaultBuilder()
                 .ConfigureAppConfiguration((ctx, cfg) =>
                 {
                     cfg.SetBasePath(AppContext.BaseDirectory);
