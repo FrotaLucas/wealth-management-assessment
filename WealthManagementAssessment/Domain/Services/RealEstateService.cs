@@ -16,8 +16,7 @@ namespace WealthManagementAssessment.Domain.Services
         public decimal RealStateEngine(string ownerId, DateTime valuationDate)
         {
 
-            var realStateSumup = _portfolioRepository.GetAllInvestmentsByInvestor(ownerId, valuationDate)
-                .Where(investment => investment.InvestmentType.Equals(InvestmentTypeEnum.RealEstate))
+            var realStateSumup = _portfolioRepository.GetRealEstatesByInvestor(ownerId, valuationDate)
                 .SelectMany(investment => investment.Transactions)
                 .Sum(transaction => transaction.Value);
 
