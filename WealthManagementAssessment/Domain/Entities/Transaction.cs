@@ -2,13 +2,13 @@
 {
     public class Transaction
     {
-        public string InvestmentId { get; set; }
+        public string InvestmentId { get; set; } = default!;
 
-        public string Type { get; set; }
+        public string Type { get; set; } = default!;
 
         public DateTime Date { get; set; }
 
-        public decimal Value { get; set; }   
+        public decimal Value { get; set; } = default!;
 
 
     }

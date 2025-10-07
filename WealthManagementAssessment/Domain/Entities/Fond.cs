@@ -2,6 +2,6 @@
 {
     public class Fond : Investment
     {
-        public string FondsInvestor { get; set; } = default;
+        public string FondsInvestor { get; set; } = default!;
     }
 }

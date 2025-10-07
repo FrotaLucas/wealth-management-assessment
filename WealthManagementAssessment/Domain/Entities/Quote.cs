@@ -2,10 +2,10 @@
 {
     public class Quote
     {
-        public string ISIN { get; set; }
+        public string ISIN { get; set; } = default!;    
 
         public DateTime Date { get; set; }
 
-        public decimal PricePerShare { get; set; }
+        public decimal PricePerShare { get; set; } = default!;
     }
 }

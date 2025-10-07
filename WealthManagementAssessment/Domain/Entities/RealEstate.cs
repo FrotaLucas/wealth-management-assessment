@@ -2,6 +2,6 @@
 {
     public class RealEstate : Investment
     {
-        public string City { get; set; } = default;
+        public string City { get; set; } = default!;
     }
 }
