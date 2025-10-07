@@ -11,14 +11,14 @@ namespace WealthManagementAssessment.Infrastructure.Repository
 
         public IReadOnlyDictionary<string, List<Transaction>> TransactionsByInvestmentId { get; }  
 
-        public PortfolioRepository(IDataSource filesReader)
+        public PortfolioRepository(IDataSource dataSource)
         {
 
-            QuotesByIsin = filesReader.ReadQuotes();
+            QuotesByIsin = dataSource.ReadQuotes();
 
-            TransactionsByInvestmentId = filesReader.ReadTransactions();
+            TransactionsByInvestmentId = dataSource.ReadTransactions();
 
-            InvestmentsByOwnerId = filesReader.ReadInvestments();
+            InvestmentsByOwnerId = dataSource.ReadInvestments();
 
         }
 
