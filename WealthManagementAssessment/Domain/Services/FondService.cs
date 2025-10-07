@@ -29,6 +29,7 @@ namespace WealthManagementAssessment.Domain.Services
                 .Where(investment => investment.InvestmentType.Equals(InvestmentTypeEnum.Fonds))
                 .ToList();
 
+
             foreach (var fond in fonds)
             {
                 decimal totalPercentage = fond.Transactions.Sum(t => t.Value);
