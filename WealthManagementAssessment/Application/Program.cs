@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using WealthManagementAssessment.Application;
 using WealthManagementAssessment.Application.Configuration;
 using WealthManagementAssessment.Application.Models;
 using WealthManagementAssessment.Application.Orchestration;
@@ -17,44 +18,7 @@ class Program
 {
     private static void Main(string[] args)
     {
-        string baseDir = AppContext.BaseDirectory;
-
-        string projectDirectory = Directory.GetParent(baseDir)!.Parent!.Parent!.Parent.FullName;
-
-
-        var host = Host.CreateDefaultBuilder(args)
-            .ConfigureAppConfiguration( (ctx, cfg) =>
-            { 
-                cfg.SetBasePath(AppContext.BaseDirectory);
-
-                cfg.AddJsonFile(Path.Combine("Application","appsettings.json"), optional: true, reloadOnChange: true );
-                cfg.AddJsonFile(Path.Combine("Application", $"appsettings.{ctx.HostingEnvironment.EnvironmentName}.json"), optional: true, reloadOnChange: true);
-                
-                cfg.AddEnvironmentVariables();
-
-            })
-            .ConfigureServices( (ctx, services) =>
-            {
-                services.Configure<AppConfig>(options =>
-                {
-                    ctx.Configuration.Bind(options);
-
-                    options.CsvPath.Investments = Path.Combine(projectDirectory, options.CsvPath.Investments);
-                    options.CsvPath.Transactions = Path.Combine( projectDirectory, options.CsvPath.Transactions );
-                    options.CsvPath.Quotes = Path.Combine(projectDirectory, options.CsvPath.Quotes);
-
-                });
-
-                services.AddSingleton<IDataSource, DataSource>();
-                services.AddSingleton<IPortfolioRepository, PortfolioRepository>();
-                services.AddSingleton<IAssetManagementService, AssetManagementService>();
-                services.AddSingleton<IStockService, StockService>();
-                services.AddSingleton<IRealStateService, RealEstateService>();
-                services.AddSingleton<IProfileService, ProfileService>();
-                services.AddSingleton<IFondService, FondService>(); 
-
-            })
-            .Build();
+        var host = Startup.NewMethodd();
 
         var assetManagement = host.Services.GetRequiredService<IAssetManagementService>();
 
@@ -72,7 +36,7 @@ class Program
             var date = DateTime.Parse(input[0]);
             string investorId = input[1];
 
-            bool showMenu = true; 
+            bool showMenu = true;
             while (showMenu)
             {
                 Console.WriteLine("Choose your investment type: \n");
@@ -81,7 +45,7 @@ class Program
                 Console.WriteLine(" 3 - Fund Asset");
                 Console.WriteLine(" 4 - Total Asset");
                 Console.WriteLine(" 5 - Check your risk profile");
-                Console.WriteLine(" 0 - Enter new InvestmentId and Date\n"); 
+                Console.WriteLine(" 0 - Enter new InvestmentId and Date\n");
 
                 string choice = Console.ReadLine();
                 switch (choice)
@@ -96,7 +60,7 @@ class Program
 
                     case "2":
                         InvestorBalanceResult st = assetManagement.GetStockAsset(investorId, date);
-                        if(st.StockBalance == 0)
+                        if (st.StockBalance == 0)
                             Console.WriteLine("You don't have stock investments.\n");
                         else
                             Console.WriteLine($"Your Stock wallet is : {st.StockBalance:N2} Euros.\n");
@@ -116,7 +80,7 @@ class Program
                             Console.WriteLine("You don't have investments.\n");
                         else
                             Console.WriteLine($"Your total wallet is : {(asset.TotalBalance):N2} Euros.\n");
-                        break; 
+                        break;
 
                     case "5":
                         InvestorProfileEnum profile = assetManagement.GetRiskProfile(investorId);
@@ -137,4 +101,6 @@ class Program
             line = Console.ReadLine();
         }
     }
+
+   
 }
