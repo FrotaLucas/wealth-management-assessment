@@ -35,10 +35,9 @@ namespace WealthManagementAssessment.Domain.Services
 
             decimal totalWallet = investmentFond + investmentStock + investmentRealEstate;
 
-            //peso fond
-            //USAR ENUM ao inves de STRING!!!!!!!!
-            List<Investment> fonds = _portfolioRepository.GetAllInvestmentsByInvestor(ownerId, date)
-                .Where(investment => investment.InvestmentType.Equals(InvestmentTypeEnum.Fonds))
+
+            List<Fond> fonds = _portfolioRepository.GetFondsByInvestor(ownerId, date)
+                //.Where(investment => investment.InvestmentType.Equals(InvestmentTypeEnum.Fonds)) //NAO PRECISO DISSO AQUI!!
                 .ToList();
 
             if (totalWallet == 0)
@@ -58,7 +57,7 @@ namespace WealthManagementAssessment.Domain.Services
 
         }
 
-        private decimal CalculateAvareFondRisk(List<Investment> fonds)
+        private decimal CalculateAvareFondRisk(List<Fond> fonds)
         {
             DateTime date = DateTime.Today; 
             decimal totalRisk = 0;
@@ -76,36 +75,5 @@ namespace WealthManagementAssessment.Domain.Services
 
             return fundRisk;
         }
-
-
-
-        //APAGAR!!
-        //public void TotalProfile()
-        //{
-        //    List<string> allInvestors = _portfolioRepository.GetAll();
-
-        //    List<decimal> conservativeRisk = new List<decimal>();
-        //    List<decimal> moderateRisk = new List<decimal>();
-        //    List<decimal> agressiveRisk = new List<decimal>();
-
-        //    foreach (var investor in allInvestors)
-        //    {
-        //        decimal risk = ProfileEngine(investor);
-
-
-        //        if (risk < 1.33m)
-        //            conservativeRisk.Add(risk);
-        //        else if (risk > 1.33m && risk < 1.66m)
-        //            moderateRisk.Add(risk);
-        //        else
-        //            agressiveRisk.Add(risk);
-
-        //    }
-
-        //    int n = conservativeRisk.Count + moderateRisk.Count + agressiveRisk.Count;
-        //    Console.WriteLine($"tot conservative: {conservativeRisk.Count}");
-        //    Console.WriteLine($"tot moderate: {moderateRisk.Count}");
-        //    Console.WriteLine($"tot aggressive: {agressiveRisk.Count}");
-        //}
     }
 }
