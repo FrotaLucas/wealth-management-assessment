@@ -25,7 +25,7 @@ namespace WealthManagementAssessment.Domain.Services
             decimal fondSumup = 0;
 
             //USAR ENUM ao inves de STRING!!!!!!!!
-            List<Investment> fonds = _portfolioRepository.GetAllInvestmentsByInvestor(ownerId, valuationDate)
+            List<Fond> fonds = _portfolioRepository.GetFondsByInvestor(ownerId, valuationDate)
                 .Where(investment => investment.InvestmentType.Equals(InvestmentTypeEnum.Fonds))
                 .ToList();
 
