@@ -5,35 +5,12 @@ namespace WealthManagementAssessment.Domain.Contracts.Repository
 {
     public interface IPortfolioRepository
     {
-        //decimal RealStateEngine(List<Investment> investments);
-
-        //decimal StockEngine(List<Investment> investments, DateTime valuationDate);
-
-        //decimal FondEngine(string ownerId ,DateTime valuationDate);
-
-
         List<Stock> GetStocksByInvestor(string ownerId, DateTime valuationDate);
 
         List<RealEstate> GetRealEstatesByInvestor(string ownerId, DateTime valuationDate);
 
         List<Fond> GetFondsByInvestor(string ownerId, DateTime valuationDate);
 
-
-
-        //List<string> GetAll();
-
-        //Dictionary<string, List<Investment>> GetAllFondsByInvestor(string ownerId, DateTime valuationDate);
-
-        //Dictionary<string, List<Investment>> GetAllInvestments();
-
-
-
-        //NAO SERIA MELHOR DEFINIR COMO METODO AO INVES DE PROPRIEDADE ?????
-        IReadOnlyDictionary<string, List<InvestmentData>> InvestmentsByOwnerId { get; }
-
-        IReadOnlyDictionary<string, List<Quote>> QuotesByIsin { get; }
-
-        IReadOnlyDictionary<string, List<Transaction>> TransactionsByInvestmentId { get; }
-
+        Quote GetQuoteByDate(string isin,  DateTime valuationDate);
     }
 }
