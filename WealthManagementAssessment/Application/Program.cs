@@ -1,18 +1,8 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+﻿using Microsoft.Extensions.DependencyInjection;
 using WealthManagementAssessment.Application;
-using WealthManagementAssessment.Application.Configuration;
 using WealthManagementAssessment.Application.Models;
-using WealthManagementAssessment.Application.Orchestration;
 using WealthManagementAssessment.Application.Orchestration.Interfaces;
-using WealthManagementAssessment.Domain.Contracts.Interfaces;
-using WealthManagementAssessment.Domain.Contracts.Repository;
-using WealthManagementAssessment.Domain.Contracts.Services;
 using WealthManagementAssessment.Domain.Enums;
-using WealthManagementAssessment.Domain.Services;
-using WealthManagementAssessment.Infrastructure.Helper;
-using WealthManagementAssessment.Infrastructure.Repository;
 
 class Program
 {
