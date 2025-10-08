@@ -10,7 +10,5 @@
 
         public decimal Value { get; set; } = default!;
 
-
     }
-
 }
