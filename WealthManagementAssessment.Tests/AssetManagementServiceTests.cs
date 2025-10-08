@@ -3,7 +3,7 @@ using WealthManagementAssessment.Domain.Contracts.Interfaces;
 
 namespace WealthManagementAssessment.Tests
 {
-    public class AssetManagementServiceTest
+    public class AssetManagementServiceTests
     {
         private readonly Mock<IStockService> _stockService;
 
