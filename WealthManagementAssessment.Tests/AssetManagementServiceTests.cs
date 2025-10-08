@@ -15,7 +15,7 @@ namespace WealthManagementAssessment.Tests
 
         private readonly Mock<IProfileService> _profileService;
 
-        private readonly AssetManagementService _assetManagementServiceTests;
+        private readonly AssetManagementService _assetManagementService;
 
         public AssetManagementServiceTests()
         {
@@ -27,7 +27,7 @@ namespace WealthManagementAssessment.Tests
 
             _profileService = new Mock<IProfileService>();
 
-            _assetManagementServiceTests = new AssetManagementService(_stockService.Object,
+            _assetManagementService = new AssetManagementService(_stockService.Object,
                 _realEstateService.Object,
                 _fondService.Object,
                 _profileService.Object);
@@ -38,7 +38,19 @@ namespace WealthManagementAssessment.Tests
         [Fact]
         public void GetFondAsset_ShouldReturnExpectedFondBalance()
         {
+            string ownerId = "333";
+            DateTime date = new DateTime(2019, 12, 20);
+            decimal expectedAmount = 10000m;
 
+            _fondService
+                .Setup(x => x.FondEngine(ownerId,date) )
+                .Returns(expectedAmount);   
+
+            var result = _assetManagementService.GetFondAsset(ownerId, date);
+
+            Assert.Equal(expectedAmount, result.FondBalance);
+            Assert.Equal(0, result.StockBalance);
+            Assert.Equal(0, result.RealStateBalance);
         }
     }
 }
