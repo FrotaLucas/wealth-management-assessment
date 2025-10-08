@@ -22,8 +22,6 @@ namespace WealthManagementAssessment.Domain.Services
 
             decimal stockSumup = 0;
 
-
-         
             foreach (var stock in stocks)
             {
                 decimal totalShares = stock.Transactions.Sum(transaction => transaction.Value);
