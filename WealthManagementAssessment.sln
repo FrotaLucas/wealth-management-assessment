@@ -5,8 +5,6 @@ VisualStudioVersion = 17.13.35931.197
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WealthManagementAssessment", "WealthManagementAssessment\WealthManagementAssessment.csproj", "{DD0C3FEF-FDCD-47F7-88CB-69406712820B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WealthManagementAssessment.Testsss", "WealthManagementAssessment.Tests\WealthManagementAssessment.Testsss.csproj", "{DBBBC8F7-75D5-404F-A1C7-CD2DE4D73316}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{DD0C3FEF-FDCD-47F7-88CB-69406712820B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DD0C3FEF-FDCD-47F7-88CB-69406712820B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DD0C3FEF-FDCD-47F7-88CB-69406712820B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DBBBC8F7-75D5-404F-A1C7-CD2DE4D73316}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DBBBC8F7-75D5-404F-A1C7-CD2DE4D73316}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DBBBC8F7-75D5-404F-A1C7-CD2DE4D73316}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DBBBC8F7-75D5-404F-A1C7-CD2DE4D73316}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
