@@ -30,14 +30,10 @@ namespace WealthManagementAssessment.Domain.Services
 
                 var quoteToday = _portfolioRepository.GetQuoteByDate(stock.ISIN, valuationDate);
 
-                //if (!_portfolioRepository.QuotesByIsin.TryGetValue(stock.ISIN, out var isinQuotes))
-                //    continue;
-
-
-                //var quoteToday = isinQuotes.FirstOrDefault(quote => quote.Date <= valuationDate);
-
-                //if (quoteToday == null)
-                //    quoteToday = isinQuotes.LastOrDefault();
+                if(quoteToday == null || quoteToday.PricePerShare == 0 )
+                {
+                    continue;
+                }
 
                 var marketValue = totalShares * quoteToday.PricePerShare;
                 stockSumup += marketValue;
