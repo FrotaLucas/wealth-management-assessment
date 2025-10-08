@@ -24,22 +24,9 @@ namespace WealthManagementAssessment.Infrastructure.Repository
 
         }
 
-        public List<Stock> GetStocksByInvestor(string ownerId, DateTime valuationDate)
+        private void LoadTransactions<T>(IEnumerable<T> investments, DateTime valuationDate) where T : Investment
         {
-            if(!InvestmentsByOwnerId.TryGetValue(ownerId, out var investmentData))
-                return new List<Stock>();
-
-            List<Stock> stocks = investmentData
-                .Where(investment => investment.InvestmentType.Equals(InvestmentTypeEnum.Stock) )
-                .Select( investment => new Stock
-                {
-                    InvestorId = investment.InvestorId,
-                    InvestmentId = investment.InvestmentId,
-                    ISIN = investment.ISIN,
-                })
-                .ToList();
-
-            foreach (var investment in stocks)
+            foreach (var investment in investments)
             {
 
                 if (TransactionsByInvestmentId.TryGetValue(investment.InvestmentId, out var transactions))
@@ -47,8 +34,26 @@ namespace WealthManagementAssessment.Infrastructure.Repository
                 else
                     investment.Transactions = new List<Transaction>();
             }
+        }
 
-           return stocks;
+        public List<Stock> GetStocksByInvestor(string ownerId, DateTime valuationDate)
+        {
+            if (!InvestmentsByOwnerId.TryGetValue(ownerId, out var investmentData))
+                return new List<Stock>();
+
+            List<Stock> stocks = investmentData
+                .Where(investment => investment.InvestmentType.Equals(InvestmentTypeEnum.Stock))
+                .Select(investment => new Stock
+                {
+                    InvestorId = investment.InvestorId,
+                    InvestmentId = investment.InvestmentId,
+                    ISIN = investment.ISIN,
+                })
+                .ToList();
+
+            LoadTransactions(stocks, valuationDate);
+
+            return stocks;
         }
 
         public List<RealEstate> GetRealEstatesByInvestor(string ownerId, DateTime valuationDate)
@@ -66,13 +71,7 @@ namespace WealthManagementAssessment.Infrastructure.Repository
                 })
                 .ToList();
 
-            foreach(var investment in realEstates)
-            {
-                if (TransactionsByInvestmentId.TryGetValue(investment.InvestmentId, out var transactions))
-                    investment.Transactions = transactions.Where( transaction => transaction.Date <= valuationDate ).ToList();  
-                else
-                    investment.Transactions = new List<Transaction>();
-            }
+            LoadTransactions(realEstates, valuationDate);
           
             return realEstates;
         }
@@ -92,13 +91,7 @@ namespace WealthManagementAssessment.Infrastructure.Repository
                 })
                 .ToList();
 
-            foreach (var investment in fonds)
-            {
-                if (TransactionsByInvestmentId.TryGetValue(investment.InvestmentId, out var transactions))
-                    investment.Transactions = transactions.Where(transaction => transaction.Date <= valuationDate).ToList();
-                else
-                    investment.Transactions = new List<Transaction>();
-            }
+            LoadTransactions(fonds, valuationDate);
 
             return fonds;
         }
