@@ -7,7 +7,6 @@ namespace WealthManagementAssessment.Domain.Services
 {
     public class ProfileService : IProfileService
     {
-
         private readonly IPortfolioRepository _portfolioRepository;
 
         private readonly IFondService _fondService;
@@ -16,7 +15,10 @@ namespace WealthManagementAssessment.Domain.Services
 
         private readonly IStockService _stockService;
 
-        public ProfileService(IPortfolioRepository portfolioRepository, IFondService fondService, IRealStateService realStateService, IStockService stockService)
+        public ProfileService(IPortfolioRepository portfolioRepository,
+            IFondService fondService, 
+            IRealStateService realStateService, 
+            IStockService stockService)
         {
             _portfolioRepository = portfolioRepository;
             _fondService = fondService;
@@ -36,7 +38,6 @@ namespace WealthManagementAssessment.Domain.Services
 
 
             List<Fond> fonds = _portfolioRepository.GetFondsByInvestor(ownerId, date)
-                //.Where(investment => investment.InvestmentType.Equals(InvestmentTypeEnum.Fonds)) //NAO PRECISO DISSO AQUI!!
                 .ToList();
 
             if (totalWallet == 0)
@@ -51,9 +52,7 @@ namespace WealthManagementAssessment.Domain.Services
                 return riskProfile;
             }
 
-
             return (investmentRealEstate * 1 + investmentStock * 2 ) / totalWallet; ;
-
         }
 
         private decimal CalculateAvareFondRisk(List<Fond> fonds)
