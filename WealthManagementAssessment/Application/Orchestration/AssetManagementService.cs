@@ -17,8 +17,10 @@ namespace WealthManagementAssessment.Application.Orchestration
 
         private readonly IProfileService _profileService;
 
-        //PENSAR NUNA FORMA DE REDUZIR ESSE TAMANHO DOS PARAMETROS DO CONSTRUTOR!!
-        public AssetManagementService(IStockService stockService, IRealStateService realStateService, IFondService fondService, IProfileService profileService)
+        public AssetManagementService(IStockService stockService,
+                                      IRealStateService realStateService,
+                                      IFondService fondService,
+                                      IProfileService profileService)
         {
             _stockService = stockService;
             _realStateService = realStateService;
