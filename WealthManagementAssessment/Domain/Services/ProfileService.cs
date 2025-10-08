@@ -11,13 +11,13 @@ namespace WealthManagementAssessment.Domain.Services
 
         private readonly IFondService _fondService;
 
-        private readonly IRealStateService _realStateService;
+        private readonly IRealEstateService _realStateService;
 
         private readonly IStockService _stockService;
 
         public ProfileService(IPortfolioRepository portfolioRepository,
             IFondService fondService, 
-            IRealStateService realStateService, 
+            IRealEstateService realStateService, 
             IStockService stockService)
         {
             _portfolioRepository = portfolioRepository;

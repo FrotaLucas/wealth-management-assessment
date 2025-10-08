@@ -3,7 +3,7 @@ using WealthManagementAssessment.Domain.Contracts.Repository;
 
 namespace WealthManagementAssessment.Domain.Services
 {
-    public class RealEstateService : IRealStateService
+    public class RealEstateService : IRealEstateService
     {
         private readonly IPortfolioRepository _portfolioRepository;
 

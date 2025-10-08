@@ -11,19 +11,19 @@ namespace WealthManagementAssessment.Application.Orchestration
 
         private readonly IStockService _stockService;
 
-        private readonly IRealStateService _realStateService;
+        private readonly IRealEstateService _realEstateService;
 
         private readonly IFondService _fondService;
 
         private readonly IProfileService _profileService;
 
         public AssetManagementService(IStockService stockService,
-                                      IRealStateService realStateService,
+                                      IRealEstateService realStateService,
                                       IFondService fondService,
                                       IProfileService profileService)
         {
             _stockService = stockService;
-            _realStateService = realStateService;
+            _realEstateService = realStateService;
             _fondService = fondService;
             _profileService = profileService;
         }
@@ -39,7 +39,7 @@ namespace WealthManagementAssessment.Application.Orchestration
 
         public InvestorBalanceResult GetRealEstateAsset(string ownerId, DateTime valuationDate)
         {
-            decimal realEstate = _realStateService.RealStateEngine(ownerId, valuationDate);
+            decimal realEstate = _realEstateService.RealStateEngine(ownerId, valuationDate);
 
             var result =  new InvestorBalanceResult { RealStateBalance = realEstate };
 
@@ -57,7 +57,7 @@ namespace WealthManagementAssessment.Application.Orchestration
 
         public InvestorBalanceResult GetTotalAsset(string ownerId, DateTime valuationDate)
         {
-            decimal realEstateAsset = _realStateService.RealStateEngine(ownerId, valuationDate);
+            decimal realEstateAsset = _realEstateService.RealStateEngine(ownerId, valuationDate);
 
             decimal stockAsset = _stockService.StockEngine(ownerId, valuationDate);
 

@@ -49,7 +49,7 @@ namespace WealthManagementAssessment.Application
                     services.AddSingleton<IPortfolioRepository, PortfolioRepository>();
                     services.AddSingleton<IAssetManagementService, AssetManagementService>();
                     services.AddSingleton<IStockService, StockService>();
-                    services.AddSingleton<IRealStateService, RealEstateService>();
+                    services.AddSingleton<IRealEstateService, RealEstateService>();
                     services.AddSingleton<IProfileService, ProfileService>();
                     services.AddSingleton<IFondService, FondService>();
 

@@ -8,11 +8,11 @@ namespace WealthManagementAssessment.Domain.Services
     {
         private readonly IPortfolioRepository _portfolioRepository;
 
-        private readonly IRealStateService _realStateService;
+        private readonly IRealEstateService _realStateService;
 
         private readonly IStockService _stockService;
         
-        public FondService(IPortfolioRepository portfolioRepository, IRealStateService realStateService, IStockService stockService)
+        public FondService(IPortfolioRepository portfolioRepository, IRealEstateService realStateService, IStockService stockService)
         {
             _portfolioRepository = portfolioRepository;
             _realStateService = realStateService;

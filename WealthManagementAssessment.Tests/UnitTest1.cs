@@ -7,7 +7,7 @@ namespace WealthManagementAssessment.Tests
     {
         private readonly Mock<IStockService> _stockService;
 
-        private readonly Mock<IRealStateService> _realStateService;
+        private readonly Mock<IRealEstateService> _realStateService;
 
         [Fact]
         public void GetFondAsset_ShouldReturnExpectedFondBalance()
