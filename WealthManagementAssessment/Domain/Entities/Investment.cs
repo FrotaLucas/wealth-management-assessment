@@ -9,7 +9,5 @@ namespace WealthManagementAssessment.Domain.Entities
         public string InvestmentId { get; set; } = default!;
 
         public List<Transaction> Transactions { get; set; } = new List<Transaction>();  
-
-
     }
 }
