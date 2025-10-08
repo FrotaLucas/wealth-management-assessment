@@ -15,6 +15,5 @@ namespace WealthManagementAssessment.Infrastructure.DataProvider
         public string City { get; set; } = default!;
 
         public string FondsInvestor { get; set; } = default!;
-
     }
 }
