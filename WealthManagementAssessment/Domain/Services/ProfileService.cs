@@ -2,7 +2,6 @@
 using WealthManagementAssessment.Domain.Contracts.Repository;
 using WealthManagementAssessment.Domain.Contracts.Services;
 using WealthManagementAssessment.Domain.Entities;
-using WealthManagementAssessment.Domain.Enums;
 
 namespace WealthManagementAssessment.Domain.Services
 {
