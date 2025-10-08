@@ -48,8 +48,6 @@ namespace WealthManagementAssessment.Application.Orchestration
 
         public InvestorBalanceResult GetStockAsset(string ownerId, DateTime valuationDate)
         {
-            //List<Investment> investments = _portfolioService.GetAllInvestmentsByInvestor(ownerId, valuationDate);
-
             decimal stock = _stockService.StockEngine(ownerId, valuationDate);
 
             var result = new InvestorBalanceResult { StockBalance = stock };
@@ -57,9 +55,6 @@ namespace WealthManagementAssessment.Application.Orchestration
             return result;
         }
 
-
-
-        //chamar de balance
         public InvestorBalanceResult GetTotalAsset(string ownerId, DateTime valuationDate)
         {
             decimal realEstateAsset = _realStateService.RealStateEngine(ownerId, valuationDate);
@@ -101,7 +96,5 @@ namespace WealthManagementAssessment.Application.Orchestration
             else
                 return InvestorProfileEnum.Aggressive;
         }
-
     }
-
 }
