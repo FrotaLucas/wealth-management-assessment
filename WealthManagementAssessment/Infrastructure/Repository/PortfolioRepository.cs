@@ -113,11 +113,10 @@ namespace WealthManagementAssessment.Infrastructure.Repository
                 .Where(quote => quote.Date <= valuationDate)
                 .FirstOrDefault();
 
-            if (quote == null)
-                return isinQuotes.LastOrDefault();
-            
-            return quote;
+            if (quote == null) 
+                return new Quote();
 
+            return quote;
         }
     }
 }
