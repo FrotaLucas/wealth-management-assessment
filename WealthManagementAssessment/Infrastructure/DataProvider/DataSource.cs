@@ -11,7 +11,6 @@ namespace WealthManagementAssessment.Infrastructure.Helper
 {
     public class DataSource : IDataSource
     {
-
         private readonly AppConfig _appConfig;
 
         public DataSource(IOptions<AppConfig> appConfig)
