@@ -1,7 +1,6 @@
 ﻿using WealthManagementAssessment.Domain.Contracts.Interfaces;
 using WealthManagementAssessment.Domain.Contracts.Repository;
 using WealthManagementAssessment.Domain.Entities;
-using WealthManagementAssessment.Domain.Enums;
 
 namespace WealthManagementAssessment.Domain.Services
 {
@@ -24,11 +23,8 @@ namespace WealthManagementAssessment.Domain.Services
         {
             decimal fondSumup = 0;
 
-            //USAR ENUM ao inves de STRING!!!!!!!!
             List<Fond> fonds = _portfolioRepository.GetFondsByInvestor(ownerId, valuationDate)
-                .Where(investment => investment.InvestmentType.Equals(InvestmentTypeEnum.Fonds))
                 .ToList();
-
 
             foreach (var fond in fonds)
             {
