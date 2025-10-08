@@ -1,6 +1,5 @@
 ﻿using WealthManagementAssessment.Domain.Contracts.Interfaces;
 using WealthManagementAssessment.Domain.Contracts.Repository;
-using WealthManagementAssessment.Domain.Enums;
 
 namespace WealthManagementAssessment.Domain.Services
 {
@@ -19,11 +18,6 @@ namespace WealthManagementAssessment.Domain.Services
             var realStateSumup = _portfolioRepository.GetRealEstatesByInvestor(ownerId, valuationDate)
                 .SelectMany(investment => investment.Transactions)
                 .Sum(transaction => transaction.Value);
-
-            //var realStateSumup = investments
-            //    .Where(investment => investment.InvestmentType == "RealEstate")
-            //    .SelectMany(investment => investment.Transactions)
-            //    .Sum(transaction => transaction.Value);
 
             return realStateSumup;
         }
