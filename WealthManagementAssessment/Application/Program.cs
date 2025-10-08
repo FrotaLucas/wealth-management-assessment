@@ -32,7 +32,7 @@ class Program
                 Console.WriteLine("Choose your investment type: \n");
                 Console.WriteLine(" 1 - RealState Asset");
                 Console.WriteLine(" 2 - Stock Asset");
-                Console.WriteLine(" 3 - Fund Asset");
+                Console.WriteLine(" 3 - Fond Asset");
                 Console.WriteLine(" 4 - Total Asset");
                 Console.WriteLine(" 5 - Check your risk profile");
                 Console.WriteLine(" 0 - Enter new InvestmentId and Date\n");
@@ -61,7 +61,7 @@ class Program
                         if (fn.FondBalance == 0)
                             Console.WriteLine("You don't have fond investments for this period.\n");
                         else
-                            Console.WriteLine($"Your Fund wallet is : {fn.FondBalance:N2} Euros.\n");
+                            Console.WriteLine($"Your Fond wallet is : {fn.FondBalance:N2} Euros.\n");
                         break;
 
                     case "4":
