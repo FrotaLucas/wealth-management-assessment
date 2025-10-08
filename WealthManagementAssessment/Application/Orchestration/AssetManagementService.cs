@@ -28,9 +28,9 @@ namespace WealthManagementAssessment.Application.Orchestration
 
         public InvestorBalanceResult GetFondAsset(string ownerId, DateTime valuationDate)
         {
-            decimal fund = _fondService.FondEngine(ownerId, valuationDate);
+            decimal fond = _fondService.FondEngine(ownerId, valuationDate);
 
-            var result = new InvestorBalanceResult { FondBalance = fund };  
+            var result = new InvestorBalanceResult { FondBalance = fond };  
 
             return result;
         }
