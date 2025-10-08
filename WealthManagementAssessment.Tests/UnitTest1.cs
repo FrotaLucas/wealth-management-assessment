@@ -1,9 +1,16 @@
+using Moq;
+using WealthManagementAssessment.Domain.Contracts.Interfaces;
+
 namespace WealthManagementAssessment.Tests
 {
     public class AssetManagementServiceTest
     {
+        private readonly Mock<IStockService> _stockService;
+
+        private readonly Mock<IRealStateService> _realStateService;
+
         [Fact]
-        public void Test1()
+        public void GetFondAsset_ShouldReturnExpectedFondBalance()
         {
 
         }
