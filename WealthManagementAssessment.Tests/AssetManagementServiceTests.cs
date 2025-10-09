@@ -19,11 +19,11 @@ namespace WealthManagementAssessment.Tests
 
         public AssetManagementServiceTests()
         {
-            _stockService = new Mock<IStockService>();  
+            _stockService = new Mock<IStockService>();
 
             _realEstateService = new Mock<IRealEstateService>();
 
-            _fondService = new Mock<IFondService>();    
+            _fondService = new Mock<IFondService>();
 
             _profileService = new Mock<IProfileService>();
 
@@ -44,8 +44,8 @@ namespace WealthManagementAssessment.Tests
             decimal expectedAmount = 10000m;
 
             _fondService
-                .Setup(x => x.FondEngine(ownerId,valuationDate) )
-                .Returns(expectedAmount);   
+                .Setup(x => x.FondEngine(ownerId, valuationDate))
+                .Returns(expectedAmount);
 
             var result = _assetManagementService.GetFondAsset(ownerId, valuationDate);
 
@@ -75,5 +75,29 @@ namespace WealthManagementAssessment.Tests
             Assert.Equal(0, result.StockBalance);
             Assert.Equal(0, result.FondBalance);
         }
+
+        [Fact]
+
+        public void GetStock_ShouldReturnExpectedStockBalance()
+        {
+            string ownerId = "Investor90";
+            DateTime valuationDate = new DateTime(2019, 12, 31);
+
+            decimal expetecedAmount = 10000m;
+
+            _stockService
+                .Setup(x => x.StockEngine(ownerId, valuationDate))
+                .Returns(expetecedAmount);
+            
+            var result = _assetManagementService.GetStockAsset(ownerId, valuationDate);
+
+
+            Assert.Equal(expetecedAmount, result.StockBalance);
+            Assert.Equal(expetecedAmount, result.TotalBalance);
+            Assert.Equal(0, result.RealStateBalance);
+            Assert.Equal(0, result.FondBalance);
+        }
+
+
     }
 }
