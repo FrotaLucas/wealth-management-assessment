@@ -27,7 +27,8 @@ namespace WealthManagementAssessment.Tests
 
             _profileService = new Mock<IProfileService>();
 
-            _assetManagementService = new AssetManagementService(_stockService.Object,
+            _assetManagementService = new AssetManagementService(
+                _stockService.Object,
                 _realEstateService.Object,
                 _fondService.Object,
                 _profileService.Object);
@@ -38,19 +39,39 @@ namespace WealthManagementAssessment.Tests
         [Fact]
         public void GetFondAsset_ShouldReturnExpectedFondBalance()
         {
-            string ownerId = "333";
-            DateTime date = new DateTime(2019, 12, 20);
+            string ownerId = "investor90";
+            DateTime valuationDate = new DateTime(2019, 12, 31);
             decimal expectedAmount = 10000m;
 
             _fondService
-                .Setup(x => x.FondEngine(ownerId,date) )
+                .Setup(x => x.FondEngine(ownerId,valuationDate) )
                 .Returns(expectedAmount);   
 
-            var result = _assetManagementService.GetFondAsset(ownerId, date);
+            var result = _assetManagementService.GetFondAsset(ownerId, valuationDate);
 
             Assert.Equal(expectedAmount, result.FondBalance);
             Assert.Equal(0, result.StockBalance);
             Assert.Equal(0, result.RealStateBalance);
+        }
+
+
+        [Fact]
+        public void GetRealEstate_ShouldReturnExpectedRealEstateBalance()
+        {
+            string ownerId = "investor90";
+            DateTime valuationDate = new DateTime(2019, 12, 31);
+
+            decimal expectedAmount = 10000m;
+
+            _realEstateService
+                .Setup(x => x.RealStateEngine(ownerId, valuationDate))
+                .Returns(expectedAmount);
+
+            var result = _assetManagementService.GetRealEstateAsset(ownerId, valuationDate);
+
+            Assert.Equal(expectedAmount, result.RealStateBalance);
+            Assert.Equal(0, result.StockBalance);
+            Assert.Equal(0, result.FondBalance);
         }
     }
 }
