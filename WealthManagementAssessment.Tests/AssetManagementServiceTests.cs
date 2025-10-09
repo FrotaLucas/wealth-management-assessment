@@ -50,6 +50,7 @@ namespace WealthManagementAssessment.Tests
             var result = _assetManagementService.GetFondAsset(ownerId, valuationDate);
 
             Assert.Equal(expectedAmount, result.FondBalance);
+            Assert.Equal(expectedAmount, result.TotalBalance);
             Assert.Equal(0, result.StockBalance);
             Assert.Equal(0, result.RealStateBalance);
         }
@@ -70,6 +71,7 @@ namespace WealthManagementAssessment.Tests
             var result = _assetManagementService.GetRealEstateAsset(ownerId, valuationDate);
 
             Assert.Equal(expectedAmount, result.RealStateBalance);
+            Assert.Equal(expectedAmount, result.TotalBalance);
             Assert.Equal(0, result.StockBalance);
             Assert.Equal(0, result.FondBalance);
         }
