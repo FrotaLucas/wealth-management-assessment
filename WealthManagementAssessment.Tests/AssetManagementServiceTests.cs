@@ -1,7 +1,11 @@
+using Microsoft.Extensions.Options;
 using Moq;
+using WealthManagementAssessment.Application.Configuration;
 using WealthManagementAssessment.Application.Orchestration;
 using WealthManagementAssessment.Domain.Contracts.Interfaces;
 using WealthManagementAssessment.Domain.Contracts.Services;
+using WealthManagementAssessment.Domain.Enums;
+using static WealthManagementAssessment.Application.Configuration.AppConfig;
 
 namespace WealthManagementAssessment.Tests
 {
@@ -15,6 +19,8 @@ namespace WealthManagementAssessment.Tests
 
         private readonly Mock<IProfileService> _profileService;
 
+        private readonly Mock<IOptions<AppConfig>> _appConfig;
+
         private readonly AssetManagementService _assetManagementService;
 
         public AssetManagementServiceTests()
@@ -27,14 +33,43 @@ namespace WealthManagementAssessment.Tests
 
             _profileService = new Mock<IProfileService>();
 
+
+            var testAppConfig = new AppConfig
+            {
+                RiskProfile = new RiskProfileLimit
+                {
+                    ConservativeUpperLimit = 1.33m,
+                    ModerateUpperLimit = 1.66m
+                }
+            };
+
+            _appConfig = new Mock<IOptions<AppConfig>>();
+
+            _appConfig.SetupGet(x => x.Value).Returns(testAppConfig);
+
             _assetManagementService = new AssetManagementService(
                 _stockService.Object,
                 _realEstateService.Object,
                 _fondService.Object,
-                _profileService.Object);
-
-
+                _profileService.Object,
+                _appConfig.Object);
         }
+
+
+        [Fact]
+        public void GetRiskProfile_ShouldReturnConservativetProfile()
+        {
+            string ownerId = "Investor90";
+            decimal expetectedRiskProfile = 1.2m;
+
+            _profileService.Setup(x => x.ProfileEngine(ownerId)).Returns(expetectedRiskProfile);
+
+            var result = _assetManagementService.GetRiskProfile(ownerId);
+
+            Assert.Equal(InvestorProfileEnum.Conservative, result);
+        }
+
+
 
         [Fact]
         public void GetFondAsset_ShouldReturnExpectedFondBalance()
