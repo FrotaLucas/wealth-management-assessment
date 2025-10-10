@@ -55,42 +55,6 @@ namespace WealthManagementAssessment.Tests
                 _appConfig.Object);
         }
 
-
-        [Fact]
-        public void GetRiskProfile_ShouldReturnConservativetProfile()
-        {
-            string ownerId = "Investor90";
-            decimal expetectedRiskProfile = 1.2m;
-
-            _profileService.Setup(x => x.ProfileEngine(ownerId)).Returns(expetectedRiskProfile);
-
-            var result = _assetManagementService.GetRiskProfile(ownerId);
-
-            Assert.Equal(InvestorProfileEnum.Conservative, result);
-        }
-
-
-
-        [Fact]
-        public void GetFondAsset_ShouldReturnExpectedFondBalance()
-        {
-            string ownerId = "investor90";
-            DateTime valuationDate = new DateTime(2019, 12, 31);
-            decimal expectedAmount = 10000m;
-
-            _fondService
-                .Setup(x => x.FondEngine(ownerId, valuationDate))
-                .Returns(expectedAmount);
-
-            var result = _assetManagementService.GetFondAsset(ownerId, valuationDate);
-
-            Assert.Equal(expectedAmount, result.FondBalance);
-            Assert.Equal(expectedAmount, result.TotalBalance);
-            Assert.Equal(0, result.StockBalance);
-            Assert.Equal(0, result.RealStateBalance);
-        }
-
-
         [Fact]
         public void GetRealEstate_ShouldReturnExpectedRealEstateBalance()
         {
@@ -109,6 +73,25 @@ namespace WealthManagementAssessment.Tests
             Assert.Equal(expectedAmount, result.TotalBalance);
             Assert.Equal(0, result.StockBalance);
             Assert.Equal(0, result.FondBalance);
+        }
+
+        [Fact]
+        public void GetFondAsset_ShouldReturnExpectedFondBalance()
+        {
+            string ownerId = "investor90";
+            DateTime valuationDate = new DateTime(2019, 12, 31);
+            decimal expectedAmount = 10000m;
+
+            _fondService
+                .Setup(x => x.FondEngine(ownerId, valuationDate))
+                .Returns(expectedAmount);
+
+            var result = _assetManagementService.GetFondAsset(ownerId, valuationDate);
+
+            Assert.Equal(expectedAmount, result.FondBalance);
+            Assert.Equal(expectedAmount, result.TotalBalance);
+            Assert.Equal(0, result.StockBalance);
+            Assert.Equal(0, result.RealStateBalance);
         }
 
         [Fact]
@@ -161,6 +144,47 @@ namespace WealthManagementAssessment.Tests
             Assert.Equal(expetecedStockAmount, result.StockBalance);
             Assert.Equal(expetecedFondAmount, result.FondBalance);
             Assert.Equal(expetecedRealEstateAmount, result.RealStateBalance);
+        }
+
+        [Fact]
+        public void GetRiskProfile_ShouldReturnConservativetProfile()
+        {
+            string ownerId = "Investor90";
+            decimal expetectedRiskProfile = 1.2m;
+
+            _profileService.Setup(x => x.ProfileEngine(ownerId)).Returns(expetectedRiskProfile);
+
+            var result = _assetManagementService.GetRiskProfile(ownerId);
+
+            Assert.Equal(InvestorProfileEnum.Conservative, result);
+        }
+
+        [Fact]
+        public void GetRiskProfile_ShouldReturnModerateProfile()
+        {
+            string ownerId = "investor90";
+            decimal expetectedRiskProfile = 1.5m;
+
+            _profileService.Setup(x => x.ProfileEngine(ownerId)).Returns(expetectedRiskProfile);
+
+            var result = _assetManagementService.GetRiskProfile(ownerId);
+
+            Assert.Equal(InvestorProfileEnum.Moderate, result);
+
+        }
+
+        [Fact]
+        public void GetRiskProfile_ShouldReturnAggressiveeProfile()
+        {
+            string ownerId = "investor90";
+            decimal expetectedRiskProfile = 1.7m;
+
+            _profileService.Setup(x => x.ProfileEngine(ownerId)).Returns(expetectedRiskProfile);
+
+            var result = _assetManagementService.GetRiskProfile(ownerId);
+
+            Assert.Equal(InvestorProfileEnum.Aggressive, result);
+
         }
 
     }
