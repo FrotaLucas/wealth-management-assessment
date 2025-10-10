@@ -1,4 +1,6 @@
-﻿using WealthManagementAssessment.Application.Models;
+﻿using Microsoft.Extensions.Options;
+using WealthManagementAssessment.Application.Configuration;
+using WealthManagementAssessment.Application.Models;
 using WealthManagementAssessment.Application.Orchestration.Interfaces;
 using WealthManagementAssessment.Domain.Contracts.Interfaces;
 using WealthManagementAssessment.Domain.Contracts.Services;
@@ -17,15 +19,18 @@ namespace WealthManagementAssessment.Application.Orchestration
 
         private readonly IProfileService _profileService;
 
+        private readonly AppConfig _appConfig;
         public AssetManagementService(IStockService stockService,
                                       IRealEstateService realStateService,
                                       IFondService fondService,
-                                      IProfileService profileService)
+                                      IProfileService profileService,
+                                      IOptions<AppConfig> appConfig)
         {
             _stockService = stockService;
             _realEstateService = realStateService;
             _fondService = fondService;
             _profileService = profileService;
+            _appConfig = appConfig.Value;
         }
 
         public InvestorBalanceResult GetFondAsset(string ownerId, DateTime valuationDate)
@@ -76,10 +81,9 @@ namespace WealthManagementAssessment.Application.Orchestration
 
         public InvestorProfileEnum GetRiskProfile(string ownerId)
         {
-            //ENCONTRAR UMA FORMA DE DEFINIR UNIVERSALMENTE ESSES LIMITES
-            decimal ConservativeUpperLimit = 1.33m;
+            decimal ConservativeUpperLimit = _appConfig.RiskProfile.ConservativeUpperLimit;
 
-            decimal ModerateUpperLimit = 1.66m;
+            decimal ModerateUpperLimit = _appConfig.RiskProfile.ModerateUpperLimit;
 
 
             decimal riskProfile = _profileService.ProfileEngine(ownerId);
