@@ -85,7 +85,6 @@ namespace WealthManagementAssessment.Application.Orchestration
 
             decimal ModerateUpperLimit = _appConfig.RiskProfile.ModerateUpperLimit;
 
-
             decimal riskProfile = _profileService.ProfileEngine(ownerId);
 
             if (riskProfile == 0)
