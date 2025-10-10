@@ -29,8 +29,8 @@ class Program
             bool showMenu = true;
             while (showMenu)
             {
-                Console.WriteLine("Choose your investment type: \n");
-                Console.WriteLine(" 1 - RealState Asset");
+                Console.WriteLine("\nChoose your investment type: \n");
+                Console.WriteLine(" 1 - Real Estate Asset");
                 Console.WriteLine(" 2 - Stock Asset");
                 Console.WriteLine(" 3 - Fond Asset");
                 Console.WriteLine(" 4 - Total Asset");
