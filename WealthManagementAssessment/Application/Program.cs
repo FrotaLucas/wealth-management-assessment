@@ -29,7 +29,7 @@ class Program
             bool showMenu = true;
             while (showMenu)
             {
-                Console.WriteLine("\nChoose your investment type: \n");
+                Console.WriteLine("\nChoose your option to see the value of your portfolio: \n");
                 Console.WriteLine(" 1 - Real Estate Asset");
                 Console.WriteLine(" 2 - Stock Asset");
                 Console.WriteLine(" 3 - Fond Asset");
