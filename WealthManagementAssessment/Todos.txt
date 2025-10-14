@@ -3,7 +3,7 @@
 
 
 
-1 segundo o projeto do YURI a classe portfolioService (APPLICATION) so esta servindo para pegar a lista de investimento e passar como paramentro dentro 
+1 segundo o projeto do Y. a classe portfolioService (APPLICATION) so esta servindo para pegar a lista de investimento e passar como paramentro dentro 
 dos metodos RealStateService e StockService. 
 QUE TAL SE ESSES METODOS POR SI SO ENCONTRAREM SUAS LISTAS DE INVESTIMENTOS INVTERNAMENTE USANDO PORTIFOLIOREPOSITORY ???????
 FondService ja esta fazendo isso de qualquer forma nao eh ?? ???
