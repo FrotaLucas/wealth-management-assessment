@@ -2,6 +2,6 @@
 {
     public interface IRealEstateService
     {
-        decimal RealStateEngine(string ownerId, DateTime valuationDate);
+        decimal RealEstate(string ownerId, DateTime valuationDate);
     }
 }

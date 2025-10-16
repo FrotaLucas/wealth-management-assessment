@@ -32,7 +32,7 @@ namespace WealthManagementAssessment.Domain.Services
 
             decimal investmentFond = _fondService.FondEngine(ownerId, date);
             decimal investmentStock = _stockService.StockEngine(ownerId, date);
-            decimal investmentRealEstate = _realStateService.RealStateEngine(ownerId, date);
+            decimal investmentRealEstate = _realStateService.RealEstate(ownerId, date);
 
             decimal totalWallet = investmentFond + investmentStock + investmentRealEstate;
 
@@ -62,7 +62,7 @@ namespace WealthManagementAssessment.Domain.Services
 
             foreach (var fond in fonds)
             {
-                decimal investmentRealEstate = _realStateService.RealStateEngine(fond.FondsInvestor, date);
+                decimal investmentRealEstate = _realStateService.RealEstate(fond.FondsInvestor, date);
                 decimal investmentStock = _stockService.StockEngine(fond.FondsInvestor, date);
                 decimal totalInvestments = investmentStock + investmentRealEstate;
 

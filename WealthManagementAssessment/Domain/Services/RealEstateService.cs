@@ -12,7 +12,7 @@ namespace WealthManagementAssessment.Domain.Services
             _portfolioRepository = portfolioRepository;
         }
 
-        public decimal RealStateEngine(string ownerId, DateTime valuationDate)
+        public decimal RealEstate(string ownerId, DateTime valuationDate)
         {
 
             var realStateSumup = _portfolioRepository.GetRealEstatesByInvestor(ownerId, valuationDate)

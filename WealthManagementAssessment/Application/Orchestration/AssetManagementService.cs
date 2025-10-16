@@ -44,7 +44,7 @@ namespace WealthManagementAssessment.Application.Orchestration
 
         public InvestorBalanceResult GetRealEstateAsset(string ownerId, DateTime valuationDate)
         {
-            decimal realEstate = _realEstateService.RealStateEngine(ownerId, valuationDate);
+            decimal realEstate = _realEstateService.RealEstate(ownerId, valuationDate);
 
             var result =  new InvestorBalanceResult { RealEstateBalance = realEstate };
 
@@ -62,7 +62,7 @@ namespace WealthManagementAssessment.Application.Orchestration
 
         public InvestorBalanceResult GetTotalAsset(string ownerId, DateTime valuationDate)
         {
-            decimal realEstateAsset = _realEstateService.RealStateEngine(ownerId, valuationDate);
+            decimal realEstateAsset = _realEstateService.RealEstate(ownerId, valuationDate);
 
             decimal stockAsset = _stockService.StockEngine(ownerId, valuationDate);
 
