@@ -1,9 +1,10 @@
 ﻿using WealthManagementAssessment.Domain.Contracts.Interfaces;
 using WealthManagementAssessment.Domain.Contracts.Repository;
+using WealthManagementAssessment.Domain.Enums;
 
 namespace WealthManagementAssessment.Domain.Services
 {
-    public class RealEstateService : IRealEstateService
+    public class RealEstateService : IRealEstateService, IAssetTypeService
     {
         private readonly IPortfolioRepository _portfolioRepository;
 
@@ -11,6 +12,9 @@ namespace WealthManagementAssessment.Domain.Services
         {
             _portfolioRepository = portfolioRepository;
         }
+
+        public AssetTypeServiceEnum AssetType => AssetTypeServiceEnum.RealEstate;
+
 
         public decimal RealEstateEngine(string ownerId, DateTime valuationDate)
         {
@@ -21,5 +25,8 @@ namespace WealthManagementAssessment.Domain.Services
 
             return realEstateSumup;
         }
+
+        public decimal CalculateBalance(string ownerId, DateTime valuationDate) => RealEstateEngine(ownerId, valuationDate);
+      
     }
 }

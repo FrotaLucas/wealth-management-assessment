@@ -1,10 +1,11 @@
 ﻿using WealthManagementAssessment.Domain.Contracts.Interfaces;
 using WealthManagementAssessment.Domain.Contracts.Repository;
 using WealthManagementAssessment.Domain.Entities;
+using WealthManagementAssessment.Domain.Enums;
 
 namespace WealthManagementAssessment.Domain.Services
 {
-    public class FondService : IFondService
+    public class FondService : IFondService, IAssetTypeService
     {
         private readonly IPortfolioRepository _portfolioRepository;
 
@@ -18,6 +19,8 @@ namespace WealthManagementAssessment.Domain.Services
             _realEstateService = realEstateService;
             _stockService = stockService;
         }
+
+        public AssetTypeServiceEnum AssetType => AssetTypeServiceEnum.Fond;
 
         public decimal FondEngine(string ownerId, DateTime valuationDate)
         {
@@ -38,5 +41,6 @@ namespace WealthManagementAssessment.Domain.Services
 
             return fondSumup;
         }
+        public decimal CalculateBalance(string ownerId, DateTime valuationDate) => FondEngine(ownerId, valuationDate);
     }
 }
