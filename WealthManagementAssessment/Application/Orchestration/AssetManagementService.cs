@@ -11,31 +11,26 @@ namespace WealthManagementAssessment.Application.Orchestration
     public class AssetManagementService : IAssetManagementService
     {
 
-        private readonly IStockService _stockService;
-
-        private readonly IRealEstateService _realEstateService;
-
-        private readonly IFondService _fondService;
+        private readonly IEnumerable<IAssetTypeService> _assetTypesService;
 
         private readonly IProfileService _profileService;
 
         private readonly AppConfig _appConfig;
-        public AssetManagementService(IStockService stockService,
-                                      IRealEstateService realEstateService,
-                                      IFondService fondService,
+        public AssetManagementService(
                                       IProfileService profileService,
-                                      IOptions<AppConfig> appConfig)
+                                      IOptions<AppConfig> appConfig,
+                                      IEnumerable<IAssetTypeService> assetTypesService)
         {
-            _stockService = stockService;
-            _realEstateService = realEstateService;
-            _fondService = fondService;
             _profileService = profileService;
             _appConfig = appConfig.Value;
+            _assetTypesService = assetTypesService;
         }
 
         public InvestorBalanceResult GetFondAsset(string ownerId, DateTime valuationDate)
         {
-            decimal fond = _fondService.FondEngine(ownerId, valuationDate);
+            var fondService = _assetTypesService.FirstOrDefault( s=> s.AssetType.Equals(AssetTypeServiceEnum.Fond) );
+
+            decimal fond = fondService.CalculateBalance(ownerId,valuationDate);
 
             var result = new InvestorBalanceResult { FondBalance = fond };  
 
@@ -44,7 +39,9 @@ namespace WealthManagementAssessment.Application.Orchestration
 
         public InvestorBalanceResult GetRealEstateAsset(string ownerId, DateTime valuationDate)
         {
-            decimal realEstate = _realEstateService.RealEstateEngine(ownerId, valuationDate);
+            var realEstateService = _assetTypesService.FirstOrDefault(s => s.AssetType.Equals(AssetTypeServiceEnum.RealEstate) );
+
+            decimal realEstate = realEstateService.CalculateBalance(ownerId, valuationDate);
 
             var result =  new InvestorBalanceResult { RealEstateBalance = realEstate };
 
@@ -53,7 +50,9 @@ namespace WealthManagementAssessment.Application.Orchestration
 
         public InvestorBalanceResult GetStockAsset(string ownerId, DateTime valuationDate)
         {
-            decimal stock = _stockService.StockEngine(ownerId, valuationDate);
+            var stockService = _assetTypesService.FirstOrDefault(s => s.AssetType.Equals (AssetTypeServiceEnum.Stock) );    
+
+            decimal stock = stockService.CalculateBalance(ownerId, valuationDate) ;
 
             var result = new InvestorBalanceResult { StockBalance = stock };
 
@@ -62,17 +61,14 @@ namespace WealthManagementAssessment.Application.Orchestration
 
         public InvestorBalanceResult GetTotalAsset(string ownerId, DateTime valuationDate)
         {
-            decimal realEstateAsset = _realEstateService.RealEstateEngine(ownerId, valuationDate);
-
-            decimal stockAsset = _stockService.StockEngine(ownerId, valuationDate);
-
-            decimal fondAsset = _fondService.FondEngine(ownerId, valuationDate);
+            var balances = _assetTypesService.ToDictionary(typeService => typeService.AssetType, typeService => typeService.CalculateBalance(ownerId, valuationDate));
 
             var result = new InvestorBalanceResult
             {
-                RealEstateBalance = realEstateAsset,
-                StockBalance = stockAsset,
-                FondBalance = fondAsset
+
+                RealEstateBalance = balances.GetValueOrDefault(AssetTypeServiceEnum.RealEstate),
+                StockBalance = balances.GetValueOrDefault(AssetTypeServiceEnum.Stock),
+                FondBalance = balances.GetValueOrDefault(AssetTypeServiceEnum.Fond)
             };
 
             return result;
