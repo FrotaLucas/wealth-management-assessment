@@ -30,10 +30,10 @@ namespace WealthManagementAssessment.Domain.Services
             {
                 decimal totalPercentage = fond.Transactions.Sum(t => t.Value);
 
-                decimal realStateSumup = _realEstateService.RealEstateEngine(fond.FondsInvestor, valuationDate);
+                decimal realEstateSumup = _realEstateService.RealEstateEngine(fond.FondsInvestor, valuationDate);
                 decimal stockSumup = _stockService.StockEngine(fond.FondsInvestor, valuationDate);
                 
-                fondSumup = fondSumup + totalPercentage * (realStateSumup + stockSumup);
+                fondSumup = fondSumup + totalPercentage * (realEstateSumup + stockSumup);
             }
 
             return fondSumup;
