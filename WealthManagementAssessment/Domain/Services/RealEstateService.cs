@@ -15,11 +15,11 @@ namespace WealthManagementAssessment.Domain.Services
         public decimal RealEstateEngine(string ownerId, DateTime valuationDate)
         {
 
-            var realStateSumup = _portfolioRepository.GetRealEstatesByInvestor(ownerId, valuationDate)
+            var realEstateSumup = _portfolioRepository.GetRealEstatesByInvestor(ownerId, valuationDate)
                 .SelectMany(investment => investment.Transactions)
                 .Sum(transaction => transaction.Value);
 
-            return realStateSumup;
+            return realEstateSumup;
         }
     }
 }
