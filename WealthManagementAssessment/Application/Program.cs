@@ -42,10 +42,10 @@ class Program
                 {
                     case "1":
                         InvestorBalanceResult rt = assetManagement.GetRealEstateAsset(investorId, date);
-                        if (rt.RealStateBalance == 0)
+                        if (rt.RealEstateBalance == 0)
                             Console.WriteLine("You don't have real estate investments for this period.\n");
                         else
-                            Console.WriteLine($"Your Real Estate wallet is : {rt.RealStateBalance:N2} Euros.\n");
+                            Console.WriteLine($"Your Real Estate wallet is : {rt.RealEstateBalance:N2} Euros.\n");
                         break;
 
                     case "2":

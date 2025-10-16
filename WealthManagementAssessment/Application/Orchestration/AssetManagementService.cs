@@ -46,7 +46,7 @@ namespace WealthManagementAssessment.Application.Orchestration
         {
             decimal realEstate = _realEstateService.RealStateEngine(ownerId, valuationDate);
 
-            var result =  new InvestorBalanceResult { RealStateBalance = realEstate };
+            var result =  new InvestorBalanceResult { RealEstateBalance = realEstate };
 
             return result;
         }
@@ -70,7 +70,7 @@ namespace WealthManagementAssessment.Application.Orchestration
 
             var result = new InvestorBalanceResult
             {
-                RealStateBalance = realEstateAsset,
+                RealEstateBalance = realEstateAsset,
                 StockBalance = stockAsset,
                 FondBalance = fondAsset
             };
