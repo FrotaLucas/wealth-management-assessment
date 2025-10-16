@@ -11,18 +11,18 @@ namespace WealthManagementAssessment.Domain.Services
 
         private readonly IFondService _fondService;
 
-        private readonly IRealEstateService _realStateService;
+        private readonly IRealEstateService _realEstateService;
 
         private readonly IStockService _stockService;
 
         public ProfileService(IPortfolioRepository portfolioRepository,
             IFondService fondService, 
-            IRealEstateService realStateService, 
+            IRealEstateService realEstateService, 
             IStockService stockService)
         {
             _portfolioRepository = portfolioRepository;
             _fondService = fondService;
-            _realStateService = realStateService;
+            _realEstateService = realEstateService;
             _stockService = stockService;
         }
 
@@ -32,7 +32,7 @@ namespace WealthManagementAssessment.Domain.Services
 
             decimal investmentFond = _fondService.FondEngine(ownerId, date);
             decimal investmentStock = _stockService.StockEngine(ownerId, date);
-            decimal investmentRealEstate = _realStateService.RealEstateEngine(ownerId, date);
+            decimal investmentRealEstate = _realEstateService.RealEstateEngine(ownerId, date);
 
             decimal totalWallet = investmentFond + investmentStock + investmentRealEstate;
 
@@ -62,7 +62,7 @@ namespace WealthManagementAssessment.Domain.Services
 
             foreach (var fond in fonds)
             {
-                decimal investmentRealEstate = _realStateService.RealEstateEngine(fond.FondsInvestor, date);
+                decimal investmentRealEstate = _realEstateService.RealEstateEngine(fond.FondsInvestor, date);
                 decimal investmentStock = _stockService.StockEngine(fond.FondsInvestor, date);
                 decimal totalInvestments = investmentStock + investmentRealEstate;
 
