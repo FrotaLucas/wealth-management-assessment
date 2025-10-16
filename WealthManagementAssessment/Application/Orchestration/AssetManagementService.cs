@@ -21,13 +21,13 @@ namespace WealthManagementAssessment.Application.Orchestration
 
         private readonly AppConfig _appConfig;
         public AssetManagementService(IStockService stockService,
-                                      IRealEstateService realStateService,
+                                      IRealEstateService realEstateService,
                                       IFondService fondService,
                                       IProfileService profileService,
                                       IOptions<AppConfig> appConfig)
         {
             _stockService = stockService;
-            _realEstateService = realStateService;
+            _realEstateService = realEstateService;
             _fondService = fondService;
             _profileService = profileService;
             _appConfig = appConfig.Value;
