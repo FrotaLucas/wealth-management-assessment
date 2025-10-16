@@ -7,6 +7,7 @@ using WealthManagementAssessment.Application.Orchestration.Interfaces;
 using WealthManagementAssessment.Domain.Contracts.Interfaces;
 using WealthManagementAssessment.Domain.Contracts.Repository;
 using WealthManagementAssessment.Domain.Contracts.Services;
+using WealthManagementAssessment.Domain.Enums;
 using WealthManagementAssessment.Domain.Services;
 using WealthManagementAssessment.Infrastructure.Helper;
 using WealthManagementAssessment.Infrastructure.Repository;
@@ -52,6 +53,10 @@ namespace WealthManagementAssessment.Application
                     services.AddSingleton<IRealEstateService, RealEstateService>();
                     services.AddSingleton<IProfileService, ProfileService>();
                     services.AddSingleton<IFondService, FondService>();
+
+                    services.AddSingleton<IAssetTypeService, StockService>();
+                    services.AddSingleton<IAssetTypeService,RealEstateService>();
+                    services.AddSingleton<IAssetTypeService, FondService>();
 
                 })
                 .Build();
