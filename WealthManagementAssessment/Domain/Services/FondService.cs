@@ -8,14 +8,14 @@ namespace WealthManagementAssessment.Domain.Services
     {
         private readonly IPortfolioRepository _portfolioRepository;
 
-        private readonly IRealEstateService _realStateService;
+        private readonly IRealEstateService _realEstateService;
 
         private readonly IStockService _stockService;
         
         public FondService(IPortfolioRepository portfolioRepository, IRealEstateService realStateService, IStockService stockService)
         {
             _portfolioRepository = portfolioRepository;
-            _realStateService = realStateService;
+            _realEstateService = realStateService;
             _stockService = stockService;
         }
 
@@ -30,7 +30,7 @@ namespace WealthManagementAssessment.Domain.Services
             {
                 decimal totalPercentage = fond.Transactions.Sum(t => t.Value);
 
-                decimal realStateSumup = _realStateService.RealEstateEngine(fond.FondsInvestor, valuationDate);
+                decimal realStateSumup = _realEstateService.RealEstateEngine(fond.FondsInvestor, valuationDate);
                 decimal stockSumup = _stockService.StockEngine(fond.FondsInvestor, valuationDate);
                 
                 fondSumup = fondSumup + totalPercentage * (realStateSumup + stockSumup);
