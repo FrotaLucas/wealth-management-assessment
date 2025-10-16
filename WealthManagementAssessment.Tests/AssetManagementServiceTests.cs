@@ -64,7 +64,7 @@ namespace WealthManagementAssessment.Tests
             decimal expectedAmount = 10000m;
 
             _realEstateService
-                .Setup(x => x.RealEstate(ownerId, valuationDate))
+                .Setup(x => x.RealEstateEngine(ownerId, valuationDate))
                 .Returns(expectedAmount);
 
             var result = _assetManagementService.GetRealEstateAsset(ownerId, valuationDate);
@@ -127,7 +127,7 @@ namespace WealthManagementAssessment.Tests
             decimal expetecedFondAmount = 30000m;
 
             _realEstateService.
-                Setup(x => x.RealEstate(ownerId, valuationDate))
+                Setup(x => x.RealEstateEngine(ownerId, valuationDate))
                 .Returns(expetecedRealEstateAmount);
 
             _stockService
